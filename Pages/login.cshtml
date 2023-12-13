@@ -1,0 +1,57 @@
+﻿@page
+@model Pet_Reunion_Hub.Pages.loginModel
+@{
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    form {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 16px;
+        box-sizing: border-box;
+    }
+
+    button {
+        background-color: #3498db;
+        color: #fff;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+</head>
+
+<body>
+    <form>
+        <label for="email">Enter your email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password">Enter your password:</label>
+        <input type="password" id="password" name="password" required>
+
+
+        <a href="/HomePage" class="button">Log In</a>
+    </form>
+</body>
+</html>

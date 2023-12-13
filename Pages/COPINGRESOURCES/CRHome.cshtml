@@ -1,0 +1,108 @@
+﻿@page
+@model Pet_Reunion_Hub.Pages.COPINGRESOURCES.CRHomeModel
+@{
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coping Resources</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        .box {
+            width: 300px;
+            background-color: #fff;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            color: #666;
+        }
+
+        .upload-box {
+            width: 300px;
+            background-color: #fff;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border: 2px dashed #ccc;
+        }
+
+        .upload-btn {
+            margin-top: 10px;
+            cursor: pointer;
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <h2>Counseling and Therapy</h2>
+            <p>Find professional help to navigate through the emotional journey of losing a pet.</p>
+        </div>
+
+        <div class="box">
+            <h2>Books About Grief</h2>
+            <p>Explore literature that offers insights and support for coping with pet loss.</p>
+        </div>
+
+        <div class="box">
+            <h2>YouTube Videos</h2>
+            <p>Watch videos that provide guidance and comfort during difficult times.</p>
+        </div>
+
+        <div class="box">
+            <h2>Testimonies by Users</h2>
+            <p>Read stories and experiences shared by others who have faced pet loss.</p>
+        </div>
+
+        <div class="box">
+            <h2>Customization Services</h2>
+            <p>Discover services to personalize memorials and create lasting memories.</p>
+        </div>
+
+        <div class="box">
+            <h2>Other Resources</h2>
+            <p>Explore additional tools and information to cope with the loss of a beloved pet.</p>
+        </div>
+
+        <div class="upload-box">
+     
+            <a href="/COPINGRESOURCES/UploadResource" class="button-link">Upload Your Resources</a>
+            <p>Share a valuable resource you found helpful in coping with pet loss.</p>
+            
+        </div>
+    </div>
+</body>
+</html>

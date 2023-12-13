@@ -1,0 +1,108 @@
+﻿@page
+@model Pet_Reunion_Hub.Pages.HomePageModel
+@{
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+        }
+
+        .box {
+            flex: 1; /* Equal width for each box */
+            max-width:300px;
+            border:1px solid #ccc;
+            padding: 20px;
+            margin: 10px;
+            text-align: center;
+            transition: transform 0.2s ease-in-out;
+            cursor: pointer;
+        }
+
+            .box:hover {
+                transform: scale(1.05);
+            }
+
+            .box h2 {
+                color: #333;
+            }
+
+            .box p {
+                color: #666;
+            }
+    </style>
+</head>
+<body>
+    
+    <div class="main-container">
+        <div class="row">
+            <div class="box">
+                <h2>Lost Pet Reporting</h2>
+                <p>Report missing pets and aid in a quicker reunion.</p>
+                <a href="/LOSTPETREPORTING/LPRHome" class="button-link">Go to Lost Pet Reporting</a>
+            </div>
+
+            <div class="box">
+                <h2>Pet Memorial</h2>
+                <p>Celebrate the joy your pet brought into your life.</p>
+                <a href="/PETMEMORIAL/PMHome" class="button-link">Go to Pet Memorial</a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="box">
+                <h2>Coping Resources</h2>
+                <p>Discover tools to navigate the emotional journey of losing a pet.</p>
+                <a href="/COPINGRESOURCES/CRHome" class="button-link">Go to Coping Resources</a>
+            </div>
+
+            <div class="box">
+                <h2>Settings</h2>
+                <p>Customise your account settings or reach out to us</p>
+                <a href="/SETTINGS/Settings" class="button-link">Go to Settings</a>
+            </div>
+        </div>
+    </div>
+    @* <div class="container">
+        <div class="box" onclick="location.href='/LostPetReporting'">
+            <h2>Lost Pet Reporting</h2>
+            <p>Report missing pets and aid in a quicker reunion.</p>
+        </div>
+
+        <div class="box" onclick="location.href='/PetMemorial'">
+            <h2>Pet Memorial</h2>
+            <p>Celebrate the joy your pet brought into your life.</p>
+        </div>
+
+        <div class="box" onclick="location.href='/CopingResources'">
+            <h2>Coping Resources</h2>
+            <p>Discover tools to navigate the emotional journey of losing a pet.</p>
+        </div>
+    </div>
+ *@
+</body>
+</html>

@@ -1,0 +1,92 @@
+﻿@page
+@model Pet_Reunion_Hub.Pages.COPINGRESOURCES.UploadResourceModel
+@{
+}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Resource</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .upload-btn {
+            cursor: pointer;
+            color: green;
+            font-weight: bold;
+        }
+
+        .my-resources-btn {
+            cursor: pointer;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Upload Resource</h1>
+
+        <form>
+            <label for="resourceTitle">Title</label>
+            <input type="text" id="resourceTitle" name="resourceTitle" required>
+
+
+            <label for="resourceFileLink">Upload File or Link</label>
+            <div>
+                <input type="file" id="resourceFile" name="resourceFile" accept=".pdf, .doc, .docx"> <!-- Input for file upload -->
+                <p>OR</p>
+                <input type="text" id="resourceFileLink" name="resourceFileLink" placeholder="Provide a link to the resource you want to share"> <!-- Input for link -->
+            </div>
+
+            <label for="resourceDescription">Description</label>
+            <textarea id="resourceDescription" name="resourceDescription" rows="4" cols="50"></textarea>
+
+            <div class="upload-btn">+ Upload Resource</div>
+
+            <button type="submit" class="my-resources-btn">My Resources</button>
+        </form>
+    </div>
+</body>
+</html>

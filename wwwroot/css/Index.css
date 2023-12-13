@@ -1,0 +1,19 @@
+﻿
+body {
+    font-family: Arial, sans-serif;
+}
+
+.feature-box {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px;
+}
+
+    .feature-box h2 {
+        color: #333;
+    }
+
+    .feature-box p {
+        color: #666;
+    }

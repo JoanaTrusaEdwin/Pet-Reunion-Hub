@@ -1,0 +1,82 @@
+﻿@page
+@model Pet_Reunion_Hub.Pages.PETMEMORIAL.PMHomeModel
+@{
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .box {
+            flex: 1; /* Equal width for each box */
+            max-width: 300px; /* Maximum width for each box */
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 10px;
+        }
+
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        #signup {
+            background-color: #3b3b3b; /* Black */
+            color: #fff;
+        }
+
+        #login {
+            background-color: #8b572a; /* Brown */
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="text-center">
+        <h1 class="display-4">A Visit to The Rainbow Bridge</h1>
+        <div class="container">
+
+            <div class="box">
+                
+                <a href="/PETMEMORIAL/CreateMemorial" class="button-link">Create a New Memorial Page</a>
+                <p></p>
+            </div>
+
+            <div class="box">
+                
+                <a href="/PETMEMORIAL/MemorialFeed" class="button-link">Memorials Among the Community</a>
+
+               
+            </div>
+
+            <div class="box">
+                
+                <a href="/PETMEMORIAL/MyMemorials" class="button-link">My Memorials</a>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
