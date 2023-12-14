@@ -7,6 +7,57 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Pet_Reunion_Hub.styles.css" asp-append-version="true" />
+
+    <style>
+        /* Style for the mini tab on the right side */
+        /* .mini-tab {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 15%;
+            height: 100%;
+            background-color: #f8f9fa; 
+            padding: 10px; 
+            box-sizing: border-box; 
+        } */
+
+        .mini-tab {
+            position: fixed;
+            top: 5%;
+            right: 0;
+            width: 15%;
+            height: 800px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            transition: width 0.5s ease;
+            overflow: hidden;
+        }
+
+        .mini-tab-content {
+            /* Add styling for the content within the mini tab */
+            padding: 10px;
+        }
+
+        .mini-tab button {
+            margin-bottom: 10px;
+            cursor: pointer;
+            width: 50px; /* Set a fixed width for the buttons */
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        body.expanded .mini-tab {
+            width: 100%;
+        }
+
+        main {
+            margin-right: 25%; /* Adjust margin based on the width of the mini-tab */
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -34,11 +85,21 @@
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
+
+        <!-- Mini tab on the right side -->
+        <div class="mini-tab">
+            <div class="mini-tab-content">
+                <!-- Your banner content goes here -->
+                <p>CURRENT LOST PETS ALERT!</p>
+            </div>
+        </div>
+    </div>
+
     </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - Pet Reunion Hub - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 2023 - Pet Reunion Hub <a asp-area="" asp-page="/Privacy"> </a>
         </div>
     </footer>
 
@@ -49,3 +110,111 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+@* <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const miniTab = document.createElement('div');
+        miniTab.classList.add('mini-tab');
+        document.body.appendChild(miniTab);
+
+        const title = document.createElement('p');
+        title.innerText = 'CURRENT LOST PETS ALERT!';
+        title.style.fontWeight = 'bold';
+        miniTab.appendChild(title);
+
+        const expandButton = document.createElement('button');
+        expandButton.innerHTML = '&#43;'; // Plus symbol
+        expandButton.style.fontSize = '14px';
+        expandButton.addEventListener('click', function () {
+            document.body.classList.add('expanded');
+        });
+        miniTab.appendChild(expandButton);
+
+        // Check if on PMHome.cshtml page before showing hide button
+        if (document.body.classList.contains('pm-home')) {
+            const hideButton = document.createElement('button');
+            hideButton.innerHTML = '&#8722;'; // Minus symbol
+            hideButton.style.fontSize = '14px';
+            hideButton.addEventListener('click', function () {
+                document.body.classList.remove('expanded');
+            });
+            miniTab.appendChild(hideButton);
+        }
+    });
+</script> *@
+@* 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const miniTab = document.createElement('div');
+        miniTab.classList.add('mini-tab');
+        document.body.appendChild(miniTab);
+
+        const title = document.createElement('p');
+        title.innerText = 'CURRENT LOST PETS ALERT!';
+        title.style.fontWeight = 'bold';
+        miniTab.appendChild(title);
+
+        const expandButton = document.createElement('button');
+        expandButton.innerHTML = '&#43;'; // Plus symbol
+        expandButton.style.fontSize = '14px';
+        expandButton.style.width = '20px'; // Set a small width
+        expandButton.style.height = '20px'; // Set a small height
+        expandButton.style.marginRight = '5px'; // Add some margin
+        expandButton.addEventListener('click', function () {
+            document.body.classList.toggle('expanded');
+        });
+        miniTab.appendChild(expandButton);
+
+        // Check if on PMHome.cshtml page before showing hide button
+        if (document.body.classList.contains('pm-home')) {
+            const hideButton = document.createElement('button');
+            hideButton.innerHTML = '&#8722;'; // Minus symbol
+            hideButton.style.fontSize = '14px';
+            hideButton.style.width = '20px'; // Set a small width
+            hideButton.style.height = '20px'; // Set a small height
+            hideButton.style.marginRight = '5px'; // Add some margin
+            hideButton.addEventListener('click', function () {
+                document.body.classList.toggle('expanded');
+            });
+            miniTab.appendChild(hideButton);
+        }
+    });
+</script> *@
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const miniTab = document.createElement('div');
+        miniTab.classList.add('mini-tab');
+        document.body.appendChild(miniTab);
+
+        const title = document.createElement('p');
+        title.innerText = 'CURRENT LOST PETS ALERT!';
+        title.style.fontWeight = 'bold';
+        miniTab.appendChild(title);
+
+        const expandButton = document.createElement('button');
+        expandButton.innerHTML = '&#43;'; // Plus symbol
+        expandButton.style.fontSize = '14px';
+        expandButton.style.width = '20px';
+        expandButton.style.height = '20px';
+        expandButton.style.marginRight = '5px';
+        expandButton.addEventListener('click', function () {
+            document.body.classList.toggle('expanded');
+        });
+        miniTab.appendChild(expandButton);
+
+        if (document.body.classList.contains('pm-home')) {
+            const hideButton = document.createElement('button');
+            hideButton.innerHTML = '&#8722;'; // Minus symbol
+            hideButton.style.fontSize = '14px';
+            hideButton.style.width = '20px';
+            hideButton.style.height = '20px';
+            hideButton.style.marginRight = '5px';
+            hideButton.addEventListener('click', function () {
+                document.body.classList.toggle('expanded');
+            });
+            miniTab.appendChild(hideButton);
+        }
+    });
+
+</script>
