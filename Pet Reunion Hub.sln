@@ -5,6 +5,8 @@ VisualStudioVersion = 17.2.32519.379
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pet Reunion Hub", "Pet Reunion Hub.csproj", "{D8D9D4B1-3B6F-49A4-BF28-D72DADB73180}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRHAdmin", "..\PRHAdmin\PRHAdmin.csproj", "{8F53691C-3250-462E-BFED-7BA38C673FC7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D8D9D4B1-3B6F-49A4-BF28-D72DADB73180}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8D9D4B1-3B6F-49A4-BF28-D72DADB73180}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8D9D4B1-3B6F-49A4-BF28-D72DADB73180}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F53691C-3250-462E-BFED-7BA38C673FC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F53691C-3250-462E-BFED-7BA38C673FC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F53691C-3250-462E-BFED-7BA38C673FC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F53691C-3250-462E-BFED-7BA38C673FC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

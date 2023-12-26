@@ -1,8 +1,7 @@
 ﻿@page
-@model Pet_Reunion_Hub.Pages.PETMEMORIAL.CreateMemorialModel
+@model Pet_Reunion_Hub.Pages.PETMEMORIAL.EditMemorialModel
 @{
 }
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -71,13 +70,14 @@
 <body class="pm-home">
     <div class="container">
         <h1>Create Pet Memorial</h1>
+        <p> (for prototype purposes) Assuming there is data here </p>
 
         <form>
             <label for="petName">Pet Name</label>
             <input type="text" id="petName" name="petName">
 
             <label for="petType">Pet Type</label>
-            
+
             <select id="petType" name="petType">
                 <option value="Dog">Dog</option>
                 <option value="Cat">Cat</option>
@@ -95,7 +95,7 @@
                 <option value="Insect">Insect</option>
                 <option value="Arachnid">Arachnid</option>
             </select>
-            
+
 
             <label for="petGender">Gender</label>
             <select id="petGender" name="petGender">
@@ -119,7 +119,7 @@
                 <input type="checkbox" id="unknownDOA" name="unknownDOA">
             </div>
             </br>
-            
+
             <label for="petDOB">Departure Date</label>
             <div>
                 <input type="date" id="petDOD" name="petDOD">
@@ -178,9 +178,9 @@
                 <div id="addPostBtn">+ Add Post</div>
             </div>
 
-           <a href="/PETMEMORIAL/MyMemorials">
-            Create Memorial
-           </a>
+            <a href="/PETMEMORIAL/MyMemorials">
+               Create Memorial
+            </a>
         </form>
     </div>
 
@@ -202,117 +202,3 @@
     </script>
 </body>
 </html>
-
-
-@* <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Pet Memorial</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: 20px auto;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            margin-bottom: 8px;
-        }
-
-        .post-container {
-            margin-top: 20px;
-        }
-
-        .post {
-            margin-bottom: 10px;
-        }
-
-        #addPostBtn {
-            cursor: pointer;
-            color: green;
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Create Pet Memorial</h1>
-
-        <form>
-            <label for="petName">Pet Name</label>
-            <input type="text" id="petName" name="petName" required>
-
-            <label for="petBreed">Pet Breed</label>
-            <input type="text" id="petBreed" name="petBreed">
-
-            <label for="petGender">Pet Gender</label>
-            <select id="petGender" name="petGender" required>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-            </select>
-
-            <label for="petDOB">Pet Date of Birth</label>
-            <input type="date" id="petDOB" name="petDOB">
-
-            <div class="post-container">
-                <h2>Pet Posts</h2>
-                <div class="post" id="post1">
-                    <label for="postText1">Text</label>
-                    <textarea id="postText1" name="postText1"></textarea>
-
-                    <!-- Add other fields for image, video, songs -->
-
-                    <label for="postVisibility1">Post Visibility</label>
-                    <select id="postVisibility1" name="postVisibility1">
-                        <option value="public">Public</option>
-                        <option value="private">Private</option>
-                    </select>
-
-                    <label for="postLocation1">Post Location</label>
-                    <input type="text" id="postLocation1" name="postLocation1">
-
-                    <label for="postAnonymous1">Anonymous</label>
-                    <input type="checkbox" id="postAnonymous1" name="postAnonymous1">
-                </div>
-
-                <!-- Additional posts can be added dynamically with JavaScript -->
-                <div id="addPostBtn">+ Add Post</div>
-            </div>
-
-            <button type="submit">Create Memorial</button>
-        </form>
-    </div>
-
-    <script>
-        let postCount = 1;
-
-        document.getElementById('addPostBtn').addEventListener('click', function () {
-            postCount++;
-            const newPost = document.createElement('div');
-            newPost.classList.add('post');
-            newPost.id = 'post' + postCount;
-
-            // Add similar structure as the original post (text, image, video, songs, etc.)
-
-            document.querySelector('.post-container').appendChild(newPost);
-        });
-    </script>
-</body>
-</html>
-
- *@
-

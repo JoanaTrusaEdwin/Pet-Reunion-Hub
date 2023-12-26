@@ -1,0 +1,72 @@
+﻿@page
+@model Pet_Reunion_Hub.Pages.SETTINGS.EditProfileModel
+@{
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Edit Your Profile</h1>
+   
+
+    <form>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="username">Create Username:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Create Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="location">Location (Crucial for Lost Pet Reporting):</label>
+        <input type="text" id="location" name="location" required>
+
+        <label for="profile-picture">Profile Picture:</label>
+        <input type="file" id="profile-picture" name="profile-picture" accept="image/*">
+
+        <a href="/SETTINGS/MyProfile" class="button">Save Changes</a>
+    </form>
+
+   
+</body>
+</html>

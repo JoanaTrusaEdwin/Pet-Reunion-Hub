@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Pet_Reunion_Hub.Pages.SETTINGS
+namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING
 {
-    public class SettingsModel : PageModel
+    public class ViewReportModel : PageModel
     {
         public void OnGet()
         {

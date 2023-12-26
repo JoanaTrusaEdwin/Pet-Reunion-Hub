@@ -1,16 +1,14 @@
 ﻿@page
-@model Pet_Reunion_Hub.Pages.COPINGRESOURCES.UploadResourceModel
+@model Pet_Reunion_Hub.Pages.SETTINGS.SubmitFeedbackModel
 @{
 }
-
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Resource</title>
+    <title>Submitting Feedback</title>
 
     <style>
         body {
@@ -66,25 +64,18 @@
 </head>
 <body>
     <div class="container">
-        <h1>Upload Resource</h1>
+        <h1>Submit a Feedback</h1>
 
         <form>
-            <label for="resourceTitle">Title</label>
-            <input type="text" id="resourceTitle" name="resourceTitle" required>
+            <label for="feedbackTitle">Title</label>
+            <input type="text" id="feedbackTitle" name="feedbackTitle" required>
+
+            <label for="feedbackDescription">Description</label>
+            <textarea id="feedbackDescription" name="resourceDescription" rows="4" cols="50"></textarea>
 
 
-            <label for="resourceFileLink">Upload File or Link</label>
-            <div>
-                <input type="file" id="resourceFile" name="resourceFile" accept=".pdf, .doc, .docx"> <!-- Input for file upload -->
-                <p>OR</p>
-                <input type="text" id="resourceFileLink" name="resourceFileLink" placeholder="Provide a link to the resource you want to share"> <!-- Input for link -->
-            </div>
-
-            <label for="resourceDescription">Description</label>
-            <textarea id="resourceDescription" name="resourceDescription" rows="4" cols="50"></textarea>
-
-            <a href="/COPINGRESOURCES/MyResources">
-               Submit
+            <a href="/SETTINGS/MyFeedback">
+              Submit
             </a>
         </form>
     </div>
