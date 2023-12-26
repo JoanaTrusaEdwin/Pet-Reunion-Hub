@@ -44,7 +44,7 @@
         .mini-tab button {
             margin-bottom: 10px;
             cursor: pointer;
-            width: 50px; /* Set a fixed width for the buttons */
+            width: 20px; /* Set a fixed width for the buttons */
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
@@ -111,6 +111,8 @@
 </body>
 </html>
 
+
+
 @* <script>
     document.addEventListener("DOMContentLoaded", function () {
         const miniTab = document.createElement('div');
@@ -123,80 +125,10 @@
         miniTab.appendChild(title);
 
         const expandButton = document.createElement('button');
-        expandButton.innerHTML = '&#43;'; // Plus symbol
+        expandButton.innerHTML = 'expand'; // Plus symbol
         expandButton.style.fontSize = '14px';
-        expandButton.addEventListener('click', function () {
-            document.body.classList.add('expanded');
-        });
-        miniTab.appendChild(expandButton);
-
-        // Check if on PMHome.cshtml page before showing hide button
-        if (document.body.classList.contains('pm-home')) {
-            const hideButton = document.createElement('button');
-            hideButton.innerHTML = '&#8722;'; // Minus symbol
-            hideButton.style.fontSize = '14px';
-            hideButton.addEventListener('click', function () {
-                document.body.classList.remove('expanded');
-            });
-            miniTab.appendChild(hideButton);
-        }
-    });
-</script> *@
-@* 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const miniTab = document.createElement('div');
-        miniTab.classList.add('mini-tab');
-        document.body.appendChild(miniTab);
-
-        const title = document.createElement('p');
-        title.innerText = 'CURRENT LOST PETS ALERT!';
-        title.style.fontWeight = 'bold';
-        miniTab.appendChild(title);
-
-        const expandButton = document.createElement('button');
-        expandButton.innerHTML = '&#43;'; // Plus symbol
-        expandButton.style.fontSize = '14px';
-        expandButton.style.width = '20px'; // Set a small width
-        expandButton.style.height = '20px'; // Set a small height
-        expandButton.style.marginRight = '5px'; // Add some margin
-        expandButton.addEventListener('click', function () {
-            document.body.classList.toggle('expanded');
-        });
-        miniTab.appendChild(expandButton);
-
-        // Check if on PMHome.cshtml page before showing hide button
-        if (document.body.classList.contains('pm-home')) {
-            const hideButton = document.createElement('button');
-            hideButton.innerHTML = '&#8722;'; // Minus symbol
-            hideButton.style.fontSize = '14px';
-            hideButton.style.width = '20px'; // Set a small width
-            hideButton.style.height = '20px'; // Set a small height
-            hideButton.style.marginRight = '5px'; // Add some margin
-            hideButton.addEventListener('click', function () {
-                document.body.classList.toggle('expanded');
-            });
-            miniTab.appendChild(hideButton);
-        }
-    });
-</script> *@
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const miniTab = document.createElement('div');
-        miniTab.classList.add('mini-tab');
-        document.body.appendChild(miniTab);
-
-        const title = document.createElement('p');
-        title.innerText = 'CURRENT LOST PETS ALERT!';
-        title.style.fontWeight = 'bold';
-        miniTab.appendChild(title);
-
-        const expandButton = document.createElement('button');
-        expandButton.innerHTML = '&#43;'; // Plus symbol
-        expandButton.style.fontSize = '14px';
-        expandButton.style.width = '20px';
-        expandButton.style.height = '20px';
+        expandButton.style.width = '150px';
+        expandButton.style.height = '30px';
         expandButton.style.marginRight = '5px';
         expandButton.addEventListener('click', function () {
             document.body.classList.toggle('expanded');
@@ -217,4 +149,46 @@
         }
     });
 
+</script> *@
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const miniTab = document.createElement('div');
+        miniTab.classList.add('mini-tab');
+        document.body.appendChild(miniTab);
+
+        const title = document.createElement('p');
+        title.innerText = 'CURRENT LOST PETS ALERT!';
+        title.style.fontWeight = 'bold';
+        miniTab.appendChild(title);
+
+        const expandButton = document.createElement('button');
+        expandButton.innerHTML = 'Expand'; // Initial text
+        expandButton.style.fontSize = '14px';
+        expandButton.style.width = '150px';
+        expandButton.style.height = '30px';
+        expandButton.style.marginRight = '5px';
+        expandButton.addEventListener('click', function () {
+            document.body.classList.toggle('expanded');
+
+            // Change button text based on the expanded state
+            expandButton.innerHTML = document.body.classList.contains('expanded') ? 'Minimize' : 'Expand';
+        });
+        miniTab.appendChild(expandButton);
+
+        if (document.body.classList.contains('pm-home')) {
+            const hideButton = document.createElement('button');
+            hideButton.innerHTML = '&#8722;'; // Minus symbol
+            hideButton.style.fontSize = '14px';
+            hideButton.style.width = '20px';
+            hideButton.style.height = '20px';
+            hideButton.style.marginRight = '5px';
+            hideButton.addEventListener('click', function () {
+                document.body.classList.toggle('expanded');
+                expandButton.innerHTML = 'Expand'; // Reset text when hiding
+            });
+            miniTab.appendChild(hideButton);
+        }
+    });
 </script>
+
