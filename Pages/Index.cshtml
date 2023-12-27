@@ -3,6 +3,7 @@
 @{
     <link rel="stylesheet" href="~/css/Index.css">
     ViewData["Title"] = "Home page";
+    
 }
 
 <!DOCTYPE html>
@@ -10,6 +11,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cormorant+Garamond&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+
+
     <title></title>
 
 <style>
@@ -96,32 +101,152 @@ footer {
                 color: #fff; 
             } */
 
+       
         body {
-            font-family: Arial, sans-serif;
-            background-color: #fff; /* White background for the body */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0; 
+            padding: 0; 
+            background-image:url('/images/fadedimage.jpg');
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat; 
+            margin-right: 0; 
+            margin-left: 0; 
+            padding-right: 0;
+            background-attachment: fixed;
+            position: relative;
+           
         }
 
+           /*  body::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                right: 0;
+                left: 0;
+                height: 175px; 
+                background-color: #807065;
+                z-index: -1;
+            } */
+
+      /*   .header-container h1{
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-weight: 300;
+                font-size: 3.5em;
+                letter-spacing: 1px;
+                border-bottom: 1px solid #fff;
+                margin-bottom: 10px;
+                color: white;
+        }
+
+        .header-container h2{
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-style: italic;
+                font-size: 1.5em; 
+                color: #fff;
+                margin-top: 10px;
+        } */
+
+        .welcoming {
+            color:white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Use the Open Sans font */
+            font-weight:200;
+        }
+
+            .welcoming p {
+                margin-bottom: 15px;
+                color: white;
+                font-size: 16px;
+                line-height: 2.5;
+            }
+
+                .welcoming p:last-child {
+                    margin-bottom: 0;
+                }
+
+        #offers{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 300;
+            font-size: 3.5em;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #fff;
+            margin-bottom: 10px;
+        }
         .feature-container {
             display: flex;
             justify-content: space-around;
+            margin-top: 30px;
         }
 
         .feature-box {
             flex: 1;
             max-width: 300px;
-            border: 1px solid #ccc;
             padding: 20px;
             margin: 10px;
-            background-color: #f8f8f8; /* Light gray background for feature boxes */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
+            background-color: #807C73; /* Black background */
+            border: none; /* Remove the border */
+            overflow: hidden; /* Ensure content doesn't overflow */
+            transition: transform 0.3s ease-in-out;
+            border-radius: 10px; /* Add border-radius for rounded corners */
+            
         }
 
-        footer {
+            .feature-box:hover {
+                transform: scale(1.05); /* Add a slight scale effect on hover */
+            }
+
+        .feature-box h4{
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-weight: 300;
+                font-size: 1.5em;
+                letter-spacing: 1px;
+                border-bottom: 1px solid #fff;
+                margin-bottom: 10px;
+        }
+        .feature-box h4, .feature-box p{
+            color:white;
+            
+
+        }
+
+        .feature-box p{
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-weight: 300;
+                letter-spacing: 1px;
+                margin-bottom: 10px;
+                text-align:justify;
+               
+        }
+
+
+
+        h3 {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            color: #fff; 
+        }
+       
+  
+
+        footer{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            color:white;
             text-align: center;
             padding: 20px;
-             /* Dark brown background for the footer */
-            color: #fff; /* White text color */
+            color: #fff;
         }
+
+        .about-us,
+        .contact-us {
+            color: #fff !important;
+        }
+
 
         .button {
             display: inline-block;
@@ -144,53 +269,91 @@ footer {
             color: #fff;
         }
 
+        
+        #signup-invitation{
+            color:white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 150;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .button:hover {
+            background-color: #807C73;
+           
+        }
+
 </style>
 </head>
 <body>
     <div class="text-center">
-        <h1 class="display-4">Pet Reunion Hub</h1>
-        <h2>Aid and Grief Support for Missing or Departed Pets</h2>
-        <p>In Pet Reunion Hub, we reunite pets and their owners, both physically and emotionally, for pets who have either gone missing or passed away. Pets weave a thread of companionship, offering unwavering loyalty and joy. Anticipating the grief associated with a lost pet or navigating the acute sorrow of a departed companion can be challenging.</p>
-        <p>Feel free to use this platform to report your missing pets or to honour and remember your beloved companions while finding the support you need. You can count on this website as a virtual memory box, enabling you to store photos or written tributes about your departed companion, accessible from any device at any time. Here, we recognise that every pet holds a special place in your heart, there is no such thing as "it's just a dog" or "it's just a spider".</p>
-        <p>We invite you to let this be your safe space to seek assistance in lost pet reporting as well as preserve memories of your cherished pets and share them with the community, fostering a sense of support among one another.</p>
+       @*  <div class="header-container">
+            <h1 class="display-4"><b>Pet Reunion Hub</b></h1>
+            <h2>Aid and Grief Support for Missing or Departed Pets</h2>
+        </div> *@
+        <br />
 
-        <h2 class="display-5">Our Offers</h2>
+        <div class="welcoming">
 
+            <p>
+                Welcome to Pet Reunion Hub, where we bring pets and owners back together, both physically and emotionally. Whether your pet is missing or has passed away, we understand the deep bond you share. Pets fill our lives with love and joy, creating a special connection.
+
+                Feel free to use our platform to report missing pets or honor and remember your companions. This website is your virtual memory box, allowing you to store photos and tributes accessible from any device. We know that every pet holds a special place in your heart, regardless of species.
+
+                Consider this your safe space to seek help in reporting lost pets and preserving memories. Share your stories with the community, creating a supportive environment for everyone who loves their pets.
+            </p>
+            @* <p>Welcome to Pet Reunion Hub, where we bring pets and owners back together, both physically and emotionally. Whether your pet is missing or has passed away, we understand the deep bond you share. Pets fill our lives with love and joy, creating a special connection.</p>
+            <br/>
+            <p>Feel free to use our platform to report missing pets or honor and remember your companions. This website is your virtual memory box, allowing you to store photos and tributes accessible from any device. We know that every pet holds a special place in your heart, regardless of species.</p>
+            <br/>
+            <p>Consider this your safe space to seek help in reporting lost pets and preserving memories. Share your stories with the community, creating a supportive environment for everyone who loves their pets.</p> *@
+            @*  <p>In Pet Reunion Hub, we reunite pets and their owners, both physically and emotionally, for pets who have either gone missing or passed away. Pets weave a thread of companionship, offering unwavering loyalty and joy. Anticipating the grief associated with a lost pet or navigating the acute sorrow of a departed companion can be challenging.</p>
+            <p>Feel free to use this platform to report your missing pets or to honour and remember your beloved companions while finding the support you need. You can count on this website as a virtual memory box, enabling you to store photos or written tributes about your departed companion, accessible from any device at any time. Here, we recognise that every pet holds a special place in your heart, there is no such thing as "it's just a dog" or "it's just a spider".</p>
+            <p>We invite you to let this be your safe space to seek assistance in lost pet reporting as well as preserve memories of your cherished pets and share them with the community, fostering a sense of support among one another.</p> *@
+        </div>
+        <br />
+        <br />
+        <h3 id="offers"><b>Our Offers</b></h3>
 
         <div class="feature-container">
 
-            <div class="feature-box">
-                <h2>Lost Pet Reporting</h2>
+            <div id="lost-pet"class="feature-box">
+                <h4><b>Lost Pet Reporting</b></h4>
                 <p>Our Lost Pet Reporting feature provides a streamlined and compassionate platform to report missing pets. Whether your furry friend has wandered off or is lost, utilize this tool to swiftly document crucial information, aiding in a quicker reunion.</p>
             </div>
 
-            <div class="feature-box">
-                <h2>Pet Memorial</h2>
-                <p>Capture the essence of your cherished companions with our Pet Memorial feature. Create a lasting tribute by sharing your pet's unique story, photos, and videos. This virtual memorial allows you to celebrate the joy your pet brought into your life and provides a space for others to connect through shared memories.</p>
+            <div id="pet-memorial"class="feature-box">
+                <h4><b>Pet Memorial</b></h4>
+                <p color="white">Capture the essence of your cherished companions with our Pet Memorial feature. Create a lasting tribute by sharing your pet's unique story, photos, and videos. This virtual memorial allows you to celebrate the joy your pet brought into your life and provides a space for others to connect through shared memories.</p>
             </div>
 
-            <div class="feature-box">
-                <h2>Grief Support</h2>
+            <div id="grief-support" class="feature-box">
+                <h4><b>Grief Support</b></h4>
                 <p>In times of grief, our Grief Support feature offers a curated collection of coping resources. From counseling services to memorial customization, discover a range of tools to navigate the emotional journey of losing a pet. Access literature, testimonies, and personalized recommendations to find solace and support.</p>
             </div>
         </div>
 
-        </br>
-        </br>
-        </br>
+        
+        <br />
+        <br />
+        <br />
 
-        <h3>Welcome to Pet Reunion Hub!</h3>
-        <p>We're thrilled to have you join our community dedicated to reuniting pets and providing support during challenging times. By signing up, you'll have access to exclusive features and the ability to store your progress, making it easier to navigate through the platform.</p>
+        <div id="invitation">
+            <h3><b>Welcome to Pet Reunion Hub!</b></h3>
+            <p id="signup-invitation">We're thrilled to have you join our community dedicated to reuniting pets and providing support during challenging times. By signing up, you'll have access to exclusive features and the ability to store your progress, making it easier to navigate through the platform.</p>
+        </div>
 
+        <div id="members">
         <h4 class="display-6"></h4>
         <a href="/signup" id="signup" class="button">Sign Up</a>
         <a href="/login" id="login" class="button">Log In</a>
+        </div>
 
 
 
     </div>
 
-    <footer>
+    <footer id="footer" style="color:white;">
         <!-- "About Us" and "Contact Us" links styled as buttons -->
         <a href="/AboutUs" class="button about-us">About Us</a>
         <a href="/Contact" class="button contact-us">Contact Us</a>
