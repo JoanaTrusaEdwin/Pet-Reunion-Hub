@@ -12,10 +12,20 @@
 
     <style>
         body {
-            font-family: Arial, sans-serif;
+            
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('/images/PETHOMEPAGE.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin-right: 0;
+            margin-left: 0;
+            padding-right: 0;
+            background-attachment: fixed;
+            position: relative;
         }
 
         .main-container {
@@ -41,24 +51,48 @@
             text-align: center;
             transition: transform 0.2s ease-in-out;
             cursor: pointer;
+            border-radius: 10px;
+            text-decoration: none;
+            color: inherit; /* Inherit text color from parent */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
+
+            .box:nth-child(1) {
+                background-color: #000; /* Black */
+            }
+
+            .box:nth-child(2) {
+                background-color: #8B572A; /* Brown */
+            }
+
+            .box:nth-child(3) {
+                background-color: #F5F5DC; /* Cream */
+            }
+
+            .box:nth-child(4) {
+                background-color: #fff; /* White */
+            }
 
             .box:hover {
                 transform: scale(1.05);
             }
 
             .box h2 {
-                color: #333;
+                color: white;
             }
 
             .box p {
-                color: #666;
+                color: #ccc;
             }
+
+        
     </style>
 </head>
 <body>
     
-    <div class="main-container">
+    @* <div class="main-container">
         <div class="row">
             <div class="box">
                 <h2>Lost Pet Reporting</h2>
@@ -86,23 +120,36 @@
                 <a href="/SETTINGS/SettingsHome" class="button-link">Go to Settings</a>
             </div>
         </div>
-    </div>
-    @* <div class="container">
-        <div class="box" onclick="location.href='/LostPetReporting'">
-            <h2>Lost Pet Reporting</h2>
-            <p>Report missing pets and aid in a quicker reunion.</p>
+    </div> *@
+
+    <div class="main-container">
+        <div class="row">
+            <a href="/LOSTPETREPORTING/LPRHome" class="box">
+                <h2>Lost Pet Reporting</h2>
+                <p>Report missing pets and aid in a quicker reunion.</p>
+                
+            </a>
+
+            <a href="/PETMEMORIAL/PMHome" class="box">
+                <h2>Pet Memorial</h2>
+                <p>Celebrate the joy your pet brought into your life.</p>
+              
+            </a>
         </div>
 
-        <div class="box" onclick="location.href='/PetMemorial'">
-            <h2>Pet Memorial</h2>
-            <p>Celebrate the joy your pet brought into your life.</p>
-        </div>
+        <div class="row">
+            <a href="/COPINGRESOURCES/CRHome" class="box">
+                <h2>Coping Resources</h2>
+                <p>Discover tools to navigate the emotional journey of losing a pet.</p>
+                
+            </a>
 
-        <div class="box" onclick="location.href='/CopingResources'">
-            <h2>Coping Resources</h2>
-            <p>Discover tools to navigate the emotional journey of losing a pet.</p>
+            <a href="/SETTINGS/SettingsHome" class="box">
+                <h2>Settings</h2>
+                <p>Customise your account settings or reach out to us</p>
+                
+            </a>
         </div>
     </div>
- *@
 </body>
 </html>

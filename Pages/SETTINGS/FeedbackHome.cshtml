@@ -35,7 +35,15 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
+            text-decoration: none; /* Remove default link styling */
+            color: #333; /* Dark Gray */
+            transition: transform 0.2s ease-in-out;
+            cursor: pointer;
         }
+
+            .box:hover {
+                transform: scale(1.05);
+            }
 
         h2 {
             color: #333;
@@ -67,6 +75,17 @@
 <body>
     <div class="container">
 
+        <a href="/SETTINGS/SubmitFeedback" class="box">
+            <h2>Submit Feedback</h2>
+        </a>
+
+        <a href="/SETTINGS/MyFeedback" class="box">
+            <h2>My Feedbacks</h2>
+        </a>
+    </div>
+
+    @* <div class="container">
+
         <div class="box">
             <h2>Submit Feedback</h2>
             <a href="/SETTINGS/SubmitFeedback">Click Me</a>>
@@ -76,7 +95,7 @@
             <h2>My Feedbacks</h2>
             <a href="/SETTINGS/MyFeedback">Click Me</a>>
         </div>
-    </div>
+    </div> *@
 
 </body>
 </html>

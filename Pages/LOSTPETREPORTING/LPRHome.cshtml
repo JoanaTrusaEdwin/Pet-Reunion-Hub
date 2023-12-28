@@ -13,7 +13,18 @@
     <style>
 
         body {
-            font-family: Arial, sans-serif;
+       
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('/images/lostpet.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin-right: 0;
+            margin-left: 0;
+            padding-right: 0;
+            background-attachment: fixed;
+            position: relative;
+        
         }
 
         .container {
@@ -27,8 +38,33 @@
             border: 1px solid #ccc;
             padding: 20px;
             margin: 10px;
+            text-align: center;
+            transition: transform 0.2s ease-in-out;
+            cursor: pointer;
+            border-radius: 10px;
+            text-decoration: none; /* Remove default link styling */
+            color: #333;
         }
 
+        /* Define colors for the boxes */
+        #make-report {
+            background-color: #000; /* Black */
+            color: #fff; /* White */
+        }
+
+        #my-reports {
+            background-color: #8B572A; /* Brown */
+            color: #fff; /* White */
+        }
+
+        #current-lost-pets {
+            background-color: #F5F5DC; /* Cream */
+            color: #333; /* Dark Gray */
+        }
+
+        .box:hover {
+            transform: scale(1.05);
+        }
 
         .button {
             display: inline-block;
@@ -53,7 +89,7 @@
     </style>
 </head>
 <body>
-    <div class="text-center">
+    @* <div class="text-center">
         <h1 class="display-4">Missing or Lost Pets</h1>
         <div class="container">
 
@@ -69,6 +105,23 @@
                 <a href="/LOSTPETREPORTING/CurrentLostPets" class="button-link">Current Missing Pets</a>
             </div>
 
+        </div> *@
+
+
+    <div class="text-center">
+        <h1 class="display-4">Missing or Lost Pets</h1>
+        <div class="container">
+            <a href="/LOSTPETREPORTING/MakeReport" class="box" id="make-report">
+                <b>Make a New Report</b>
+            </a>
+
+            <a href="/LOSTPETREPORTING/MyReports" class="box" id="my-reports">
+                <b>View My Reports</b>
+            </a>
+
+            <a href="/LOSTPETREPORTING/CurrentLostPets" class="box" id="current-lost-pets">
+                <b>View Current Lost Pets</b>
+            </a>
         </div>
     </div>
 

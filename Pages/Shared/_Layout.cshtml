@@ -227,20 +227,7 @@
         });
         miniTab.appendChild(expandButton);
 
-        if (document.body.classList.contains('pm-home')) {
-            const hideButton = document.createElement('button');
-            hideButton.innerHTML = '&#8722;'; // Minus symbol
-            hideButton.style.fontSize = '14px';
-            hideButton.style.width = '20px';
-            hideButton.style.height = '20px';
-            hideButton.style.marginRight = '5px';
-            hideButton.style.backgroundColor = '#807C73';
-            hideButton.addEventListener('click', function () {
-                document.body.classList.toggle('expanded');
-                expandButton.innerHTML = 'Expand'; // Reset text when hiding
-            });
-            miniTab.appendChild(hideButton);
-        }
+        
     });
 </script>
 

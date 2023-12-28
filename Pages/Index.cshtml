@@ -19,94 +19,11 @@
 
 <style>
 
-/* body {
-    font-family: Arial, sans-serif;
-    background-color: #fff; 
-    color: #333; 
-}
-
-       .text-center {
-            text-align: center;
-            padding: 20px;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            color: #3b3b3b; 
-        }
-
-        p {
-            color: #555; 
-        }
-
-.feature-container {
-        display: flex;
-        justify-content: space-around;
-            margin-top: 30px;
-}
-
-.feature-box {
-        flex: 1; 
-        max-width: 300px; 
-        border: 1px solid #ccc;
-        padding: 20px;
-        margin: 10px;
-        background-color: #f8f8f8; 
-}
-
-footer {
-        text-align: center;
-        padding: 20px;
-        background-color: #f2f2f2;
-        color: #fff;
-        }
-
-    .button {
-        display: inline-block;
-        padding: 10px 20px;
-        border-radius: 25px;
-        text-decoration: none;
-        font-weight: bold;
-        letter-spacing: 1px;
-        margin: 10px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-    #signup {
-        background-color: #3b3b3b; 
-        color: #fff;
-    }
-
-            #signup:hover {
-                background-color: #8b572a; 
-            }
-
-    #login {
-        background-color: #8b572a; 
-        color: #fff;
-    }
-
-        #login:hover {
-                background-color: #3b3b3b; 
-            }
-
-        .about-us, .contact-us {
-            background-color: #fff; 
-            color: #3b3b3b; 
-            margin-top: 10px;
-        }
-
-            .about-us:hover, .contact-us:hover {
-                background-color: #3b3b3b;
-                color: #fff; 
-            } */
-
-       
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0; 
             padding: 0; 
-            background-image:url('/images/fadedimage.jpg');
+            background-image:url('/images/HAPPYPETS.jpg');
             background-size: cover; 
             background-position: center; 
             background-repeat: no-repeat; 
@@ -115,49 +32,23 @@ footer {
             padding-right: 0;
             background-attachment: fixed;
             position: relative;
-           
         }
-
-           /*  body::before {
-                content: "";
-                position: absolute;
-                top: 0;
-                right: 0;
-                left: 0;
-                height: 175px; 
-                background-color: #807065;
-                z-index: -1;
-            } */
-
-      /*   .header-container h1{
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                font-weight: 300;
-                font-size: 3.5em;
-                letter-spacing: 1px;
-                border-bottom: 1px solid #fff;
-                margin-bottom: 10px;
-                color: white;
-        }
-
-        .header-container h2{
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                font-style: italic;
-                font-size: 1.5em; 
-                color: #fff;
-                margin-top: 10px;
-        } */
-
+ 
         .welcoming {
-            color:white;
+            
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Use the Open Sans font */
             font-weight:200;
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 20px; /* Adjust as needed */
+            border-radius: 10px;
+            text-align: justify;
         }
 
             .welcoming p {
                 margin-bottom: 15px;
                 color: white;
                 font-size: 20px;
-                line-height: 2.5;
+                line-height: 2.0;
             }
 
                 .welcoming p:last-child {
@@ -184,7 +75,7 @@ footer {
             padding: 20px;
             margin: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
-            background-color: #EAE0C8; /* Black background */
+            
             border: none; /* Remove the border */
             overflow: hidden; /* Ensure content doesn't overflow */
             transition: transform 0.3s ease-in-out;
@@ -192,23 +83,48 @@ footer {
             
         }
 
+        #lost-pet {
+            background-color: #000; /* Black background */
+        }
+
+        #pet-memorial {
+            background-color: #8B572A; /* Brown background */
+        }
+
+        #grief-support {
+            background-color: #F5F5DC;
+            color: black; 
+        }
+
             .feature-box:hover {
                 transform: scale(1.05); /* Add a slight scale effect on hover */
             }
+
+        .box-image {
+            width: 100%; /* Make the image fill the container */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 100px; /* Rounded corners only at the top */
+            overflow: hidden; /* Hide any overflow beyond rounded corners */
+        }
 
         .feature-box h4{
                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                 font-weight: 300;
                 font-size: 1.5em;
                 letter-spacing: 1px;
-                border-bottom: 1px solid black;
+                border-bottom: 1px solid white;
                 margin-bottom: 10px;
         }
         .feature-box h4, .feature-box p{
-            color:black;
-            
-
+            color: white;
+           
         }
+
+        #grief-support h4,
+        #grief-support p {
+            color: black;
+        }
+
 
         .feature-box p{
                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -269,13 +185,19 @@ footer {
             color: #fff;
         }
 
-        
+        #invitation {
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+            padding: 20px; /* Adjust padding as needed */
+            border-radius: 10px; /* Add border-radius for rounded corners */
+            color: white; /* Set text color to white or a suitable color */
+        }
+
         #signup-invitation{
             color:white;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             font-weight: 150;
             letter-spacing: 1px;
-            margin-bottom: 10px;
+            margin-bottom: 0;
         }
 
         .button:hover {
@@ -318,17 +240,23 @@ footer {
         <div class="feature-container">
 
             <div id="lost-pet"class="feature-box">
+                <img class="box-image" src="/images/MISSING.jpg" alt="Lost Pet Image">
                 <h4><b>Lost Pet Reporting</b></h4>
-                <p><b>Our Lost Pet Reporting feature provides a streamlined and compassionate platform to report missing pets. Whether your furry friend has wandered off or is lost, utilize this tool to swiftly document crucial information, aiding in a quicker reunion.</b></p>
+                <br/>
+                <p><b>Our Lost Pet Reporting feature provides a streamlined and compassionate platform to report missing pets. Whether your furry friend has wandered off or is lost, utilise this tool to swiftly document crucial information, aiding in a quicker reunion.</b></p>
             </div>
 
             <div id="pet-memorial"class="feature-box">
+                <img class="box-image" src="/images/MEMORIALSECOND.jpg" alt="Pet Memorial Image">
                 <h4><b>Pet Memorial</b></h4>
+                <br />
                 <p color="white"><b>Capture the essence of your cherished companions with our Pet Memorial feature. Create a lasting tribute by sharing your pet's unique story, photos, and videos. This virtual memorial allows you to celebrate the joy your pet brought into your life and provides a space for others to connect through shared memories.</b></p>
             </div>
 
             <div id="grief-support" class="feature-box">
+                <img class="box-image" src="/images/GRIEF.jpg" alt="Grief Support Image">
                 <h4><b>Grief Support</b></h4>
+                <br />
                 <p><b>In times of grief, our Grief Support feature offers a curated collection of coping resources. From counseling services to memorial customization, discover a range of tools to navigate the emotional journey of losing a pet. Access literature, testimonies, and personalized recommendations to find solace and support.</b></p>
             </div>
         </div>

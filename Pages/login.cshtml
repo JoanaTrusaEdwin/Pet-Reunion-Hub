@@ -11,17 +11,34 @@
     <title></title>
 <style>
     body {
-        font-family: Arial, sans-serif;
+        
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('/images/cats.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin-right: 0;
+            margin-left: 0;
+            padding-right: 0;
+            background-attachment: fixed;
+            position: relative;
     }
 
     form {
         max-width: 400px;
         margin: 0 auto;
+            background-color: #807C73;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
     }
 
     label {
         display: block;
         margin-bottom: 8px;
+            color: #fff;
+            font-weight: bold;
     }
 
     input {
@@ -29,16 +46,26 @@
         padding: 8px;
         margin-bottom: 16px;
         box-sizing: border-box;
+            border: 1px solid #6F695D;
+            border-radius: 5px;
+            background-color: #fff;
+            color: #333;
     }
 
-    button {
-        background-color: #3498db;
-        color: #fff;
+    #button {
+        background-color: white;
+        color: black;
         padding: 10px 15px;
         border: none;
-        border-radius: 5px;
+        border-radius: 50px;
         cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
     }
+
+        .button:hover {
+            background-color: #807C73;
+        }
 </style>
 </head>
 
@@ -51,7 +78,7 @@
         <input type="password" id="password" name="password" required>
 
 
-        <a href="/HomePage" class="button">Log In</a>
+        <a href="/HomePage" id="button"class="button"><b>Log In</b></a>
     </form>
 </body>
 </html>

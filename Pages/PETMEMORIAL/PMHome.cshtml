@@ -13,7 +13,17 @@
     <style>
 
         body {
-            font-family: Arial, sans-serif;
+            
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('/images/petrainbow.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin-right: 0;
+            margin-left: 0;
+            padding-right: 0;
+            background-attachment: fixed;
+            position: relative;
         }
 
         .container {
@@ -27,8 +37,33 @@
             border: 1px solid #ccc;
             padding: 20px;
             margin: 10px;
+            text-align: center;
+            transition: transform 0.2s ease-in-out;
+            cursor: pointer;
+            border-radius: 10px;
+            text-decoration: none; /* Remove default link styling */
+            color: #333;
         }
 
+        /* Define colors for the boxes */
+        #create-memorial {
+            background-color: #3b3b3b; /* Black */
+            color: #fff; /* White */
+        }
+
+        #memorial-feed {
+            background-color: #8B572A; /* Brown */
+            color: #fff; /* White */
+        }
+
+        #my-memorials {
+            background-color: #F5F5DC; /* Cream */
+            color: #333; /* Dark Gray */
+        }
+
+        .box:hover {
+            transform: scale(1.05);
+        }
 
         .button {
             display: inline-block;
@@ -41,19 +76,11 @@
             cursor: pointer;
         }
 
-        #signup {
-            background-color: #3b3b3b; /* Black */
-            color: #fff;
-        }
-
-        #login {
-            background-color: #8b572a; /* Brown */
-            color: #fff;
-        }
+      
     </style>
 </head>
 <body class="pm-home">
-    <div class="text-center">
+    @* <div class="text-center">
         <h1 class="display-4">A Visit to The Rainbow Bridge</h1>
         <div class="container">
 
@@ -75,8 +102,23 @@
                 <a href="/PETMEMORIAL/MyMemorials" class="button-link">My Memorials</a>
             </div>
         </div>
-    </div>
+    </div> *@
+    <div class="text-center">
+        <h1 class="display-4">A Visit to The Rainbow Bridge</h1>
+        <div class="container">
+            <a href="/PETMEMORIAL/CreateMemorial" class="box" id="create-memorial">
+                <b>  Create a New Memorial Page</b>
+            </a>
 
+            <a href="/PETMEMORIAL/MemorialFeed" class="box" id="memorial-feed">
+                <b> Memorials Among the Community</b>
+            </a>
+
+            <a href="/PETMEMORIAL/MyMemorials" class="box" id="my-memorials">
+                <b>  My Memorials</b>
+            </a>
+        </div>
+    </div>
 
 </body>
 </html>
