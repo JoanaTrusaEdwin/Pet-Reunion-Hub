@@ -82,6 +82,14 @@
             margin-right: 25%; /* Adjust margin based on the width of the mini-tab */
         }
 
+        #homebutton{
+            background-color: #fff; /* White background */
+            color: #000; /* Black font color */
+            padding: 10px 15px;
+            border: none;
+            border-radius: 20px;
+            text-decoration: none;
+        }
 
     </style>
 </head>
@@ -108,12 +116,13 @@
         </nav> *@
 
 
-        <div id="headerbox" style="background-color: #6F695D; text-align:center; width:90%; padding: 10px; color: #fff;">
+        <div id="headerbox" style=" background-color: #8b572a; text-align:center; width:90%; padding: 10px; color: #fff;">
                 <!-- Your brown header content goes here -->
                 <h1>Pet Reunion Hub</h1>
                 <h2>
                     Aid and Grief Support for Missing or Departed Pets
                 </h2>
+            <a href="/HomePage" class="button" id="homebutton" style="float: left; position: absolute; top: 10px; left: 10px;">Home</a>
          </div>
         
     </header>
@@ -206,7 +215,10 @@
         expandButton.style.width = '150px';
         expandButton.style.height = '30px';
         expandButton.style.marginRight = '5px';
-        expandButton.style.backgroundColor = '#807C73';
+        expandButton.style.backgroundColor = 'black';
+        expandButton.style.color = 'white'; // Set text color to white
+        expandButton.style.fontWeight = 'bold'; // Set font weight to bold
+        expandButton.style.borderRadius = '20px';
         expandButton.addEventListener('click', function () {
             document.body.classList.toggle('expanded');
 
