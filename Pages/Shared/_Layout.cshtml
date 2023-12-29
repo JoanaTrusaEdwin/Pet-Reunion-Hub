@@ -9,18 +9,7 @@
     <link rel="stylesheet" href="~/Pet_Reunion_Hub.styles.css" asp-append-version="true" />
 
     <style>
-        /* Style for the mini tab on the right side */
-        /* .mini-tab {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 15%;
-            height: 100%;
-            background-color: #f8f9fa; 
-            padding: 10px; 
-            box-sizing: border-box; 
-        } */
-
+        
         body{
           background-color:  #F5F5DC
         }
@@ -136,8 +125,25 @@
         <!-- Mini tab on the right side -->
         <div class="mini-tab">
             <div class="mini-tab-content">
+                
                 <!-- Your banner content goes here -->
                 <p>CURRENT LOST PETS ALERT!</p>
+                <hr />
+                <!-- Hardcoded line displaying pet's photo, name, last seen location, and time -->
+                <img src="pet_photo.jpg" alt="Pet Photo" style="max-width: 100%;">
+                <h4>Pet Name: Fido</h4>
+                <p>Last Seen Location: Park</p>
+                <p>Last Seen Time: 2 hours ago</p>
+
+                <!-- Expanded details (hidden by default) -->
+                    <div class="expanded-details" style="display: none;">
+                        <hr />
+                        <h4>Breed: Labrador Retriever</h4>
+                        <p>Gender: Male</p>
+                        <p>Date of Birth: 1st March 2018</p>
+                        <p>Microchip ID: 123456789</p>
+                        <p>Contact Information: owner@example.com | +1 (555) 123-4567</p>
+                    </div>
             </div>
         </div>
     </div>
@@ -159,46 +165,8 @@
 </html>
 
 
-
-@* <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const miniTab = document.createElement('div');
-        miniTab.classList.add('mini-tab');
-        document.body.appendChild(miniTab);
-
-        const title = document.createElement('p');
-        title.innerText = 'CURRENT LOST PETS ALERT!';
-        title.style.fontWeight = 'bold';
-        miniTab.appendChild(title);
-
-        const expandButton = document.createElement('button');
-        expandButton.innerHTML = 'expand'; // Plus symbol
-        expandButton.style.fontSize = '14px';
-        expandButton.style.width = '150px';
-        expandButton.style.height = '30px';
-        expandButton.style.marginRight = '5px';
-        expandButton.addEventListener('click', function () {
-            document.body.classList.toggle('expanded');
-        });
-        miniTab.appendChild(expandButton);
-
-        if (document.body.classList.contains('pm-home')) {
-            const hideButton = document.createElement('button');
-            hideButton.innerHTML = '&#8722;'; // Minus symbol
-            hideButton.style.fontSize = '14px';
-            hideButton.style.width = '20px';
-            hideButton.style.height = '20px';
-            hideButton.style.marginRight = '5px';
-            hideButton.addEventListener('click', function () {
-                document.body.classList.toggle('expanded');
-            });
-            miniTab.appendChild(hideButton);
-        }
-    });
-
-</script> *@
-
 <script>
+
     document.addEventListener("DOMContentLoaded", function () {
         const miniTab = document.createElement('div');
         miniTab.classList.add('mini-tab');
@@ -231,3 +199,4 @@
     });
 </script>
 
+   
