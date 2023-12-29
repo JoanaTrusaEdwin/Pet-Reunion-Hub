@@ -60,6 +60,18 @@
             font-size: 16px;
             border-radius: 4px;
         }
+
+        #submitbtn {
+            background-color: #3b3b3b;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+
     </style>
 </head>
 <body>
@@ -82,8 +94,18 @@
             <label for="resourceDescription">Description</label>
             <textarea id="resourceDescription" name="resourceDescription" rows="4" cols="50"></textarea>
 
-            <a href="/COPINGRESOURCES/MyResources">
-               Submit
+            <label for="type">Type of resource</label>
+            <select id="resourcetype" name="resourcetype" required>
+                <option value="Counselling">Counselling and Therapy</option>
+                <option value="YoutubeVideos">Youtube Videos</option>
+                <option value="Books">Books About Grief</option>
+                <option value="testimonies">Testimonies by Users</option>
+                <option value="customisation">Customisation</option>
+                <option value="others">Others</option>
+            </select>
+
+            <a href="/COPINGRESOURCES/MyResources" id="submitbtn">
+               Save Changes
             </a>
         </form>
     </div>

@@ -2,3 +2,77 @@
 @model Pet_Reunion_Hub.Pages.COPINGRESOURCES.CounselingModel
 @{
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counselors Page</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #F5F5DC; /* Light cream background */
+            color: #333; /* Black text color */
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .counselor-list {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px;
+        }
+
+        .counselor-box {
+            background-color: #654321; /* Brown background */
+            color: #fff; /* White text color */
+            border-radius: 15px; /* Rounded corners */
+            padding: 20px;
+            width: 45%; /* Set the width of each counselor box */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle lift */
+        }
+
+        .counselor-image {
+            width: 50px; /* Set the width of the counselor image */
+            border-radius: 50%; /* Make the image round */
+            margin-bottom: 10px;
+        }
+
+        h2, p {
+            margin: 0;
+        }
+
+        .counselor-contact {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="counselor-list">
+        <div class="counselor-box">
+            <img class="counselor-image" src="image1.jpg" alt="Counselor Image">
+            <h2>John Doe</h2>
+            <p><strong>Specialization:</strong> Pet Grief Counseling</p>
+            <p><strong>Description:</strong> Compassionate counselor helping individuals cope with the loss of a beloved pet.</p>
+            <div class="counselor-contact">
+                <p><strong>Contact Information:</strong></p>
+                <p>Email: john@example.com</p>
+                <p>Phone: +1 (555) 123-4567</p>
+            </div>
+        </div>
+
+        <div class="counselor-box">
+            <img class="counselor-image" src="image1.jpg" alt="Counselor Image">
+            <h2>Jane Smith</h2>
+            <p><strong>Specialization:</strong> Pet Grief Counseling</p>
+            <p><strong>Description:</strong> Understanding counselor providing support for those mourning the loss of a pet.</p>
+            <div class="counselor-contact">
+                <p><strong>Contact Information:</strong></p>
+                <p>Email: jane@example.com</p>
+                <p>Phone: +1 (555) 987-6543</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

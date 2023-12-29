@@ -9,10 +9,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #F5F5DC; /* Light cream background */
+            color: #333; /* Black text color */
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .counselor-list {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px;
+        }
+
+        .counselor-box {
+            background-color: #654321; /* Brown background */
+            color: #fff; /* White text color */
+            border-radius: 15px; /* Rounded corners */
+            padding: 20px;
+            width: 45%; /* Set the width of each counselor box */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle lift */
+        }
+
+        .counselor-image {
+            width: 50px; /* Set the width of the counselor image */
+            border-radius: 50%; /* Make the image round */
+            margin-bottom: 10px;
+        }
+
+        h2, p {
+            margin: 0;
+        }
+
+        .counselor-contact {
+            margin-top: 10px;
+        }
+
+        #editbtn{
+            background-color: #3b3b3b;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
-    <h1>(Just for prototype purposes)</h1>
-    <p>Assuming this is a memorial</p>
-    <a href="/COPINGRESOURCES/ViewResource">View More</a>
+
+    <div class="counselor-list">
+        <div class="counselor-box">
+           
+            <h2>Dealing with Grief at Random Times</h2>
+            <p><strong>[link]</strong></p>
+            <p><strong>Description:</strong> This video has helped me a lot in dealing with the grief when the waves hit me during the most random times </p>
+            <div class="counselor-contact">
+                
+            </div>
+        </div>
+    </div>
+    
+    <a href="/COPINGRESOURCES/EditResource" id="editbtn">Edit</a>
 </body>
 </html>

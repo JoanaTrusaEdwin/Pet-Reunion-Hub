@@ -12,7 +12,8 @@
 
     <style>
         body {
-            font-family: Arial, sans-serif;
+           
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
@@ -51,7 +52,7 @@
 
         #addPostBtn {
             cursor: pointer;
-            color: green;
+            color: black;
             font-weight: bold;
             background-color: #fff;
             border: none;
@@ -64,6 +65,16 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
+        }
+
+        #submitbtn{
+            background-color: #3b3b3b;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
         }
     </style>
 </head>
@@ -178,8 +189,8 @@
                 <div id="addPostBtn">+ Add Post</div>
             </div>
 
-            <a href="/PETMEMORIAL/MyMemorials">
-               Create Memorial
+            <a href="/PETMEMORIAL/MyMemorials" id="submitbtn">
+               <b>Save Changes</b>
             </a>
         </form>
     </div>
