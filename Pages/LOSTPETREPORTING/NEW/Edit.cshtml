@@ -1,0 +1,75 @@
+﻿@page
+@model Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>CreateReport</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CreateReport.Id" />
+            <div class="form-group">
+                <label asp-for="CreateReport.PetName" class="control-label"></label>
+                <input asp-for="CreateReport.PetName" class="form-control" />
+                <span asp-validation-for="CreateReport.PetName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateReport.PetBreed" class="control-label"></label>
+                <input asp-for="CreateReport.PetBreed" class="form-control" />
+                <span asp-validation-for="CreateReport.PetBreed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateReport.PetGender" class="control-label"></label>
+                <input asp-for="CreateReport.PetGender" class="form-control" />
+                <span asp-validation-for="CreateReport.PetGender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateReport.DateOfBirth" class="control-label"></label>
+                <input asp-for="CreateReport.DateOfBirth" class="form-control" />
+                <span asp-validation-for="CreateReport.DateOfBirth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateReport.PetMicrochipID" class="control-label"></label>
+                <input asp-for="CreateReport.PetMicrochipID" class="form-control" />
+                <span asp-validation-for="CreateReport.PetMicrochipID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateReport.LastSeenLocation" class="control-label"></label>
+                <input asp-for="CreateReport.LastSeenLocation" class="form-control" />
+                <span asp-validation-for="CreateReport.LastSeenLocation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateReport.LastSeenTime" class="control-label"></label>
+                <input asp-for="CreateReport.LastSeenTime" class="form-control" />
+                <span asp-validation-for="CreateReport.LastSeenTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateReport.MainPhoto" class="control-label"></label>
+                <input asp-for="CreateReport.MainPhoto" class="form-control" />
+                <span asp-validation-for="CreateReport.MainPhoto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateReport.ContactInformation" class="control-label"></label>
+                <input asp-for="CreateReport.ContactInformation" class="form-control" />
+                <span asp-validation-for="CreateReport.ContactInformation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

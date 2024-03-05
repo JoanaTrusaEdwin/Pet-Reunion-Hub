@@ -1,0 +1,84 @@
+﻿@page
+@model Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateReport[0].PetName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateReport[0].PetBreed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateReport[0].PetGender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateReport[0].DateOfBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateReport[0].PetMicrochipID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateReport[0].LastSeenLocation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateReport[0].LastSeenTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateReport[0].MainPhoto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateReport[0].ContactInformation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.CreateReport) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PetName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PetBreed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PetGender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PetMicrochipID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastSeenLocation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastSeenTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MainPhoto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactInformation)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
