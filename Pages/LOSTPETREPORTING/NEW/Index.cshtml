@@ -34,9 +34,11 @@
             <th>
                 @Html.DisplayNameFor(model => model.CreateReport[0].LastSeenTime)
             </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.CreateReport[0].MainPhoto)
             </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.CreateReport[0].ContactInformation)
             </th>
@@ -67,10 +69,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.LastSeenTime)
             </td>
+
+
             <td>
                 @Html.DisplayFor(modelItem => item.MainPhoto)
+                    <img src="@item.MainPhoto" alt="Pet Photo" style="max-width: 100px;" />
             </td>
+
+
             <td>
+
                 @Html.DisplayFor(modelItem => item.ContactInformation)
             </td>
             <td>

@@ -56,9 +56,24 @@
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CreateReport.MainPhoto)
         </dt>
-        <dd class="col-sm-10">
+
+
+        @* <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CreateReport.MainPhoto)
+        </dd> *@
+
+        @* NEW HERE *@
+        <dt class="col-sm-2">
+            Main Photo
+        </dt>
+        <dd class="col-sm-10">
+            <!-- Display the image -->
+            <img src="@Model.CreateReport.MainPhoto" alt="Pet Photo" style="max-width: 300px;" />
         </dd>
+         @* NEW HERE *@
+
+
+
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CreateReport.ContactInformation)
         </dt>
