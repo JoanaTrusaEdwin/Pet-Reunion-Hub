@@ -68,6 +68,12 @@
                 <span asp-validation-for="Photo" class="text-danger"></span>
             </div>
           @*   NEW HERE *@
+            <div class="form-group photos-group">
+                <label asp-for="Photos" class="control-label"></label>
+                <input type="file" name="Photos" multiple class="form-control" />
+                <span asp-validation-for="Photos" class="text-danger"></span>
+                <button type="button" class="btn btn-primary" onclick="addMorePhotos()">+</button>
+            </div>
 
 
             <div class="form-group">
@@ -88,4 +94,25 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        function addMorePhotos() {
+            var input = document.createElement('input');
+            input.type = 'file';
+            input.multiple = true;
+            input.className = 'form-control';
+            input.name = 'Photos';
+            var photosGroup = document.querySelector('.form-group.photos-group');
+            photosGroup.appendChild(input);
+
+            var removeButton = document.createElement('button');
+            removeButton.type = 'button';
+            removeButton.className = 'btn btn-danger';
+            removeButton.textContent = 'Remove';
+            removeButton.onclick = function () {
+                photosGroup.removeChild(input);
+                photosGroup.removeChild(removeButton);
+            };
+           photosGroup.appendChild(removeButton);
+        }
+    </script>
 }

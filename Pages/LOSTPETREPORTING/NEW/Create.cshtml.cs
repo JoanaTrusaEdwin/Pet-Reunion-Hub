@@ -35,6 +35,7 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
         //NEW HERE
         public IFormFile Photo { get; set; }
         //NEW HERE
+        public List<IFormFile> Photos { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
@@ -45,6 +46,41 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
             {
                 return Page();
             }
+
+            //if (Photos != null && Photos.Count > 0)
+            //{
+            //    foreach (var photo in Photos)
+            //    {
+            //        // Retrieve the connection string for Azure Blob Storage from appsettings.json
+            //        string connectionString = _configuration["AzureBlobStorageConnectionString"];
+
+            //        // Create a BlobServiceClient using the connection string
+            //        var blobServiceClient = new BlobServiceClient(azureBlobStorageConnectionString);
+
+            //        // Get a reference to the container where you want to store the files
+            //        var containerClient = blobServiceClient.GetBlobContainerClient("newprhcontainer");
+
+            //        // Generate a unique filename for the uploaded file
+            //        var fileName = Guid.NewGuid().ToString() + Path.GetExtension(photo.FileName);
+
+            //        // Get a reference to the blob in the container
+            //        var blobClient = containerClient.GetBlobClient(fileName);
+
+            //        // Upload the file to Azure Blob Storage
+            //        using (var stream = photo.OpenReadStream())
+            //        {
+            //            await blobClient.UploadAsync(stream, true);
+            //        }
+
+            //        // Optionally, you can get the URL of the uploaded file
+            //        var fileUrl = blobClient.Uri.ToString();
+
+            //        // Save the photo URL to the database
+            //        var reportPhoto = new ReportPhoto { ReportId = CreateReport.Id, PhotoUrl = fileUrl };
+            //        _context.ReportPhoto.Add(reportPhoto);
+            //        await _context.SaveChangesAsync();
+            //    }
+            //}
 
             //NEW HERE
 
@@ -72,6 +108,8 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
                 // You can log an error or return an appropriate response
                 return Page();
             }
+
+            
 
 
             // Check if the connectionString is not null or empty
@@ -109,10 +147,49 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
                 // Save the report to your database
             }
 
-            //NEW HERE
-
             _context.CreateReport.Add(CreateReport);
             await _context.SaveChangesAsync();
+
+            if (Photos != null && Photos.Count > 0)
+            {
+                foreach (var photo in Photos)
+                {
+                    // Retrieve the connection string for Azure Blob Storage from appsettings.json
+                    string connectionString = _configuration["AzureBlobStorageConnectionString"];
+
+                    // Create a BlobServiceClient using the connection string
+                    var blobServiceClient = new BlobServiceClient(azureBlobStorageConnectionString);
+
+                    // Get a reference to the container where you want to store the files
+                    var containerClient = blobServiceClient.GetBlobContainerClient("newprhcontainer");
+
+                    // Generate a unique filename for the uploaded file
+                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(photo.FileName);
+
+                    // Get a reference to the blob in the container
+                    var blobClient = containerClient.GetBlobClient(fileName);
+
+                    // Upload the file to Azure Blob Storage
+                    using (var stream = photo.OpenReadStream())
+                    {
+                        await blobClient.UploadAsync(stream, true);
+                    }
+
+                    // Optionally, you can get the URL of the uploaded file
+                    var fileUrl = blobClient.Uri.ToString();
+
+                    // Save the photo URL to the database
+                    var reportPhoto = new ReportPhoto { ReportId = CreateReport.Id, PhotoUrl = fileUrl };
+                    _context.ReportPhoto.Add(reportPhoto);
+                    await _context.SaveChangesAsync();
+                }
+            }
+
+
+            //NEW HERE
+
+            //_context.CreateReport.Add(CreateReport);
+            //await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
         }
