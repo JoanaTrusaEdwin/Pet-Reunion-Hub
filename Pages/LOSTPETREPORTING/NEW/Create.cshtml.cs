@@ -9,9 +9,11 @@ using PRHDATALIB.Models;
 using Azure.Storage.Blobs;
 using System.Configuration;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
 {
+    [Authorize(Policy = "RequireLoggedIn")]
     public class CreateModel : PageModel
     {
         private readonly PRHDATALIB.Models.DatabaseContext _context;

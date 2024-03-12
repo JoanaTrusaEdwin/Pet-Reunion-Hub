@@ -1,24 +1,24 @@
-﻿//using Microsoft.AspNetCore.Identity;
-//using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-//using Microsoft.EntityFrameworkCore;
+﻿////using Microsoft.AspNetCore.Identity;
+////using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+////using Microsoft.EntityFrameworkCore;
 
-//namespace PRHDATALIB.Models;
+////namespace PRHDATALIB.Models;
 
-//public class DatabaseContext : IdentityDbContext<IdentityUser>
-//{
-//    public DatabaseContext(DbContextOptions<DatabaseContext> options)
-//        : base(options)
-//    {
-//    }
+////public class DatabaseContext : IdentityDbContext<IdentityUser>
+////{
+////    public DatabaseContext(DbContextOptions<DatabaseContext> options)
+////        : base(options)
+////    {
+////    }
 
-//    protected override void OnModelCreating(ModelBuilder builder)
-//    {
-//        base.OnModelCreating(builder);
-//        // Customize the ASP.NET Identity model and override the defaults if needed.
-//        // For example, you can rename the ASP.NET Identity table names and more.
-//        // Add your customizations after calling base.OnModelCreating(builder);
-//    }
-//}
+////    protected override void OnModelCreating(ModelBuilder builder)
+////    {
+////        base.OnModelCreating(builder);
+////        // Customize the ASP.NET Identity model and override the defaults if needed.
+////        // For example, you can rename the ASP.NET Identity table names and more.
+////        // Add your customizations after calling base.OnModelCreating(builder);
+////    }
+////}
 
 
 #nullable disable
@@ -32,7 +32,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 namespace PRHDATALIB.Models
 {
     //public partial class DatabaseContext : DbContext
-    public partial class DatabaseContext : IdentityDbContext<ApplicationUser> // Modify the inheritance
+    public partial class DatabaseContext : IdentityDbContext<IdentityUser> // Modify the inheritance
     {
         public DatabaseContext()
         {
@@ -136,7 +136,7 @@ namespace PRHDATALIB.Models
                       .HasConstraintName("FK_ReportPhoto_CreateReport");
             });
 
-            //modelBuilder.Entity<ApplicationUser>(entity =>
+            //modelBuilder.Entity<IdentityUser>(entity =>
             //{
             //    entity.ToTable("AspNetUsers");
 
@@ -204,6 +204,14 @@ namespace PRHDATALIB.Models
 
             base.OnModelCreating(modelBuilder);
             //OnModelCreatingPartial(modelBuilder);
+
+            //modelBuilder.Entity<ApplicationUser>().ToTable("AspNetUsers");
+            //modelBuilder.Entity<IdentityRole>().ToTable("AspNetRoles");
+            //modelBuilder.Entity<IdentityUserRole<string>>().ToTable("AspNetUserRoles");
+            //modelBuilder.Entity<IdentityUserClaim<string>>().ToTable("AspNetUserClaims");
+            //modelBuilder.Entity<IdentityUserLogin<string>>().ToTable("AspNetUserLogins");
+            //modelBuilder.Entity<IdentityRoleClaim<string>>().ToTable("AspNetRoleClaims");
+            //modelBuilder.Entity<IdentityUserToken<string>>().ToTable("AspNetUserTokens");
         }
 
         //partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

@@ -6,6 +6,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 
 
 
@@ -18,14 +22,55 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<DatabaseContext>();
 
-//builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(30); // Cookie expires when browser session ends
+    options.SlidingExpiration = false;
+});
+
+
+//builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 //{
 //    // Configure identity options here
 //})
 //.AddEntityFrameworkStores<DatabaseContext>();
 
-//// Add services to the container.
-builder.Services.AddRazorPages();
+
+
+//builder.Services.AddAuthentication(options =>
+//{
+//    options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
+//    options.DefaultSignInScheme = IdentityConstants.ApplicationScheme;
+//    options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
+//})
+//    .AddCookie(IdentityConstants.ApplicationScheme, options =>
+//    {
+//        options.SlidingExpiration = false; // Disable sliding expiration
+
+//    });
+
+
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("RequireLoggedIn", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+    });
+});
+
+//builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(options =>
+{
+    options.Conventions.AuthorizeFolder("/", "RequireLoggedIn");
+    options.Conventions.AllowAnonymousToPage("/Index");
+});
+
+//builder.Services.Configure<CookieAuthenticationOptions>(IdentityConstants.ApplicationScheme, options =>
+//{
+//    options.ExpireTimeSpan = TimeSpan.Zero; // Cookie expires when browser session ends
+//});
+
 
 var app = builder.Build();
 
