@@ -1,25 +1,4 @@
-﻿////using Microsoft.AspNetCore.Identity;
-////using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-////using Microsoft.EntityFrameworkCore;
-
-////namespace PRHDATALIB.Models;
-
-////public class DatabaseContext : IdentityDbContext<IdentityUser>
-////{
-////    public DatabaseContext(DbContextOptions<DatabaseContext> options)
-////        : base(options)
-////    {
-////    }
-
-////    protected override void OnModelCreating(ModelBuilder builder)
-////    {
-////        base.OnModelCreating(builder);
-////        // Customize the ASP.NET Identity model and override the defaults if needed.
-////        // For example, you can rename the ASP.NET Identity table names and more.
-////        // Add your customizations after calling base.OnModelCreating(builder);
-////    }
-////}
-
+﻿
 
 #nullable disable
 using Microsoft.EntityFrameworkCore;
@@ -49,6 +28,11 @@ namespace PRHDATALIB.Models
 
         public virtual DbSet<ReportPhoto> ReportPhoto { get; set; }
 
+        public virtual DbSet<IdentityUser> Users { get; set; }
+
+        public virtual DbSet<Testing> Testing { get; set; }
+
+        public DbSet<Newtest> NEWTEST { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -113,6 +97,19 @@ namespace PRHDATALIB.Models
                     .HasMaxLength(255)
                     .IsRequired()
                     .HasColumnName("ContactInformation");
+
+                //entity.Property(e => e.UserId)
+                //    .IsRequired();
+
+                // Define the relationship with AspNetUsers
+                entity.HasOne(cr => cr.User)
+                    .WithMany()
+                    .HasForeignKey(cr => cr.UserId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("FK_CreateReport_AspNetUsers");
+
+
+
             });
 
             modelBuilder.Entity<ReportPhoto>(entity =>
@@ -136,6 +133,35 @@ namespace PRHDATALIB.Models
                       .HasConstraintName("FK_ReportPhoto_CreateReport");
             });
 
+            modelBuilder.Entity<Testing>(entity =>
+            {
+                entity.ToTable("TESTING");
+
+                entity.Property(e => e.Id)
+                      .ValueGeneratedOnAdd()
+                      .HasColumnName("Id");
+
+                entity.Property(e => e.Test)
+                      .HasMaxLength(255)
+                      .IsRequired()
+                      .HasColumnName("Test");
+            });
+
+            modelBuilder.Entity<Newtest>(entity =>
+            {
+                entity.Property(e => e.NewTest)
+                    .IsRequired()
+                    .HasMaxLength(255);
+
+                // Define the foreign key relationship with the User entity
+                entity.HasOne(d => d.User)
+                    .WithMany()
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.Restrict) // Choose the appropriate delete behavior
+                    .HasConstraintName("FK_NEWTEST_AspNetUsers"); // Set the constraint name
+
+                // Define any additional configurations for the NEWTEST entity here
+            });
             //modelBuilder.Entity<IdentityUser>(entity =>
             //{
             //    entity.ToTable("AspNetUsers");

@@ -82,6 +82,9 @@
                 <input asp-for="CreateReport.ContactInformation" class="form-control" />
                 <span asp-validation-for="CreateReport.ContactInformation" class="text-danger"></span>
             </div>
+
+            <input type="hidden" asp-for="CreateReport.UserId" />
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

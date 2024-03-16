@@ -337,12 +337,8 @@
         <Value>True</Value>
       </PropertyElementName>
       <PropertyElementName>
-        <Name>TargetDatabaseName</Name>
-        <Value>PetReunionHub</Value>
-      </PropertyElementName>
-      <PropertyElementName>
         <Name>TargetConnectionString</Name>
-        <Value>Data Source=LAPTOP-4OJRF6T6\SQLEXPRESS;Initial Catalog=PetReunionHub;Integrated Security=True;Persist Security Info=False;Pooling=False;Multiple Active Result Sets=False;Connect Timeout=60;Encrypt=False;Trust Server Certificate=False;Application Name="Microsoft SQL Server Data Tools, Schema Compare";Command Timeout=0</Value>
+        <Value>Integrated Security=True;Pooling=False;Connect Timeout=30</Value>
       </PropertyElementName>
       <PropertyElementName>
         <Name>TreatVerificationErrorsAsWarnings</Name>

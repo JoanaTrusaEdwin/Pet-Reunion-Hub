@@ -165,6 +165,7 @@ using PRHDATALIB.Models;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace Pet_Reunion_Hub.Controllers
 {
@@ -214,6 +215,9 @@ namespace Pet_Reunion_Hub.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                report.UserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
                 _context.Add(report);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

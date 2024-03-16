@@ -70,8 +70,11 @@ builder.Services.AddRazorPages(options =>
 //{
 //    options.ExpireTimeSpan = TimeSpan.Zero; // Cookie expires when browser session ends
 //});
-
-
+builder.Logging.AddConsole(options =>
+{
+    options.IncludeScopes = true;
+    options.TimestampFormat = "[yyyy-MM-dd HH:mm:ss] ";
+});
 var app = builder.Build();
 
 //Configure the HTTP request pipeline.
