@@ -15,7 +15,7 @@
     <div class="col-md-4">
         <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="CreateReport.Id" />
+           @*  <input type="hidden" asp-for="CreateReport.Id" /> *@
             <div class="form-group">
                 <label asp-for="CreateReport.PetName" class="control-label"></label>
                 <input asp-for="CreateReport.PetName" class="form-control" />
@@ -60,7 +60,7 @@
             </div>  *@
 
           @* NEW ONE *@
-          <div class="form-group">
+         @*  <div class="form-group">
             <label asp-for="CreateReport.MainPhoto" class="control-label"></label>
             <img src="@Model.CreateReport.MainPhoto" class="img-thumbnail" style="max-width: 200px;" />
         </div>
@@ -69,7 +69,26 @@
             <label asp-for="Photo" class="control-label">Upload New Photo</label>
             <input type="file" name="Photo" class="form-control" />
             <span asp-validation-for="Photo" class="text-danger"></span>
-        </div>
+        </div> *@
+            <!-- Main Photo -->
+            <div class="form-group">
+                <label asp-for="CreateReport.MainPhoto" class="control-label">Main Photo</label>
+                <img src="@Model.CreateReport.MainPhoto" class="img-thumbnail" style="max-width: 200px;" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Photo" class="control-label">Upload New Main Photo</label>
+                <input type="file" name="Photo" class="form-control" />
+                <span asp-validation-for="Photo" class="text-danger"></span>
+            </div>
+
+            <!-- Additional Photos -->
+            <div class="form-group photos-group">
+                <label asp-for="Photos" class="control-label">Additional Photos</label>
+                <input type="file" name="Photos" multiple class="form-control" />
+                <span asp-validation-for="Photos" class="text-danger"></span>
+                <button type="button" class="btn btn-primary" onclick="addMorePhotos()">+</button>
+            </div>
 
          @*  NEW ONE *@
 
@@ -81,6 +100,8 @@
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
+
+            @* <input type="hidden" asp-for="CreateReport.UserId" /> *@
         </form>
     </div>
 </div>
