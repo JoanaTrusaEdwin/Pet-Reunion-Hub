@@ -50,60 +50,7 @@
 //                return Page();
 //            }
 
-//            //if (Photos != null && Photos.Count > 0)
-//            //{
-//            //    foreach (var photo in Photos)
-//            //    {
-//            //        // Retrieve the connection string for Azure Blob Storage from appsettings.json
-//            //        string connectionString = _configuration["AzureBlobStorageConnectionString"];
 
-//            //        // Create a BlobServiceClient using the connection string
-//            //        var blobServiceClient = new BlobServiceClient(azureBlobStorageConnectionString);
-
-//            //        // Get a reference to the container where you want to store the files
-//            //        var containerClient = blobServiceClient.GetBlobContainerClient("newprhcontainer");
-
-//            //        // Generate a unique filename for the uploaded file
-//            //        var fileName = Guid.NewGuid().ToString() + Path.GetExtension(photo.FileName);
-
-//            //        // Get a reference to the blob in the container
-//            //        var blobClient = containerClient.GetBlobClient(fileName);
-
-//            //        // Upload the file to Azure Blob Storage
-//            //        using (var stream = photo.OpenReadStream())
-//            //        {
-//            //            await blobClient.UploadAsync(stream, true);
-//            //        }
-
-//            //        // Optionally, you can get the URL of the uploaded file
-//            //        var fileUrl = blobClient.Uri.ToString();
-
-//            //        // Save the photo URL to the database
-//            //        var reportPhoto = new ReportPhoto { ReportId = CreateReport.Id, PhotoUrl = fileUrl };
-//            //        _context.ReportPhoto.Add(reportPhoto);
-//            //        await _context.SaveChangesAsync();
-//            //    }
-//            //}
-
-//            //NEW HERE
-
-//            //if (Photo != null && Photo.Length > 0)
-//            //{
-
-//            //    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(Photo.FileName);
-
-
-//            //    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", fileName); // Change the directory path as needed
-
-
-//            //    using (var stream = new FileStream(filePath, FileMode.Create))
-//            //    {
-//            //        await Photo.CopyToAsync(stream);
-//            //    }
-
-
-//            //    CreateReport.MainPhoto = "/uploads/" + fileName; // Change the path format as needed
-//            //}
 //            string azureBlobStorageConnectionString = _configuration.GetConnectionString("AzureBlobStorageConnectionString");
 //            if (string.IsNullOrEmpty(azureBlobStorageConnectionString))
 //            {
@@ -155,37 +102,37 @@
 
 //            if (Photos != null && Photos.Count > 0)
 //            {
-//                foreach (var photo in Photos)
-//                {
-//                    // Retrieve the connection string for Azure Blob Storage from appsettings.json
-//                    string connectionString = _configuration["AzureBlobStorageConnectionString"];
+                            //foreach (var photo in Photos)
+                            //{
+        //                        // Retrieve the connection string for Azure Blob Storage from appsettings.json
+        //                        string connectionString = _configuration["AzureBlobStorageConnectionString"];
 
-//                    // Create a BlobServiceClient using the connection string
-//                    var blobServiceClient = new BlobServiceClient(azureBlobStorageConnectionString);
+        //                        // Create a BlobServiceClient using the connection string
+        //                        var blobServiceClient = new BlobServiceClient(azureBlobStorageConnectionString);
 
-//                    // Get a reference to the container where you want to store the files
-//                    var containerClient = blobServiceClient.GetBlobContainerClient("newprhcontainer");
+        //                        // Get a reference to the container where you want to store the files
+        //                        var containerClient = blobServiceClient.GetBlobContainerClient("newprhcontainer");
 
-//                    // Generate a unique filename for the uploaded file
-//                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(photo.FileName);
+        //                        // Generate a unique filename for the uploaded file
+        //                        var fileName = Guid.NewGuid().ToString() + Path.GetExtension(photo.FileName);
 
-//                    // Get a reference to the blob in the container
-//                    var blobClient = containerClient.GetBlobClient(fileName);
+        //                        // Get a reference to the blob in the container
+        //                        var blobClient = containerClient.GetBlobClient(fileName);
 
-//                    // Upload the file to Azure Blob Storage
-//                    using (var stream = photo.OpenReadStream())
-//                    {
-//                        await blobClient.UploadAsync(stream, true);
-//                    }
+        //                        // Upload the file to Azure Blob Storage
+        //                        using (var stream = photo.OpenReadStream())
+        //                        {
+        //                            await blobClient.UploadAsync(stream, true);
+        //                        }
 
-//                    // Optionally, you can get the URL of the uploaded file
-//                    var fileUrl = blobClient.Uri.ToString();
+        //                        // Optionally, you can get the URL of the uploaded file
+        //                        var fileUrl = blobClient.Uri.ToString();
 
-//                    // Save the photo URL to the database
-//                    var reportPhoto = new ReportPhoto { ReportId = CreateReport.Id, PhotoUrl = fileUrl };
-//                    _context.ReportPhoto.Add(reportPhoto);
-//                    await _context.SaveChangesAsync();
-//                }
+        //                        // Save the photo URL to the database
+        //                        var reportPhoto = new ReportPhoto { ReportId = CreateReport.Id, PhotoUrl = fileUrl };
+        //                        _context.ReportPhoto.Add(reportPhoto);
+        //                        await _context.SaveChangesAsync();
+        //                    }
 //            }
 
 
@@ -218,6 +165,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using System.Configuration;
+using Azure.Storage.Blobs;
 
 namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
 {
@@ -256,7 +204,6 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
 
         public async Task<IActionResult> OnPostAsync()
         {
-
             try
             {
                 var user = await _userManager.GetUserAsync(User);
@@ -273,52 +220,66 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
 
                     CreateReport.UserId = userId;
                     _logger.LogInformation("Assigned User ID: {UserId}", CreateReport.UserId);
+                    string azureBlobStorageConnectionString = _configuration.GetConnectionString("AzureBlobStorageConnectionString");
 
-                    // Save main photo
+                    if (string.IsNullOrEmpty(azureBlobStorageConnectionString))
+                    {
+
+                        return Page();
+                    }
+
                     if (Photo != null && Photo.Length > 0)
                     {
+
+                        string connectionString = _configuration["AzureBlobStorageConnectionString"];
+                        var blobServiceClient = new BlobServiceClient(azureBlobStorageConnectionString);
+                        var containerClient = blobServiceClient.GetBlobContainerClient("newprhcontainer");
                         var fileName = Guid.NewGuid().ToString() + Path.GetExtension(Photo.FileName);
-                        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", fileName);
-                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        var blobClient = containerClient.GetBlobClient(fileName);
+                        using (var stream = Photo.OpenReadStream())
                         {
-                            await Photo.CopyToAsync(stream);
+                            await blobClient.UploadAsync(stream, true);
                         }
-                        CreateReport.MainPhoto = "/uploads/" + fileName;
+
+                        var fileUrl = blobClient.Uri.ToString();
+                        CreateReport.MainPhoto = fileUrl;
                     }
 
                     _context.CreateReport.Add(CreateReport);
                     await _context.SaveChangesAsync();
                     _logger.LogInformation("New report created successfully.");
-                    return RedirectToPage("./Index");
+                    //return RedirectToPage("./Index");
 
-                    // Save additional photos
+                    
                     if (Photos != null && Photos.Count > 0)
                     {
                         foreach (var photo in Photos)
                         {
-                            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(photo.FileName);
-                            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", fileName);
-                            using (var stream = new FileStream(filePath, FileMode.Create))
+                            string connectionString = _configuration["AzureBlobStorageConnectionString"];                          
+                            var blobServiceClient = new BlobServiceClient(azureBlobStorageConnectionString);                           
+                            var containerClient = blobServiceClient.GetBlobContainerClient("newprhcontainer");                       
+                            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(photo.FileName);                       
+                            var blobClient = containerClient.GetBlobClient(fileName);
+                            
+                            using (var stream = photo.OpenReadStream())
                             {
-                                await photo.CopyToAsync(stream);
+                                await blobClient.UploadAsync(stream, true);
                             }
-                            // Save the photo URL to the database
-                            var reportPhoto = new ReportPhoto { ReportId = CreateReport.Id, PhotoUrl = "/uploads/" + fileName };
+                            
+                            var fileUrl = blobClient.Uri.ToString();
+                           
+                            var reportPhoto = new ReportPhoto { ReportId = CreateReport.Id, PhotoUrl = fileUrl };
                             _context.ReportPhoto.Add(reportPhoto);
                             await _context.SaveChangesAsync();
                         }
                     }
-
-                    //_context.CreateReport.Add(CreateReport);
-                    //await _context.SaveChangesAsync();
-                    //_logger.LogInformation("New report created successfully.");
-                    //return RedirectToPage("./Index");
+                    else
+                    {
+                        _logger.LogError("User not found.");
+                        return RedirectToPage("/Account/Login");
+                    }
                 }
-                else
-                {
-                    _logger.LogError("User not found.");
-                    return RedirectToPage("/Account/Login");
-                }
+                return RedirectToPage("./Index");
             }
             catch (Exception ex)
             {
@@ -327,7 +288,6 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
                 throw;
             }
         }
-    }
-    
+    }   
 }
 
