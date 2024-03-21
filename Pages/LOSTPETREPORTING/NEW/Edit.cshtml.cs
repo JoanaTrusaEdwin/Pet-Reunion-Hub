@@ -129,7 +129,10 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
                 return NotFound();
             }
 
-            CreateReport = await _context.CreateReport.FirstOrDefaultAsync(m => m.Id == id);
+            //CreateReport = await _context.CreateReport.FirstOrDefaultAsync(m => m.Id == id);
+            CreateReport = await _context.CreateReport
+                                .Include(cr => cr.ReportPhotos) // Include the ReportPhotos collection
+                                .FirstOrDefaultAsync(m => m.Id == id);
 
             if (CreateReport == null)
             {
@@ -196,7 +199,13 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
 
                         existingReport.PetName = CreateReport.PetName;
                         existingReport.PetBreed = CreateReport.PetBreed;
-
+                        existingReport.PetGender = CreateReport.PetGender;
+                        existingReport.DateOfBirth = CreateReport.DateOfBirth;
+                        existingReport.LastSeenLocation = CreateReport.LastSeenLocation;
+                        existingReport.LastSeenTime = CreateReport.LastSeenTime;
+                        existingReport.ContactInformation = CreateReport.ContactInformation;
+                       
+                       
 
                         if (Photo != null && Photo.Length > 0)
                         {
@@ -207,6 +216,8 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
 
                         await UpdateOrCreateReportPhotos(existingReport, Photos);
                         _context.Entry(existingReport).State = EntityState.Modified;
+
+
                     }
 
                     await _context.SaveChangesAsync();
@@ -276,159 +287,3 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
 
 
 
-//using System;
-//using System.Collections.Generic;
-//using System.IO;
-//using System.Linq;
-//using System.Threading.Tasks;
-//using Microsoft.AspNetCore.Http;
-//using Microsoft.AspNetCore.Mvc;
-//using Microsoft.AspNetCore.Mvc.RazorPages;
-//using Microsoft.EntityFrameworkCore;
-//using Microsoft.Extensions.Configuration;
-//using Microsoft.AspNetCore.Identity;
-//using Microsoft.Extensions.Logging;
-//using PRHDATALIB.Models;
-//using Azure.Storage.Blobs;
-
-//namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
-//{
-//    public class EditModel : PageModel
-//    {
-//        private readonly DatabaseContext _context;
-//        private readonly IConfiguration _configuration;
-//        private readonly UserManager<IdentityUser> _userManager;
-//        private readonly ILogger<EditModel> _logger;
-
-//        public EditModel(ILogger<EditModel> logger, DatabaseContext context, IConfiguration configuration, UserManager<IdentityUser> userManager)
-//        {
-//            _logger = logger;
-//            _context = context;
-//            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-//            _userManager = userManager;
-//        }
-
-//        [BindProperty]
-//        public CreateReport CreateReport { get; set; }
-
-//        [BindProperty]
-//        public IFormFile MainPhoto { get; set; }
-
-//        [BindProperty]
-//        public List<IFormFile> Photos { get; set; }
-
-//        public List<ReportPhoto> ExistingPhotos { get; set; }
-
-//        public async Task<IActionResult> OnGetAsync(int? id)
-//        {
-//            if (id == null)
-//            {
-//                return NotFound();
-//            }
-
-//            CreateReport = await _context.CreateReport
-//                .Include(c => c.ReportPhotos)
-//                .FirstOrDefaultAsync(m => m.Id == id);
-
-//            if (CreateReport == null)
-//            {
-//                return NotFound();
-//            }
-
-//            // Populate existing photos
-//            ExistingPhotos = CreateReport.ReportPhotos.ToList();
-
-//            return Page();
-//        }
-
-//        public async Task<IActionResult> OnPostAsync()
-//        {
-//            try
-//            {
-//                var user = await _userManager.GetUserAsync(User);
-//                if (user == null)
-//                {
-//                    _logger.LogError("User not found.");
-//                    return RedirectToPage("/Account/Login");
-//                }
-
-//                // Ensure user ID is assigned to the report
-//                string userId = user.Id;
-//                CreateReport.UserId = userId;
-
-//                // Handle main photo upload and update
-//                if (MainPhoto != null && MainPhoto.Length > 0)
-//                {
-//                    string mainPhotoUrl = await UploadPhotoToBlobStorage(MainPhoto, _configuration.GetConnectionString("AzureBlobStorageConnectionString"));
-//                    CreateReport.MainPhoto = mainPhotoUrl;
-//                }
-
-//                // Handle additional photo upload and update
-//                await HandlePhotoUpload();
-
-//                // Update the report in the database
-//                _context.Update(CreateReport);
-//                await _context.SaveChangesAsync();
-
-//                _logger.LogInformation("Report saved successfully.");
-//                return RedirectToPage("./Index");
-//            }
-//            catch (Exception ex)
-//            {
-//                _logger.LogError(ex, "Error saving report:");
-//                throw;
-//            }
-//        }
-
-//        private async Task HandlePhotoUpload()
-//        {
-//            string azureBlobStorageConnectionString = _configuration.GetConnectionString("AzureBlobStorageConnectionString");
-
-//            // Iterate through existing photos and remove those marked for deletion
-//            foreach (var photo in ExistingPhotos)
-//            {
-//                if (Photos.Any(p => p.FileName == photo.PhotoUrl && p.Length == 0))
-//                {
-//                    // Photo marked for deletion
-//                    CreateReport.ReportPhotos.Remove(photo);
-//                }
-//            }
-
-//            // Add new photos
-//            foreach (var photo in Photos)
-//            {
-//                if (photo != null && photo.Length > 0)
-//                {
-//                    string fileUrl = await UploadPhotoToBlobStorage(photo, azureBlobStorageConnectionString);
-//                    var reportPhoto = new ReportPhoto { PhotoUrl = fileUrl };
-
-//                    // Add the uploaded photo to the report
-//                    CreateReport.ReportPhotos.Add(reportPhoto);
-//                }
-//            }
-//        }
-
-//        private async Task<string> UploadPhotoToBlobStorage(IFormFile photo, string connectionString)
-//        {
-//            if (string.IsNullOrEmpty(connectionString))
-//            {
-//                return null;
-//            }
-
-//            string containerName = "newprhcontainer";
-
-//            var blobServiceClient = new BlobServiceClient(connectionString);
-//            var containerClient = blobServiceClient.GetBlobContainerClient(containerName);
-
-//            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(photo.FileName);
-//            var blobClient = containerClient.GetBlobClient(fileName);
-
-//            using (var stream = photo.OpenReadStream())
-//            {
-//                await blobClient.UploadAsync(stream, true);
-//            }
-
-//            return blobClient.Uri.ToString();
-//        }
-//    }
-//}

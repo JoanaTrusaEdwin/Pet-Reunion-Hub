@@ -66,39 +66,19 @@
                 <span asp-validation-for="Photo" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <label class="control-label">Main Photo Options:</label><br />
-                <input type="radio" name="MainPhotoOption" value="keep" checked> Keep Main Photo<br>
-                <input type="radio" name="MainPhotoOption" value="replace"> Replace Main Photo<br>
-            </div>
-           
-
-          @*   @if (Model.ExistingPhotos != null)
-            {
-                @foreach (var photo in Model.ExistingPhotos)
-                {
-                    <div class="form-group">
-                        <label class="control-label">Existing Additional Photo</label>
-                        <img src="@photo.PhotoUrl" class="img-thumbnail" style="max-width: 200px;" />
-                    </div>
-                }
-            } *@
-
-           @*  @if (Model.ExistingPhotos != null)
-            {
-                foreach (var photo in Model.ExistingPhotos)
-                {
-                    <div class="form-group">
-                        <label class="control-label">Additional Photo</label>
-                        <img src="@photo.PhotoUrl" class="img-thumbnail" style="max-width: 200px;" />
-                        <input type="radio" name="AdditionalPhotoOption" value="@photo.PhotoId" checked> Keep<br>
-                        <input type="radio" name="AdditionalPhotoOption" value="@photo.PhotoId + '_remove'"> Remove<br>
-                        <input type="radio" name="AdditionalPhotoOption" value="@photo.PhotoId + '_replace'"> Replace<br>
-                    </div>
-                }
-            } *@
 
             <!-- Additional Photos -->
+
+            <div class="form-group">
+                @if (Model.CreateReport.ReportPhotos != null)
+                {
+                    foreach (var reportPhoto in Model.CreateReport.ReportPhotos)
+                    {
+                        <img src="@reportPhoto.PhotoUrl" alt="Additional Photo" class="img-fluid" />
+                    }
+                }
+            </div>
+
             <div class="form-group photos-group">
                 <label asp-for="Photos" class="control-label">Additional Photos</label>
                 <input type="file" name="Photos" multiple class="form-control" />
@@ -106,7 +86,6 @@
                 <button type="button" class="btn btn-primary" onclick="addMorePhotos()">+</button>
             </div>
 
-         @*  NEW ONE *@
 
             <div class="form-group">
                 <label asp-for="CreateReport.ContactInformation" class="control-label"></label>
