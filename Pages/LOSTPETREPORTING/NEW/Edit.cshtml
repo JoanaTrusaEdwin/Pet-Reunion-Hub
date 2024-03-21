@@ -53,23 +53,7 @@
             </div>
 
 
-          @*   <div class="form-group">
-                <label asp-for="CreateReport.MainPhoto" class="control-label"></label>
-                <input asp-for="CreateReport.MainPhoto" class="form-control" />
-                <span asp-validation-for="CreateReport.MainPhoto" class="text-danger"></span>
-            </div>  *@
-
-          @* NEW ONE *@
-         @*  <div class="form-group">
-            <label asp-for="CreateReport.MainPhoto" class="control-label"></label>
-            <img src="@Model.CreateReport.MainPhoto" class="img-thumbnail" style="max-width: 200px;" />
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Photo" class="control-label">Upload New Photo</label>
-            <input type="file" name="Photo" class="form-control" />
-            <span asp-validation-for="Photo" class="text-danger"></span>
-        </div> *@
+      
             <!-- Main Photo -->
             <div class="form-group">
                 <label asp-for="CreateReport.MainPhoto" class="control-label">Main Photo</label>
@@ -81,6 +65,38 @@
                 <input type="file" name="Photo" class="form-control" />
                 <span asp-validation-for="Photo" class="text-danger"></span>
             </div>
+
+            <div class="form-group">
+                <label class="control-label">Main Photo Options:</label><br />
+                <input type="radio" name="MainPhotoOption" value="keep" checked> Keep Main Photo<br>
+                <input type="radio" name="MainPhotoOption" value="replace"> Replace Main Photo<br>
+            </div>
+           
+
+          @*   @if (Model.ExistingPhotos != null)
+            {
+                @foreach (var photo in Model.ExistingPhotos)
+                {
+                    <div class="form-group">
+                        <label class="control-label">Existing Additional Photo</label>
+                        <img src="@photo.PhotoUrl" class="img-thumbnail" style="max-width: 200px;" />
+                    </div>
+                }
+            } *@
+
+           @*  @if (Model.ExistingPhotos != null)
+            {
+                foreach (var photo in Model.ExistingPhotos)
+                {
+                    <div class="form-group">
+                        <label class="control-label">Additional Photo</label>
+                        <img src="@photo.PhotoUrl" class="img-thumbnail" style="max-width: 200px;" />
+                        <input type="radio" name="AdditionalPhotoOption" value="@photo.PhotoId" checked> Keep<br>
+                        <input type="radio" name="AdditionalPhotoOption" value="@photo.PhotoId + '_remove'"> Remove<br>
+                        <input type="radio" name="AdditionalPhotoOption" value="@photo.PhotoId + '_replace'"> Replace<br>
+                    </div>
+                }
+            } *@
 
             <!-- Additional Photos -->
             <div class="form-group photos-group">
@@ -101,6 +117,9 @@
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
 
+            <input type="hidden" asp-for="CreateReport.Id" />
+
+
             @* <input type="hidden" asp-for="CreateReport.UserId" /> *@
         </form>
     </div>
@@ -112,4 +131,25 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        function addMorePhotos() {
+            var input = document.createElement('input');
+            input.type = 'file';
+            input.multiple = true;
+            input.className = 'form-control';
+            input.name = 'Photos';
+            var photosGroup = document.querySelector('.form-group.photos-group');
+            photosGroup.appendChild(input);
+
+            var removeButton = document.createElement('button');
+            removeButton.type = 'button';
+            removeButton.className = 'btn btn-danger';
+            removeButton.textContent = 'Remove';
+            removeButton.onclick = function () {
+                photosGroup.removeChild(input);
+                photosGroup.removeChild(removeButton);
+            };
+            photosGroup.appendChild(removeButton);
+        }
+    </script>
 }
