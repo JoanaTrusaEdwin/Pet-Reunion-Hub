@@ -117,7 +117,7 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
         public CreateReport CreateReport { get; set; }
 
         [BindProperty]
-        public IFormFile Photo { get; set; }
+        public IFormFile? Photo { get; set; }
 
         [BindProperty]
         public List<IFormFile> Photos { get; set; }
@@ -129,7 +129,7 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
                 return NotFound();
             }
 
-            //CreateReport = await _context.CreateReport.FirstOrDefaultAsync(m => m.Id == id);
+            
             CreateReport = await _context.CreateReport
                                 .Include(cr => cr.ReportPhotos) // Include the ReportPhotos collection
                                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -145,8 +145,15 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
 
         public async Task<IActionResult> OnPostAsync()
         {
+           
             try
             {
+                //if (!ModelState.IsValid)
+                //{
+                //    //If model state is invalid, return the page with validation errors
+                //    return Page();
+                //}
+
                 var user = await _userManager.GetUserAsync(User);
                 if (user != null)
                 {
@@ -234,9 +241,11 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error saving report:");
-                //return RedirectToPage("/Error");
+                
                 throw;
             }
+
+        
         }
 
 
