@@ -133,6 +133,10 @@
             input.multiple = true;
             input.className = 'form-control';
             input.name = 'Photos';
+            input.onchange = function (event) {
+                previewAdditionalPhotos(event);
+            };
+
             var photosGroup = document.querySelector('.form-group.photos-group');
             photosGroup.appendChild(input);
 
@@ -162,18 +166,27 @@
 
         function previewAdditionalPhotos(event) {
             var input = event.target;
-            var reader = new FileReader();
+            var reader;
 
-            reader.onload = function () {
-                var additionalPhotosPreview = document.getElementById('additionalPhotosPreview');
-                var img = document.createElement('img');
-                img.src = reader.result;
-                img.className = 'img-thumbnail';
-                img.style.maxWidth = '200px';
-                additionalPhotosPreview.appendChild(img);
-            };
+            // Clear existing previews for this input
+            var previewContainer = input.nextElementSibling;
+            previewContainer.innerHTML = '';
 
-            reader.readAsDataURL(input.files[0]);
+            // Loop through each selected file
+            for (var i = 0; i < input.files.length; i++) {
+                reader = new FileReader();
+                reader.onload = function () {
+                    var img = document.createElement('img');
+                    img.src = reader.result;
+                    img.className = 'img-thumbnail';
+                    img.style.maxWidth = '200px';
+
+                    previewContainer.appendChild(img);
+                };
+
+                reader.readAsDataURL(input.files[i]);
+            }
         }
+
     </script>
 }
