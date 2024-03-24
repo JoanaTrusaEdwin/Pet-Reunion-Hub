@@ -173,7 +173,7 @@ using System.Linq;
 
 namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
 {
-    [Authorize]
+    
     public class CreateModel : PageModel
     {
         private readonly PRHDATALIB.Models.DatabaseContext _context;

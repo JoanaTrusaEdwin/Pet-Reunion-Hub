@@ -24,6 +24,8 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
+    options.LoginPath = "/Identity/Account/Login"; // Specify your login page path
+    options.LogoutPath = "/Identity/Account/Logout";
     options.ExpireTimeSpan = TimeSpan.FromMinutes(30); // Cookie expires when browser session ends
     options.SlidingExpiration = false;
 });
