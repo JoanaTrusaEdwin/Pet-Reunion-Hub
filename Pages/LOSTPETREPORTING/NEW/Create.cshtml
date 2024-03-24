@@ -55,25 +55,28 @@
                 <span asp-validation-for="CreateReport.LastSeenTime" class="text-danger"></span>
             </div>
 
-
-            @* <div class="form-group">
-                <label asp-for="CreateReport.MainPhoto" class="control-label"></label>
-                <input asp-for="CreateReport.MainPhoto" class="form-control" />
-                <span asp-validation-for="CreateReport.MainPhoto" class="text-danger"></span>
-            </div> *@
-
-           @*  NEW HERE *@
+           @* MAIN PHOTO *@
             <div class="form-group">
                 <label asp-for="Photo" class="control-label"></label>
-                <input type="file" name="Photo" class="form-control" />
+                <input type="file" name="Photo" class="form-control" onchange="previewMainPhoto(event)" />
                 <span asp-validation-for="Photo" class="text-danger"></span>
             </div>
-          @*   NEW HERE *@
+
+            <div class="form-group">
+                <img id="mainPhotoPreview" src="#" alt="Main Photo Preview" style="display: none; max-width: 200px;">
+            </div>
+
+          @* ADDITIONAL PHOTOS *@
             <div class="form-group photos-group">
-                <label asp-for="Photos" class="control-label"></label>
-                <input type="file" name="Photos" multiple class="form-control" />
+                <label asp-for="Photos" class="control-label">Additional Photos</label>
+                <input type="file" name="Photos" multiple class="form-control" onchange="previewAdditionalPhotos(event)" />
                 <span asp-validation-for="Photos" class="text-danger"></span>
+                <div class="additional-photos-preview"></div>
                 <button type="button" class="btn btn-primary" onclick="addMorePhotos()">+</button>
+            </div>
+
+            <div class="form-group">
+                <img id="additionalPhotosPreview" src="#" alt="Main Photo Preview" style="display: none; max-width: 200px;">
             </div>
 
 
@@ -105,6 +108,10 @@
             input.multiple = true;
             input.className = 'form-control';
             input.name = 'Photos';
+            input.onchange = function (event) {
+                previewAdditionalPhotos(event);
+            };
+
             var photosGroup = document.querySelector('.form-group.photos-group');
             photosGroup.appendChild(input);
 
@@ -117,6 +124,43 @@
                 photosGroup.removeChild(removeButton);
             };
            photosGroup.appendChild(removeButton);
+        }
+
+        function previewMainPhoto(event) {
+            var input = event.target;
+            var reader = new FileReader();
+
+            reader.onload = function () {
+                var mainPhotoPreview = document.getElementById('mainPhotoPreview');
+                mainPhotoPreview.src = reader.result;
+                mainPhotoPreview.style.display = 'block';
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+
+        function previewAdditionalPhotos(event) {
+            var input = event.target;
+            var reader;
+
+            // Clear existing previews for this input
+            var previewContainer = input.nextElementSibling;
+            previewContainer.innerHTML = '';
+
+            // Loop through each selected file
+            for (var i = 0; i < input.files.length; i++) {
+                reader = new FileReader();
+                reader.onload = function () {
+                    var img = document.createElement('img');
+                    img.src = reader.result;
+                    img.className = 'img-thumbnail';
+                    img.style.maxWidth = '200px';
+
+                    previewContainer.appendChild(img);
+                };
+
+                reader.readAsDataURL(input.files[i]);
+            }
         }
     </script>
 }

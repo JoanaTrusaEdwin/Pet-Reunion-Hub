@@ -166,9 +166,14 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using System.Configuration;
 using Azure.Storage.Blobs;
+using Microsoft.AspNetCore.Authorization;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
 {
+    [Authorize]
     public class CreateModel : PageModel
     {
         private readonly PRHDATALIB.Models.DatabaseContext _context;

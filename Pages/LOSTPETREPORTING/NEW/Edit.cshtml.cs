@@ -208,6 +208,7 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
                         existingReport.PetBreed = CreateReport.PetBreed;
                         existingReport.PetGender = CreateReport.PetGender;
                         existingReport.DateOfBirth = CreateReport.DateOfBirth;
+                        existingReport.PetMicrochipID = CreateReport.PetMicrochipID;
                         existingReport.LastSeenLocation = CreateReport.LastSeenLocation;
                         existingReport.LastSeenTime = CreateReport.LastSeenTime;
                         existingReport.ContactInformation = CreateReport.ContactInformation;
