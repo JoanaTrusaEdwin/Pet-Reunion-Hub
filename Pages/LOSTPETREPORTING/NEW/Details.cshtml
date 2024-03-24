@@ -1,4 +1,4 @@
-﻿@page
+﻿@* @page
 @model Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW.DetailsModel
 
 @{
@@ -7,74 +7,105 @@
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Mvc.RazorPages
 
-<h1>Details</h1>
+<h1>@Model.CreateReport.PetName</h1>
 
 <div>
-    <h4>CreateReport</h4>
+  
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CreateReport.PetName)
         </dt>
+        <br/>
+
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CreateReport.PetName)
         </dd>
+        <br />
+
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CreateReport.PetBreed)
         </dt>
+         <br/>
+
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CreateReport.PetBreed)
         </dd>
+        <br />
+
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CreateReport.PetGender)
         </dt>
+        <br />
+
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CreateReport.PetGender)
         </dd>
+        <br />
+
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CreateReport.DateOfBirth)
         </dt>
+         <br/>
+
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CreateReport.DateOfBirth)
         </dd>
+         <br/>
+
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CreateReport.PetMicrochipID)
         </dt>
+         <br/>
+
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CreateReport.PetMicrochipID)
         </dd>
+         <br/>
+
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CreateReport.LastSeenLocation)
         </dt>
+         <br/>
+
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CreateReport.LastSeenLocation)
         </dd>
+         <br/>
+
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CreateReport.LastSeenTime)
         </dt>
+         <br/>
+
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CreateReport.LastSeenTime)
         </dd>
+         <br/>
+
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CreateReport.MainPhoto)
-        </dt>
-
-
-        @* <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CreateReport.MainPhoto)
-        </dd> *@
-
-        @* NEW HERE *@
-        <dt class="col-sm-2">
-            Main Photo
-        </dt>
-        <dd class="col-sm-10">
-            <!-- Display the image -->
+           
             <img src="@Model.CreateReport.MainPhoto" alt="Pet Photo" style="max-width: 300px;" />
-        </dd>
-         @* NEW HERE *@
+        </dt>
 
 
+        <div>
+            <h4>Additional Photos</h4>
+            @if (Model.CreateReport.ReportPhotos != null && Model.CreateReport.ReportPhotos.Any())
+            {
+                <div>
+                    @foreach (var photo in Model.CreateReport.ReportPhotos)
+                    {
+                        <img src="@photo.PhotoUrl" alt="Additional Photo" style="max-width: 300px;" />
+                        <br/>
+                    }
+                </div>
+            }
+            else
+            {
+                <p>No additional photos available.</p>
+            }
+        </div>
 
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CreateReport.ContactInformation)
@@ -87,4 +118,101 @@
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.CreateReport?.Id">Edit</a> |
     <a asp-page="./Index">Back to List</a>
+</div>
+*@
+
+@page
+@model Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Mvc.RazorPages
+
+<style>
+    /* Style for Edit and Back to List buttons */
+
+    #edit {
+        border-radius: 5px;
+        background-color: #8b572a;
+        color: white;
+        text-decoration: none;
+        padding: 5px 10px;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+
+    #back {
+        border-radius: 5px;
+        background-color: black;
+        color: white;
+        text-decoration: none;
+        padding: 5px 10px;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+        background-color: #555; /* Darken the background color on hover */
+    }
+</style>
+
+<div style="padding: 30px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 20px; background-color: #fff;">
+    <h1>@Model.CreateReport.PetName</h1>
+
+    <hr />
+
+    <dl>
+        <dt>Pet Name:</dt>
+        <dd>@Model.CreateReport.PetName</dd>
+
+
+        <dt>Pet Breed:</dt>
+        <dd>@Model.CreateReport.PetBreed</dd>
+
+        <dt>Pet Gender:</dt>
+        <dd>@Model.CreateReport.PetGender</dd>
+
+        <dt>Date of Birth:</dt>
+        <dd>@Model.CreateReport.DateOfBirth</dd>
+
+        <dt>Pet Microchip ID:</dt>
+        <dd>@Model.CreateReport.PetMicrochipID</dd>
+
+        <dt>Last Seen Location:</dt>
+        <dd>@Model.CreateReport.LastSeenLocation</dd>
+
+        <dt>Last Seen Time:</dt>
+        <dd>@Model.CreateReport.LastSeenTime</dd>
+
+        <dt>Main Photo:</dt>
+        <dd><img src="@Model.CreateReport.MainPhoto" alt="Pet Photo" style="max-width: 300px;" /></dd>
+
+        <div>
+            <h4>Additional Photos</h4>
+            @if (Model.CreateReport.ReportPhotos != null && Model.CreateReport.ReportPhotos.Any())
+            {
+                <div>
+                    @foreach (var photo in Model.CreateReport.ReportPhotos)
+                    {
+                        <img src="@photo.PhotoUrl" alt="Additional Photo" style="max-width: 300px;" />
+                        <br />
+                    }
+                </div>
+            }
+            else
+            {
+                <p>No additional photos available.</p>
+            }
+        </div>
+
+        <dt>Contact Information:</dt>
+        <dd>@Model.CreateReport.ContactInformation</dd>
+    </dl>
+
+    <div>
+        <a asp-page="./Edit" asp-route-id="@Model.CreateReport?.Id" class="btn" id="edit">Edit</a>
+        <a asp-page="./Index" class="btn" id="back">Back to List</a>
+    </div>
 </div>

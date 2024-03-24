@@ -1,4 +1,4 @@
-﻿@page
+﻿@* @page
 @model Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW.IndexModel
 
 @{
@@ -74,7 +74,7 @@
 
 
             <td>
-                @Html.DisplayFor(modelItem => item.MainPhoto)
+                @* @Html.DisplayFor(modelItem => item.MainPhoto) 
                     <img src="@item.MainPhoto" alt="Pet Photo" style="max-width: 100px;" />
             </td>
 
@@ -92,3 +92,87 @@
 }
     </tbody>
 </table>
+ *@
+@page
+@model Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Mvc.RazorPages
+
+<style>
+    /* Style for Create New link */
+    #createnew {
+        border-radius: 25px;
+        background-color: black;
+        color: white;
+        text-decoration: none;
+        padding: 10px 20px;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+
+        #createnew:hover {
+            background-color: #555; /* Darken the background color on hover */
+        }
+
+    /* Style for Edit link */
+    #edit {
+        border-radius: 5px;
+        background-color: black;
+        color: white;
+        text-decoration: none;
+        padding: 5px 10px;
+        font-weight: bold;
+    }
+
+    /* Style for Details link */
+    #details {
+        border-radius: 5px;
+        background-color: #8b572a;
+        color: white;
+        text-decoration: none;
+        padding: 5px 10px;
+        font-weight: bold;
+    }
+
+    /* Style for Delete link */
+    #delete {
+        border-radius: 5px;
+        background-color: red;
+        color: white;
+        text-decoration: none;
+        padding: 5px 10px;
+        font-weight: bold;
+    }
+</style>
+
+<h1>My Reports</h1>
+<br/>
+
+<p>
+    <a asp-page="Create" id="createnew">Make a New Report</a>
+</p>
+<br />
+@foreach (var item in Model.CreateReport)
+{
+    <div style="border: 1px solid #ccc; padding: 30px; margin-bottom: 20px;  border-radius: 20px; background-color: #fff;">
+        <h3>@item.PetName </h3>
+        @* <p><strong>Pet Name:</strong> @item.PetName</p> *@
+        <p><strong>Pet Breed:</strong> @item.PetBreed</p>
+        <p><strong>Pet Gender:</strong> @item.PetGender</p>
+        <p><strong>Date of Birth:</strong> @item.DateOfBirth</p>
+        <p><strong>Pet Microchip ID:</strong> @item.PetMicrochipID</p>
+        <p><strong>Last Seen Location:</strong> @item.LastSeenLocation</p>
+        <p><strong>Last Seen Time:</strong> @item.LastSeenTime</p>
+        <p><strong>Contact Information:</strong> @item.ContactInformation</p>
+        <p><strong>Main Photo:</strong> <br/> <img src="@item.MainPhoto" alt="Pet Photo" style="max-width: 300px;" /></p>
+        <p>
+            <a asp-page="./Edit" asp-route-id="@item.Id" id="edit">Edit</a> |
+            <a asp-page="./Details" asp-route-id="@item.Id" id="details">Details</a> |
+            <a asp-page="./Delete" asp-route-id="@item.Id" id="delete">Delete</a>
+        </p>
+    </div>
+}
