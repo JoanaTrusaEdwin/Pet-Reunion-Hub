@@ -6,10 +6,66 @@
 }
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Mvc.RazorPages
+<style>
+    body {
+        /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-<h1>Edit</h1>
+    .container {
+        max-width: 1500px;
+        margin: 20px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-<h4>CreateReport</h4>
+    label {
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    input,
+    select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    #submitbtn {
+        background-color: black;
+        color: #fff;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+        font-weight: bold; /* Make the text bold */
+        font-size: 1.1em;
+    }
+
+    #tolist {
+        background-color: #8b572a;
+        color: #fff;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+        border-radius: 20px; /* Increase border-radius for a more rounded appearance */
+        font-weight: bold;
+    }
+</style>
+
+@* <h1>Edit</h1>
+
+<h4>CreateReport</h4> *@
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -17,52 +73,71 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
            @*  <input type="hidden" asp-for="CreateReport.Id" /> *@
             <div class="form-group">
-                <label asp-for="CreateReport.PetName" class="control-label"></label>
-                <input asp-for="CreateReport.PetName" class="form-control" />
+                <label asp-for="CreateReport.PetName" class="control-label"><b>Pet Name</b</label>
+                <input asp-for="CreateReport.PetName" class="form-control" required
+                            maxlength="255"/>
                 <span asp-validation-for="CreateReport.PetName" class="text-danger"></span>
             </div>
+            <br/>
+
             <div class="form-group">
-                <label asp-for="CreateReport.PetBreed" class="control-label"></label>
-                <input asp-for="CreateReport.PetBreed" class="form-control" />
+                <label asp-for="CreateReport.PetBreed" class="control-label"><b>Species and Breed</b></label>
+                <input asp-for="CreateReport.PetBreed" class="form-control" required
+                            maxlength="255" />
                 <span asp-validation-for="CreateReport.PetBreed" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="CreateReport.PetGender" class="control-label"></label>
-                <input asp-for="CreateReport.PetGender" class="form-control" />
+            <br/>
+
+            <div>
+                <label asp-for="CreateReport.PetGender" class="control-label"><b>Sex</b></label>
+                <select asp-for="CreateReport.PetGender" class="form-control" required>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
                 <span asp-validation-for="CreateReport.PetGender" class="text-danger"></span>
             </div>
+            <br/>
+
             <div class="form-group">
-                <label asp-for="CreateReport.DateOfBirth" class="control-label"></label>
+                <label asp-for="CreateReport.DateOfBirth" class="control-label"><b>Date of Birth (leave empty if unsure)</b></label>
                 <input asp-for="CreateReport.DateOfBirth" class="form-control" />
                 <span asp-validation-for="CreateReport.DateOfBirth" class="text-danger"></span>
             </div>
+            <br/>
+
             <div class="form-group">
-                <label asp-for="CreateReport.PetMicrochipID" class="control-label"></label>
-                <input asp-for="CreateReport.PetMicrochipID" class="form-control" />
+                <label asp-for="CreateReport.PetMicrochipID" class="control-label"><b>Microchip ID (if any)</b></label>
+                <input asp-for="CreateReport.PetMicrochipID" class="form-control"
+                            maxlength="50"/>
                 <span asp-validation-for="CreateReport.PetMicrochipID" class="text-danger"></span>
             </div>
+            <br/>
+
             <div class="form-group">
-                <label asp-for="CreateReport.LastSeenLocation" class="control-label"></label>
-                <input asp-for="CreateReport.LastSeenLocation" class="form-control" />
+                <label asp-for="CreateReport.LastSeenLocation" class="control-label"><b>Describe where you last saw your pet.</b></label>
+                <input asp-for="CreateReport.LastSeenLocation" class="form-control" required
+                            maxlength="255/>
                 <span asp-validation-for="CreateReport.LastSeenLocation" class="text-danger"></span>
             </div>
+            <br/>
+
             <div class="form-group">
-                <label asp-for="CreateReport.LastSeenTime" class="control-label"></label>
-                <input asp-for="CreateReport.LastSeenTime" class="form-control" />
+                <label asp-for="CreateReport.LastSeenTime" class="control-label"><b>When was the last time your pet was seen?</b></label>
+                <input asp-for="CreateReport.LastSeenTime" class="form-control" required/>
                 <span asp-validation-for="CreateReport.LastSeenTime" class="text-danger"></span>
             </div>
-
+            <br/>
 
       
             <!-- Main Photo -->
             <div class="form-group">
-                <label asp-for="CreateReport.MainPhoto" class="control-label">Main Photo</label>
+                <label asp-for="CreateReport.MainPhoto" class="control-label"><b>Pet's Main Photo</b></label>
                 <img src="@Model.CreateReport.MainPhoto" class="img-thumbnail" style="max-width: 200px;" />
             </div>
 
             <div class="form-group">
-                <label asp-for="Photo" class="control-label">Upload New Main Photo</label>
-                <input type="file" name="Photo" class="form-control" onchange="previewMainPhoto(event)" />
+                <label asp-for="Photo" class="control-label">Change Main Photo</label>
+                <input type="file" name="Photo" class="form-control" onchange="previewMainPhoto(event)"/>
                 <span asp-validation-for="Photo" class="text-danger"></span>
             </div>
 
@@ -84,6 +159,7 @@
                     foreach (var reportPhoto in Model.CreateReport.ReportPhotos)
                     {
                         <img src="@reportPhoto.PhotoUrl" alt="Additional Photo" class="img-fluid" />
+                        <br/>
                     }
                 }
             </div>
@@ -100,6 +176,7 @@
             <div class="form-group">
                 <img id="additionalPhotosPreview" src="#" alt="Main Photo Preview" style="display: none; max-width: 200px;">
             </div>
+            <br/>
 
 
 
@@ -108,8 +185,10 @@
                 <input asp-for="CreateReport.ContactInformation" class="form-control" />
                 <span asp-validation-for="CreateReport.ContactInformation" class="text-danger"></span>
             </div>
+            <br/>
+
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" id="submitbtn" value="Save Changes" class="btn btn-primary" />
             </div>
 
             <input type="hidden" asp-for="CreateReport.Id" />
@@ -121,12 +200,37 @@
 </div>
 
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Index" id="tolist">Back to List</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
+         //TO PREVENT NULL
+        function validateForm() {
+            var isValid = true;
+            var unfilledFields = [];
+
+            // Check each required input field
+            var inputs = document.querySelectorAll('input[required]');
+            inputs.forEach(function (input) {
+                if (!input.value.trim()) {
+                    isValid = false;
+                    unfilledFields.push(input.name);
+                }
+            });
+
+            // Display warning message if any required field is empty
+            if (!isValid) {
+                var message = 'Please fill in the following fields:\n';
+                unfilledFields.forEach(function (field) {
+                    message += '- ' + field + '\n';
+                });
+                alert(message);
+            }
+
+            return isValid;
+        }
         function addMorePhotos() {
             var input = document.createElement('input');
             input.type = 'file';
