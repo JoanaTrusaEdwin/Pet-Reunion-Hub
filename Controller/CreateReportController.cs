@@ -166,6 +166,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Pet_Reunion_Hub.Controllers
 {
@@ -209,6 +210,7 @@ namespace Pet_Reunion_Hub.Controllers
         }
 
         // POST: CreateReport/Create
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PetName,PetBreed,PetGender,DateOfBirth,PetMicrochipID,LastSeenLocation,LastSeenTime,MainPhoto,ContactInformation")] CreateReport report)

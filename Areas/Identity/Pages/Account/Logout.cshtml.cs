@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Pet_Reunion_Hub.Areas.Identity.Pages.Account
 {
@@ -38,5 +40,6 @@ namespace Pet_Reunion_Hub.Areas.Identity.Pages.Account
                 return RedirectToPage();
             }
         }
+
     }
 }

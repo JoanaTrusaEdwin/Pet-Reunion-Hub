@@ -28,6 +28,7 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
 
         public IList<CreateReport> CreateReport { get;set; } = default!;
 
+        [Authorize]
         public async Task<IActionResult> OnGetAsync()
         {
             //if (_context.CreateReport != null)

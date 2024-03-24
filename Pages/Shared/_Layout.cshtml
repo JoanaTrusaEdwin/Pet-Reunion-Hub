@@ -111,7 +111,30 @@
                 <h2>
                     Aid and Grief Support for Missing or Departed Pets
                 </h2>
-            <a href="/HomePage" class="button" id="homebutton" style="float: left; position: absolute; top: 10px; left: 10px;">Home</a>
+
+            @* @if (!Context.Request.Path.Equals("/", StringComparison.OrdinalIgnoreCase)) 
+            {
+                <a href="/HomePage" class="button" id="homebutton" style="float: left; position: absolute; top: 10px; left: 10px;">Home</a>
+            } *@
+            @if (!Context.Request.Path.Equals("/", StringComparison.OrdinalIgnoreCase) &&
+            !Context.Request.Path.StartsWithSegments("/Identity/Account", StringComparison.OrdinalIgnoreCase))
+            {
+                <a href="/HomePage" class="button" id="homebutton" style="float: left; position: absolute; top: 10px; left: 10px;">Home</a>
+            }
+
+           @*  @if (!Context.Request.Path.Equals("/", StringComparison.OrdinalIgnoreCase) &&
+            !Context.Request.Path.StartsWithSegments("/Identity/Account", StringComparison.OrdinalIgnoreCase))
+            {
+                <a href="/Identity/Logout" class="button" id="homebutton" style="float: left; position: absolute; top: 10px; right: 10px;">Log Out</a>
+            } *@
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <form asp-area="Identity" asp-page="/Identity/Account/Logout" method="post">
+                    <button type="submit" style="float: left; position: absolute; top: 10px; right: 10px;" >Logout</button>
+                </form>
+            }
+
          </div>
         
     </header>
@@ -146,8 +169,6 @@
                     </div>
             </div>
         </div> *@
-    </div>
-
     </div>
 
     <footer class="border-top footer text-muted">

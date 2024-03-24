@@ -170,10 +170,12 @@ using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NuGet.Protocol.Plugins;
+using System.Security.Principal;
 
 namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
 {
-    
+    [Authorize]
     public class CreateModel : PageModel
     {
         private readonly PRHDATALIB.Models.DatabaseContext _context;
@@ -192,6 +194,7 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
             _signInManager = signInManager;
         }
 
+        [Authorize]
         public IActionResult OnGet()
         {
             CreateReport = new CreateReport { UserId = _userManager.GetUserId(User) };
@@ -220,7 +223,9 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
                     if (string.IsNullOrEmpty(userId))
                     {
                         _logger.LogWarning("User ID is null or empty.");
-                        return RedirectToPage("/Account/Login");
+                        ////return RedirectToPage("/Account/Login");
+                        //return RedirectToPage("/Identity/Account/Login");
+                       
                     }
 
                     CreateReport.UserId = userId;
@@ -281,7 +286,8 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
                     else
                     {
                         _logger.LogError("User not found.");
-                        return RedirectToPage("/Account/Login");
+                        //return RedirectToPage("/Account/Login");
+
                     }
                 }
                 return RedirectToPage("./Index");

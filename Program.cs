@@ -24,33 +24,10 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.LoginPath = "/Identity/Account/Login"; // Specify your login page path
-    options.LogoutPath = "/Identity/Account/Logout";
+    
     options.ExpireTimeSpan = TimeSpan.FromMinutes(30); // Cookie expires when browser session ends
     options.SlidingExpiration = false;
 });
-
-
-//builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
-//{
-//    // Configure identity options here
-//})
-//.AddEntityFrameworkStores<DatabaseContext>();
-
-
-
-//builder.Services.AddAuthentication(options =>
-//{
-//    options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
-//    options.DefaultSignInScheme = IdentityConstants.ApplicationScheme;
-//    options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
-//})
-//    .AddCookie(IdentityConstants.ApplicationScheme, options =>
-//    {
-//        options.SlidingExpiration = false; // Disable sliding expiration
-
-//    });
-
 
 
 builder.Services.AddAuthorization(options =>
@@ -61,22 +38,21 @@ builder.Services.AddAuthorization(options =>
     });
 });
 
-//builder.Services.AddRazorPages();
 builder.Services.AddRazorPages(options =>
 {
     options.Conventions.AuthorizeFolder("/", "RequireLoggedIn");
     options.Conventions.AllowAnonymousToPage("/Index");
+
+    options.Conventions.ConfigureFilter(new AuthorizeFilter("RequireLoggedIn"));
 });
 
-//builder.Services.Configure<CookieAuthenticationOptions>(IdentityConstants.ApplicationScheme, options =>
-//{
-//    options.ExpireTimeSpan = TimeSpan.Zero; // Cookie expires when browser session ends
-//});
+
 builder.Logging.AddConsole(options =>
 {
     options.IncludeScopes = true;
     options.TimestampFormat = "[yyyy-MM-dd HH:mm:ss] ";
 });
+
 var app = builder.Build();
 
 //Configure the HTTP request pipeline.
@@ -93,6 +69,15 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapRazorPages();
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+});
 
 app.MapRazorPages();
 
