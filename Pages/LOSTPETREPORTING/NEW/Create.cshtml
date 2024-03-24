@@ -21,22 +21,22 @@
             </div> *@
             <div class="form-group">
                 <label asp-for="CreateReport.PetName" class="control-label"></label>
-                <input asp-for="CreateReport.PetName" class="form-control" />
+                <input asp-for="CreateReport.PetName" class="form-control" required />
                 <span asp-validation-for="CreateReport.PetName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CreateReport.PetBreed" class="control-label"></label>
-                <input asp-for="CreateReport.PetBreed" class="form-control" />
+                <input asp-for="CreateReport.PetBreed" class="form-control" required />
                 <span asp-validation-for="CreateReport.PetBreed" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CreateReport.PetGender" class="control-label"></label>
-                <input asp-for="CreateReport.PetGender" class="form-control" />
+                <input asp-for="CreateReport.PetGender" class="form-control" required />
                 <span asp-validation-for="CreateReport.PetGender" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CreateReport.DateOfBirth" class="control-label"></label>
-                <input asp-for="CreateReport.DateOfBirth" class="form-control" />
+                <input asp-for="CreateReport.DateOfBirth" class="form-control"/>
                 <span asp-validation-for="CreateReport.DateOfBirth" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -46,19 +46,19 @@
             </div>
             <div class="form-group">
                 <label asp-for="CreateReport.LastSeenLocation" class="control-label"></label>
-                <input asp-for="CreateReport.LastSeenLocation" class="form-control" />
+                <input asp-for="CreateReport.LastSeenLocation" class="form-control" required />
                 <span asp-validation-for="CreateReport.LastSeenLocation" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CreateReport.LastSeenTime" class="control-label"></label>
-                <input asp-for="CreateReport.LastSeenTime" class="form-control" />
+                <input asp-for="CreateReport.LastSeenTime" class="form-control" required />
                 <span asp-validation-for="CreateReport.LastSeenTime" class="text-danger"></span>
             </div>
 
            @* MAIN PHOTO *@
             <div class="form-group">
                 <label asp-for="Photo" class="control-label"></label>
-                <input type="file" name="Photo" class="form-control" onchange="previewMainPhoto(event)" />
+                <input type="file" name="Photo" class="form-control" onchange="previewMainPhoto(event)" required />
                 <span asp-validation-for="Photo" class="text-danger"></span>
             </div>
 
@@ -82,7 +82,7 @@
 
             <div class="form-group">
                 <label asp-for="CreateReport.ContactInformation" class="control-label"></label>
-                <input asp-for="CreateReport.ContactInformation" class="form-control" />
+                <input asp-for="CreateReport.ContactInformation" class="form-control" required />
                 <span asp-validation-for="CreateReport.ContactInformation" class="text-danger"></span>
             </div>
 
@@ -102,6 +102,30 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
+        function validateForm() {
+            var isValid = true;
+            var unfilledFields = [];
+
+            // Check each required input field
+            var inputs = document.querySelectorAll('input[required]');
+            inputs.forEach(function (input) {
+                if (!input.value.trim()) {
+                    isValid = false;
+                    unfilledFields.push(input.name);
+                }
+            });
+
+            // Display warning message if any required field is empty
+            if (!isValid) {
+                var message = 'Please fill in the following fields:\n';
+                unfilledFields.forEach(function (field) {
+                    message += '- ' + field + '\n';
+                });
+                alert(message);
+            }
+
+            return isValid;
+        }
         function addMorePhotos() {
             var input = document.createElement('input');
             input.type = 'file';
