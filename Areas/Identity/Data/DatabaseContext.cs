@@ -30,6 +30,8 @@ namespace PRHDATALIB.Models
 
         public virtual DbSet<IdentityUser> Users { get; set; }
 
+        public virtual DbSet<GENERALLOCATION> GENERALLOCATION { get; set; }
+
         public virtual DbSet<Testing> Testing { get; set; }
 
         public DbSet<Newtest> NEWTEST { get; set; }
@@ -98,6 +100,21 @@ namespace PRHDATALIB.Models
                     .IsRequired()
                     .HasColumnName("ContactInformation");
 
+                entity.Property(e => e.AdditionalDescription)
+                   .HasMaxLength(1000)
+                   .IsRequired()
+                   .HasColumnName("AdditionalDescription");
+
+                entity.Property(e => e.Age)
+                   .HasMaxLength(50)
+                   .IsRequired()
+                   .HasColumnName("Age");
+
+                entity.Property(e => e.GenLoc)
+                  .HasMaxLength(1000)
+                  .IsRequired()
+                  .HasColumnName("GenLoc");
+
                 //entity.Property(e => e.UserId)
                 //    .IsRequired();
 
@@ -133,19 +150,25 @@ namespace PRHDATALIB.Models
                       .HasConstraintName("FK_ReportPhoto_CreateReport");
             });
 
-            modelBuilder.Entity<Testing>(entity =>
+            modelBuilder.Entity<GENERALLOCATION>(entity =>
             {
-                entity.ToTable("TESTING");
+                entity.ToTable("GENERALLOCATION");
 
-                entity.Property(e => e.Id)
-                      .ValueGeneratedOnAdd()
-                      .HasColumnName("Id");
+                entity.HasKey(e => e.Id);
 
-                entity.Property(e => e.Test)
-                      .HasMaxLength(255)
-                      .IsRequired()
-                      .HasColumnName("Test");
+                entity.Property(e => e.LOCATIONVALUE)
+                     .HasMaxLength(255)
+                     .IsRequired();
+
+                entity.HasOne(cr => cr.User)
+                 .WithMany()
+                 .HasForeignKey(cr => cr.UserId)
+                 .OnDelete(DeleteBehavior.Restrict)
+                 .HasConstraintName("FK_GENERALLOCATION_AspNetUsers");
+
+
             });
+
 
             modelBuilder.Entity<Newtest>(entity =>
             {

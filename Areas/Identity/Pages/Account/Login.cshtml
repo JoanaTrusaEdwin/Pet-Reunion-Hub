@@ -4,13 +4,101 @@
 @{
     ViewData["Title"] = "Log in";
 }
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-image: url('/images/cats.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        margin-right: 0;
+        margin-left: 0;
+        padding-right: 0;
+        background-attachment: fixed;
+        position: relative;
+    }
 
+    form {
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        color: black;
+        font-weight: bold;
+    }
+
+    input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 16px;
+        box-sizing: border-box;
+        border: 1px solid #6F695D;
+        border-radius: 5px;
+        background-color: #fff;
+        color: black;
+    }
+    #remember{
+        
+        color:black;
+    }
+
+    #forgot {
+        border-radius: 5px;
+        background-color: black;
+        color: white;
+        text-decoration: none;
+        padding: 5px 10px;
+        font-weight: bold;
+    }
+
+    /* Style for Details link */
+    #register {
+        border-radius: 5px;
+        background-color: #8b572a;
+        color: white;
+        text-decoration: none;
+        padding: 5px 10px;
+        font-weight: bold;
+    }
+
+    /* Style for Delete link */
+    #emailcon {
+        border-radius: 5px;
+        background-color: white;
+        color: black;
+        text-decoration: none;
+        padding: 5px 10px;
+        font-weight: bold;
+    }
+   
+  /*   #button {
+        background-color: white;
+        color: black;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    } */
+
+    .button:hover {
+        background-color: #807C73;
+    }
+</style>
 <h1>@ViewData["Title"]</h1>
 <div class="row">
     <div class="col-md-4">
         <section>
             <form id="account" method="post">
-                <h2>Use a local account to log in.</h2>
+                
                 <hr />
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-floating">
@@ -25,7 +113,7 @@
                 </div>
                 <div>
                     <div class="checkbox">
-                        <label asp-for="Input.RememberMe" class="form-label">
+                        <label id="remember" asp-for="Input.RememberMe" class="form-label">
                             <input class="form-check-input" asp-for="Input.RememberMe" />
                             @Html.DisplayNameFor(m => m.Input.RememberMe)
                         </label>
@@ -36,13 +124,13 @@
                 </div>
                 <div>
                     <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                        <a id="forgot-password" asp-page="./ForgotPassword" id="forgot">Forgot your password?</a>
                     </p>
                     <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" id="register">Register as a new user</a>
                     </p>
                     <p>
-                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation" id="emailcon">Resend email confirmation</a>
                     </p>
                 </div>
             </form>
@@ -50,17 +138,17 @@
     </div>
     <div class="col-md-6 col-md-offset-2">
         <section>
-            <h3>Use another service to log in.</h3>
+           @*  <h3>Use another service to log in.</h3> *@
             <hr />
             @{
                 if ((Model.ExternalLogins?.Count ?? 0) == 0)
                 {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                            about setting up this ASP.NET application to support logging in via external services</a>.
-                        </p>
-                    </div>
+                    // <div>
+                    //     <p>
+                    //         There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
+                    //         about setting up this ASP.NET application to support logging in via external services</a>.
+                    //     </p>
+                    // </div>
                 }
                 else
                 {

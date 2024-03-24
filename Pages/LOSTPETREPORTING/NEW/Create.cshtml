@@ -133,7 +133,14 @@
                 <span asp-validation-for="CreateReport.DateOfBirth" class="text-danger"></span>
             </div>
                 <br />
-                
+
+                <div class="form-group">
+                    <label asp-for="CreateReport.Age" class="control-label"><b>Your pet's estimated age</b></label>
+                    <input asp-for="CreateReport.Age" class="form-control"
+                           maxlength="50" />
+                    <span asp-validation-for="CreateReport.Age" class="text-danger"></span>
+                </div>
+                <br />
 
             <div class="form-group">
                     <label asp-for="CreateReport.PetMicrochipID" class="control-label"><b>Microchip ID (if any)</b></label>
@@ -142,7 +149,22 @@
                 <span asp-validation-for="CreateReport.PetMicrochipID" class="text-danger"></span>
             </div>
                 <br />
-                
+
+                <div class="form-group">
+                    <label asp-for="CreateReport.AdditionalDescription" class="control-label"><b>Any necessary descriptions about the pet (physical appearance, behavior, unique traits)</b></label>
+                    <input asp-for="CreateReport.AdditionalDescription" class="form-control"
+                           maxlength="50" />
+                    <span asp-validation-for="CreateReport.AdditionalDescription" class="text-danger"></span>
+                </div>
+                <br />
+
+                <div class="form-group">
+                    <label asp-for="CreateReport.GenLoc" class="control-label"><b>To notify nearby users, please provide the general location of where you found your lost pet with capital letters and folloing the format COUNTRY-STATE-CITY</b></label>
+                    <input asp-for="CreateReport.GenLoc" class="form-control" required
+                           maxlength="100" />
+                    <span asp-validation-for="CreateReport.GenLoc" class="text-danger"></span>
+                </div>
+                <br />
 
             <div class="form-group">
                     <label asp-for="CreateReport.LastSeenLocation" class="control-label"><b>Describe where you last saw your pet.</b></label>
