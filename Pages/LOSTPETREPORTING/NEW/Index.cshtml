@@ -155,7 +155,7 @@
     <a asp-page="Create" id="createnew">Make a New Report</a>
 </p>
 <br />
-@foreach (var item in Model.CreateReport)
+@foreach (var item in Model.CreateReport.Reverse())
 {
     <div style="border: 1px solid #ccc; padding: 30px; margin-bottom: 20px;  border-radius: 20px; background-color: #fff;">
         <h3>@item.PetName </h3>

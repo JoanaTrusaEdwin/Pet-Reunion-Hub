@@ -1,4 +1,4 @@
-﻿
+﻿@* 
 @page
 @model Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW.AllReportsModel
 @{
@@ -10,8 +10,7 @@
 <table class="table">
     <thead>
         <tr>
-            @* <th>Report ID</th>
-            <th>User ID</th> *@
+            
             <th>Pet Name</th>
             <th>Pet Breed</th>
             <th>Pet Gender</th>
@@ -20,6 +19,7 @@
             <th>Last Seen Location</th>
             <th>Last Seen Time</th>
             <th>Main Photo</th>
+            <th>Photos</th>
             <th>Contact Information</th>
             <th>Additional Description</th>
             <th>Age</th>
@@ -30,8 +30,7 @@
         @foreach (var item in Model.CreateReport)
         {
             <tr>
-                @* <td>@item.Id</td>
-                <td>@item.UserId</td> *@
+                
                 <td>@item.PetName</td>
                 <td>@item.PetBreed</td>
                 <td>@item.PetGender</td>
@@ -40,6 +39,15 @@
                 <td>@item.LastSeenLocation</td>
                 <td>@item.LastSeenTime.Value.ToShortTimeString()</td>
                 <td><img src="@item.MainPhoto" width="100" /></td>
+
+                <td>
+                    @foreach (var photo in item.ReportPhotos)
+                    {
+                        <img src="@photo.PhotoUrl" width="100" />
+
+                        <br />
+                    }
+                </td>
                 <td>@item.ContactInformation</td>
                 <td>@item.AdditionalDescription</td>
                 <td>@item.Age</td>
@@ -47,4 +55,71 @@
             </tr>
         }
     </tbody>
-</table>
+</table> *@
+
+@page
+@model Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW.AllReportsModel
+@{
+    ViewData["Title"] = "All Reports";
+}
+
+<h1>All Reports</h1>
+
+<div class="report-container">
+    @foreach (var item in Model.CreateReport.Reverse())
+    {
+        <div class="report">
+            <h2>@item.PetName</h2>
+            @* <p><strong>Main Photo:</strong></p> *@
+            <img src="@item.MainPhoto" width="400" />
+            <p><strong>Pet Type and Breed:</strong> @item.PetBreed</p>
+            <p><strong>Sex:</strong> @item.PetGender</p>
+            <p><strong>Date of Birth:</strong> @(item.DateOfBirth?.ToShortDateString() ?? string.Empty)</p>
+            <p><strong>Estimated Age:</strong> @(item.Age?? string.Empty)</p>
+            <p><strong>Pet Microchip ID:</strong> @item.PetMicrochipID</p>
+            <p><strong>Additional Description:</strong> @(item.AdditionalDescription ?? string.Empty)</p>
+            <p><strong>General Location:</strong> @item.GenLoc</p>
+            <p><strong>Last Seen Location:</strong> @item.LastSeenLocation</p>
+            <p><strong>Last Seen Time:</strong> @item.LastSeenTime.Value.ToShortTimeString()</p>
+            
+
+            <p><strong>Additional Photos:</strong></p>
+            <div class="photos">
+                @foreach (var photo in item.ReportPhotos)
+                {
+                    <img src="@photo.PhotoUrl" width="200" />
+                    <br/>
+                    <br/>
+                }
+            </div>
+            <h3>Contact Information:@item.ContactInformation</h3>
+          @*   <p><strong>Additional Description:</strong> @item.AdditionalDescription</p>
+            <p><strong>Age:</strong> @item.Age</p>
+            <p><strong>Gen Loc:</strong> @item.GenLoc</p> *@
+        </div>
+    }
+</div>
+
+<style>
+    .report-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .report {
+        background-color: white;
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 1000px;
+    }
+
+    .photos {
+        margin-top: 10px;
+    }
+
+        .photos img {
+            margin-right: 5px;
+        }
+</style>

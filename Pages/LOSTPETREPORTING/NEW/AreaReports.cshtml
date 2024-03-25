@@ -1,0 +1,78 @@
+﻿@* @page
+@model Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW.AreaReportsModel
+@{
+} *@
+@page
+@model Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW.AreaReportsModel
+@{
+    ViewData["Title"] = "Area Reports";
+}
+
+<h1>Reports in Your Area</h1>
+<a href="/LOSTPETREPORTING/NEW/AllReports" class="box" id="global">
+    <b>Current Lost Pets Globally</b>
+</a>
+<br/>
+<br/>
+<div class="report-container">
+    @foreach (var report in Model.CreateReport)
+    {
+        <div class="report">
+            <h2>@report.PetName</h2>
+            <p><strong>Pet Breed:</strong> @report.PetBreed</p>
+            <p><strong>Pet Gender:</strong> @report.PetGender</p>
+            <p><strong>Date of Birth:</strong> @(report.DateOfBirth?.ToShortDateString() ?? string.Empty)</p>
+            <p><strong>Pet Microchip ID:</strong> @report.PetMicrochipID</p>
+            <p><strong>Last Seen Location:</strong> @report.LastSeenLocation</p>
+            <p><strong>Last Seen Time:</strong> @report.LastSeenTime.Value.ToShortTimeString()</p>
+            <img src="@report.MainPhoto" width="100" />
+            <div class="photos">
+                @foreach (var photo in report.ReportPhotos)
+                {
+                    <img src="@photo.PhotoUrl" width="100" />
+                }
+            </div>
+            <p><strong>Contact Information:</strong> @report.ContactInformation</p>
+            <p><strong>Additional Description:</strong> @report.AdditionalDescription</p>
+            <p><strong>Age:</strong> @report.Age</p>
+            <p><strong>Gen Loc:</strong> @report.GenLoc</p>
+        </div>
+    }
+
+</div>
+
+<style>
+
+    #global{
+        background-color: black;
+        color: #fff;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        text-decoration: none;
+        font-weight: bold; /* Make the text bold */
+        font-size: 1.1em;
+    }
+    .report-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .report {
+        background-color: white;
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 1000px;
+    }
+
+    .photos {
+        margin-top: 10px;
+    }
+
+        .photos img {
+            margin-right: 5px;
+        }
+</style>

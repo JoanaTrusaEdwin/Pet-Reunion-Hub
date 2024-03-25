@@ -10,6 +10,7 @@
 //        }
 //    }
 //}
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,10 +35,12 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
         }
 
         public IList<CreateReport> CreateReport { get; set; }
+        //public List<IFormFile> Photos { get; set; } = new List<IFormFile>();
 
         public async Task<IActionResult> OnGetAsync()
         {
-            CreateReport = await _context.CreateReport.ToListAsync();
+            CreateReport = await _context.CreateReport.Include(r => r.ReportPhotos).ToListAsync();
+
             return Page();
         }
     }
