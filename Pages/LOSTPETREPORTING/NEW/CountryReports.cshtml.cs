@@ -23,12 +23,12 @@ using PRHDATALIB.Models;
 namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
 {
     [Authorize]
-    public class AreaReportsModel : PageModel
+    public class CountryReportsModel : PageModel
     {
         private readonly PRHDATALIB.Models.DatabaseContext _context;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public AreaReportsModel(PRHDATALIB.Models.DatabaseContext context, UserManager<IdentityUser> userManager)
+        public CountryReportsModel(PRHDATALIB.Models.DatabaseContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
             _userManager = userManager;
