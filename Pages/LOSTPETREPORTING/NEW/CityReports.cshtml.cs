@@ -3,7 +3,7 @@
 
 //namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
 //{
-//    public class CountryReportsModel : PageModel
+//    public class AreaReportsModel : PageModel
 //    {
 //        public void OnGet()
 //        {
@@ -23,12 +23,12 @@ using PRHDATALIB.Models;
 namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
 {
     [Authorize]
-    public class CountryReportsModel : PageModel
+    public class CityReportsModel : PageModel
     {
         private readonly PRHDATALIB.Models.DatabaseContext _context;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public CountryReportsModel(PRHDATALIB.Models.DatabaseContext context, UserManager<IdentityUser> userManager)
+        public CityReportsModel(PRHDATALIB.Models.DatabaseContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -53,13 +53,10 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
                 .Select(gl => gl.LOCATIONVALUE)
                 .FirstOrDefaultAsync();
 
-            // Extract the country from the user's location value
-            var userCountry = userLocationValue?.Split('-').FirstOrDefault();
-
-            // Query reports where the country matches the user's country
-            CreateReport = await _context.CreateReport
-                .Where(r => r.GenLoc.StartsWith(userCountry))
-                .ToListAsync();
+            // Query reports where GenLoc matches the user's LOCATIONVALUE
+            CreateReport = await _context.CreateReport.Where(r => r.GenLoc == userLocationValue).ToListAsync();
         }
+
     }
 }
+

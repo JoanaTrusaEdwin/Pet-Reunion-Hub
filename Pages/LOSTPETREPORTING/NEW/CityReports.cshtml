@@ -1,14 +1,38 @@
-﻿@page
-@model Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW.CountryReportsModel
+﻿@* @page
+@model Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW.AreaReportsModel
 @{
+} *@
+@page
+@model Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW.CityReportsModel
+@{
+    ViewData["Title"] = "Area Reports";
 }
-<h1>Reports in Your Country</h1>
+
+<h1>Reports in Your Area</h1>
+
 <a href="/LOSTPETREPORTING/NEW/AllReports" class="box" id="global">
     <b>Current Lost Pets Globally</b>
 </a>
+<br/>
+<br/>
+
+<a href="/LOSTPETREPORTING/NEW/CountryReports" class="box" id="country">
+    <b>Lost Pets in Your Country</b>
+</a>
+<br/>
+<br/>
+
+<a href="/LOSTPETREPORTING/NEW/StateReports" class="box" id="country">
+    <b>Lost Pets in Your State</b>
+</a>
 <br />
 <br />
+
 <div class="report-container">
+    <p>joana39 and bcs same country, city, and state (MALAYSIA-SARAWAK-SIBU) to test city (works)</p>
+    <p>joana8 same country and state, DIFFERENT CITY (MALAYSIA-SARAWAK-KUCHING) to test state</p>
+    <p>joana 23 from different country (USA), to test country</p>
+
     @foreach (var report in Model.CreateReport.Reverse())
     {
         <div class="report">
@@ -37,7 +61,7 @@
 
 <style>
 
-    #global {
+    #global{
         background-color: black;
         color: #fff;
         padding: 10px 15px;
@@ -49,6 +73,17 @@
         font-size: 1.1em;
     }
 
+    #country{
+        background-color: #8b572a;
+        color: #fff;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        text-decoration: none;
+        font-weight: bold; /* Make the text bold */
+        font-size: 1.1em;
+    }
     .report-container {
         display: flex;
         flex-direction: column;

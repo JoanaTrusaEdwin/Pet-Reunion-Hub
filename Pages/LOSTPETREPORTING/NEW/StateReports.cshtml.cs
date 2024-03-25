@@ -3,14 +3,13 @@
 
 //namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
 //{
-//    public class CountryReportsModel : PageModel
+//    public class StateReportsModel : PageModel
 //    {
 //        public void OnGet()
 //        {
 //        }
 //    }
 //}
-
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,12 +22,12 @@ using PRHDATALIB.Models;
 namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
 {
     [Authorize]
-    public class CountryReportsModel : PageModel
+    public class StateReportsModel : PageModel
     {
         private readonly PRHDATALIB.Models.DatabaseContext _context;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public CountryReportsModel(PRHDATALIB.Models.DatabaseContext context, UserManager<IdentityUser> userManager)
+        public StateReportsModel(PRHDATALIB.Models.DatabaseContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -53,12 +52,14 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
                 .Select(gl => gl.LOCATIONVALUE)
                 .FirstOrDefaultAsync();
 
-            // Extract the country from the user's location value
-            var userCountry = userLocationValue?.Split('-').FirstOrDefault();
+            // Extract the country and state from the user's location value
+            var parts = userLocationValue?.Split('-');
+            var userCountry = parts?.FirstOrDefault();
+            var userState = parts?.Length > 1 ? parts?[1] : null;
 
-            // Query reports where the country matches the user's country
+            // Query reports where the country and state match the user's location
             CreateReport = await _context.CreateReport
-                .Where(r => r.GenLoc.StartsWith(userCountry))
+                .Where(r => r.GenLoc.StartsWith($"{userCountry}-{userState}"))
                 .ToListAsync();
         }
     }
