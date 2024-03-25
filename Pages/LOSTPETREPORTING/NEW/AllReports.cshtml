@@ -1,0 +1,50 @@
+﻿
+@page
+@model Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW.AllReportsModel
+@{
+    ViewData["Title"] = "All Reports";
+}
+
+<h1>All Reports</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            @* <th>Report ID</th>
+            <th>User ID</th> *@
+            <th>Pet Name</th>
+            <th>Pet Breed</th>
+            <th>Pet Gender</th>
+            <th>Date of Birth</th>
+            <th>Pet Microchip ID</th>
+            <th>Last Seen Location</th>
+            <th>Last Seen Time</th>
+            <th>Main Photo</th>
+            <th>Contact Information</th>
+            <th>Additional Description</th>
+            <th>Age</th>
+            <th>Gen Loc</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.CreateReport)
+        {
+            <tr>
+                @* <td>@item.Id</td>
+                <td>@item.UserId</td> *@
+                <td>@item.PetName</td>
+                <td>@item.PetBreed</td>
+                <td>@item.PetGender</td>
+                <td>@(item.DateOfBirth?.ToShortDateString()?? string.Empty)</td>
+                <td>@item.PetMicrochipID</td>
+                <td>@item.LastSeenLocation</td>
+                <td>@item.LastSeenTime.Value.ToShortTimeString()</td>
+                <td><img src="@item.MainPhoto" width="100" /></td>
+                <td>@item.ContactInformation</td>
+                <td>@item.AdditionalDescription</td>
+                <td>@item.Age</td>
+                <td>@item.GenLoc</td>
+            </tr>
+        }
+    </tbody>
+</table>

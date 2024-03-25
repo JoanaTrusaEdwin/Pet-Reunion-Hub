@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pet Reunion Hub", "Pet Reun
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "PetReunionHub", "..\PetReunionHub\PetReunionHub.sqlproj", "{0B8FAF63-EB60-4FD7-9BBE-06A48F6C237A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRHDATALIB", "..\PRHDATALIB\PRHDATALIB.csproj", "{9709B457-5D2A-4731-8E82-D0B67A364CB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PRHDATALIB", "..\PRHDATALIB\PRHDATALIB.csproj", "{9709B457-5D2A-4731-8E82-D0B67A364CB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
