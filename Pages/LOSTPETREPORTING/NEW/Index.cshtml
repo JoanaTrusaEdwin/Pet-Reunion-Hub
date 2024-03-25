@@ -92,7 +92,7 @@
 }
     </tbody>
 </table>
- *@
+*@
 @page
 @model Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW.IndexModel
 
@@ -103,7 +103,7 @@
 @using Microsoft.AspNetCore.Mvc.RazorPages
 
 <style>
-    /* Style for Create New link */
+    
     #createnew {
         border-radius: 25px;
         background-color: black;
@@ -115,10 +115,9 @@
     }
 
         #createnew:hover {
-            background-color: #555; /* Darken the background color on hover */
+            background-color: #555; 
         }
 
-    /* Style for Edit link */
     #edit {
         border-radius: 5px;
         background-color: black;
@@ -128,7 +127,7 @@
         font-weight: bold;
     }
 
-    /* Style for Details link */
+   
     #details {
         border-radius: 5px;
         background-color: #8b572a;
@@ -138,7 +137,7 @@
         font-weight: bold;
     }
 
-    /* Style for Delete link */
+    
     #delete {
         border-radius: 5px;
         background-color: red;
@@ -164,7 +163,10 @@
         <p><strong>Pet Breed:</strong> @item.PetBreed</p>
         <p><strong>Pet Gender:</strong> @item.PetGender</p>
         <p><strong>Date of Birth:</strong> @item.DateOfBirth</p>
+        <p><strong>Estimated Age:</strong> @item.Age</p>
         <p><strong>Pet Microchip ID:</strong> @item.PetMicrochipID</p>
+        <p><strong>Additional Description:</strong> @item.AdditionalDescription</p>
+        <p><strong>General Location:</strong> @item.GenLoc</p>
         <p><strong>Last Seen Location:</strong> @item.LastSeenLocation</p>
         <p><strong>Last Seen Time:</strong> @item.LastSeenTime</p>
         <p><strong>Contact Information:</strong> @item.ContactInformation</p>
@@ -176,3 +178,4 @@
         </p>
     </div>
 }
+ 

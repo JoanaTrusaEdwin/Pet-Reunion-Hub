@@ -38,7 +38,7 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div style="padding: 30px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 20px; background-color: #fff;">
-    <h4>CreateReport</h4>
+    <h4>Confirm Deletion</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -65,12 +65,35 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CreateReport.DateOfBirth)
         </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CreateReport.Age)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CreateReport.Age)
+        </dd>
+
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CreateReport.PetMicrochipID)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CreateReport.PetMicrochipID)
         </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CreateReport.AdditionalDescription)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CreateReport.AdditionalDescription)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CreateReport.GenLoc)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CreateReport.GenLoc)
+        </dd>
+
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CreateReport.LastSeenLocation)
         </dt>
@@ -90,8 +113,10 @@
         </dt>
 
         <div class="form-group">
-            <label asp-for="CreateReport.MainPhoto" class="control-label"></label>
+            <label asp-for="CreateReport.MainPhoto" class="control-label"><b>Pet Photo</b></label>
+            <br/>
             <img src="@Model.CreateReport.MainPhoto" class="img-thumbnail" style="max-width: 200px;" />
+
         </div>
 
         @* <dd class="col-sm-10">

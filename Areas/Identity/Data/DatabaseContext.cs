@@ -101,18 +101,15 @@ namespace PRHDATALIB.Models
                     .HasColumnName("ContactInformation");
 
                 entity.Property(e => e.AdditionalDescription)
-                   .HasMaxLength(1000)
-                   .IsRequired()
+                   .HasMaxLength(1000)                 
                    .HasColumnName("AdditionalDescription");
 
                 entity.Property(e => e.Age)
-                   .HasMaxLength(50)
-                   .IsRequired()
+                   .HasMaxLength(50)                 
                    .HasColumnName("Age");
 
                 entity.Property(e => e.GenLoc)
-                  .HasMaxLength(1000)
-                  .IsRequired()
+                  .HasMaxLength(1000)     
                   .HasColumnName("GenLoc");
 
                 //entity.Property(e => e.UserId)
@@ -124,8 +121,6 @@ namespace PRHDATALIB.Models
                     .HasForeignKey(cr => cr.UserId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK_CreateReport_AspNetUsers");
-
-
 
             });
 

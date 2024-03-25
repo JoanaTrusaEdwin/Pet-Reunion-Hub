@@ -189,7 +189,7 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
                         if (toBeUpdated != null)
                         {
                             Console.WriteLine($"!!!!!!!!!!!!!!!!!!!!tobeupdated: ID: {toBeUpdated.Id}");
-                            await TryUpdateModelAsync<CreateReport>(toBeUpdated, "CreateReport", c => c.PetName, c => c.PetBreed, c => c.PetMicrochipID, c => c.LastSeenLocation, c => c.LastSeenTime, c => c.DateOfBirth);
+                            await TryUpdateModelAsync<CreateReport>(toBeUpdated, "CreateReport", c => c.PetName, c => c.PetBreed, c => c.PetMicrochipID, c => c.LastSeenLocation, c => c.LastSeenTime, c => c.DateOfBirth, c => c.Age, c => c.GenLoc, c => c.AdditionalDescription);
                         }
                         _context.CreateReport.Update(CreateReport);
                         _context.SaveChanges();
@@ -212,8 +212,10 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
                         existingReport.LastSeenLocation = CreateReport.LastSeenLocation;
                         existingReport.LastSeenTime = CreateReport.LastSeenTime;
                         existingReport.ContactInformation = CreateReport.ContactInformation;
-                       
-                       
+                        existingReport.Age = CreateReport.Age;
+                        existingReport.GenLoc = CreateReport.GenLoc;
+                        existingReport.AdditionalDescription = CreateReport.AdditionalDescription;
+
 
                         if (Photo != null && Photo.Length > 0)
                         {

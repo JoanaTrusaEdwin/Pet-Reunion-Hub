@@ -26,9 +26,10 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
             _userManager = userManager;
         }
 
-        public IList<CreateReport> CreateReport { get;set; } = default!;
+        public IList<CreateReport> CreateReport { get;set; } 
+           // = default!;
 
-        [Authorize]
+        
         public async Task<IActionResult> OnGetAsync()
         {
             //if (_context.CreateReport != null)
@@ -41,8 +42,10 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            // Filter data to include only records associated with the current user
-            CreateReport = _context.CreateReport.Where(n => n.UserId == currentUser.Id).ToList();
+            CreateReport = await _context.CreateReport
+                   .Where(n => n.UserId == currentUser.Id)
+                   .ToListAsync();
+
 
             return Page();
         }
