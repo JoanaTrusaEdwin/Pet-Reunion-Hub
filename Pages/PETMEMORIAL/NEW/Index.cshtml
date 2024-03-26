@@ -1,0 +1,103 @@
+﻿@page
+@model Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    // Layout = "~/Pages/Shared/SignUp.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Tribute[0].PetName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tribute[0].PetType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tribute[0].PetBreed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tribute[0].PetSex)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tribute[0].DateOfBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tribute[0].DateOfAdoption)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tribute[0].DateOfDeparture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tribute[0].Cause)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tribute[0].TributeText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tribute[0].TributePhoto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tribute[0].IsPublic)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tribute[0].User)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Tribute) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PetName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PetType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PetBreed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PetSex)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfAdoption)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfDeparture)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cause)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TributeText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TributePhoto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsPublic)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Id)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

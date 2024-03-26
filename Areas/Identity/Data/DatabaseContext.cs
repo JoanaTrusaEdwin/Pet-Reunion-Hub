@@ -32,7 +32,7 @@ namespace PRHDATALIB.Models
 
         public virtual DbSet<GENERALLOCATION> GENERALLOCATION { get; set; }
 
-        public virtual DbSet<Testing> Testing { get; set; }
+        public DbSet<Tribute> Tribute { get; set; }
 
         public DbSet<Newtest> NEWTEST { get; set; }
 
@@ -164,6 +164,35 @@ namespace PRHDATALIB.Models
 
             });
 
+            modelBuilder.Entity<Tribute>(entity =>
+            {
+                entity.ToTable("Tribute");
+                entity.Property(e => e.Id)
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id"); entity.Property(e => e.Id)
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id");
+                /*entity.HasKey(e => e.Id);*/ // Primary key
+                entity.Property(e => e.PetName).HasMaxLength(255);
+                entity.Property(e => e.PetType).HasMaxLength(100);
+                entity.Property(e => e.PetBreed).HasMaxLength(100);
+                entity.Property(e => e.PetSex).HasMaxLength(10);
+                entity.Property(e => e.DateOfBirth).HasColumnType("DATE");
+                entity.Property(e => e.DateOfAdoption).HasColumnType("DATE");
+                entity.Property(e => e.DateOfDeparture).HasColumnType("DATE");
+                entity.Property(e => e.TributeText).HasMaxLength(int.MaxValue); // Max length
+                entity.Property(e => e.TributePhoto).HasMaxLength(255);
+                entity.Property(e => e.IsPublic).IsRequired();
+                entity.Property(e => e.UserId).IsRequired().HasMaxLength(450);
+
+                entity.HasOne(cr => cr.User)
+                .WithMany()
+                .HasForeignKey(cr => cr.UserId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("FK_Tribute_AspNetUsers");
+
+
+            });
 
             modelBuilder.Entity<Newtest>(entity =>
             {
