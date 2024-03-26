@@ -34,6 +34,11 @@ namespace PRHDATALIB.Models
 
         public DbSet<Tribute> Tribute { get; set; }
 
+        public DbSet<Comment> Comment { get; set; }
+        public DbSet<Heart> Heart { get; set; }
+        public DbSet<Post> Post { get; set; }
+        public DbSet<Media> Media { get; set; }
+
         public DbSet<Newtest> NEWTEST { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -193,6 +198,84 @@ namespace PRHDATALIB.Models
 
 
             });
+
+            modelBuilder.Entity<Comment>(entity =>
+            {
+                entity.ToTable("Comment"); // Table name
+                entity.HasKey(e => e.Id); // Primary key
+
+                // Configure properties
+                entity.Property(e => e.Id).HasColumnName("Id");
+                entity.Property(e => e.Content).HasColumnName("Content").HasColumnType("NVARCHAR(MAX)");
+                entity.Property(e => e.UserId).HasColumnName("UserId").IsRequired().HasColumnType("NVARCHAR(450)");
+                entity.Property(e => e.PostId).HasColumnName("PostId");
+                entity.Property(e => e.TributeId).HasColumnName("TributeId");
+
+
+                entity.HasOne(e => e.Post)
+                      .WithMany()
+                      .HasForeignKey(e => e.PostId)
+                      .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(e => e.Tribute)
+                      .WithMany()
+                      .HasForeignKey(e => e.TributeId)
+                      .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(cr => cr.User)
+               .WithMany()
+               .HasForeignKey(cr => cr.UserId)
+               .OnDelete(DeleteBehavior.Restrict)
+               .HasConstraintName("FK_Comment_AspNetUsers");
+
+            });
+
+            modelBuilder.Entity<Heart>(entity =>
+            {
+                entity.ToTable("Heart"); // Table name
+                entity.HasKey(e => e.Id); // Primary key
+
+                // Configure properties
+                entity.Property(e => e.Id).HasColumnName("Id");
+                entity.Property(e => e.UserId).HasColumnName("UserId").IsRequired().HasColumnType("NVARCHAR(450)");
+                entity.Property(e => e.PostId).HasColumnName("PostId");
+                entity.Property(e => e.TributeId).HasColumnName("TributeId");
+
+                entity.HasOne(e => e.Post)
+                      .WithMany()
+                      .HasForeignKey(e => e.PostId)
+                      .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(e => e.Tribute)
+                      .WithMany()
+                      .HasForeignKey(e => e.TributeId)
+                      .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(cr => cr.User)
+              .WithMany()
+              .HasForeignKey(cr => cr.UserId)
+              .OnDelete(DeleteBehavior.Restrict)
+              .HasConstraintName("FK_Heart_AspNetUsers");
+            });
+
+            modelBuilder.Entity<Media>(entity =>
+            {
+                entity.ToTable("Media"); // Table name
+                entity.HasKey(e => e.Id); // Primary key
+
+                // Configure properties
+                entity.Property(e => e.Id).HasColumnName("Id");
+                entity.Property(e => e.MediaUrl).HasColumnName("MediaUrl").IsRequired().HasColumnType("NVARCHAR(500)");
+                entity.Property(e => e.MediaType).HasColumnName("MediaType").IsRequired().HasColumnType("NVARCHAR(20)");
+                entity.Property(e => e.PostId).HasColumnName("PostId");
+
+                // Configure foreign key
+                entity.HasOne(e => e.Post)
+                      .WithMany()
+                      .HasForeignKey(e => e.PostId)
+                      .OnDelete(DeleteBehavior.Restrict);
+            });
+
 
             modelBuilder.Entity<Newtest>(entity =>
             {
