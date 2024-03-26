@@ -6,69 +6,172 @@
     // Layout = "~/Pages/Shared/SignUp.cshtml";
 }
 
-<h1>Create</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost Pet Reporting</title>
+    <style>
+        body {
+            /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<h4>Tribute</h4>
+        .container {
+            max-width: 1500px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input,
+        select
+        {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        
+
+        #submitbtn {
+            background-color: black;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold; /* Make the text bold */
+            font-size: 1.1em;
+        }
+
+        #tolist {
+            background-color: #8b572a;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 20px; /* Increase border-radius for a more rounded appearance */
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+<h1>Create a Tribute For Your Beloved Pet</h1>
+
+<h4></h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+            <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="form-group">
-                <label asp-for="Tribute.PetName" class="control-label"></label>
-                <input asp-for="Tribute.PetName" class="form-control" />
+                <label asp-for="Tribute.PetName" class="control-label"><b>Name</b></label>
+                <input asp-for="Tribute.PetName" class="form-control
+                           maxlength="255" />
                 <span asp-validation-for="Tribute.PetName" class="text-danger"></span>
             </div>
+            <br/>
+
             <div class="form-group">
-                <label asp-for="Tribute.PetType" class="control-label"></label>
-                <input asp-for="Tribute.PetType" class="form-control" />
+                <label asp-for="Tribute.PetType" class="control-label"><b>Pet Type</b></label>
+                    <input asp-for="Tribute.PetType" class="form-control 
+                            maxlength="100" />
                 <span asp-validation-for="Tribute.PetType" class="text-danger"></span>
             </div>
+                <br />
+
             <div class="form-group">
-                <label asp-for="Tribute.PetBreed" class="control-label"></label>
-                <input asp-for="Tribute.PetBreed" class="form-control" />
+                <label asp-for="Tribute.PetBreed" class="control-label"><b>Breed</b></label>
+                <input asp-for="Tribute.PetBreed" class="form-control
+                           maxlength="100" />
                 <span asp-validation-for="Tribute.PetBreed" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Tribute.PetSex" class="control-label"></label>
+                <br />
+
+            @* <div class="form-group">
+                <label asp-for="Tribute.PetSex" class="control-label"><b>Sex</b></label>
                 <input asp-for="Tribute.PetSex" class="form-control" />
                 <span asp-validation-for="Tribute.PetSex" class="text-danger"></span>
-            </div>
+            </div> *@
+
+                <div class="form-group">
+                    <label asp-for="Tribute.PetSex" class="control-label"><b>Sex</b></label>
+                    <select asp-for="Tribute.PetSex" class="form-control">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                    <span asp-validation-for="Tribute.PetSex" class="text-danger"></span>
+                </div>
+
+
             <div class="form-group">
-                <label asp-for="Tribute.DateOfBirth" class="control-label"></label>
+                <label asp-for="Tribute.DateOfBirth" class="control-label"><b>Date of Birth (You may leave it empty if you're unsure)</b></label>
                 <input asp-for="Tribute.DateOfBirth" class="form-control" />
                 <span asp-validation-for="Tribute.DateOfBirth" class="text-danger"></span>
             </div>
+                <br />
+
             <div class="form-group">
-                <label asp-for="Tribute.DateOfAdoption" class="control-label"></label>
+                <label asp-for="Tribute.DateOfAdoption" class="control-label"><b>Date of Adoption</b></label>
                 <input asp-for="Tribute.DateOfAdoption" class="form-control" />
                 <span asp-validation-for="Tribute.DateOfAdoption" class="text-danger"></span>
             </div>
+                <br />
+
             <div class="form-group">
-                <label asp-for="Tribute.DateOfDeparture" class="control-label"></label>
+                <label asp-for="Tribute.DateOfDeparture" class="control-label"><b>Date of Departure</b></label>
                 <input asp-for="Tribute.DateOfDeparture" class="form-control" />
                 <span asp-validation-for="Tribute.DateOfDeparture" class="text-danger"></span>
             </div>
+                <br />
+
             <div class="form-group">
-                <label asp-for="Tribute.Cause" class="control-label"></label>
-                <input asp-for="Tribute.Cause" class="form-control" />
+                <label asp-for="Tribute.Cause" class="control-label"><b>Cause of Death</b></label>
+                <input asp-for="Tribute.Cause" class="form-control
+                           maxlength="500" />
                 <span asp-validation-for="Tribute.Cause" class="text-danger"></span>
             </div>
+                <br />
+
             <div class="form-group">
-                <label asp-for="Tribute.TributeText" class="control-label"></label>
-                <input asp-for="Tribute.TributeText" class="form-control" />
+                <label asp-for="Tribute.TributeText" class="control-label"><b>Tribute Text</b></label>
+                    <textarea asp-for="Tribute.TributeText" class="form-control autosize" rows="3" style="width: 2000 px !important;;" maxlength="2147483647"></textarea>
                 <span asp-validation-for="Tribute.TributeText" class="text-danger"></span>
             </div>
+                <br />
+
             <div class="form-group">
-                <label asp-for="Tribute.TributePhoto" class="control-label"></label>
+                <label asp-for="Tribute.TributePhoto" class="control-label"><b>Photo of Your Pet</b></label>
                 <input asp-for="Tribute.TributePhoto" class="form-control" />
                 <span asp-validation-for="Tribute.TributePhoto" class="text-danger"></span>
             </div>
+                <br />
+
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Tribute.IsPublic" /> @Html.DisplayNameFor(model => model.Tribute.IsPublic)
                 </label>
             </div>
+                <br />
          @*    <div class="form-group">
                 <label asp-for="Tribute.UserId" class="control-label"></label>
                 <select asp-for="Tribute.UserId" class ="form-control" asp-items="ViewBag.UserId"></select>
@@ -76,16 +179,84 @@
 
             <input type="hidden" asp-for="Tribute.UserId" />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                    <input type="submit" id="submitbtn" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+        <a asp-page="Index" id="tolist">My Tributes</a>
 </div>
+</body>
+</html>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+
+        // Function to auto-expand textarea
+        function autoExpandTextarea(element) {
+            element.style.height = 'auto';
+            element.style.height = (element.scrollHeight) + 'px';
+        }
+
+        // Attach event listener to all textareas with class 'autosize'
+        document.addEventListener('input', function (event) {
+            if (event.target.tagName.toLowerCase() !== 'textarea' || !event.target.classList.contains('autosize')) return;
+            autoExpandTextarea(event.target);
+        }, false);
+
+        // Auto-expand textareas on page load
+        document.querySelectorAll('textarea.autosize').forEach(function (element) {
+            autoExpandTextarea(element);
+        });
+
+        //TO CONTROL CHARACTERS
+        function updateCharacterCount(inputId, countId, limit) {
+            var input = document.getElementById(inputId);
+            var count = document.getElementById(countId);
+            console.log("Input value:", input.value);
+            console.log("Input length:", input.value.length);
+            var remaining = limit - input.value.length;
+
+            if (remaining < 0) {
+                input.value = input.value.substring(0, limit);
+                remaining = 0;
+            }
+
+            count.textContent = remaining + "/" + limit;
+        }
+
+        // Call this function when the input changes
+        function handleInput(inputId, countId, limit) {
+            updateCharacterCount(inputId, countId, limit);
+        }
+
+        //TO PREVENT NULL
+        function validateForm() {
+            var isValid = true;
+            var unfilledFields = [];
+
+            // Check each required input field
+            var inputs = document.querySelectorAll('input[required]');
+            inputs.forEach(function (input) {
+                if (!input.value.trim()) {
+                    isValid = false;
+                    unfilledFields.push(input.name);
+                }
+            });
+
+            // Display warning message if any required field is empty
+            if (!isValid) {
+                var message = 'Please fill in the following fields:\n';
+                unfilledFields.forEach(function (field) {
+                    message += '- ' + field + '\n';
+                });
+                alert(message);
+            }
+
+            return isValid;
+        }
+        </script>
 }
