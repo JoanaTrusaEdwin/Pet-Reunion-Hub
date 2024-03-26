@@ -141,6 +141,13 @@
     <h4>Confirm Deletion</h4>
     <hr />
     <dl class="row">
+
+        <div class="form-group">
+            <label asp-for="Tribute.TributePhoto" class="control-label"><b>Pet Photo</b></label>
+            <br />
+            <img src="@Model.Tribute.TributePhoto" class="img-thumbnail" style="max-width: 200px;" />
+
+        </div>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Tribute.PetName)
         </dt>
