@@ -113,6 +113,8 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
 
         [BindProperty]
         public Tribute Tribute { get; set; }
+        [BindProperty]
+        public IFormFile? photo { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -159,10 +161,20 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
 
                     Tribute.UserId = userId;
                     _logger.LogInformation("Assigned User ID: {UserId}", Tribute.UserId);
-                   
+                    string azureBlobStorageConnectionString = _configuration.GetConnectionString("AzureBlobStorageConnectionString");
+
+                    if (string.IsNullOrEmpty(azureBlobStorageConnectionString))
+                    {
+                        return Page();
+                    }
 
                     if (Tribute.Id == 0)
                     {
+                        if (photo != null && photo.Length > 0)
+                        {
+                            string fileUrl = await UploadPhotoToBlobStorage(photo);
+                            Tribute.TributePhoto = fileUrl;
+                        }
                         //_context.CreateReport.Add(CreateReport);
                         Tribute toBeUpdated = await _context.Tribute.FindAsync(Tribute.Id);
                         if (toBeUpdated != null)
@@ -191,9 +203,14 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                         existingTribute.DateOfDeparture = Tribute.DateOfDeparture;
                         existingTribute.Cause = Tribute.Cause;
                         existingTribute.TributeText = Tribute.TributeText;
-                        existingTribute.TributePhoto = Tribute.TributePhoto;
+                        //existingTribute.TributePhoto = Tribute.TributePhoto;
                         existingTribute.IsPublic = Tribute.IsPublic;
 
+                        if (photo != null && photo.Length > 0)
+                        {
+                            string fileUrl = await UploadPhotoToBlobStorage(photo);
+                            existingTribute.TributePhoto = fileUrl;
+                        }
                         _context.Entry(existingTribute).State = EntityState.Modified;
 
                     }
@@ -216,6 +233,30 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                 throw;
             }
 
+        }
+
+        private async Task<string> UploadPhotoToBlobStorage(IFormFile photo)
+        {
+            string azureBlobStorageConnectionString = _configuration.GetConnectionString("AzureBlobStorageConnectionString");
+            if (string.IsNullOrEmpty(azureBlobStorageConnectionString))
+            {
+                return null;
+            }
+
+            string containerName = "newprhcontainer";
+
+            var blobServiceClient = new BlobServiceClient(azureBlobStorageConnectionString);
+            var containerClient = blobServiceClient.GetBlobContainerClient(containerName);
+
+            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(photo.FileName);
+            var blobClient = containerClient.GetBlobClient(fileName);
+
+            using (var stream = photo.OpenReadStream())
+            {
+                await blobClient.UploadAsync(stream, true);
+            }
+
+            return blobClient.Uri.ToString();
         }
     }
 }

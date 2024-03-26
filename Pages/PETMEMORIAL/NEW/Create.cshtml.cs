@@ -101,8 +101,11 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
         [BindProperty]
         public Tribute Tribute { get; set; } = new Tribute();
 
+        [BindProperty]
+        public IFormFile? photo { get; set; }
 
-        public async Task<IActionResult> OnPostAsync()
+
+        public async Task<IActionResult> OnPostAsync(IFormFile photo)
         {
             try
             {
@@ -122,9 +125,29 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
 
                     Tribute.UserId = userId;
                     _logger.LogInformation("Assigned User ID: {UserId}", Tribute.UserId);
-                    
+                    string azureBlobStorageConnectionString = _configuration.GetConnectionString("AzureBlobStorageConnectionString");
 
+                    if (string.IsNullOrEmpty(azureBlobStorageConnectionString))
+                    {
 
+                        return Page();
+                    }
+                    if (photo != null && photo.Length > 0)
+                    {
+
+                        string connectionString = _configuration["AzureBlobStorageConnectionString"];
+                        var blobServiceClient = new BlobServiceClient(azureBlobStorageConnectionString);
+                        var containerClient = blobServiceClient.GetBlobContainerClient("newprhcontainer");
+                        var fileName = Guid.NewGuid().ToString() + Path.GetExtension(photo.FileName);
+                        var blobClient = containerClient.GetBlobClient(fileName);
+                        using (var stream = photo.OpenReadStream())
+                        {
+                            await blobClient.UploadAsync(stream, true);
+                        }
+
+                        var fileUrl = blobClient.Uri.ToString();
+                        Tribute.TributePhoto = fileUrl;
+                    }
                     _context.Tribute.Add(Tribute);
                     await _context.SaveChangesAsync();
                     _logger.LogInformation("New tribute created successfully.");

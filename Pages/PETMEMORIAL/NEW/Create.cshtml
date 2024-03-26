@@ -162,12 +162,19 @@
             </div>
                 <br />
 
-            <div class="form-group">
+            @* <div class="form-group">
                 <label asp-for="Tribute.TributePhoto" class="control-label"><b>Photo of Your Pet</b></label>
                 <input asp-for="Tribute.TributePhoto" class="form-control" />
                 <span asp-validation-for="Tribute.TributePhoto" class="text-danger"></span>
             </div>
+                <br /> *@
+                <div class="form-group">
+                    <label asp-for="Tribute.TributePhoto" class="control-label"><b>Photo of Your Pet</b></label>
+                    <input type="file" name="photo" asp-for="Tribute.TributePhoto" class="form-control-file" accept="image/*" />
+                    <span asp-validation-for="Tribute.TributePhoto" class="text-danger"></span>
+                </div>
                 <br />
+
 
             <div class="form-group form-check">
                 <label class="form-check-label">

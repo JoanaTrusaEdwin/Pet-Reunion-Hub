@@ -161,12 +161,22 @@
             </div>
             <br />
 
-            <div class="form-group">
+           @*  <div class="form-group">
                 <label asp-for="Tribute.TributePhoto" class="control-label"><b>Photo of Your Pet</b></label>
                 <input asp-for="Tribute.TributePhoto" class="form-control" />
                 <span asp-validation-for="Tribute.TributePhoto" class="text-danger"></span>
             </div>
-            <br />
+            <br /> *@
+                <div class="form-group">
+                    <label asp-for="Tribute.TributePhoto" class="control-label"><b>Pet's Main Photo</b></label>
+                    <img src="@Model.Tribute.TributePhoto" class="img-thumbnail" style="max-width: 200px;" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Tribute.TributePhoto" class="control-label"><b>Change Photo</b></label>
+                    <input type="file" name="photo" asp-for="Tribute.TributePhoto" class="form-control-file" accept="image/*" />
+                    <span asp-validation-for="Tribute.TributePhoto" class="text-danger"></span>
+                </div>
+                <br />
 
             <div class="form-group form-check">
                 <label class="form-check-label">
@@ -179,7 +189,8 @@
             <select asp-for="Tribute.UserId" class ="form-control" asp-items="ViewBag.UserId"></select>
             </div> *@
 
-            <input type="hidden" asp-for="Tribute.UserId" />
+            <input type="hidden" asp-for="Tribute.Id" />
+
             <div class="form-group">
                 <input type="submit" id="submitbtn" value="Save Changes" class="btn btn-primary" />
             </div>
