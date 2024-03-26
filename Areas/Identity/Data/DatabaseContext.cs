@@ -182,7 +182,7 @@ namespace PRHDATALIB.Models
                 entity.Property(e => e.DateOfDeparture).HasColumnType("DATE");
                 entity.Property(e => e.TributeText).HasMaxLength(int.MaxValue); // Max length
                 entity.Property(e => e.TributePhoto).HasMaxLength(255);
-                entity.Property(e => e.IsPublic).IsRequired();
+                entity.Property(e => e.IsPublic);
                 entity.Property(e => e.UserId).IsRequired().HasMaxLength(450);
 
                 entity.HasOne(cr => cr.User)
