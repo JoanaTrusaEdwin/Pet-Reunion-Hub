@@ -137,7 +137,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
 
                         string connectionString = _configuration["AzureBlobStorageConnectionString"];
                         var blobServiceClient = new BlobServiceClient(azureBlobStorageConnectionString);
-                        var containerClient = blobServiceClient.GetBlobContainerClient("newprhcontainer");
+                        var containerClient = blobServiceClient.GetBlobContainerClient("tributes");
                         var fileName = Guid.NewGuid().ToString() + Path.GetExtension(photo.FileName);
                         var blobClient = containerClient.GetBlobClient(fileName);
                         using (var stream = photo.OpenReadStream())
