@@ -239,7 +239,13 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
 
         public IActionResult OnGet()
         {
-            PublicTributes = _context.Tribute.Where(t => t.IsPublic == true).ToList();
+            var userId = _userManager.GetUserId(User);
+
+            // Query for public tributes
+            PublicTributes = _context.Tribute
+                .Where(t => t.Visibility == "Public")
+                .ToList();
+
             return Page();
         }
     }

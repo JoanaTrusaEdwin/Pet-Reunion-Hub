@@ -201,11 +201,18 @@
             @Html.DisplayFor(model => model.Tribute.TributeText)
         </dd>
 
-        <dt class="col-sm-2">
+       @*  <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Tribute.IsPublic)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Tribute.IsPublic)
+        </dd>
+ *@
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Tribute.Visibility)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Tribute.Visibility)
         </dd>
         
         @* <div class="form-group">

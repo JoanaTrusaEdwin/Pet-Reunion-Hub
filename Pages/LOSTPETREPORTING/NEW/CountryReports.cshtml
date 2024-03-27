@@ -4,11 +4,18 @@
 }
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Mvc.RazorPages
+<br />
+<div class="button-container">
+    <a href="/LOSTPETREPORTING/NEW/AllReports" class="box" id="global">
+        <b>Lost Pets Around The World</b>
+    </a>
 
+    <a href="/LOSTPETREPORTING/NEW/StateReports" class="box" id="state">
+        <b>Lost Pets in Your State</b>
+    </a>
+</div>
+<br />
 <h1>Reports in Your Country</h1>
-<a href="/LOSTPETREPORTING/NEW/AllReports" class="box" id="global">
-    <b>Current Lost Pets Globally</b>
-</a>
 <br />
 <br />
 <div class="report-container">
@@ -39,13 +46,29 @@
 </div>
 
 <style>
+    .button-container {
+        display: flex;
+        justify-content: space-between; /* Adjust as needed */
+    }
 
+
+    #state {
+        background-color: white;
+        color: black;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        font-weight: bold; /* Make the text bold */
+        font-size: 1.1em;
+    }
     #global {
         background-color: black;
         color: #fff;
         padding: 10px 15px;
         border: none;
-        border-radius: 20px;
+        border-radius: 5px;
         cursor: pointer;
         text-decoration: none;
         font-weight: bold; /* Make the text bold */

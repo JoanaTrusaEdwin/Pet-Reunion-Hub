@@ -1,95 +1,4 @@
-﻿@* @page
-@model Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW.CommunityMemorialsModel
-@{
-}
-
-<h1>Community Memorials</h1>
-
-@if (Model.PublicTributes != null)
-{
-    @foreach (var tribute in Model.PublicTributes)
-    {
-        <div style="background-color: #fff; border-radius: 20px; padding: 20px; margin-bottom: 20px;">
-            <h3>@tribute.PetName</h3>
-            <p>@tribute.TributeText</p>
-            <p> <img src="@tribute.TributePhoto" alt="Pet Photo" style="max-width: 500px;" /></p>
-            @* <p><strong>Pet Name:</strong> @item.PetName</p> 
-            <p><strong>Pet Type:</strong> @tribute.PetType</p>
-            <p><strong>Breed:</strong> @tribute.PetBreed</p>
-            <p><strong>Sex:</strong> @tribute.PetSex</p>
-            <p><strong>Date of Birth:</strong> @tribute.DateOfBirth</p>
-            <p><strong>Date of Adoption:</strong> @tribute.DateOfAdoption</p>
-            <p><strong>Date of Departure:</strong> @tribute.DateOfDeparture</p>
-            <p><strong>Cause of Death:</strong> @tribute.Cause</p>
-            <p><strong>Tribute Text:</strong> @tribute.TributeText</p>
-            <b></b>
-            <button type="button" class="heart-button" data-tribute-id="@tribute.Id">
-                @(Model.UserHeartsStatus.ContainsKey(tribute.Id) && Model.UserHeartsStatus[tribute.Id] ? "Unheart" : "Heart")
-            </button>
-            <span class="heart-count" id="heart-count-@tribute.Id">@Model.TributeHeartsCount[tribute.Id]</span>
-            <br />
-
-            <h4>Leave a Comment</h4>
-            <div class="comment-section">
-                @foreach (var comment in Model.TributeComments[tribute.Id])
-                {
-                    <div>
-                        <p>@comment.UserId: @comment.Content</p>
-                        @if (User.Identity.Name == comment.UserId)
-                        {
-                            <button type="button" class="delete-comment-button" data-comment-id="@comment.Id" data-tribute-id="@tribute.Id">
-                                Delete
-                            </button>
-                        }
-                    </div>
-                }
-            </div>
-            <br/>
-            <form method="post">
-                <input type="hidden" name="tributeId" value="@tribute.Id" />
-                <input type="hidden" name="userId" value="@User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value" />
-                <textarea name="commentContent" required></textarea>
-                <button type="submit">Post Comment</button>
-            </form>
-        </div>
-    }
-}
-else
-{
-    <p><strong>No Public Tributes</strong></p>
-}
-
-@section Scripts {
-    <script>
-        document.querySelectorAll('.heart-button').forEach(button => {
-            button.addEventListener('click', async () => {
-                const tributeId = button.dataset.tributeId;
-                const response = await fetch(`/PETMEMORIAL/NEW/CommunityMemorials?handler=Heart&tributeId=${tributeId}`, {
-                    method: 'POST'
-                });
-                if (response.ok) {
-                    const heartCountSpan = document.getElementById(`heart-count-${tributeId}`);
-                    heartCountSpan.textContent = parseInt(heartCountSpan.textContent) + 1;
-                }
-            });
-        });
-
-        document.querySelectorAll('.delete-comment-button').forEach(button => {
-            button.addEventListener('click', async () => {
-                const commentId = button.dataset.commentId;
-                const tributeId = button.dataset.tributeId;
-                const response = await fetch(`/PETMEMORIAL/NEW/CommunityMemorials?handler=DeleteComment&commentId=${commentId}&tributeId=${tributeId}`, {
-                    method: 'POST'
-                });
-                if (response.ok) {
-                    button.parentElement.remove();
-                }
-            });
-        });
-    </script>
-}
- *@
-
+﻿
 @page
 @model Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW.CommunityMemorialsModel
 @{
@@ -116,18 +25,12 @@ else
         <p><b>Cause of Death:</b> @tribute.Cause</p>
         <p>@tribute.TributeText</p>
 
-        <h3>Comments</h3>
-        @foreach (var comment in comments)
-        {
-            <p><b>User ID:</b> @comment.UserId</p>
-            <p>@comment.Content</p>
-        }
-        
+      
    
 
     <form method="post">
         <input type="hidden" name="tributeId" value="@tribute.Id" />
-        @* <input type="hidden" name="isPublic" value="@tribute.IsPublic" /> *@
+        <input type="hidden" name="Visibility" value="@tribute.Visibility" />
     </form>
     <hr />
     </div>

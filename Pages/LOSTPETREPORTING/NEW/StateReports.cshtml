@@ -5,19 +5,19 @@
 
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Mvc.RazorPages
+<br />
+<div class="button-container">
+    <a href="/LOSTPETREPORTING/NEW/AllReports" class="box" id="global">
+        <b>Lost Pets Around The World</b>
+    </a>
 
+
+    <a href="/LOSTPETREPORTING/NEW/CountryReports" class="box" id="country">
+        <b>Lost Pets in Your Country</b>
+    </a>
+</div>
+<br />
 <h1>Reports in Your State</h1>
-<a href="/LOSTPETREPORTING/NEW/AllReports" class="box" id="global">
-    <b>Current Lost Pets Globally</b>
-</a>
-<br />
-<br/>
-
-<a href="/LOSTPETREPORTING/NEW/CountryReports" class="box" id="country">
-    <b>Current Lost Pets in Your Country</b>
-</a>
-<br />
-<br />
 
 <div class="report-container">
     @foreach (var report in Model.CreateReport.Reverse())
@@ -47,30 +47,35 @@
 </div>
 
 <style>
+    .button-container {
+        display: flex;
+        justify-content: space-between; /* Adjust as needed */
+    }
 
     #global {
         background-color: black;
         color: #fff;
         padding: 10px 15px;
         border: none;
-        border-radius: 20px;
+        border-radius: 5px;
         cursor: pointer;
         text-decoration: none;
         font-weight: bold; /* Make the text bold */
         font-size: 1.1em;
     }
 
-    #country{
+    #country {
         background-color: #8b572a;
         color: #fff;
         padding: 10px 15px;
         border: none;
-        border-radius: 20px;
+        border-radius: 5px;
         cursor: pointer;
         text-decoration: none;
         font-weight: bold; /* Make the text bold */
         font-size: 1.1em;
     }
+   
     .report-container {
         display: flex;
         flex-direction: column;

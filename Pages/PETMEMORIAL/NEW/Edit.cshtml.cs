@@ -204,7 +204,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                         existingTribute.Cause = Tribute.Cause;
                         existingTribute.TributeText = Tribute.TributeText;
                         //existingTribute.TributePhoto = Tribute.TributePhoto;
-                        existingTribute.IsPublic = Tribute.IsPublic;
+                        existingTribute.Visibility = Tribute.Visibility;
 
                         if (photo != null && photo.Length > 0)
                         {
