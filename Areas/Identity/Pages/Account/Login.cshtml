@@ -16,6 +16,10 @@
         padding-right: 0;
         background-attachment: fixed;
         position: relative;
+       
+        justify-content: center;
+        align-items: center;
+        
     }
 
     form {
@@ -44,12 +48,14 @@
         background-color: #fff;
         color: black;
     }
+
+   
     #remember{
         
         color:black;
     }
 
-    #forgot {
+    #forgot-password {
         border-radius: 5px;
         background-color: black;
         color: white;
@@ -69,9 +75,9 @@
     }
 
     /* Style for Delete link */
-    #emailcon {
+    #resend-confirmation {
         border-radius: 5px;
-        background-color: white;
+        background-color:lightpink;
         color: black;
         text-decoration: none;
         padding: 5px 10px;
@@ -93,13 +99,11 @@
         background-color: #807C73;
     }
 </style>
-<h1>@ViewData["Title"]</h1>
+<h1>  @ViewData["Title"]</h1>
 <div class="row">
     <div class="col-md-4">
         <section>
             <form id="account" method="post">
-                
-                <hr />
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-floating">
                     <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
@@ -122,16 +126,20 @@
                 <div>
                     <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
                 </div>
+                <br/>
                 <div>
                     <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword" id="forgot">Forgot your password?</a>
+                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
                     </p>
+
                     <p>
                         <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" id="register">Register as a new user</a>
                     </p>
+
                     <p>
-                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation" id="emailcon">Resend email confirmation</a>
-                    </p>
+                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                    </P>
+
                 </div>
             </form>
         </section>
