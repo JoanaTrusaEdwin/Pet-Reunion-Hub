@@ -26,10 +26,11 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
             _userManager = userManager;
         }
 
-        public IList<CreateReport> CreateReport { get;set; } 
-           // = default!;
+        public IList<CreateReport> CreateReport { get;set; }
+        public List<IFormFile> ReportPhotos { get; set; } = new List<IFormFile>();
+        // = default!;
 
-        
+
         public async Task<IActionResult> OnGetAsync()
         {
             //if (_context.CreateReport != null)
@@ -44,6 +45,7 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
 
             CreateReport = await _context.CreateReport
                    .Where(n => n.UserId == currentUser.Id)
+                   .Include(p => p.ReportPhotos)
                    .ToListAsync();
 
 

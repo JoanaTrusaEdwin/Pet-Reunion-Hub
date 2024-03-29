@@ -82,7 +82,7 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
         public DeleteModel(DatabaseContext context, UserManager<IdentityUser> userManager, ILogger<DeleteModel> logger)
         {
             _context = context;
-            _userManager = userManager;
+;            _userManager = userManager;
             _logger = logger;
         }
 

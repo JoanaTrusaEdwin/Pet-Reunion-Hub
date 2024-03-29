@@ -5,13 +5,92 @@
     ViewData["Title"] = "Index";
     // Layout = "~/Pages/Shared/SignUp.cshtml";
 }
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Mvc.RazorPages
 
-<h1>Index</h1>
+<style>
+
+    #createnew {
+        border-radius: 5px;
+        background-color: black;
+        color: white;
+        text-decoration: none;
+        padding: 10px 20px;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+
+        #createnew:hover {
+            background-color: #555;
+        }
+
+    #edit {
+        border-radius: 5px;
+        background-color: black;
+        color: white;
+        text-decoration: none;
+        padding: 5px 10px;
+        font-weight: bold;
+    }
+
+
+    #details {
+        border-radius: 5px;
+        background-color: #8b572a;
+        color: white;
+        text-decoration: none;
+        padding: 5px 10px;
+        font-weight: bold;
+    }
+
+
+    #delete {
+        border-radius: 5px;
+        background-color: red;
+        color: white;
+        text-decoration: none;
+        padding: 5px 10px;
+        font-weight: bold;
+    }
+</style>
+<h1>My Moments</h1>
+<br/>
 
 <p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
+    <a asp-page="Create" id="createnew">Create a New Story</a>
+</>
+<br/>
+    @foreach (var item in Model.Post.Reverse())
+    {
+        <div style="border: 1px solid #ccc; padding: 30px; margin-bottom: 20px;  border-radius: 5px; background-color: #fff;">
+            
+            @* <p><strong>Pet Name:</strong> @item.PetName</p> *@
+            <p><strong>Caption:</strong> @item.Content</p>
+            <p><strong>Visibility</strong> @item.IsPublic</p>
+            <p><strong>Pet:</strong> @item.TributeId</p>
+
+            @if (item.Media != null && item.Media.Any())
+            {
+                <p><strong>Media:</strong></p>
+                <div class="media-container">
+                    @foreach (var mediaItem in item.Media)
+                    {
+                        <img src="@mediaItem.MediaUrl" alt="Media Image" style="max-width: 200px; margin-right: 10px;">
+                    }
+                </div>
+            }
+            <br/>
+            <br/>
+
+            <p>
+                <a asp-page="./Edit" asp-route-id="@item.Id" id="edit">Edit</a> 
+                <a asp-page="./Details" asp-route-id="@item.Id" id="details">Details</a> 
+                <a asp-page="./Delete" asp-route-id="@item.Id" id="delete">Delete</a>
+            </p>
+        </div>
+    }
+
+@* <table class="table">
     <thead>
         <tr>
             <th>
@@ -53,3 +132,4 @@
 }
     </tbody>
 </table>
+ *@

@@ -18,7 +18,8 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
             _context = context;
         }
 
-      public Post Post { get; set; } = default!; 
+      public Post Post { get; set; } = default!;
+      public List<IFormFile> MediaFiles { get; set; } = new List<IFormFile>();
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -27,15 +28,25 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
                 return NotFound();
             }
 
-            var post = await _context.Post.FirstOrDefaultAsync(m => m.Id == id);
-            if (post == null)
+             Post = await _context.Post
+            .Include(cr => cr.Media) // Include the ReportPhotos collection
+            .FirstOrDefaultAsync(m => m.Id == id);
+
+            //var post = await _context.Post.FirstOrDefaultAsync(m => m.Id == id);
+            //if (post == null)
+            //{
+            //    return NotFound();
+            //}
+            //else 
+            //{
+            //    Post = post;
+            //}
+            //return Page
+            if (Post == null)
             {
                 return NotFound();
             }
-            else 
-            {
-                Post = post;
-            }
+
             return Page();
         }
     }
