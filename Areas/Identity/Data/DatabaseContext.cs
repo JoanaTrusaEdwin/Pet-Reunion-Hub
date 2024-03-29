@@ -34,6 +34,10 @@ namespace PRHDATALIB.Models
 
         public DbSet<Tribute> Tribute { get; set; }
 
+        public DbSet<Post> Post { get; set; }
+
+        public DbSet<Media> Media { get; set; }
+
         public DbSet<TESTBIT> TESTBIT { get; set; }
         //public DbSet<Comment> Comment { get; set; }
         //public DbSet<Heart> Heart { get; set; }
@@ -66,16 +70,13 @@ namespace PRHDATALIB.Models
 
 
                 entity.Property(e => e.PetName)
-                    .HasMaxLength(255)
                     .IsRequired()
                     .HasColumnName("PetName");
 
                 entity.Property(e => e.PetBreed)
-                    .HasMaxLength(255)
                     .HasColumnName("PetBreed");
 
                 entity.Property(e => e.PetGender)
-                    .HasMaxLength(10)
                     .IsRequired()
                     .HasColumnName("PetGender");
 
@@ -84,11 +85,9 @@ namespace PRHDATALIB.Models
                     .HasColumnName("DateOfBirth");
 
                 entity.Property(e => e.PetMicrochipID)
-                    .HasMaxLength(50)
                     .HasColumnName("PetMicrochipID");
 
                 entity.Property(e => e.LastSeenLocation)
-                    .HasMaxLength(255)
                     .IsRequired()
                     .HasColumnName("LastSeenLocation");
 
@@ -97,25 +96,20 @@ namespace PRHDATALIB.Models
                     .HasColumnName("LastSeenTime");
 
                 entity.Property(e => e.MainPhoto)
-                    .HasMaxLength(255)
                     .IsRequired()
                     .HasColumnName("MainPhoto");
 
                 entity.Property(e => e.ContactInformation)
-                    .HasMaxLength(255)
                     .IsRequired()
                     .HasColumnName("ContactInformation");
 
-                entity.Property(e => e.AdditionalDescription)
-                   .HasMaxLength(1000)                 
+                entity.Property(e => e.AdditionalDescription)              
                    .HasColumnName("AdditionalDescription");
 
-                entity.Property(e => e.Age)
-                   .HasMaxLength(50)                 
+                entity.Property(e => e.Age)               
                    .HasColumnName("Age");
 
-                entity.Property(e => e.GenLoc)
-                  .HasMaxLength(1000)     
+                entity.Property(e => e.GenLoc)   
                   .HasColumnName("GenLoc");
 
                 //entity.Property(e => e.UserId)
@@ -140,7 +134,6 @@ namespace PRHDATALIB.Models
                       .IsRequired();
 
                 entity.Property(e => e.PhotoUrl)
-                      .HasMaxLength(255)
                       .IsRequired();
 
                 // Define the relationship with CreateReport
@@ -158,7 +151,6 @@ namespace PRHDATALIB.Models
                 entity.HasKey(e => e.Id);
 
                 entity.Property(e => e.LOCATIONVALUE)
-                     .HasMaxLength(255)
                      .IsRequired();
 
                 entity.HasOne(cr => cr.User)
@@ -179,19 +171,18 @@ namespace PRHDATALIB.Models
                         .ValueGeneratedOnAdd()
                         .HasColumnName("Id");
                 /*entity.HasKey(e => e.Id);*/ // Primary key
-                entity.Property(e => e.PetName).HasMaxLength(255);
-                entity.Property(e => e.PetType).HasMaxLength(100);
-                entity.Property(e => e.PetBreed).HasMaxLength(100);
+                entity.Property(e => e.PetName);
+                entity.Property(e => e.PetType);
+                entity.Property(e => e.PetBreed);
                 //entity.Property(e => e.PetSex).HasMaxLength(10);
                 entity.Property(e => e.PetSex);
                 entity.Property(e => e.DateOfBirth).HasColumnType("DATE");
                 entity.Property(e => e.DateOfAdoption).HasColumnType("DATE");
                 entity.Property(e => e.DateOfDeparture).HasColumnType("DATE");
                 entity.Property(e => e.TributeText).HasMaxLength(int.MaxValue); // Max length
-                entity.Property(e => e.TributePhoto).HasMaxLength(255);
+                entity.Property(e => e.TributePhoto);
                 //entity.Property(e => e.IsPublic).IsRequired().HasColumnType("BIT");
                 entity.Property(e => e.Visibility)
-                    .HasMaxLength(255)
                     .IsRequired()
                     .HasColumnName("Visibility");
 
@@ -205,6 +196,61 @@ namespace PRHDATALIB.Models
 
 
             });
+
+            modelBuilder.Entity<Post>(entity =>
+            {
+                entity.ToTable("Post");
+                entity.Property(e => e.Id)
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id"); entity.Property(e => e.Id)
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id");
+              
+                entity.Property(e => e.Content);
+                entity.Property(e => e.IsPublic);
+
+                entity.Property(e => e.TributeId).HasColumnName("TributeId"); 
+
+                entity.HasOne(p => p.Tribute)
+                    .WithMany()
+                    .HasForeignKey(p => p.TributeId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("FK_Post_Tribute");
+
+                entity.Property(e => e.UserId).IsRequired().HasMaxLength(450);
+
+                entity.HasOne(cr => cr.User)
+                .WithMany()
+                .HasForeignKey(cr => cr.UserId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("FK_Tribute_AspNetUsers");
+
+
+            });
+
+            modelBuilder.Entity<Media>(entity =>
+            {
+                entity.ToTable("Media");
+
+                entity.Property(e => e.Id)
+                       .ValueGeneratedOnAdd()
+                       .HasColumnName("Id"); entity.Property(e => e.Id)
+                       .ValueGeneratedOnAdd()
+                       .HasColumnName("Id");
+
+                entity.Property(e => e.PostId);
+
+                entity.Property(e => e.MediaUrl);
+                entity.Property(e => e.MediaType);
+
+                // Define the relationship with CreateReport
+                entity.HasOne(rp => rp.Post)
+                      .WithMany(cr => cr.Media)
+                      .HasForeignKey(rp => rp.PostId)
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .HasConstraintName("FK_Media_Post");
+            });
+
 
             modelBuilder.Entity<TESTBIT>(entity =>
             {

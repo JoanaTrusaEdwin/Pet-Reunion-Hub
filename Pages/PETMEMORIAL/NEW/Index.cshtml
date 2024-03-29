@@ -11,6 +11,16 @@
 
 <style>
 
+    #createmore{
+        border-radius: 30px;
+        background-color: pink;
+        color: black;
+        text-decoration: none;
+        padding: 10px 20px;
+        font-weight: bold;
+        transition: background-color 0.3s;
+
+    }
     #createnew {
         border-radius: 25px;
         background-color: black;
@@ -59,6 +69,8 @@
 <p>
     <a asp-page="Create" id="createnew">Create a New Tribute</a>
 </p>
+<br/>
+<a href="/PETMEMORIAL/POSTS/Create" id="createmore">Create More Memories</a>
 <br/>
 @foreach (var item in Model.Tribute.Reverse())
 {
