@@ -69,6 +69,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NuGet.Protocol.Plugins;
 using System.Security.Principal;
+using Pet_Reunion_Hub.Helper;
 
 namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
 {
@@ -148,6 +149,19 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                         var fileUrl = blobClient.Uri.ToString();
                         Tribute.TributePhoto = fileUrl;
                     }
+
+                    Tribute.PetName = EncryptionHelper.Encrypt(Tribute.PetName);
+                    Tribute.PetType = EncryptionHelper.Encrypt(Tribute.PetType);
+                    Tribute.PetBreed = EncryptionHelper.Encrypt(Tribute.PetBreed);
+                    Tribute.PetSex = EncryptionHelper.Encrypt(Tribute.PetSex);
+                    //Tribute.DateOfBirth = EncryptionHelper.Encrypt(Tribute.DateOfBirth);
+                    //Tribute.DateOfAdoption = EncryptionHelper.Encrypt(Tribute.DateOfAdoption);
+                    //Tribute.DateOfDeparture = EncryptionHelper.Encrypt(Tribute.DateOfDeparture);
+                    Tribute.Cause = EncryptionHelper.Encrypt(Tribute.Cause);
+                    Tribute.TributeText = EncryptionHelper.Encrypt(Tribute.TributeText);
+                    //Tribute.TributePhoto = EncryptionHelper.Encrypt(Tribute.TributePhoto);
+                    Tribute.Visibility = EncryptionHelper.Encrypt(Tribute.Visibility);
+
                     _context.Tribute.Add(Tribute);
                     await _context.SaveChangesAsync();
                     _logger.LogInformation("New tribute created successfully.");

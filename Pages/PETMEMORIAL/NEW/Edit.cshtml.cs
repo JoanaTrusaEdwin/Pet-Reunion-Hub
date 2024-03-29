@@ -91,6 +91,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
+using Pet_Reunion_Hub.Helper;
 
 namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
 {
@@ -127,11 +128,19 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
             Tribute = await _context.Tribute
                                 .FirstOrDefaultAsync(m => m.Id == id);
 
+
             if (Tribute == null)
             {
                 return NotFound();
             }
-
+            Tribute.PetName = EncryptionHelper.Decrypt(Tribute.PetName);
+            Tribute.PetType = EncryptionHelper.Decrypt(Tribute.PetType);
+            Tribute.PetBreed = EncryptionHelper.Decrypt(Tribute.PetBreed);
+            Tribute.PetSex = EncryptionHelper.Decrypt(Tribute.PetSex);
+            Tribute.Cause = EncryptionHelper.Decrypt(Tribute.Cause);
+            Tribute.TributeText = EncryptionHelper.Decrypt(Tribute.TributeText);
+            //Tribute.TributePhoto = EncryptionHelper.Decrypt(Tribute.TributePhoto);
+            Tribute.Visibility = EncryptionHelper.Decrypt(Tribute.Visibility);
             return Page();
         }
 
@@ -211,6 +220,15 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                             string fileUrl = await UploadPhotoToBlobStorage(photo);
                             existingTribute.TributePhoto = fileUrl;
                         }
+
+                        existingTribute.PetName = EncryptionHelper.Encrypt(existingTribute.PetName);
+                        existingTribute.PetType = EncryptionHelper.Encrypt(existingTribute.PetType);
+                        existingTribute.PetBreed = EncryptionHelper.Encrypt(existingTribute.PetBreed);
+                        existingTribute.PetSex = EncryptionHelper.Encrypt(existingTribute.PetSex);
+                        existingTribute.Cause = EncryptionHelper.Encrypt(existingTribute.Cause);
+                        existingTribute.TributeText = EncryptionHelper.Encrypt(existingTribute.TributeText);
+                        existingTribute.Visibility = EncryptionHelper.Encrypt(existingTribute.Visibility);
+
                         _context.Entry(existingTribute).State = EntityState.Modified;
 
                     }

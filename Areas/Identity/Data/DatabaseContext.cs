@@ -182,7 +182,8 @@ namespace PRHDATALIB.Models
                 entity.Property(e => e.PetName).HasMaxLength(255);
                 entity.Property(e => e.PetType).HasMaxLength(100);
                 entity.Property(e => e.PetBreed).HasMaxLength(100);
-                entity.Property(e => e.PetSex).HasMaxLength(10);
+                //entity.Property(e => e.PetSex).HasMaxLength(10);
+                entity.Property(e => e.PetSex);
                 entity.Property(e => e.DateOfBirth).HasColumnType("DATE");
                 entity.Property(e => e.DateOfAdoption).HasColumnType("DATE");
                 entity.Property(e => e.DateOfDeparture).HasColumnType("DATE");
