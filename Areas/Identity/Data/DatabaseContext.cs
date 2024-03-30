@@ -254,7 +254,7 @@ namespace PRHDATALIB.Models
                 entity.Property(e => e.LINK);
                 entity.Property(e => e.FILEURL);
                 entity.Property(e => e.TYPE);
-
+                entity.Property(e => e.FORMAT);
 
 
                 entity.Property(e => e.UserId).IsRequired().HasMaxLength(450);

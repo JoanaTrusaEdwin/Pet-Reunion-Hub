@@ -186,7 +186,7 @@
            @* MAIN PHOTO *@
             <div class="form-group">
                     <label asp-for="Photo" class="control-label"><b>To ease the community's search and identification of your pet, please include at least one photo.</b></label>
-                <input type="file" name="Photo" class="form-control" onchange="previewMainPhoto(event)" required />
+                    <input type="file" accept="image/* name=" Photo" class="form-control" onchange="previewMainPhoto(event)" required />
                 <span asp-validation-for="Photo" class="text-danger"></span>
             </div>
 
@@ -199,7 +199,7 @@
           @* ADDITIONAL PHOTOS *@
             <div class="form-group photos-group">
                     <label asp-for="Photos" class="control-label"><b>You may upload additional photos for more accuracy.</b></label>
-                <input type="file" name="Photos" multiple class="form-control" onchange="previewAdditionalPhotos(event)" />
+                    <input type="file" name="Photos" multiple class="form-control" accept="image/* onchange="previewAdditionalPhotos(event)" />
                 <span asp-validation-for="Photos" class="text-danger"></span>
                 <div class="additional-photos-preview"></div>
                 <button type="button" class="btn btn-primary" onclick="addMorePhotos()">+</button>

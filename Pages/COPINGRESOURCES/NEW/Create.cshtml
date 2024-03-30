@@ -5,55 +5,233 @@
     ViewData["Title"] = "Create";
     // Layout = "~/Pages/Shared/SignUp.cshtml";
 }
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Mvc.RazorPages
 
-<h1>Create</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost Pet Reporting</title>
+    <style>
+        body {
+            /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<h4>RESOURCE</h4>
+        .container {
+            max-width: 1500px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+
+
+        #submitbtn {
+            background-color: black;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold; /* Make the text bold */
+            font-size: 1.1em;
+        }
+
+        #tolist {
+            background-color: #8b572a;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<h4>Share a Meaningful Resource to Help The Community</h4>
+<p>If you offer any sort of services or products, feel free to utilise this as an advertising platform.
+    Remember to be respectful and empathetic. Reported users will be banned permanently.
+</p>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="RESOURCE.TITLE" class="control-label"></label>
-                <input asp-for="RESOURCE.TITLE" class="form-control" />
+                <label asp-for="RESOURCE.TITLE" class="control-label"><b>Title</b></label>
+                <input asp-for="RESOURCE.TITLE" class="form-control" required/>
                 <span asp-validation-for="RESOURCE.TITLE" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RESOURCE.DESCRIPTION" class="control-label"></label>
-                <input asp-for="RESOURCE.DESCRIPTION" class="form-control" />
+                <label asp-for="RESOURCE.DESCRIPTION" class="control-label"><b>Description</b></label>
+                <input asp-for="RESOURCE.DESCRIPTION" class="form-control" required />
                 <span asp-validation-for="RESOURCE.DESCRIPTION" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RESOURCE.LINK" class="control-label"></label>
-                <input asp-for="RESOURCE.LINK" class="form-control" />
+                <label asp-for="RESOURCE.LINK" class="control-label"><b>Attach a URL to the resource</b></label>
+                <input asp-for="RESOURCE.LINK" class="form-control" type="url" />
                 <span asp-validation-for="RESOURCE.LINK" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div>
+                <p><b>OR</b></p>
+              
+            </div>
+            @* <div class="form-group">
                 <label asp-for="RESOURCE.FILEURL" class="control-label"></label>
                 <input asp-for="RESOURCE.FILEURL" class="form-control" />
                 <span asp-validation-for="RESOURCE.FILEURL" class="text-danger"></span>
-            </div>
+            </div> *@
             <div class="form-group">
-                <label asp-for="RESOURCE.TYPE" class="control-label"></label>
+                <label asp-for="RESOURCE.FILEURL" class="control-label"><b>Upload File</b></label>
+                <input type="file" name="UploadedFile" asp-for="RESOURCE.FILEURL" class="form-control-file" onchange="previewMainPhoto(event)" />
+                <span asp-validation-for="RESOURCE.FILEURL" class="text-danger"></span>
+            </div>
+            <br />
+
+            <div class="form-group">
+                <img id="mainPhotoPreview" src="#" alt="Main Photo Preview" style="display: none; max-width: 200px;">
+            </div>
+
+           @*  <div class="form-group">
+                <label asp-for="RESOURCE.TYPE" class="control-label">Type of Resource</label>
                 <input asp-for="RESOURCE.TYPE" class="form-control" />
                 <span asp-validation-for="RESOURCE.TYPE" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+            </div *@
+
+              <div class="form-group">
+                    <label asp-for="RESOURCE.TYPE" class="control-label"><b>Category</b></label>
+                    <select asp-for="RESOURCE.TYPE" class="form-control">
+                        <option value="Book">Book</option>
+                        <option value="Counselling and Therapy">Counselling and Therapy</option>
+                        <option value="Customisation">Customisation</option>
+                        <option value="Personal Testimony">Personal Testimony</option>
+                        <option value="Online Video">Online Video</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <span asp-validation-for="RESOURCE.TYPE" class="text-danger"></span>
+                </div>
+
+          @*   <div class="form-group">
                 <label asp-for="RESOURCE.UserId" class="control-label"></label>
                 <select asp-for="RESOURCE.UserId" class ="form-control" asp-items="ViewBag.UserId"></select>
-            </div>
+            </div> *@
+            <input type="hidden" asp-for="RESOURCE.UserId" />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" id="submitbtn" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a asp-page="Index" id="tolist">My Uploads</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+
+        // Function to auto-expand textarea
+        function autoExpandTextarea(element) {
+            element.style.height = 'auto';
+            element.style.height = (element.scrollHeight) + 'px';
+        }
+
+        // Attach event listener to all textareas with class 'autosize'
+        document.addEventListener('input', function (event) {
+            if (event.target.tagName.toLowerCase() !== 'textarea' || !event.target.classList.contains('autosize')) return;
+            autoExpandTextarea(event.target);
+        }, false);
+
+        // Auto-expand textareas on page load
+        document.querySelectorAll('textarea.autosize').forEach(function (element) {
+            autoExpandTextarea(element);
+        });
+
+        //TO CONTROL CHARACTERS
+        function updateCharacterCount(inputId, countId, limit) {
+            var input = document.getElementById(inputId);
+            var count = document.getElementById(countId);
+            console.log("Input value:", input.value);
+            console.log("Input length:", input.value.length);
+            var remaining = limit - input.value.length;
+
+            if (remaining < 0) {
+                input.value = input.value.substring(0, limit);
+                remaining = 0;
+            }
+
+            count.textContent = remaining + "/" + limit;
+        }
+
+        // Call this function when the input changes
+        function handleInput(inputId, countId, limit) {
+            updateCharacterCount(inputId, countId, limit);
+        }
+
+        //TO PREVENT NULL
+        function validateForm() {
+            var isValid = true;
+            var unfilledFields = [];
+
+            // Check each required input field
+            var inputs = document.querySelectorAll('input[required]');
+            inputs.forEach(function (input) {
+                if (!input.value.trim()) {
+                    isValid = false;
+                    unfilledFields.push(input.name);
+                }
+            });
+
+            // Display warning message if any required field is empty
+            if (!isValid) {
+                var message = 'Please fill in the following fields:\n';
+                unfilledFields.forEach(function (field) {
+                    message += '- ' + field + '\n';
+                });
+                alert(message);
+            }
+
+            return isValid;
+        }
+
+        //PREVIEW PHOTO
+        function previewMainPhoto(event) {
+            var input = event.target;
+            var reader = new FileReader();
+
+            reader.onload = function () {
+                var mainPhotoPreview = document.getElementById('mainPhotoPreview');
+                mainPhotoPreview.src = reader.result;
+                mainPhotoPreview.style.display = 'block';
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+
+    </script>
+
 }
