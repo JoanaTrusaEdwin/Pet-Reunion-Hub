@@ -35,6 +35,69 @@
             color: #fff;
             margin-top: 10px;
         }
+
+        /*NAVIGATION*/
+        .sidebar-toggle {
+            cursor: pointer;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 9999;
+        }
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            margin: 5px 0;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0; /* Adjusted to display sidebar on the left */
+            width: 250px;
+            height: 100%;
+            /* background-color: #f0f0f0; */
+            background-color: black;
+            transition: transform 0.3s ease; /* Changed transition property */
+            z-index: 9998;
+            padding-top: 60px; /* Adjust according to your header height */
+            transform: translateX(-100%); /* Initially hidden */
+        }
+
+        .black-header {
+            background-color: black;
+            height: 25px; /* Adjusted height */
+            width: 100%;
+        }
+           
+
+            .sidebar.active {
+                transform: translateX(0); /* Show sidebar */
+            }
+
+        .content-container {
+            /* Adjust to make space for the sidebar */
+            transition: margin-left 0.3s ease; /* Added transition for smooth effect */
+        }
+
+        .sidebar button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            text-align: left;
+            border: none;
+            background-color: transparent;
+            border-bottom: 1px solid #ccc;
+            cursor: pointer;
+        }
+
+            .sidebar button:hover {
+                background-color: #ddd;
+            }
+
+
         /* .mini-tab {
             position: fixed;
             top: 0%;
@@ -118,20 +181,42 @@
             {
                 <a href="/HomePage" class="button" id="homebutton" style="float: left; position: absolute; top: 10px; left: 10px;">Home</a>
             } *@
-            @if (!Context.Request.Path.Equals("/", StringComparison.OrdinalIgnoreCase) &&
+           @*  @if (!Context.Request.Path.Equals("/", StringComparison.OrdinalIgnoreCase) &&
             !Context.Request.Path.StartsWithSegments("/Identity/Account", StringComparison.OrdinalIgnoreCase))
             {
                 <a href="/HomePage" class="button" id="homebutton" style="float: left; position: absolute; top: 10px; left: 10px;">Home</a>
-            }
+            } *@
          </div>
         
     </header>
-   
+    <!-- Sidebar toggle button -->
+
     
-    <div class="container">
+    <div class="sidebar-toggle" onclick="toggleSidebar()">
+        <div class="bar" style="background-color: white; height: 4px;"></div>
+        <div class="bar" style="background-color: white; height: 4px;"></div>
+        <div class="bar" style="background-color: white; height: 4px;"></div>
+    </div>
+
+
+    <!-- Sidebar content -->
+    <div class="sidebar">
+        <button style="color:white" onclick="window.location.href='/LOSTPETREPORTING/NEW/CityReports'">Lost Pets In Your City</button>
+        <button style="color:white" onclick="window.location.href='/LOSTPETREPORTING/NEW/StateReports'">Lost Pets In Your State</button>
+        <button style="color:white" onclick="window.location.href='/LOSTPETREPORTING/NEW/CountryReports'">Lost Pets In Your Country</button>
+        <button style="color:white" onclick="window.location.href='/HomePage'">Main Menu</button>
+        <button style="color:white" onclick="window.location.href='/LOSTPETREPORTING/LPRHome'">Back to Lost Pets</button>
+        <button style="color:white" onclick="window.location.href='/PETMEMORIAL/PMHome'">Back to Pet Memorial</button>
+        <button style="color:white" onclick="window.location.href='/COPINGRESOURCES/CRHome'">Back to Resources</button>
+    </div>
+
+    <div class="content-container">
+        <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
+     </div>
+    </div>
 
       @*   <!-- Mini tab on the right side -->
         <div class="mini-tab">
@@ -157,13 +242,19 @@
                     </div>
             </div>
         </div> *@
-    </div>
+   
 
     <footer class="border-top footer text-muted">
         <div class="container" style="color:white; margin: 0 auto;" ">
             &copy; 2023 - Pet Reunion Hub <a asp-area="" asp-page="/Privacy"> </a>
         </div>
     </footer>
+
+    <script>
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('active');
+        }
+    </script>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
