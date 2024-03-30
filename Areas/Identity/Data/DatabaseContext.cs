@@ -38,6 +38,8 @@ namespace PRHDATALIB.Models
 
         public DbSet<Media> Media { get; set; }
 
+        public DbSet<RESOURCE> RESOURCE { get; set; }
+
         public DbSet<CONTAINER> CONTAINER { get; set; }
 
         //public DbSet<TESTBIT> TESTBIT { get; set; }
@@ -226,6 +228,34 @@ namespace PRHDATALIB.Models
                     .HasForeignKey(p => p.TributeId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK_Post_Tribute");
+
+                entity.Property(e => e.UserId).IsRequired().HasMaxLength(450);
+
+                entity.HasOne(cr => cr.User)
+                .WithMany()
+                .HasForeignKey(cr => cr.UserId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("FK_Tribute_AspNetUsers");
+
+
+            });
+
+            modelBuilder.Entity<RESOURCE>(entity =>
+            {
+                entity.ToTable("RESOURCE");
+                entity.Property(e => e.Id)
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id"); entity.Property(e => e.Id)
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id");
+
+                entity.Property(e => e.TITLE);
+                entity.Property(e => e.DESCRIPTION);
+                entity.Property(e => e.LINK);
+                entity.Property(e => e.FILEURL);
+                entity.Property(e => e.TYPE);
+
+
 
                 entity.Property(e => e.UserId).IsRequired().HasMaxLength(450);
 
