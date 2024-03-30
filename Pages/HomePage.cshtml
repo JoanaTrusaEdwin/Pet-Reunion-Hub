@@ -95,103 +95,24 @@
     </style>
 </head>
 <body>
-    
-    @* <div class="main-container">
-        <div class="row">
-            <div class="box">
-                <h2>Lost Pet Reporting</h2>
-                <p>Report missing pets and aid in a quicker reunion.</p>
-                <a href="/LOSTPETREPORTING/LPRHome" class="button-link">Go to Lost Pet Reporting</a>
-            </div>
-
-            <div class="box">
-                <h2>Pet Memorial</h2>
-                <p>Celebrate the joy your pet brought into your life.</p>
-                <a href="/PETMEMORIAL/PMHome" class="button-link">Go to Pet Memorial</a>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="box">
-                <h2>Coping Resources</h2>
-                <p>Discover tools to navigate the emotional journey of losing a pet.</p>
-                <a href="/COPINGRESOURCES/CRHome" class="button-link">Go to Coping Resources</a>
-            </div>
-
-            <div class="box">
-                <h2>Settings</h2>
-                <p>Customise your account settings or reach out to us</p>
-                <a href="/SETTINGS/SettingsHome" class="button-link">Go to Settings</a>
-            </div>
-        </div>
-    </div> *@
-
+ 
     <div class="main-container">
         <div class="row">
             <a href="/LOSTPETREPORTING/LPRHome" class="box">
                 <h2>Lost Pet Reporting</h2>
                 <p>Report missing pets and aid in a quicker reunion.</p>
-                
             </a>
 
             <a href="/PETMEMORIAL/PMHome" class="box">
                 <h2>Pet Memorial</h2>
-                <p>Celebrate the joy your pet brought into your life.</p>
-              
+                <p>Celebrate the joy your pet brought into your life.</p>             
             </a>
 
             <a href="/COPINGRESOURCES/CRHome" class="box">
                 <h2 style="color: black;">Coping Resources</h2>
                 <p style="color: black;">Discover tools to navigate the emotional journey of losing a pet.</p>
-
             </a>
         </div>
-        @* <div>
-            @if (SignInManager.IsSignedIn(User))
-            {
-                <a id="manage" class="headerLinks" asp-area="Identity" asp-page="~/User/Profile" title="Manage">Hello</a>
-                <form id="logoutForm" class="headerLinks" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
-                    <button id="logout" type="submit" class="headerLinks">Logout</button>
-                </form>
-
-            }
-            else
-            {
-                <a href="~/Register">Register</a>
-                <a href="~/Login">Log In </a>
-            }
-        </div> *@
-        @if (Model.IsUserAuthenticated)
-        {
-            <a id="manage" class="headerLinks" asp-area="Identity" asp-page="~/User/Profile" title="Manage"></a>
-            <form id="logoutForm" class="headerLinks" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
-                <button id="logout" type="submit" class="headerLinks" style="border: 1px solid white; border-radius: 5px; color: black;">Logout</button>
-            </form>
-        }
-        else
-        {
-            <a href="~/Register">Register</a>
-            <a href="~/Login">Log In</a>
-        }
-
-        @* <div class="row">
-            <a href="/COPINGRESOURCES/CRHome" class="box">
-                <h2>Coping Resources</h2>
-                <p>Discover tools to navigate the emotional journey of losing a pet.</p>
-                
-            </a>
-
-            <a href="/SETTINGS/SettingsHome" class="box">
-                <h2>Settings</h2>
-                <p>Customise your account settings or reach out to us</p>
-                
-            </a> *@
-@* 
-            <a href="/TEST/TESTBITS/Create" class="box">
-                <h2>TestBit</h2>
-                
-            </a> *@
-        @* </div> *@
     </div>
 </body>
 </html>

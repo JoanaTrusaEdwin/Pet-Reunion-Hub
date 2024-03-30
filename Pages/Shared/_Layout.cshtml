@@ -149,47 +149,16 @@
 </head>
 <body>
     <header>
-        @* <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index"> </a>
-                @* <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index"> </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy"> </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav> *@
-
-
         <div id="headerbox" style=" background-color: #8b572a; text-align:center; width:100%; padding: 10px; color: #fff;">
-                <!-- Your brown header content goes here -->
+               
                 <h1>Pet Reunion Hub</h1>
                 <h2>
                     Aid and Grief Support for Missing or Departed Pets
                 </h2>
-
-            @* @if (!Context.Request.Path.Equals("/", StringComparison.OrdinalIgnoreCase)) 
-            {
-                <a href="/HomePage" class="button" id="homebutton" style="float: left; position: absolute; top: 10px; left: 10px;">Home</a>
-            } *@
-           @*  @if (!Context.Request.Path.Equals("/", StringComparison.OrdinalIgnoreCase) &&
-            !Context.Request.Path.StartsWithSegments("/Identity/Account", StringComparison.OrdinalIgnoreCase))
-            {
-                <a href="/HomePage" class="button" id="homebutton" style="float: left; position: absolute; top: 10px; left: 10px;">Home</a>
-            } *@
          </div>
         
     </header>
-    <!-- Sidebar toggle button -->
+
 
     
     <div class="sidebar-toggle" onclick="toggleSidebar()">
@@ -198,8 +167,6 @@
         <div class="bar" style="background-color: white; height: 4px;"></div>
     </div>
 
-
-    <!-- Sidebar content -->
     <div class="sidebar">
         <button style="color:white; background-color:darkred" onclick="window.location.href='/LOSTPETREPORTING/NEW/CityReports'">Lost Pets In Your City</button>
         <button style="color:white; background-color:darkblue" onclick="window.location.href='/LOSTPETREPORTING/NEW/StateReports'">Lost Pets In Your State</button>
