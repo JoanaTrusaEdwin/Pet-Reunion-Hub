@@ -142,7 +142,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
             Tribute.Cause = EncryptionHelper.Decrypt(Tribute.Cause);
             Tribute.TributeText = EncryptionHelper.Decrypt(Tribute.TributeText);
             //Tribute.TributePhoto = EncryptionHelper.Decrypt(Tribute.TributePhoto);
-            Tribute.Visibility = EncryptionHelper.Decrypt(Tribute.Visibility);
+            //Tribute.Visibility = EncryptionHelper.Decrypt(Tribute.Visibility);
             return Page();
         }
 
@@ -215,7 +215,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                         existingTribute.Cause = Tribute.Cause;
                         existingTribute.TributeText = Tribute.TributeText;
                         //existingTribute.TributePhoto = Tribute.TributePhoto;
-                        existingTribute.Visibility = Tribute.Visibility;
+                        //existingTribute.Visibility = Tribute.Visibility;
 
                         if (photo != null && photo.Length > 0)
                         {
@@ -229,7 +229,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                         existingTribute.PetSex = EncryptionHelper.Encrypt(existingTribute.PetSex);
                         existingTribute.Cause = EncryptionHelper.Encrypt(existingTribute.Cause);
                         existingTribute.TributeText = EncryptionHelper.Encrypt(existingTribute.TributeText);
-                        existingTribute.Visibility = EncryptionHelper.Encrypt(existingTribute.Visibility);
+                        //existingTribute.Visibility = EncryptionHelper.Encrypt(existingTribute.Visibility);
 
                         _context.Entry(existingTribute).State = EntityState.Modified;
 

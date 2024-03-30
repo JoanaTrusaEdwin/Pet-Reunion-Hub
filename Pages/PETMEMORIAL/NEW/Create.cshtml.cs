@@ -160,7 +160,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                     Tribute.Cause = EncryptionHelper.Encrypt(Tribute.Cause);
                     Tribute.TributeText = EncryptionHelper.Encrypt(Tribute.TributeText);
                     //Tribute.TributePhoto = EncryptionHelper.Encrypt(Tribute.TributePhoto);
-                    Tribute.Visibility = EncryptionHelper.Encrypt(Tribute.Visibility);
+                    //Tribute.Visibility = EncryptionHelper.Encrypt(Tribute.Visibility);
 
                     _context.Tribute.Add(Tribute);
                     await _context.SaveChangesAsync();

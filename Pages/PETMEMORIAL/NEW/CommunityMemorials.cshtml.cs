@@ -218,6 +218,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Pet_Reunion_Hub.Helper;
 using PRHDATALIB.Models;
 
 namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
@@ -245,6 +246,21 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
             PublicTributes = _context.Tribute
                 .Where(t => t.Visibility == "Public")
                 .ToList();
+
+            foreach (var tribute in PublicTributes)
+            {
+                tribute.PetName = EncryptionHelper.Decrypt(tribute.PetName);
+                tribute.PetType = EncryptionHelper.Decrypt(tribute.PetType);
+                tribute.PetBreed = EncryptionHelper.Decrypt(tribute.PetBreed);
+                tribute.PetSex = EncryptionHelper.Decrypt(tribute.PetSex);
+                tribute.Cause = EncryptionHelper.Decrypt(tribute.Cause);
+                tribute.TributeText = EncryptionHelper.Decrypt(tribute.TributeText);
+            }
+
+
+
+
+            Console.WriteLine($"Number of public tributes: {PublicTributes.Count}");
 
             return Page();
         }

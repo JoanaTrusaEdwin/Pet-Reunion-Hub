@@ -46,7 +46,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                 tribute.Cause = EncryptionHelper.Decrypt(tribute.Cause);
                 tribute.TributeText = EncryptionHelper.Decrypt(tribute.TributeText);
                 //tribute.TributePhoto = EncryptionHelper.Decrypt(tribute.TributePhoto);
-                tribute.Visibility = EncryptionHelper.Decrypt(tribute.Visibility);
+                //tribute.Visibility = EncryptionHelper.Decrypt(tribute.Visibility);
             }
             return Page();
         }
