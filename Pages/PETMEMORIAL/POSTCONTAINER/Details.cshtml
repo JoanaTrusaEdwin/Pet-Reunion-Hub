@@ -1,0 +1,39 @@
+﻿@* @page
+@model Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTCONTAINER.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Pages/Shared/SignUp.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>CONTAINER</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CONTAINER.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CONTAINER.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CONTAINER.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CONTAINER.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CONTAINER.User)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CONTAINER.User.Id)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.CONTAINER?.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
+ *@

@@ -38,7 +38,9 @@ namespace PRHDATALIB.Models
 
         public DbSet<Media> Media { get; set; }
 
-        public DbSet<TESTBIT> TESTBIT { get; set; }
+        public DbSet<CONTAINER> CONTAINER { get; set; }
+
+        //public DbSet<TESTBIT> TESTBIT { get; set; }
         //public DbSet<Comment> Comment { get; set; }
         //public DbSet<Heart> Heart { get; set; }
         //public DbSet<Post> Post { get; set; }
@@ -209,7 +211,15 @@ namespace PRHDATALIB.Models
                 entity.Property(e => e.Content);
                 entity.Property(e => e.IsPublic);
 
-                entity.Property(e => e.TributeId).HasColumnName("TributeId"); 
+                entity.Property(e => e.ContainerId).HasColumnName("ContainerId"); 
+
+                entity.HasOne(p => p.CONTAINER)
+                    .WithMany()
+                    .HasForeignKey(p => p.ContainerId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("FK_Post_CONTAINER");
+
+                entity.Property(e => e.TributeId).HasColumnName("TributeId");
 
                 entity.HasOne(p => p.Tribute)
                     .WithMany()
@@ -251,27 +261,49 @@ namespace PRHDATALIB.Models
                       .HasConstraintName("FK_Media_Post");
             });
 
-
-            modelBuilder.Entity<TESTBIT>(entity =>
+            modelBuilder.Entity<CONTAINER>(entity =>
             {
-                entity.ToTable("TESTBIT");
+                entity.ToTable("POSTCONTAINER");
                 entity.Property(e => e.Id)
                         .ValueGeneratedOnAdd()
                         .HasColumnName("Id"); entity.Property(e => e.Id)
                         .ValueGeneratedOnAdd()
                         .HasColumnName("Id");
-                
-                entity.Property(e => e.Cute);
+
+                entity.Property(e => e.Name);
+                entity.Property(e => e.Description);
+
                 entity.Property(e => e.UserId).IsRequired().HasMaxLength(450);
 
                 entity.HasOne(cr => cr.User)
                 .WithMany()
                 .HasForeignKey(cr => cr.UserId)
                 .OnDelete(DeleteBehavior.Restrict)
-                .HasConstraintName("FK_TESTBIT_AspNetUsers");
+                .HasConstraintName("FK_CONTAINER_AspNetUsers");
 
 
             });
+
+            //modelBuilder.Entity<TESTBIT>(entity =>
+            //{
+            //    entity.ToTable("TESTBIT");
+            //    entity.Property(e => e.Id)
+            //            .ValueGeneratedOnAdd()
+            //            .HasColumnName("Id"); entity.Property(e => e.Id)
+            //            .ValueGeneratedOnAdd()
+            //            .HasColumnName("Id");
+                
+            //    entity.Property(e => e.Cute);
+            //    entity.Property(e => e.UserId).IsRequired().HasMaxLength(450);
+
+            //    entity.HasOne(cr => cr.User)
+            //    .WithMany()
+            //    .HasForeignKey(cr => cr.UserId)
+            //    .OnDelete(DeleteBehavior.Restrict)
+            //    .HasConstraintName("FK_TESTBIT_AspNetUsers");
+
+
+            //});
             //modelBuilder.Entity<Comment>(entity =>
             //{
             //    entity.ToTable("Comment"); // Table name

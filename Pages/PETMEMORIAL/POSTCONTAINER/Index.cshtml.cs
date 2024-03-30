@@ -7,7 +7,7 @@
 //using Microsoft.EntityFrameworkCore;
 //using PRHDATALIB.Models;
 
-//namespace Pet_Reunion_Hub.Pages.TEST.TESTBITS
+//namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTCONTAINER
 //{
 //    public class IndexModel : PageModel
 //    {
@@ -18,14 +18,14 @@
 //            _context = context;
 //        }
 
-//        public IList<TESTBIT> TESTBIT { get;set; } = default!;
+//        public IList<CONTAINER> CONTAINER { get;set; } = default!;
 
 //        public async Task OnGetAsync()
 //        {
-//            if (_context.TESTBIT_1 != null)
+//            if (_context.CONTAINER != null)
 //            {
-//                TESTBIT = await _context.TESTBIT_1
-//                .Include(t => t.User).ToListAsync();
+//                CONTAINER = await _context.CONTAINER
+//                .Include(c => c.User).ToListAsync();
 //            }
 //        }
 //    }

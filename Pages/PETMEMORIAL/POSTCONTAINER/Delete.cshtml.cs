@@ -7,7 +7,7 @@
 //using Microsoft.EntityFrameworkCore;
 //using PRHDATALIB.Models;
 
-//namespace Pet_Reunion_Hub.Pages.TEST.TESTBITS
+//namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTCONTAINER
 //{
 //    public class DeleteModel : PageModel
 //    {
@@ -19,40 +19,40 @@
 //        }
 
 //        [BindProperty]
-//      public TESTBIT TESTBIT { get; set; } = default!;
+//      public CONTAINER CONTAINER { get; set; } = default!;
 
 //        public async Task<IActionResult> OnGetAsync(int? id)
 //        {
-//            if (id == null || _context.TESTBIT_1 == null)
+//            if (id == null || _context.CONTAINER == null)
 //            {
 //                return NotFound();
 //            }
 
-//            var testbit = await _context.TESTBIT_1.FirstOrDefaultAsync(m => m.Id == id);
+//            var container = await _context.CONTAINER.FirstOrDefaultAsync(m => m.Id == id);
 
-//            if (testbit == null)
+//            if (container == null)
 //            {
 //                return NotFound();
 //            }
 //            else 
 //            {
-//                TESTBIT = testbit;
+//                CONTAINER = container;
 //            }
 //            return Page();
 //        }
 
 //        public async Task<IActionResult> OnPostAsync(int? id)
 //        {
-//            if (id == null || _context.TESTBIT_1 == null)
+//            if (id == null || _context.CONTAINER == null)
 //            {
 //                return NotFound();
 //            }
-//            var testbit = await _context.TESTBIT_1.FindAsync(id);
+//            var container = await _context.CONTAINER.FindAsync(id);
 
-//            if (testbit != null)
+//            if (container != null)
 //            {
-//                TESTBIT = testbit;
-//                _context.TESTBIT_1.Remove(TESTBIT);
+//                CONTAINER = container;
+//                _context.CONTAINER.Remove(CONTAINER);
 //                await _context.SaveChangesAsync();
 //            }
 
