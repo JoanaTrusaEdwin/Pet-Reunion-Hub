@@ -1,0 +1,91 @@
+﻿@page
+@model Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW.NEWDETAILModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Mvc.RazorPages
+
+<style>
+    /* Style for Edit and Back to List buttons */
+
+    #edit {
+        border-radius: 5px;
+        background-color: #8b572a;
+        color: white;
+        text-decoration: none;
+        padding: 5px 10px;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+
+    #back {
+        border-radius: 5px;
+        background-color: black;
+        color: white;
+        text-decoration: none;
+        padding: 5px 10px;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+        background-color: #555; /* Darken the background color on hover */
+    }
+</style>
+
+<div style="padding: 30px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 20px; background-color: #fff;">
+    <h1>@Model.Tribute.PetName</h1>
+
+    <hr />
+
+    <dl>
+        @*  <dt>Pet Name:</dt>
+        <dd>@Model.Tribute.PetName</dd>
+        *@
+        <dt></dt>
+        <dd><img src="@Model.Tribute.TributePhoto" alt="Pet Photo" style="max-width: 300px;" /></dd>
+
+        @* <dt>Photo:</dt>
+        <dd>@Model.Tribute.TributePhoto</dd> *@
+
+        <dt>Pet Type:</dt>
+        <dd>@Model.Tribute.PetType</dd>
+
+        <dt>Breed:</dt>
+        <dd>@Model.Tribute.PetBreed</dd>
+
+        <dt>Sex:</dt>
+        <dd>@Model.Tribute.PetSex</dd>
+
+        <dt>Date of Birth:</dt>
+        <dd>@Model.Tribute.DateOfBirth</dd>
+
+        <dt>Date of Adoption:</dt>
+        <dd>@Model.Tribute.DateOfAdoption </dd>
+
+        <dt>Date of Departure:</dt>
+        <dd>@Model.Tribute.DateOfDeparture</dd>
+
+        <dt>Tribute Text:</dt>
+        <dd>@Model.Tribute.TributeText  </dd>
+
+        @* <dt>Public:</dt>
+        <dd>@Model.Tribute.IsPublic </dd>
+        *@
+        <dt>Visibility:</dt>
+        <dd>@Model.Tribute.Visibility </dd>
+
+        @*  <dt>Main Photo:</dt>
+        <dd><img src="@Model.Tribute.TributePhoto" alt="Pet Photo" style="max-width: 300px;" /></dd> *@
+
+
+    </dl>
+
+    <div>
+        <a asp-page="./Edit" asp-route-id="@Model.Tribute?.Id" class="btn" id="edit">Edit</a>
+        <a asp-page="./Index" class="btn" id="back">Back to List</a>
+    </div>
+</div>
+

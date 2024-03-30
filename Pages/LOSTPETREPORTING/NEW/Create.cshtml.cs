@@ -238,22 +238,22 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
                         return Page();
                     }
 
-                    if (Photo != null && Photo.Length > 0)
-                    {
+                    //if (Photo != null && Photo.Length > 0)
+                    //{
 
-                        string connectionString = _configuration["AzureBlobStorageConnectionString"];
-                        var blobServiceClient = new BlobServiceClient(azureBlobStorageConnectionString);
-                        var containerClient = blobServiceClient.GetBlobContainerClient("newprhcontainer");
-                        var fileName = Guid.NewGuid().ToString() + Path.GetExtension(Photo.FileName);
-                        var blobClient = containerClient.GetBlobClient(fileName);
-                        using (var stream = Photo.OpenReadStream())
-                        {
-                            await blobClient.UploadAsync(stream, true);
-                        }
+                    //    string connectionString = _configuration["AzureBlobStorageConnectionString"];
+                    //    var blobServiceClient = new BlobServiceClient(azureBlobStorageConnectionString);
+                    //    var containerClient = blobServiceClient.GetBlobContainerClient("newprhcontainer");
+                    //    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(Photo.FileName);
+                    //    var blobClient = containerClient.GetBlobClient(fileName);
+                    //    using (var stream = Photo.OpenReadStream())
+                    //    {
+                    //        await blobClient.UploadAsync(stream, true);
+                    //    }
 
-                        var fileUrl = blobClient.Uri.ToString();
-                        CreateReport.MainPhoto = fileUrl;
-                    }
+                    //    var fileUrl = blobClient.Uri.ToString();
+                    //    CreateReport.MainPhoto = fileUrl;
+                    //}
 
                     _context.CreateReport.Add(CreateReport);
                     await _context.SaveChangesAsync();

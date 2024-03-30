@@ -94,6 +94,7 @@ using Pet_Reunion_Hub.Helper;
 
 namespace Pet_Reunion_Hub.Pages.COPINGRESOURCES.NEW
 {
+    [Authorize]
     public class EditModel : PageModel
     {
         private readonly DatabaseContext _context;

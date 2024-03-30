@@ -96,6 +96,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
 {
+    [Authorize]
     public class EditModel : PageModel
     {
         private readonly DatabaseContext _context;
@@ -178,11 +179,11 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
                     if (CreateReport.Id == 0)
                     {
 
-                        if (Photo != null && Photo.Length > 0)
-                        {
-                            string fileUrl = await UploadPhotoToBlobStorage(Photo);
-                            CreateReport.MainPhoto = fileUrl;
-                        }
+                        //if (Photo != null && Photo.Length > 0)
+                        //{
+                        //    string fileUrl = await UploadPhotoToBlobStorage(Photo);
+                        //    CreateReport.MainPhoto = fileUrl;
+                        //}
 
                         //_context.CreateReport.Add(CreateReport);
                         CreateReport toBeUpdated = await _context.CreateReport.FindAsync(CreateReport.Id);
@@ -217,11 +218,11 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
                         existingReport.AdditionalDescription = CreateReport.AdditionalDescription;
 
 
-                        if (Photo != null && Photo.Length > 0)
-                        {
-                            string fileUrl = await UploadPhotoToBlobStorage(Photo);
-                            existingReport.MainPhoto = fileUrl;
-                        }
+                        //if (Photo != null && Photo.Length > 0)
+                        //{
+                        //    string fileUrl = await UploadPhotoToBlobStorage(Photo);
+                        //    existingReport.MainPhoto = fileUrl;
+                        //}
 
 
                         await UpdateOrCreateReportPhotos(existingReport, Photos);

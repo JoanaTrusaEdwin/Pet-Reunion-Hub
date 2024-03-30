@@ -92,7 +92,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
             _signInManager = signInManager;
         }
 
-        [Authorize]
+        
         public IActionResult OnGet()
         {
             Tribute = new Tribute { UserId = _userManager.GetUserId(User) };

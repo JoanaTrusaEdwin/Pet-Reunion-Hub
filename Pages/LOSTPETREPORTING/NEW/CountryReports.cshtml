@@ -29,7 +29,7 @@
             <p><strong>Pet Microchip ID:</strong> @report.PetMicrochipID</p>
             <p><strong>Last Seen Location:</strong> @report.LastSeenLocation</p>
             <p><strong>Last Seen Time:</strong> @report.LastSeenTime.Value.ToShortTimeString()</p>
-            <img src="@report.MainPhoto" width="100" />
+           @*  <img src="@report.MainPhoto" width="100" /> *@
             <div class="photos">
                 @foreach (var photo in report.ReportPhotos)
                 {

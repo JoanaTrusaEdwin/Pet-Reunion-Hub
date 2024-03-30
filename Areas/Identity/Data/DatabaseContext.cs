@@ -99,9 +99,9 @@ namespace PRHDATALIB.Models
                     .IsRequired()
                     .HasColumnName("LastSeenTime");
 
-                entity.Property(e => e.MainPhoto)
-                    .IsRequired()
-                    .HasColumnName("MainPhoto");
+                //entity.Property(e => e.MainPhoto)
+                //    .IsRequired()
+                //    .HasColumnName("MainPhoto");
 
                 entity.Property(e => e.ContactInformation)
                     .IsRequired()

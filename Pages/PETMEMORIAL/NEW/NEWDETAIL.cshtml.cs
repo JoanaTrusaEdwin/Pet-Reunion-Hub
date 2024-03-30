@@ -1,28 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Pet_Reunion_Hub.Helper;
 using PRHDATALIB.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
-{
+{ 
+
     [Authorize]
-    public class DeleteModel : PageModel
+    public class NEWDETAILModel : PageModel
     {
         private readonly PRHDATALIB.Models.DatabaseContext _context;
 
-        public DeleteModel(PRHDATALIB.Models.DatabaseContext context)
+        public NEWDETAILModel(PRHDATALIB.Models.DatabaseContext context)
         {
             _context = context;
         }
 
-        [BindProperty]
-      public Tribute Tribute { get; set; } = default!;
+        public Tribute Tribute { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -32,12 +32,11 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
             }
 
             var tribute = await _context.Tribute.FirstOrDefaultAsync(m => m.Id == id);
-
             if (tribute == null)
             {
                 return NotFound();
             }
-            else 
+            else
             {
                 Tribute = tribute;
                 tribute.PetName = EncryptionHelper.Decrypt(tribute.PetName);
@@ -50,24 +49,6 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                 tribute.Visibility = EncryptionHelper.Decrypt(tribute.Visibility);
             }
             return Page();
-        }
-
-        public async Task<IActionResult> OnPostAsync(int? id)
-        {
-            if (id == null || _context.Tribute == null)
-            {
-                return NotFound();
-            }
-            var tribute = await _context.Tribute.FindAsync(id);
-
-            if (tribute != null)
-            {
-                Tribute = tribute;
-                _context.Tribute.Remove(Tribute);
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToPage("./Index");
         }
     }
 }
