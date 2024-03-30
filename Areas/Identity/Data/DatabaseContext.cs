@@ -85,7 +85,7 @@ namespace PRHDATALIB.Models
                     .HasColumnName("PetGender");
 
                 entity.Property(e => e.DateOfBirth)
-                    .HasColumnType("date")
+                    //.HasColumnType("date")
                     .HasColumnName("DateOfBirth");
 
                 entity.Property(e => e.PetMicrochipID)
