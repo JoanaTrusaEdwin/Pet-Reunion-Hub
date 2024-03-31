@@ -29,7 +29,7 @@
             color: #fff; /* White text color */
             border-radius: 15px; /* Rounded corners */
             padding: 20px;
-            width: 45%; /* Set the width of each counselor box */
+            width: 100%; /* Set the width of each counselor box */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle lift */
         }
 
@@ -49,7 +49,7 @@
     </style>
 </head>
 <body>
-    <div class="counselor-list">
+    @* <div class="counselor-list">
         <div class="counselor-box">
             <img class="counselor-image" src="image1.jpg" alt="Counselor Image">
             <h2>John Doe</h2>
@@ -73,6 +73,31 @@
                 <p>Phone: +1 (555) 987-6543</p>
             </div>
         </div>
-    </div>
+    </div> *@
+<h1>Counselling and Therapy</h1>
+<br/>
+    @foreach (var RESOURCE in Model.RESOURCE)
+    {
+        <div class="counselor-box">
+
+            <h2>@RESOURCE.TITLE</h2>   
+            <br/>
+            <p><b>Description:</b> @RESOURCE.DESCRIPTION</p>
+            <br/>
+            <p><b>URL to resource: </b> @RESOURCE.LINK</p>
+            <br />
+            <p><b>Attached File: </b></p>
+            @if (!string.IsNullOrEmpty(RESOURCE.FILEURL))
+            {
+                <img src="@RESOURCE.FILEURL" alt="File" style="max-width: 500px;" />
+            }
+            <form method="post">
+           
+            </form>
+            <hr />
+        </div>
+        <br />
+    }
+
 </body>
 </html>
