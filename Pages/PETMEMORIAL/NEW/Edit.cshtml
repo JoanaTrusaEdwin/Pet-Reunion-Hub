@@ -81,7 +81,7 @@
 <h4>Tribute</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Tribute.Id" />
@@ -169,7 +169,7 @@
                     <label asp-for="Tribute.TributeText" class="control-label"><b>Tribute Text</b></label>
                     <textarea asp-for="Tribute.TributeText" class="form-control autosize  character-count"
                               id="pet-tribute-input"
-                              rows="3"
+                              rows="25"
                               maxlength="10000"
                               oninput="handleInput(event, 'pet-tribute-count')"></textarea>
                     <span id="pet-tribute-count" class="character-count-display">0/10000</span>
@@ -233,17 +233,17 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
 
-        // Function to auto-expand textarea
-        function autoExpandTextarea(element) {
-            element.style.height = 'auto';
-            element.style.height = (element.scrollHeight) + 'px';
-        }
+        // // Function to auto-expand textarea
+        // function autoExpandTextarea(element) {
+        //     element.style.height = 'auto';
+        //     element.style.height = (element.scrollHeight) + 'px';
+        // }
 
-        // Attach event listener to all textareas with class 'autosize'
-        document.addEventListener('input', function (event) {
-            if (event.target.tagName.toLowerCase() !== 'textarea' || !event.target.classList.contains('autosize')) return;
-            autoExpandTextarea(event.target);
-        }, false);
+        // // Attach event listener to all textareas with class 'autosize'
+        // document.addEventListener('input', function (event) {
+        //     if (event.target.tagName.toLowerCase() !== 'textarea' || !event.target.classList.contains('autosize')) return;
+        //     autoExpandTextarea(event.target);
+        // }, false);
 
         // Auto-expand textareas on page load
         document.querySelectorAll('textarea.autosize').forEach(function (element) {
