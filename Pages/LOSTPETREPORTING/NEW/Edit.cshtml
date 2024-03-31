@@ -73,20 +73,27 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
            @*  <input type="hidden" asp-for="CreateReport.Id" /> *@
             <div class="form-group">
-                <label asp-for="CreateReport.PetName" class="control-label"><b>Pet Name</b</label>
-                <input asp-for="CreateReport.PetName" class="form-control" required
-                            maxlength="255"/>
+                <label asp-for="CreateReport.PetName" class="control-label"><b>Pet Name</b></label>
+                <input asp-for="CreateReport.PetName" class="form-control character-count" required
+                       id="pet-name-input"
+                       maxlength="255"
+                       oninput="handleInput(event, 'pet-name-count')" />
+                <span id="pet-name-count" class="character-count-display">0/255</span>
                 <span asp-validation-for="CreateReport.PetName" class="text-danger"></span>
             </div>
-            <br/>
+            <br />
+
 
             <div class="form-group">
-                <label asp-for="CreateReport.PetBreed" class="control-label"><b>Pet Type and Breed (e.g.: Dog, Husky)</b></label>
-                <input asp-for="CreateReport.PetBreed" class="form-control" required
-                            maxlength="255" />
+                <label asp-for="CreateReport.PetBreed" class="control-label"><b>Pet Type and Breed  (e.g.: Dog, Husky)</b></label>
+                <input asp-for="CreateReport.PetBreed" class="form-control character-count" required
+                       maxlength="255"
+                       id="pet-breed-input"
+                       oninput="handleInput(event, 'pet-breed-count')" />
+                <span id="pet-breed-count" class="character-count-display">0/255</span>
                 <span asp-validation-for="CreateReport.PetBreed" class="text-danger"></span>
             </div>
-            <br/>
+            <br />
 
             <div>
                 <label asp-for="CreateReport.PetGender" class="control-label"><b>Sex</b></label>
@@ -105,30 +112,38 @@
             </div>
             <br/>
 
-             <div class="form-group">
-                    <label asp-for="CreateReport.Age" class="control-label"><b>Your pet's estimated age</b></label>
-                    <input asp-for="CreateReport.Age" class="form-control"
-                           maxlength="50" />
-                    <span asp-validation-for="CreateReport.Age" class="text-danger"></span>
-                </div>
-                <br />
+            <div class="form-group">
+                <label asp-for="CreateReport.Age" class="control-label"><b>Your pet's estimated age (Specify. e.g: 1 year/1 year 3 months/3 weeks)</b></label>
+                <input asp-for="CreateReport.Age" class="form-control character-count" required
+                       maxlength="50"
+                       id="pet-age-input"
+                       oninput="handleInput(event, 'pet-age-count')" />
+                <span id="pet-age-count" class="character-count-display">0/50</span>
+                <span asp-validation-for="CreateReport.Age" class="text-danger"></span>
+            </div>
+            <br />
 
             <div class="form-group">
                 <label asp-for="CreateReport.PetMicrochipID" class="control-label"><b>Microchip ID (if any)</b></label>
-                <input asp-for="CreateReport.PetMicrochipID" class="form-control"
-                            maxlength="50"/>
+                <input asp-for="CreateReport.PetMicrochipID" class="form-control character-count"
+                       maxlength="50"
+                       id="pet-id-input"
+                       oninput="handleInput(event, 'pet-id-count')" />
+                <span id="pet-id-count" class="character-count-display">0/50</span>
                 <span asp-validation-for="CreateReport.PetMicrochipID" class="text-danger"></span>
             </div>
-            <br/>
+            <br />
 
-            
-                <div class="form-group">
-                    <label asp-for="CreateReport.AdditionalDescription" class="control-label"><b>Any necessary descriptions about the pet (physical appearance, behavior, unique traits)</b></label>
-                    <input asp-for="CreateReport.AdditionalDescription" class="form-control"
-                           maxlength="50" />
-                    <span asp-validation-for="CreateReport.AdditionalDescription" class="text-danger"></span>
-                </div>
-                <br />
+            <div class="form-group">
+                <label asp-for="CreateReport.AdditionalDescription" class="control-label"><b>Any necessary descriptions about the pet (physical appearance, behavior, unique traits)</b></label>
+                <input asp-for="CreateReport.AdditionalDescription" class="form-control character-count"
+                       maxlength="500"
+                       id="pet-desc-input"
+                       oninput="handleInput(event, 'pet-desc-count')" />
+                <span id="pet-desc-count" class="character-count-display">0/500</span>
+                <span asp-validation-for="CreateReport.AdditionalDescription" class="text-danger"></span>
+            </div>
+            <br />
 
                  <div class="form-group">
                     <label asp-for="CreateReport.GenLoc" class="control-label"><b>To notify nearby users, please provide the general location of where you found your lost pet with capital letters and folloing the format COUNTRY-STATE-CITY</b></label>
@@ -140,11 +155,15 @@
 
             <div class="form-group">
                 <label asp-for="CreateReport.LastSeenLocation" class="control-label"><b>Describe where you last saw your pet.</b></label>
-                <input asp-for="CreateReport.LastSeenLocation" class="form-control" required
-                            maxlength="255/>
+                <input asp-for="CreateReport.LastSeenLocation" class="form-control character-count" required
+                       maxlength="500"
+                       id="pet-location-input"
+                       oninput="handleInput(event, 'pet-location-count')" />
+                <span id="pet-location-count" class="character-count-display">0/500</span>
                 <span asp-validation-for="CreateReport.LastSeenLocation" class="text-danger"></span>
             </div>
-            <br/>
+            <br />
+
 
             <div class="form-group">
                 <label asp-for="CreateReport.LastSeenTime" class="control-label"><b>When was the last time your pet was seen?</b></label>
@@ -154,27 +173,7 @@
             <br/>
 
       
-     @*        <!-- Main Photo -->
-            <div class="form-group">
-                <label asp-for="CreateReport.MainPhoto" class="control-label"><b>Pet's Main Photo</b></label>
-                <img src="@Model.CreateReport.MainPhoto" class="img-thumbnail" style="max-width: 200px;" />
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Photo" class="control-label">Change Main Photo</label>
-                <input type="file" name="Photo" class="form-control" onchange="previewMainPhoto(event)"/>
-                <span asp-validation-for="Photo" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <img id="mainPhotoPreview" src="#" alt="Main Photo Preview" style="display: none; max-width: 200px;">
-            </div> *@
-
-            <!-- Additional Photos -->
-            <br />
-            <br />
-            <br />
-            <br />
+     
 
             <div class="form-group">
                 <label asp-for="Photos" class="control-label">Your Photos</label>
@@ -189,28 +188,29 @@
                 }
             </div>
 
+            @* ADDITIONAL PHOTOS *@
             <div class="form-group photos-group">
-                <label asp-for="Photos" class="control-label">Additional Photos</label>
-                <input type="file" name="Photos" multiple class="form-control" onchange="previewAdditionalPhotos(event)" />
+                <label asp-for="Photos" class="control-label"><b>Upload one or more photos of your pet</b></label>
+                <input type="file" name="Photos" multiple class="form-control" accept="image/*"  onchange="previewAdditionalPhotos(event)" />
                 <span asp-validation-for="Photos" class="text-danger"></span>
                 <div class="additional-photos-preview"></div>
                 <button type="button" class="btn btn-primary" onclick="addMorePhotos()">+</button>
-               
             </div>
 
             <div class="form-group">
-                <img id="additionalPhotosPreview" src="#" alt="Main Photo Preview" style="display: none; max-width: 200px;">
+                <img src="#" alt="Main Photo Preview" style="display: none; max-width: 200px;">
             </div>
-            <br/>
-
-
 
             <div class="form-group">
-                <label asp-for="CreateReport.ContactInformation" class="control-label"></label>
-                <input asp-for="CreateReport.ContactInformation" class="form-control" />
+                <label asp-for="CreateReport.ContactInformation" class="control-label"><b>Your contact information (You may choose to share your phone number, email, or any preferred platforms)</b></label>
+                <input asp-for="CreateReport.ContactInformation" class="form-control character-count" required
+                       maxlength="500"
+                       id="pet-ctc-input"
+                       oninput="handleInput(event, 'pet-ctc-count')" />
+                <span id="pet-ctc-count" class="character-count-display">0/500</span>
                 <span asp-validation-for="CreateReport.ContactInformation" class="text-danger"></span>
             </div>
-            <br/>
+            <br />
 
             <div class="form-group">
                 <input type="submit" id="submitbtn" value="Save Changes" class="btn btn-primary" />
@@ -231,6 +231,30 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
+
+         //TO CONTROL NUMBER OF CHARACTERS
+        function updateCharacterCount(inputId, countId, limit) {
+            var input = document.getElementById(inputId);
+            var count = document.getElementById(countId);
+            console.log("Input value:", input.value);
+            console.log("Input length:", input.value.length);
+            count.textContent = input.value.length + "/" + limit;
+        }
+
+        // Call this function when the input changes
+        function handleInput(event, countId) {
+            var inputId = event.target.id;
+            var limit = event.target.getAttribute('maxlength') || 0;
+            updateCharacterCount(inputId, countId, limit);
+        }
+
+        var characterCountInputs = document.querySelectorAll('.character-count');
+        characterCountInputs.forEach(function (input) {
+            input.addEventListener('input', function (event) {
+                var countId = input.getAttribute('data-count-id');
+                handleInput(event, countId);
+            });
+        });
          //TO PREVENT NULL
         function validateForm() {
             var isValid = true;
