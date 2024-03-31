@@ -69,6 +69,11 @@
             font-weight: bold;
             
         }
+
+        .preview-image {
+            border: none;
+            background-color: transparent;
+        }
     </style>
 </head>
 
@@ -239,20 +244,7 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
-
-
-      //    function updateCharacterCount(inputId, countId,limit) {
-      //   var input = document.getElementById(inputId);
-      //   var count = document.getElementById(countId);
-      //   console.log("Input value:", input.value);
-      //   console.log("Input length:", input.value.length);
-      //       count.textContent = input.value.length + "/" + limit;
-      // }
-
-      // // Call this function when the input changes
-      // function handleInput(inputId, countId, limit) {
-      //   updateCharacterCount(inputId, countId,limit);
-      // }
+        //TO CONTROL NUMBER OF CHARACTERS
         function updateCharacterCount(inputId, countId, limit) {
             var input = document.getElementById(inputId);
             var count = document.getElementById(countId);
@@ -275,6 +267,9 @@
                 handleInput(event, countId);
             });
         });
+
+
+
         //TO PREVENT NULL
         function validateForm() {
             var isValid = true;
@@ -301,7 +296,9 @@
             return isValid;
         }
 
-        //FOR ADDITIONAL PHOTOS
+
+
+        //TO ADD PHOTOS
         function addMorePhotos() {
             var input = document.createElement('input');
             input.type = 'file';
@@ -326,16 +323,11 @@
            photosGroup.appendChild(removeButton);
         }
 
+        //TO PREVIEW EACH PHOTO
         function previewAdditionalPhotos(event) {
             var input = event.target;
             var previewContainer = input.nextElementSibling;
             previewContainer.innerHTML = '';
-
-            // var limit = 5;
-            // if (input.files.length > limit) {
-            //     alert('You can only upload up to ' + limit + ' photos.');
-            //     return;
-            // }
 
             for (var i = 0; i < input.files.length; i++) {
                 var reader = new FileReader();
@@ -343,13 +335,14 @@
                     return function (event) {
                         var img = document.createElement('img');
                         img.src = event.target.result;
-                        img.className = 'img-thumbnail';
+                        img.className = 'preview-image';
                         img.style.maxWidth = '100px';
 
                         var previewImg = document.createElement('img');
                         previewImg.src = event.target.result;
-                        previewImg.className = 'img-thumbnail';
+                        previewImg.className = 'preview-image';
                         previewImg.style.maxWidth = '200px';
+                        previewImg.style.backgroundColor = 'transparent';
 
                         previewContainer.appendChild(previewImg);
                     };
@@ -358,29 +351,6 @@
                 reader.readAsDataURL(input.files[i]);
             }
         }
-        //PREVIEWS THE ADDITIONAL PHOTOS
-        // function previewAdditionalPhotos(event) {
-        //     var input = event.target;
-        //     var reader;
-
-        //     // Clear existing previews for this input
-        //     var previewContainer = input.nextElementSibling;
-        //     previewContainer.innerHTML = '';
-
-        //     // Loop through each selected file
-        //     for (var i = 0; i < input.files.length; i++) {
-        //         reader = new FileReader();
-        //         reader.onload = function () {
-        //             var img = document.createElement('img');
-        //             img.src = reader.result;
-        //             img.className = 'img-thumbnail';
-        //             img.style.maxWidth = '200px';
-
-        //             previewContainer.appendChild(img);
-        //         };
-
-        //         reader.readAsDataURL(input.files[i]);
-        //     }
-        // }
+ 
     </script>
 }
