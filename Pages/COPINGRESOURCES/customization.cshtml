@@ -2,3 +2,77 @@
 @model Pet_Reunion_Hub.Pages.COPINGRESOURCES.customizationModel
 @{
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #F5F5DC; /* Light cream background */
+            color: #333; /* Black text color */
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .counselor-list {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px;
+        }
+
+        .counselor-box {
+            background-color: #654321; /* Brown background */
+            color: #fff; /* White text color */
+            border-radius: 15px; /* Rounded corners */
+            padding: 20px;
+            width: 100%; /* Set the width of each counselor box */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle lift */
+        }
+
+        .counselor-image {
+            width: 50px; /* Set the width of the counselor image */
+            border-radius: 50%; /* Make the image round */
+            margin-bottom: 10px;
+        }
+
+        h2, p {
+            margin: 0;
+        }
+
+        .counselor-contact {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Browse Customiseable Dolls, T-Shirts, Art that can help you honor your pet</h1>
+    <br />
+    @foreach (var RESOURCE in Model.RESOURCE)
+    {
+        <div class="counselor-box">
+
+            <h2>@RESOURCE.TITLE</h2>
+            <br />
+            <p><b>Description:</b> @RESOURCE.DESCRIPTION</p>
+            <br />
+            <p><b>URL to resource: </b> @RESOURCE.LINK</p>
+            <br />
+            <p><b>Attached File: </b></p>
+            @if (!string.IsNullOrEmpty(RESOURCE.FILEURL))
+            {
+                <img src="@RESOURCE.FILEURL" alt="File" style="max-width: 500px;" />
+            }
+            <form method="post">
+            </form>
+            <hr />
+        </div>
+        <br />
+    }
+
+</body>
+</html>
