@@ -206,9 +206,10 @@
             </div>
 
             <div class="form-group">
-                <img id="additionalPhotosPreview" src="#" alt="Main Photo Preview" style="display: none; max-width: 200px;">
+                <img  src="#" alt="Main Photo Preview" style="display: none; max-width: 200px;">
             </div>
 
+                @* id="additionalPhotosPreview" *@
                 <br />
                 
             <div class="form-group">
@@ -321,43 +322,61 @@
            photosGroup.appendChild(removeButton);
         }
 
-        //PREVIEWS THE MAIN PHOTO
-        function previewMainPhoto(event) {
-            var input = event.target;
-            var reader = new FileReader();
-
-            reader.onload = function () {
-                var mainPhotoPreview = document.getElementById('mainPhotoPreview');
-                mainPhotoPreview.src = reader.result;
-                mainPhotoPreview.style.display = 'block';
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        }
-
-        //PREVIEWS THE ADDITIONAL PHOTOS
         function previewAdditionalPhotos(event) {
             var input = event.target;
-            var reader;
-
-            // Clear existing previews for this input
             var previewContainer = input.nextElementSibling;
             previewContainer.innerHTML = '';
 
-            // Loop through each selected file
-            for (var i = 0; i < input.files.length; i++) {
-                reader = new FileReader();
-                reader.onload = function () {
-                    var img = document.createElement('img');
-                    img.src = reader.result;
-                    img.className = 'img-thumbnail';
-                    img.style.maxWidth = '200px';
+            // var limit = 5;
+            // if (input.files.length > limit) {
+            //     alert('You can only upload up to ' + limit + ' photos.');
+            //     return;
+            // }
 
-                    previewContainer.appendChild(img);
-                };
+            for (var i = 0; i < input.files.length; i++) {
+                var reader = new FileReader();
+                reader.onload = (function (file) {
+                    return function (event) {
+                        var img = document.createElement('img');
+                        img.src = event.target.result;
+                        img.className = 'img-thumbnail';
+                        img.style.maxWidth = '100px';
+
+                        var previewImg = document.createElement('img');
+                        previewImg.src = event.target.result;
+                        previewImg.className = 'img-thumbnail';
+                        previewImg.style.maxWidth = '200px';
+
+                        previewContainer.appendChild(previewImg);
+                    };
+                })(input.files[i]);
 
                 reader.readAsDataURL(input.files[i]);
             }
         }
+        //PREVIEWS THE ADDITIONAL PHOTOS
+        // function previewAdditionalPhotos(event) {
+        //     var input = event.target;
+        //     var reader;
+
+        //     // Clear existing previews for this input
+        //     var previewContainer = input.nextElementSibling;
+        //     previewContainer.innerHTML = '';
+
+        //     // Loop through each selected file
+        //     for (var i = 0; i < input.files.length; i++) {
+        //         reader = new FileReader();
+        //         reader.onload = function () {
+        //             var img = document.createElement('img');
+        //             img.src = reader.result;
+        //             img.className = 'img-thumbnail';
+        //             img.style.maxWidth = '200px';
+
+        //             previewContainer.appendChild(img);
+        //         };
+
+        //         reader.readAsDataURL(input.files[i]);
+        //     }
+        // }
     </script>
 }
