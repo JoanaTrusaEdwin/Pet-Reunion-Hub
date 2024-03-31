@@ -68,6 +68,10 @@
                 <img src="@RESOURCE.FILEURL" alt="File" style="max-width: 500px;" />
             }
             <form method="post">
+                @* <button type="button" onclick="copyLink('@Url.PageLink("/COPINGRESOURCES/ResourceDetails", new { id = RESOURCE.Id })')">Copy Link</button>
+            *@
+                <a href="http://localhost:7145/COPINGRESOURCES/Books/@RESOURCE.Id" onclick="copyLink(this.href); return false;">Copy URL</a>
+                @* <button>Copy Link</button> *@
             </form>
             <hr />
         </div>
@@ -76,3 +80,31 @@
 
 </body>
 </html>
+<script>
+    // function copyLink(link) {
+    //     var textArea = document.createElement("textarea");
+    //     textArea.value = link;
+    //     document.body.appendChild(textArea);
+    //     textArea.select();
+    //     document.execCommand("copy");
+    //     document.body.removeChild(textArea);
+    //     alert("Link copied to clipboard: " + link);
+    // }
+    // function copyToClipboard(text) {
+
+    //     var inputc = document.body.appendChild(document.createElement("input"));
+
+    //     inputc.value = window.location.href;
+
+    //     inputc.focus();
+
+    //     inputc.select();
+
+    //     document.execCommand('copy');
+
+    //     inputc.parentNode.removeChild(inputc);
+
+    //     alert("URL Copied.");
+
+    // }
+</script>

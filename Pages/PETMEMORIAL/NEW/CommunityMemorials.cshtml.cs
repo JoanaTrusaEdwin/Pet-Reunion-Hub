@@ -245,6 +245,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
             // Query for public tributes
             PublicTributes = _context.Tribute
                 .Where(t => t.Visibility == "Public")
+                .OrderByDescending(t => t.Id)
                 .ToList();
 
             foreach (var tribute in PublicTributes)
