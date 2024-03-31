@@ -75,14 +75,22 @@
 <h1>Create a Lasting Memory</h1>
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="form-group">
-                <label asp-for="Post.Content" class="control-label"><b>Caption</b></label>
-                <input asp-for="Post.Content" class="form-control" />
+                <label asp-for="Post.Content" class="control-label"><b>Description</b></label>
+                <textarea asp-for="Post.Content" class="form-control autosize  character-count"
+                          id="pet-content-input"
+                          rows="15"
+                          maxlength="10000"
+                          oninput="handleInput(event, 'pet-content-count')"></textarea>
+                <span id="pet-content-count" class="character-count-display">0/10000</span>
                 <span asp-validation-for="Post.Content" class="text-danger"></span>
             </div>
+            <br />
+
             <div class="form-group">
                 @* <label asp-for="Post.IsPublic" class="control-label"></label>
                 <input asp-for="Post.IsPublic" class="form-control" />
@@ -134,26 +142,35 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
 
-        //TO CONTROL CHARACTERS
+        document.querySelectorAll('textarea.autosize').forEach(function (element) {
+            autoExpandTextarea(element);
+        });
+
+        //TO CONTROL NUMBER OF CHARACTERS
         function updateCharacterCount(inputId, countId, limit) {
             var input = document.getElementById(inputId);
             var count = document.getElementById(countId);
             console.log("Input value:", input.value);
             console.log("Input length:", input.value.length);
-            var remaining = limit - input.value.length;
-
-            if (remaining < 0) {
-                input.value = input.value.substring(0, limit);
-                remaining = 0;
-            }
-
-            count.textContent = remaining + "/" + limit;
+            count.textContent = input.value.length + "/" + limit;
         }
 
         // Call this function when the input changes
-        function handleInput(inputId, countId, limit) {
+        function handleInput(event, countId) {
+            var inputId = event.target.id;
+            var limit = event.target.getAttribute('maxlength') || 0;
             updateCharacterCount(inputId, countId, limit);
         }
+
+        var characterCountInputs = document.querySelectorAll('.character-count');
+        characterCountInputs.forEach(function (input) {
+            input.addEventListener('input', function (event) {
+                var countId = input.getAttribute('data-count-id');
+                handleInput(event, countId);
+            });
+        });
+
+
 
         //TO PREVENT NULL
         function validateForm() {
