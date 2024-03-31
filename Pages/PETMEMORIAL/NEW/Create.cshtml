@@ -88,24 +88,32 @@
 
             <div class="form-group">
                 <label asp-for="Tribute.PetName" class="control-label"><b>Name</b></label>
-                <input asp-for="Tribute.PetName" class="form-control
-                           maxlength="255" />
+                    <input asp-for="Tribute.PetName" class="form-control character-count" required
+                           id="pet-name-input"
+                           maxlength="255"
+                           oninput="handleInput(event, 'pet-name-count')" />
+                    <span id="pet-name-count" class="character-count-display">0/255</span>
                 <span asp-validation-for="Tribute.PetName" class="text-danger"></span>
             </div>
             <br/>
 
             <div class="form-group">
                 <label asp-for="Tribute.PetType" class="control-label"><b>Pet Type</b></label>
-                    <input asp-for="Tribute.PetType" class="form-control 
-                            maxlength="100" />
+                    <input asp-for="Tribute.PetType" class="form-control character-count" required
+                           id="pet-type-input"
+                           maxlength="100"
+                           oninput="handleInput(event, 'pet-type-count')" />
+                    <span id="pet-type-count" class="character-count-display">0/100</span>
                 <span asp-validation-for="Tribute.PetType" class="text-danger"></span>
             </div>
                 <br />
 
             <div class="form-group">
                 <label asp-for="Tribute.PetBreed" class="control-label"><b>Breed</b></label>
-                <input asp-for="Tribute.PetBreed" class="form-control
-                           maxlength="100" />
+                    <input asp-for="Tribute.PetBreed" class="form-control character-count" 
+                           maxlength="100" 
+                           oninput="handleInput(event, 'pet-breed-count')" />
+                    <span id="pet-breed-count" class="character-count-display">0/100</span>
                 <span asp-validation-for="Tribute.PetBreed" class="text-danger"></span>
             </div>
                 <br />
@@ -149,15 +157,23 @@
 
             <div class="form-group">
                 <label asp-for="Tribute.Cause" class="control-label"><b>Cause of Death</b></label>
-                <input asp-for="Tribute.Cause" class="form-control
-                           maxlength="500" />
+                    <input asp-for="Tribute.Cause" class="form-control character-count"
+                           id="pet-cause-input"
+                           maxlength="500"
+                           oninput="handleInput(event, 'pet-cause-count')" />
+                    <span id="pet-cause-count" class="character-count-display">0/500</span>
                 <span asp-validation-for="Tribute.Cause" class="text-danger"></span>
             </div>
                 <br />
 
             <div class="form-group">
                 <label asp-for="Tribute.TributeText" class="control-label"><b>Tribute Text</b></label>
-                    <textarea asp-for="Tribute.TributeText" class="form-control autosize" rows="3" style="width: 2000 px !important;" maxlength="2147483647"></textarea>
+                    <textarea asp-for="Tribute.TributeText" class="form-control autosize  character-count"
+                              id="pet-tribute-input"
+                            rows="3" 
+                            maxlength="10000"
+                              oninput="handleInput(event, 'pet-tribute-count')"></textarea>
+                    <span id="pet-tribute-count" class="character-count-display">0/10000</span>
                 <span asp-validation-for="Tribute.TributeText" class="text-danger"></span>
             </div>
                 <br />
@@ -237,26 +253,30 @@
             autoExpandTextarea(element);
         });
 
-        //TO CONTROL CHARACTERS
+        //TO CONTROL NUMBER OF CHARACTERS
         function updateCharacterCount(inputId, countId, limit) {
             var input = document.getElementById(inputId);
             var count = document.getElementById(countId);
             console.log("Input value:", input.value);
             console.log("Input length:", input.value.length);
-            var remaining = limit - input.value.length;
-
-            if (remaining < 0) {
-                input.value = input.value.substring(0, limit);
-                remaining = 0;
-            }
-
-            count.textContent = remaining + "/" + limit;
+            count.textContent = input.value.length + "/" + limit;
         }
 
         // Call this function when the input changes
-        function handleInput(inputId, countId, limit) {
+        function handleInput(event, countId) {
+            var inputId = event.target.id;
+            var limit = event.target.getAttribute('maxlength') || 0;
             updateCharacterCount(inputId, countId, limit);
         }
+
+        var characterCountInputs = document.querySelectorAll('.character-count');
+        characterCountInputs.forEach(function (input) {
+            input.addEventListener('input', function (event) {
+                var countId = input.getAttribute('data-count-id');
+                handleInput(event, countId);
+            });
+        });
+
 
         //TO PREVENT NULL
         function validateForm() {
