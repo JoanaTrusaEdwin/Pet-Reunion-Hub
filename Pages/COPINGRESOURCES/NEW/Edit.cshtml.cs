@@ -198,7 +198,7 @@ namespace Pet_Reunion_Hub.Pages.COPINGRESOURCES.NEW
                         existingRESOURCE.TITLE = RESOURCE.TITLE;
                         existingRESOURCE.DESCRIPTION = RESOURCE.DESCRIPTION;
                         existingRESOURCE.LINK = RESOURCE.LINK;
-                        existingRESOURCE.FILEURL = RESOURCE.FILEURL;
+                        //existingRESOURCE.FILEURL = RESOURCE.FILEURL;
                         existingRESOURCE.TYPE = RESOURCE.TYPE;
                         existingRESOURCE.FORMAT = RESOURCE.FORMAT;
 
@@ -249,7 +249,7 @@ namespace Pet_Reunion_Hub.Pages.COPINGRESOURCES.NEW
                 return null;
             }
 
-            string containerName = "tributes";
+            string containerName = "resources";
 
             var blobServiceClient = new BlobServiceClient(azureBlobStorageConnectionString);
             var containerClient = blobServiceClient.GetBlobContainerClient(containerName);

@@ -106,22 +106,40 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="RESOURCE.TITLE" class="control-label"><b>Title</b></label>
-                <input asp-for="RESOURCE.TITLE" class="form-control" required />
+                <input asp-for="RESOURCE.TITLE" class="form-control character-count" required
+                       id="pet-title-input"
+                       maxlength="255"
+                       oninput="handleInput(event, 'pet-title-count')" />
+                <span id="pet-title-count" class="character-count-display">0/255</span>
                 <span asp-validation-for="RESOURCE.TITLE" class="text-danger"></span>
             </div>
+            <br />
+
             <div class="form-group">
                 <label asp-for="RESOURCE.DESCRIPTION" class="control-label"><b>Description</b></label>
-                <input asp-for="RESOURCE.DESCRIPTION" class="form-control" required />
+                <textarea asp-for="RESOURCE.DESCRIPTION" class="form-control autosize  character-count" required
+                          id="pet-content-input"
+                          rows="5"
+                          maxlength="1000"
+                          oninput="handleInput(event, 'pet-resdesc-count')"></textarea>
+                <span id="pet-resdesc-count" class="character-count-display">0/1000</span>
                 <span asp-validation-for="RESOURCE.DESCRIPTION" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <br />
+
+             <div class="form-group">
                 <label asp-for="RESOURCE.LINK" class="control-label"><b>Attach a URL to the resource</b></label>
-                <input asp-for="RESOURCE.LINK" class="form-control" type="url" />
+                <input asp-for="RESOURCE.LINK" class="form-control  character-count" 
+                       id="pet-link-input"
+                       maxlength="2083"
+                       oninput="handleInput(event, 'pet-link-count')"/>
+                <span id="pet-link-count" class="character-count-display">0/2083</span>
                 <span asp-validation-for="RESOURCE.LINK" class="text-danger"></span>
             </div>
             <div>
+                <br />
                 <p><b>OR</b></p>
-
+              
             </div>
     
              <div class="form-group">
@@ -139,11 +157,11 @@
             <div class="form-group">
                 <img id="mainPhotoPreview" src="#" alt="Main Photo Preview" style="display: none; max-width: 200px;">
             </div>
-
+@* 
             <div class="form-group">
                 <img id="mainPhotoPreview" src="#" alt="Main Photo Preview" style="display: none; max-width: 200px;">
             </div>
-  
+   *@
 
             <div class="form-group">
                 <label asp-for="RESOURCE.TYPE" class="control-label"><b>Category</b></label>
@@ -157,7 +175,9 @@
                 </select>
                 <span asp-validation-for="RESOURCE.TYPE" class="text-danger"></span>
             </div>
+
             <input type="hidden" asp-for="RESOURCE.Id" />
+
             <div class="form-group">
                 <input type="submit" id="submitbtn" value="Save" class="btn btn-primary" />
             </div>
@@ -172,44 +192,33 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
-
-        // Function to auto-expand textarea
-        function autoExpandTextarea(element) {
-            element.style.height = 'auto';
-            element.style.height = (element.scrollHeight) + 'px';
-        }
-
-        // Attach event listener to all textareas with class 'autosize'
-        document.addEventListener('input', function (event) {
-            if (event.target.tagName.toLowerCase() !== 'textarea' || !event.target.classList.contains('autosize')) return;
-            autoExpandTextarea(event.target);
-        }, false);
-
-        // Auto-expand textareas on page load
         document.querySelectorAll('textarea.autosize').forEach(function (element) {
             autoExpandTextarea(element);
         });
 
-        //TO CONTROL CHARACTERS
+        //TO CONTROL NUMBER OF CHARACTERS
         function updateCharacterCount(inputId, countId, limit) {
             var input = document.getElementById(inputId);
             var count = document.getElementById(countId);
             console.log("Input value:", input.value);
             console.log("Input length:", input.value.length);
-            var remaining = limit - input.value.length;
-
-            if (remaining < 0) {
-                input.value = input.value.substring(0, limit);
-                remaining = 0;
-            }
-
-            count.textContent = remaining + "/" + limit;
+            count.textContent = input.value.length + "/" + limit;
         }
 
         // Call this function when the input changes
-        function handleInput(inputId, countId, limit) {
+        function handleInput(event, countId) {
+            var inputId = event.target.id;
+            var limit = event.target.getAttribute('maxlength') || 0;
             updateCharacterCount(inputId, countId, limit);
         }
+
+        var characterCountInputs = document.querySelectorAll('.character-count');
+        characterCountInputs.forEach(function (input) {
+            input.addEventListener('input', function (event) {
+                var countId = input.getAttribute('data-count-id');
+                handleInput(event, countId);
+            });
+        });
 
         //TO PREVENT NULL
         function validateForm() {
