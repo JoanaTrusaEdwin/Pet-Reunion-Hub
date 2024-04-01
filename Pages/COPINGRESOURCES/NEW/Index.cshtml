@@ -74,7 +74,7 @@
 @foreach (var item in Model.RESOURCE.Reverse())
 {
     <div class="resource" style="border: 1px solid #ccc; padding: 30px; margin-bottom: 20px;  border-radius: 5px; background-color: #fff;">
-        <h3>@item.TITLE </h3>
+        <h3 class="searchable">@item.TITLE </h3>
 
         <p><strong>Created on:</strong> @item.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
 

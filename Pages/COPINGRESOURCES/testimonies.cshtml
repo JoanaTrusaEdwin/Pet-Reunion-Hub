@@ -46,31 +46,44 @@
         .counselor-contact {
             margin-top: 10px;
         }
+
+        .highlight {
+            background-color: yellow;
+            color: black;
+        }
     </style>
 </head>
 <body>
 
-    <h1>Discover relatable stories and testimonies by other users</h1>
+    <h1>Books and Reading Materials</h1>
+    <br />
+    <input style="border-radius:20px; height:40px; width: 500px;" type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search">
+    <br />
     <br />
     @foreach (var RESOURCE in Model.RESOURCE)
     {
         <div class="counselor-box">
 
-            <h2>@RESOURCE.TITLE</h2>
-            <br />
+            <h3 class="searchable">@RESOURCE.TITLE </h3>
+
             <p><strong>Created on:</strong> @RESOURCE.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
+
+            <p><strong>Description:</strong>
+            <p class="searchable">@(string.IsNullOrEmpty(RESOURCE.DESCRIPTION) ? "-" : RESOURCE.DESCRIPTION) </p>
             <br />
-            <p><b>Description:</b> @RESOURCE.DESCRIPTION</p>
+
+            <p><strong>URL Link to Resource:</strong>
+            <p class="searchable">@(string.IsNullOrEmpty(RESOURCE.LINK) ? "-" : RESOURCE.LINK) </p>
             <br />
-            <p><b>URL to resource: </b> @RESOURCE.LINK</p>
+
+            <p><strong>Category:</strong>
+            <p class="searchable"> @RESOURCE.TYPE</p>
             <br />
-            <p><b>Attached File: </b></p>
-            @if (!string.IsNullOrEmpty(RESOURCE.FILEURL))
-            {
-                <img src="@RESOURCE.FILEURL" alt="File" style="max-width: 500px;" />
-            }
-            <form method="post">
-            </form>
+
+                        @if (!string.IsNullOrEmpty(RESOURCE.FILEURL))
+                        {
+                <p> <img src="@RESOURCE.FILEURL" alt="FILE" style="max-width: 500px;" /></p>
+                        }
             <hr />
         </div>
         <br />
@@ -78,4 +91,35 @@
 
 </body>
 </html>
+<script>
+    function searchFunction() {
+        var input = document.getElementById("searchInput");
+        var filter = input.value.toUpperCase();
+        var reports = document.getElementsByClassName("counselor-box");
 
+        for (var i = 0; i < reports.length; i++) {
+            var report = reports[i];
+            var searchableElements = report.getElementsByClassName("searchable");
+            var found = false;
+
+            for (var j = 0; j < searchableElements.length; j++) {
+                var nameElement = searchableElements[j];
+                var text = nameElement.textContent.toUpperCase();
+
+                if (text.indexOf(filter) > -1) {
+                    found = true;
+                    // Highlight the matching text
+                    var newText = text.replace(new RegExp('(' + filter + ')', 'ig'), '<span class="highlight">$1</span>');
+                    nameElement.innerHTML = newText;
+                }
+            }
+
+            if (found) {
+                report.style.display = "";
+            } else {
+                report.style.display = "none";
+            }
+        }
+    }
+
+</script>
