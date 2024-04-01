@@ -93,19 +93,19 @@
     {
         <div class="report">
             <h3 class="searchable">@item.PetName </h3>
-            <h2>Contact Information:@item.ContactInformation</h2>
+            <h2 class="searchable">Contact Information:@item.ContactInformation</h2>
             <p><strong>Created on:</strong> @item.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
             @* <p><strong>Main Photo:</strong></p> *@
            @*  <img src="@item.MainPhoto" width="400" /> *@
-            <p><strong>Pet Type and Breed:</strong> @item.PetBreed</p>
-            <p><strong>Sex:</strong> @item.PetGender</p>
-            <p><strong>Date of Birth:</strong> @(item.DateOfBirth?.ToShortDateString() ?? string.Empty)</p>
-            <p><strong>Estimated Age:</strong> @(item.Age?? string.Empty)</p>
-            <p><strong>Pet Microchip ID:</strong> @item.PetMicrochipID</p>
-            <p><strong>Additional Description:</strong> @(item.AdditionalDescription ?? string.Empty)</p>
-            <p><strong>General Location:</strong> @item.GenLoc</p>
-            <p><strong>Last Seen Location:</strong> @item.LastSeenLocation</p>
-            <p><strong>Last Seen Time:</strong> @item.LastSeenTime.Value.ToShortTimeString()</p>
+            <p class="searchable"><strong>Pet Type and Breed:</strong> @item.PetBreed</p>
+            <p class="searchable"><strong>Sex:</strong> @item.PetGender</p>
+            <p class="searchable"><strong>Date of Birth:</strong> @(item.DateOfBirth?.ToShortDateString() ?? string.Empty)</p>
+            <p class="searchable"><strong>Estimated Age:</strong> @(item.Age ?? string.Empty)</p>
+            <p class="searchable"><strong>Pet Microchip ID:</strong> @item.PetMicrochipID</p>
+            <p class="searchable"><strong>Additional Description:</strong> @(item.AdditionalDescription ?? string.Empty)</p>
+            <p class="searchable"><strong>General Location:</strong> @item.GenLoc</p>
+            <p class="searchable"><strong>Last Seen Location:</strong> @item.LastSeenLocation</p>
+            <p class="searchable"><strong>Last Seen Time:</strong> @item.LastSeenTime.Value.ToShortTimeString()</p>
             
 
             <p><strong>Additional Photos:</strong></p>
