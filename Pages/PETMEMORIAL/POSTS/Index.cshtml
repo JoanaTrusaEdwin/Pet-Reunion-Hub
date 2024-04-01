@@ -52,6 +52,10 @@
         padding: 5px 10px;
         font-weight: bold;
     }
+
+    .highlight {
+        background-color: yellow;
+    }
 </style>
 <h1>Your Moments and Stories</h1>
 <br/>
@@ -61,18 +65,27 @@
 </p>
 <p>
     <a asp-page="Create" id="createnew">Create a New Story</a>
-</>
+</p>
+
+<input style="border-radius:20px; height:40px; width: 500px;" type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search">
+<br />
+
+
 <br/>
     @foreach (var item in Model.Post.Reverse())
     {
-        <div style="border: 1px solid #ccc; padding: 30px; margin-bottom: 20px;  border-radius: 5px; background-color: #fff;">
+        <div class="post" style="border: 1px solid #ccc; padding: 30px; margin-bottom: 20px;  border-radius: 5px; background-color: #fff;">
             
             @* <p><strong>Pet Name:</strong> @item.PetName</p> *@
-            <p><strong>Caption:</strong> @item.Content</p>
-            <p><strong>Visibility</strong> @item.IsPublic</p>
-          
+           
+        <p><strong>Caption:</strong>
+        <p class="searchable">@(string.IsNullOrEmpty(item.Content) ? "-" : item.Content) </p>
+        <br />
 
-          @*   @if (item.Media != null && item.Media.Any())
+      @*       <p><strong>Visibility</strong> @item.IsPublic</p>
+           *@
+
+            @if (item.Media != null && item.Media.Any())
             {
                 <p><strong>Media:</strong></p>
                 <div class="media-container">
@@ -81,7 +94,7 @@
                         <img src="@mediaItem.MediaUrl" alt="Media Image" style="max-width: 200px; margin-right: 10px;">
                     }
                 </div>
-            } *@
+            }
          
             <p><strong>Created on:</strong> @item.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
 
@@ -92,47 +105,35 @@
             </p>
         </div>
     }
+<script>
+    function searchFunction() {
+        var input = document.getElementById("searchInput");
+        var filter = input.value.toUpperCase();
+        var reports = document.getElementsByClassName("post");
 
-@* <table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Post[0].Content)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Post[0].IsPublic)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Post[0].User)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Post[0].Tribute)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Post) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Content)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsPublic)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tribute.UserId)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
- *@
+        for (var i = 0; i < reports.length; i++) {
+            var report = reports[i];
+            var searchableElements = report.getElementsByClassName("searchable");
+            var found = false;
+
+            for (var j = 0; j < searchableElements.length; j++) {
+                var nameElement = searchableElements[j];
+                var text = nameElement.textContent.toUpperCase();
+
+                if (text.indexOf(filter) > -1) {
+                    found = true;
+                    // Highlight the matching text
+                    var newText = text.replace(new RegExp('(' + filter + ')', 'ig'), '<span class="highlight">$1</span>');
+                    nameElement.innerHTML = newText;
+                }
+            }
+
+            if (found) {
+                report.style.display = "";
+            } else {
+                report.style.display = "none";
+            }
+        }
+    }
+</script>
+
