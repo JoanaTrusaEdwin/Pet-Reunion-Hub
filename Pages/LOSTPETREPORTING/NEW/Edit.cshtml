@@ -61,6 +61,11 @@
         
         font-weight: bold;
     }
+
+    .preview-image {
+        border: none;
+        background-color: transparent;
+    }
 </style>
 
 @* <h1>Edit</h1>
@@ -205,6 +210,7 @@
             <div class="form-group">
                 <img src="#" alt="Main Photo Preview" style="display: none; max-width: 200px;">
             </div>
+            <br />
 
             <div class="form-group">
                 <label asp-for="CreateReport.ContactInformation" class="control-label"><b>Your contact information (You may choose to share your phone number, email, or any preferred platforms)</b></label>
@@ -285,6 +291,9 @@
 
             return isValid;
         }
+
+
+        //TO ADD PHOTOS
         function addMorePhotos() {
             var input = document.createElement('input');
             input.type = 'file';
@@ -309,42 +318,33 @@
             photosGroup.appendChild(removeButton);
         }
 
-        function previewMainPhoto(event) {
-            var input = event.target;
-            var reader = new FileReader();
-
-            reader.onload = function () {
-                var mainPhotoPreview = document.getElementById('mainPhotoPreview');
-                mainPhotoPreview.src = reader.result;
-                mainPhotoPreview.style.display = 'block';
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        }
-
+        //TO PREVIEW EACH PHOTO
         function previewAdditionalPhotos(event) {
             var input = event.target;
-            var reader;
-
-            // Clear existing previews for this input
             var previewContainer = input.nextElementSibling;
             previewContainer.innerHTML = '';
 
-            // Loop through each selected file
             for (var i = 0; i < input.files.length; i++) {
-                reader = new FileReader();
-                reader.onload = function () {
-                    var img = document.createElement('img');
-                    img.src = reader.result;
-                    img.className = 'img-thumbnail';
-                    img.style.maxWidth = '200px';
+                var reader = new FileReader();
+                reader.onload = (function (file) {
+                    return function (event) {
+                        var img = document.createElement('img');
+                        img.src = event.target.result;
+                        img.className = 'preview-image';
+                        img.style.maxWidth = '100px';
 
-                    previewContainer.appendChild(img);
-                };
+                        var previewImg = document.createElement('img');
+                        previewImg.src = event.target.result;
+                        previewImg.className = 'preview-image';
+                        previewImg.style.maxWidth = '200px';
+                        previewImg.style.backgroundColor = 'transparent';
+
+                        previewContainer.appendChild(previewImg);
+                    };
+                })(input.files[i]);
 
                 reader.readAsDataURL(input.files[i]);
             }
         }
-
     </script>
 }
