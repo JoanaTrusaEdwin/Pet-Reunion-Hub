@@ -57,9 +57,11 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
             var userCountry = userLocationValue?.Split('-').FirstOrDefault();
 
             // Query reports where the country matches the user's country
-            CreateReport = await _context.CreateReport
+            CreateReport = await _context.CreateReport.Include(r => r.ReportPhotos)
                 .Where(r => r.GenLoc.StartsWith(userCountry))
                 .ToListAsync();
+
+            
         }
     }
 }

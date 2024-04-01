@@ -58,7 +58,7 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
             var userState = parts?.Length > 1 ? parts?[1] : null;
 
             // Query reports where the country and state match the user's location
-            CreateReport = await _context.CreateReport
+            CreateReport = await _context.CreateReport.Include(r => r.ReportPhotos)
                 .Where(r => r.GenLoc.StartsWith($"{userCountry}-{userState}"))
                 .ToListAsync();
         }
