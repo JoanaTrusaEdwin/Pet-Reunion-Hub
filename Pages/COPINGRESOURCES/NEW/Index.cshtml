@@ -54,78 +54,42 @@
         padding: 5px 10px;
         font-weight: bold;
     }
+
+    .highlight {
+        background-color: yellow;
+    }
 </style>
 
 <h1>My Resources</h1>
-
+<br/>
 <p>
     <a asp-page="Create" id="createnew">Upload a New Resource</a>
 </p>
 <br />
 
+<input style="border-radius:20px; height:40px; width: 500px;" type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search">
 <br />
-@* <table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.RESOURCE[0].TITLE)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RESOURCE[0].DESCRIPTION)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RESOURCE[0].LINK)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RESOURCE[0].FILEURL)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RESOURCE[0].TYPE)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RESOURCE[0].User)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.RESOURCE) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TITLE)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DESCRIPTION)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LINK)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FILEURL)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TYPE)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table> *@
+<br/>
+
 @foreach (var item in Model.RESOURCE.Reverse())
 {
-    <div style="border: 1px solid #ccc; padding: 30px; margin-bottom: 20px;  border-radius: 5px; background-color: #fff;">
+    <div class="resource" style="border: 1px solid #ccc; padding: 30px; margin-bottom: 20px;  border-radius: 5px; background-color: #fff;">
         <h3>@item.TITLE </h3>
+
         <p><strong>Created on:</strong> @item.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
-        <p><strong>Description</strong> @item.DESCRIPTION</p>
-        <p><strong></strong> @item.LINK</p>
-        <p><strong>Category</strong> @item.TYPE</p>
+
+        <p><strong>Description:</strong>
+        <p class="searchable">@(string.IsNullOrEmpty(item.DESCRIPTION) ? "-" : item.DESCRIPTION) </p>
+        <br />
+
+        <p><strong>URL Link to Resource:</strong>
+        <p class="searchable">@(string.IsNullOrEmpty(item.LINK) ? "-" : item.LINK) </p>
+        <br />
+
+         <p><strong>Category:</strong>
+        <p class="searchable"> @item.TYPE</p>
+        <br/>
+
         <p> <img src="@item.FILEURL" alt="FILE" style="max-width: 500px;" /></p>
        
         <P>
@@ -135,3 +99,36 @@
         </p>
     </div>
 }
+
+ <script>
+    function searchFunction() {
+        var input = document.getElementById("searchInput");
+        var filter = input.value.toUpperCase();
+        var reports = document.getElementsByClassName("resource");
+
+        for (var i = 0; i < reports.length; i++) {
+            var report = reports[i];
+            var searchableElements = report.getElementsByClassName("searchable");
+            var found = false;
+
+            for (var j = 0; j < searchableElements.length; j++) {
+                var nameElement = searchableElements[j];
+                var text = nameElement.textContent.toUpperCase();
+
+                if (text.indexOf(filter) > -1) {
+                    found = true;
+                    // Highlight the matching text
+                    var newText = text.replace(new RegExp('(' + filter + ')', 'ig'), '<span class="highlight">$1</span>');
+                    nameElement.innerHTML = newText;
+                }
+            }
+
+            if (found) {
+                report.style.display = "";
+            } else {
+                report.style.display = "none";
+            }
+        }
+    }
+</script>
+
