@@ -169,6 +169,8 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
                         //return RedirectToPage("/Account/Login");
 
                     }
+                    Post.CreatedAt = DateTime.UtcNow;
+
                     //_context.Post.Add(Post);
                     //await _context.SaveChangesAsync();
                     //_logger.LogInformation("New post created successfully.");

@@ -212,6 +212,7 @@ namespace PRHDATALIB.Models
               
                 entity.Property(e => e.Content);
                 entity.Property(e => e.IsPublic);
+                entity.Property(e => e.CreatedAt);
 
                 entity.Property(e => e.ContainerId).HasColumnName("ContainerId"); 
 
