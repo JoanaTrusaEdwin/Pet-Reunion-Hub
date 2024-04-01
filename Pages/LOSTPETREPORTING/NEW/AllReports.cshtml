@@ -62,14 +62,37 @@
 @{
     ViewData["Title"] = "All Reports";
 }
+<style>
+    .report-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .report {
+        background-color: white;
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 1000px;
+    }
+
+    .photos {
+        margin-top: 10px;
+    }
+
+        .photos img {
+            margin-right: 5px;
+        }
+</style>
 
 <h1>Reports From All Over The World</h1>
-
+<input type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search for names..">
 <div class="report-container">
     @foreach (var item in Model.CreateReport.Reverse())
     {
         <div class="report">
-            <h3>@item.PetName</h3>
+            <h3 class="searchable">@item.PetName </h3>
             <h2>Contact Information:@item.ContactInformation</h2>
             <p><strong>Created on:</strong> @item.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
             @* <p><strong>Main Photo:</strong></p> *@
@@ -101,27 +124,38 @@
         </div>
     }
 </div>
+<script>
+    function searchFunction() {
+        var input = document.getElementById("searchInput");
+        var filter = input.value.toUpperCase();
+        var reports = document.getElementsByClassName("report");
 
-<style>
-    .report-container {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
+        for (var i = 0; i < reports.length; i++) {
+            var report = reports[i];
+            var searchableElements = report.getElementsByClassName("searchable");
+            var found = false;
 
-    .report {
-        background-color: white;
-        border-radius: 20px;
-        padding: 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        width: 1000px;
-    }
+            for (var j = 0; j < searchableElements.length; j++) {
+                var nameElement = searchableElements[j];
+                if (nameElement.textContent.toUpperCase().indexOf(filter) > -1) {
+                    found = true;
+                    break; // No need to continue searching if found in one element
+                }
+            }
 
-    .photos {
-        margin-top: 10px;
-    }
-
-        .photos img {
-            margin-right: 5px;
+            if (found) {
+                report.style.display = "";
+                // Highlight the matching text in all found elements
+                for (var k = 0; k < searchableElements.length; k++) {
+                    var element = searchableElements[k];
+                    element.innerHTML = element.textContent.replace(new RegExp('(' + filter + ')', 'ig'), '<span class="highlight">$1</span>');
+                }
+            } else {
+                report.style.display = "none";
+            }
         }
-</style>
+    }
+</script>
+
+
+
