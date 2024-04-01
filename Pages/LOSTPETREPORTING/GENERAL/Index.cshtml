@@ -6,13 +6,66 @@
 //     Layout = "~/Pages/Shared/SignUp.cshtml";
  }
 
-<h1>Index</h1>
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Mvc.RazorPages
 
-<p>
+<style>
+
+    #createnew {
+        border-radius: 5px;
+        background-color: black;
+        color: white;
+        text-decoration: none;
+        padding: 10px 20px;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+
+        #createnew:hover {
+            background-color: #555;
+        }
+
+    #edit {
+        border-radius: 5px;
+        background-color: black;
+        color: white;
+        text-decoration: none;
+        padding: 5px 10px;
+        font-weight: bold;
+    }
+
+
+    #details {
+        border-radius: 5px;
+        background-color: #8b572a;
+        color: white;
+        text-decoration: none;
+        padding: 5px 10px;
+        font-weight: bold;
+    }
+
+
+    #delete {
+        border-radius: 5px;
+        background-color: red;
+        color: white;
+        text-decoration: none;
+        padding: 5px 10px;
+        font-weight: bold;
+    }
+</style>
+
+@* <p>
     <a asp-page="Create">Create New</a>
+</p> *@
+<p>
+    @if (!Model.GENERALLOCATION.Any())
+    {
+        <a asp-page="Create" id="createnew">Set your residential area now</a>
+    }
 </p>
-<table class="table">
-    <thead>
+<table class="table" style="background-color: white; border-radius:5px;">
+   @*  <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.GENERALLOCATION[0].LOCATIONVALUE)
@@ -22,20 +75,24 @@
             </th>
             <th></th>
         </tr>
-    </thead>
+    </thead> *@
     <tbody>
+
+    <h1>
+
+    </h1>
 @foreach (var item in Model.GENERALLOCATION) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.LOCATIONVALUE)
+                <b>@Html.DisplayFor(modelItem => item.LOCATIONVALUE)</b>
             </td>
-            <td>
+           @*  <td>
                 @Html.DisplayFor(modelItem => item.User.Id)
-            </td>
+            </td> *@
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@item.Id" id="edit">Edit</a>
+               @*  <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a> *@
             </td>
         </tr>
 }
