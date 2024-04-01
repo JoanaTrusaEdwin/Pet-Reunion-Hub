@@ -54,6 +54,10 @@
         padding: 5px 10px;
         font-weight: bold;
     }
+
+    .highlight {
+        background-color: yellow;
+    }
 </style>
 <h1>My Tributes</h1>
 <br/>
@@ -63,25 +67,54 @@
 <br/>
 
 <br/>
+<input style="border-radius:20px; height:40px; width: 500px;" type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search">
+<br />
+<br />
+<div class="tribute-container">
 @foreach (var item in Model.Tribute.Reverse())
 {
-    <div style="border: 1px solid #ccc; padding: 30px; margin-bottom: 20px;  border-radius: 5px; background-color: #fff;">
-        <h3>@item.PetName </h3>
-        <p><strong>Created on:</strong> @item.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
+    <div class="tribute" style="border: 1px solid #ccc; padding: 30px; margin-bottom: 20px;  border-radius: 5px; background-color: #fff;">
+            <h3 class="searchable">@item.PetName </h3>
+
+      
         <p> <img src="@item.TributePhoto" alt="Pet Photo" style="max-width: 500px;" /></p>
-        @* <p><strong>Pet Name:</strong> @item.PetName</p> *@
-        <p><strong>Pet Type:</strong> @item.PetType</p>
-        <p><strong>Breed:</strong> @item.PetBreed</p>
-        <p><strong>Sex:</strong> @item.PetSex</p>
-        <p><strong>Date of Birth:</strong> @item.DateOfBirth</p>
-        <p><strong>Date of Adoption:</strong> @item.DateOfAdoption</p>
-        <p><strong>Date of Departure:</strong> @item.DateOfDeparture</p>
-        <p><strong>Cause of Death:</strong> @item.Cause</p>
-        <p><strong>Tribute Text:</strong> @item.TributeText</p>
-       @*  <p><strong>Pet Photo:</strong> @item.TributePhoto</p> *@
-        <p><strong>Visibility:</strong> @item.Visibility</p>
-        <p><strong>Created At:</strong> @item.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
-        @* <p><strong>Main Photo:</strong> <br/> <img src="@item.MainPhoto" alt="Pet Photo" style="max-width: 300px;" /></p> *@
+       
+        <p><strong>Pet Type:</strong> 
+         <p class="searchable">@item.PetType </p>
+         <br/>
+
+         <p><strong>Breed:</strong>
+         <p class="searchable">@(string.IsNullOrEmpty(item.PetBreed) ? "-" : item.PetBreed) </p>
+         <br />
+                  
+            <p><strong>Sex:</strong>
+            <p class="searchable">@(string.IsNullOrEmpty(item.PetSex) ? "-" : item.PetSex) </p>
+            <br />
+
+
+            <p><strong>Date of Birth:</strong>
+            <p class="searchable">@(item.DateOfBirth != null ? item.DateOfBirth.Value.ToShortDateString() : "-")</p>
+            <br />
+
+            <p><strong>Date of Adoption:</strong>
+            <p class="searchable">@(item.DateOfAdoption != null ? item.DateOfAdoption.Value.ToShortDateString() : "-")</p>
+            <br />
+
+            <p><strong>Date of Departure:</strong>
+            <p class="searchable">@(item.DateOfDeparture != null ? item.DateOfDeparture.Value.ToShortDateString() : "-")</p>
+            <br />
+
+            <p><strong>Cause of Death:</strong>
+            <p class="searchable">@(string.IsNullOrEmpty(item.Cause) ? "-" : item.Cause) </p>
+
+            <p><strong>Tribute Text:</strong>
+            <p class="searchable">@(string.IsNullOrEmpty(item.TributeText) ? "-" : item.TributeText) </p>
+            <br />
+
+            <p><strong>Created on:</strong>
+            <p class="searchable">@item.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
+            <br />
+      
         <p>
             <a asp-page="./Edit" asp-route-id="@item.Id" id="edit">Edit</a> 
             <a asp-page="./NEWDETAIL" asp-route-id="@item.Id" id="details">Details</a> 
@@ -89,93 +122,35 @@
         </p>
     </div>
 }
- 
-@* <table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Tribute[0].PetName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tribute[0].PetType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tribute[0].PetBreed)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tribute[0].PetSex)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tribute[0].DateOfBirth)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tribute[0].DateOfAdoption)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tribute[0].DateOfDeparture)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tribute[0].Cause)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tribute[0].TributeText)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tribute[0].TributePhoto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tribute[0].IsPublic)
-            </th>
-           @*  <th>
-                @Html.DisplayNameFor(model => model.Tribute[0].User)
-            </th> 
-           <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Tribute) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PetName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PetType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PetBreed)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PetSex)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateOfBirth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateOfAdoption)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateOfDeparture)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cause)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TributeText)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TributePhoto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsPublic)
-            </td>
-           
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table> *@
- 
+</div>
+<script>
+    function searchFunction() {
+        var input = document.getElementById("searchInput");
+        var filter = input.value.toUpperCase();
+        var reports = document.getElementsByClassName("tribute");
+
+        for (var i = 0; i < reports.length; i++) {
+            var report = reports[i];
+            var searchableElements = report.getElementsByClassName("searchable");
+            var found = false;
+
+            for (var j = 0; j < searchableElements.length; j++) {
+                var nameElement = searchableElements[j];
+                var text = nameElement.textContent.toUpperCase();
+
+                if (text.indexOf(filter) > -1) {
+                    found = true;
+                    // Highlight the matching text
+                    var newText = text.replace(new RegExp('(' + filter + ')', 'ig'), '<span class="highlight">$1</span>');
+                    nameElement.innerHTML = newText;
+                }
+            }
+
+            if (found) {
+                report.style.display = "";
+            } else {
+                report.style.display = "none";
+            }
+        }
+    }
+</script>
