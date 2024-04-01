@@ -39,58 +39,63 @@
     @foreach (var report in Model.CreateReport.Reverse())
     {
         <div class="report">
+
             <h2 class="searchable">@report.PetName</h2>
-
-            <h3 class="searchable">Contact Information:@report.ContactInformation</h3>
-
-            <p><strong>Created on:</strong></p> 
-            <p class="searchable">@report.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
             <br/>
 
-            <p><strong>Pet Breed:</strong></p>
-            <p class="searchable"> @report.PetBreed</p>
-            <br />
-
-            <p><strong>Pet Gender:</strong></p>
-            <p class="searchable">@report.PetGender</p>
-            <br />
-
-            <p><strong>Date of Birth:</strong></p>
-            <p class="searchable"> @(report.DateOfBirth != null ? report.DateOfBirth.Value.ToShortDateString() : "Not specified")</p>
-            <br />
-
-            <p><strong>Pet Microchip ID:</strong></p>
-            <p class="searchable"> @(string.IsNullOrEmpty(report.PetMicrochipID) ? "Not specified" : report.PetMicrochipID)</p>
-            <br />
-
-            <p><strong>Last Seen Location:</strong></p>
-            <p class="searchable"> @report.LastSeenLocation</p>
-            <br />
-            <p><strong>Last Seen Time:</strong></p>
-            <p class="searchable"> @report.LastSeenTime.Value.ToShortTimeString()</p>
-            <br />
-                    
-            <p><strong>Additional Description:</strong></p>
-            <p class="searchable"> @report.AdditionalDescription</p>
-            <br />
-
-            <p><strong>Estimated Age:</strong></p>
-            <p class ="searchable"> @report.Age</p>
-            <br />
-
-
-            <p><strong>General Location:</strong></p>
-            <p class ="searchable"> @report.GenLoc</p>
-            <br />
-
-            <p><strong>Photos:</strong></p>
+            <h5>Owner Contact Information:</h5>
+            <p class="searchable">@report.ContactInformation</p>
+            <br/>
+          
             <div class="photos">
                 @foreach (var photo in report.ReportPhotos)
                 {
                     <img src="@photo.PhotoUrl" maxwidth="500" maxheight="1000" />
                 }
             </div>
+            <p><strong>General Location:</strong></p>
+            <p class="searchable"> @report.GenLoc</p>
+            <br />
 
+            <p><strong>Last Seen Location:</strong></p>
+            <p class="searchable"> @report.LastSeenLocation</p>
+            <br />
+
+            <p><strong>Last Seen Time:</strong></p>
+            <p class="searchable"> @report.LastSeenTime.Value.ToShortTimeString()</p>
+            <br />
+
+
+            <p><strong>Estimated Age:</strong></p>
+            <p class="searchable"> @report.Age</p>
+            <br />
+
+            <p><strong>Pet Microchip ID:</strong></p>
+            <p class="searchable"> @(string.IsNullOrEmpty(report.PetMicrochipID) ? "Not specified" : report.PetMicrochipID)</p>
+            <br />
+
+            <p><strong>Type and Breed:</strong></p>
+            <p class="searchable"> @report.PetBreed</p>
+            <br />
+
+            <p><strong>Sex:</strong></p>
+            <p class="searchable">@report.PetGender</p>
+            <br />
+
+
+            <p><strong>Additional Description:</strong></p>
+            <p class="searchable"> @report.AdditionalDescription</p>
+            <br />
+
+            <p><strong>Date of Birth:</strong></p>
+            <p class="searchable"> @(report.DateOfBirth != null ? report.DateOfBirth.Value.ToShortDateString() : "Not specified")</p>
+            <br />
+
+            <p><strong>Created on:</strong></p>
+            <p class="searchable">@report.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
+            <br />
+            @*  COMMENT *@
+          
         </div>
     }
 
@@ -163,6 +168,7 @@
     }
 
 </style>
+
 <script>
     function searchFunction() {
         var input = document.getElementById("searchInput");

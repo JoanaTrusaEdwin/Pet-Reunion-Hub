@@ -62,6 +62,76 @@
 @{
     ViewData["Title"] = "All Reports";
 }
+
+
+<h1>Reports From All Over The World</h1>
+<input style="border-radius:20px; height:40px; width: 500px;" type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search">
+<br/>
+<br/>
+
+<div class="report-container">
+
+
+    @foreach (var report in Model.CreateReport.Reverse())
+    {
+        <div class="report">
+            <h2 class="searchable">@report.PetName</h2>
+
+            <h3 class="searchable">Contact Information: @report.ContactInformation</h3>
+
+            <p><strong>Created on:</strong></p>
+            <p class="searchable">@report.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
+            <br />
+
+            <p><strong>Pet Breed:</strong></p>
+            <p class="searchable"> @report.PetBreed</p>
+            <br />
+
+            <p><strong>Pet Gender:</strong></p>
+            <p class="searchable">@report.PetGender</p>
+            <br />
+
+            <p><strong>Date of Birth:</strong></p>
+            <p class="searchable"> @(report.DateOfBirth != null ? report.DateOfBirth.Value.ToShortDateString() : "Not specified")</p>
+            <br />
+
+            <p><strong>Pet Microchip ID:</strong></p>
+            <p class="searchable"> @(string.IsNullOrEmpty(report.PetMicrochipID) ? "Not specified" : report.PetMicrochipID)</p>
+            <br />
+
+            <p><strong>Last Seen Location:</strong></p>
+            <p class="searchable"> @report.LastSeenLocation</p>
+            <br />
+            <p><strong>Last Seen Time:</strong></p>
+            <p class="searchable"> @report.LastSeenTime.Value.ToShortTimeString()</p>
+            <br />
+
+            <p><strong>Additional Description:</strong></p>
+            <p class="searchable"> @report.AdditionalDescription</p>
+            <br />
+
+            <p><strong>Estimated Age:</strong></p>
+            <p class="searchable"> @report.Age</p>
+            <br />
+
+
+            <p><strong>General Location:</strong></p>
+            <p class="searchable"> @report.GenLoc</p>
+            <br />
+
+            <p><strong>Photos:</strong></p>
+            <div class="photos">
+                @foreach (var photo in report.ReportPhotos)
+                {
+                    <img src="@photo.PhotoUrl" maxwidth="500" maxheight="1000" />
+                }
+            </div>
+
+        </div>
+    }
+
+</div>
+
 <style>
     .report-container {
         display: flex;
@@ -90,47 +160,6 @@
     }
 
 </style>
-
-<h1>Reports From All Over The World</h1>
-<input style="border-radius:20px; height:40px; width: 500px;" type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search">
-<br/>
-<br/>
-<div class="report-container">
-    @foreach (var item in Model.CreateReport.Reverse())
-    {
-        <div class="report">
-            <h2 class="searchable">@item.PetName </h2>
-            <h4 class="searchable">Contact Information:@item.ContactInformation</h4>
-            <p><strong>Created on:</strong> @item.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
-            @* <p><strong>Main Photo:</strong></p> *@
-           @*  <img src="@item.MainPhoto" width="400" /> *@
-            <p class="searchable"><strong>Pet Type and Breed:</strong> @item.PetBreed</p>
-            <p class="searchable"><strong>Sex:</strong> @item.PetGender</p>
-            <p class="searchable"><strong>Date of Birth:</strong> @(item.DateOfBirth?.ToShortDateString() ?? string.Empty)</p>
-            <p class="searchable"><strong>Estimated Age:</strong> @(item.Age ?? string.Empty)</p>
-            <p class="searchable"><strong>Pet Microchip ID:</strong> @item.PetMicrochipID</p>
-            <p class="searchable"><strong>Additional Description:</strong> @(item.AdditionalDescription ?? string.Empty)</p>
-            <p class="searchable"><strong>General Location:</strong> @item.GenLoc</p>
-            <p class="searchable"><strong>Last Seen Location:</strong> @item.LastSeenLocation</p>
-            <p class="searchable"><strong>Last Seen Time:</strong> @item.LastSeenTime.Value.ToShortTimeString()</p>
-            
-
-            <p><strong>Additional Photos:</strong></p>
-            <div class="photos">
-                @foreach (var photo in item.ReportPhotos)
-                {
-                    <img src="@photo.PhotoUrl" width="200" />
-                    <br/>
-                    <br/>
-                }
-            </div>
-            
-          @*   <p><strong>Additional Description:</strong> @item.AdditionalDescription</p>
-            <p><strong>Age:</strong> @item.Age</p>
-            <p><strong>Gen Loc:</strong> @item.GenLoc</p> *@
-        </div>
-    }
-</div>
 @* <script>
     function searchFunction() {
         var input = document.getElementById("searchInput");
@@ -196,4 +225,6 @@
         }
     }
 </script>
+
+
 
