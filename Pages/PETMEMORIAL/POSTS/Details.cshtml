@@ -69,6 +69,9 @@
         </dd>
     </dl> *@
     <dl>
+        <dt>Created on:</dt>
+        <dd>@Model.Post.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</dd>
+
         <dt>Caption:</dt>
         <dd>@Model.Post.Content</dd>
 
@@ -76,9 +79,7 @@
         <dt>Visibility:</dt>
         <dd>@Model.Post.IsPublic</dd>
 
-        <dt>Pet:</dt>
-        <dd>@Model.Post.TributeId</dd>
-
+ 
         <div>
             <h4>Your Media Files</h4>
             @if (Model.Post.Media != null && Model.Post.Media.Any())

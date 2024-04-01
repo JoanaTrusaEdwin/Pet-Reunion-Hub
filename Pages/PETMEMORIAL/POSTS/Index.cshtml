@@ -70,7 +70,7 @@
             @* <p><strong>Pet Name:</strong> @item.PetName</p> *@
             <p><strong>Caption:</strong> @item.Content</p>
             <p><strong>Visibility</strong> @item.IsPublic</p>
-            <p><strong>Pet:</strong> @item.TributeId</p>
+          
 
           @*   @if (item.Media != null && item.Media.Any())
             {
@@ -82,9 +82,8 @@
                     }
                 </div>
             } *@
-            <br/>
-            <br/>
-            <p><strong>Created At:</strong> @item.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
+         
+            <p><strong>Created on:</strong> @item.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
 
             <p>
                 <a asp-page="./Edit" asp-route-id="@item.Id" id="edit">Edit</a> 

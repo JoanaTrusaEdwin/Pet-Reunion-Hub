@@ -29,6 +29,9 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
         [BindProperty]
         public Post Post { get; set; } = default!;
 
+        //public Media Media { get; set; }
+        public List<IFormFile> MediaFiles { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null || _context.Post == null)
@@ -36,7 +39,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
                 return NotFound();
             }
 
-            var post = await _context.Post.FirstOrDefaultAsync(m => m.Id == id);
+            var post = await _context.Post.Include(p => p.Media).FirstOrDefaultAsync(m => m.Id == id);
 
             if (post == null)
             {
