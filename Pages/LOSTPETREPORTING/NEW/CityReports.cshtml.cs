@@ -54,7 +54,7 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
                 .FirstOrDefaultAsync();
 
             // Query reports where GenLoc matches the user's LOCATIONVALUE
-            CreateReport = await _context.CreateReport.Where(r => r.GenLoc == userLocationValue).ToListAsync();
+            CreateReport = await _context.CreateReport.Include(r => r.ReportPhotos).Where(r => r.GenLoc == userLocationValue).ToListAsync();
         }
 
     }

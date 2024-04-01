@@ -99,8 +99,8 @@
     @foreach (var item in Model.CreateReport.Reverse())
     {
         <div class="report">
-            <h3 class="searchable">@item.PetName </h3>
-            <h2 class="searchable">Contact Information:@item.ContactInformation</h2>
+            <h2 class="searchable">@item.PetName </h2>
+            <h4 class="searchable">Contact Information:@item.ContactInformation</h4>
             <p><strong>Created on:</strong> @item.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
             @* <p><strong>Main Photo:</strong></p> *@
            @*  <img src="@item.MainPhoto" width="400" /> *@
