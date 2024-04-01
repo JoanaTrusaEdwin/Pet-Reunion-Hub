@@ -38,6 +38,10 @@
     {
         <div class="report">
             <h2>@report.PetName</h2>
+
+            <h3>Contact Information:@report.ContactInformation</h3>
+            <p><strong>Created on:</strong> @report.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
+
             <p><strong>Pet Breed:</strong> @report.PetBreed</p>
             <p><strong>Pet Gender:</strong> @report.PetGender</p>
             <p><strong>Date of Birth:</strong> @(report.DateOfBirth?.ToShortDateString() ?? string.Empty)</p>
@@ -51,7 +55,7 @@
                     <img src="@photo.PhotoUrl" width="100" />
                 }
             </div>
-            <p><strong>Contact Information:</strong> @report.ContactInformation</p>
+           
             <p><strong>Additional Description:</strong> @report.AdditionalDescription</p>
             <p><strong>Age:</strong> @report.Age</p>
             <p><strong>Gen Loc:</strong> @report.GenLoc</p>

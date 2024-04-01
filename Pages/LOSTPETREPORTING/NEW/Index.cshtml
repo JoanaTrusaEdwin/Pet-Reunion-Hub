@@ -159,6 +159,7 @@
 {
     <div style="border: 1px solid #ccc; padding: 30px; margin-bottom: 20px;  border-radius: 5px; background-color: #fff;">
         <h3>@item.PetName </h3>
+        <p><strong>Created on:</strong> @item.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
         @* <p><strong>Pet Name:</strong> @item.PetName</p> *@
         <p><strong>Pet Breed:</strong> @item.PetBreed</p>
         <p><strong>Pet Gender:</strong> @item.PetGender</p>
@@ -170,7 +171,7 @@
         <p><strong>Last Seen Location:</strong> @item.LastSeenLocation</p>
         <p><strong>Last Seen Time:</strong> @item.LastSeenTime</p>
         <p><strong>Contact Information:</strong> @item.ContactInformation</p>
-        <p><strong>Created At:</strong> @item.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
+       @*  <p><strong>Created At:</strong> @item.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p> *@
       @*   <p><strong>Main Photo:</strong> <br/> <img src="@item.MainPhoto" alt="Pet Photo" style="max-width: 300px;" /></p> *@
 
         @if (item.ReportPhotos != null && item.ReportPhotos.Any())

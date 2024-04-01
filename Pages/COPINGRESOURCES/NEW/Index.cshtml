@@ -122,11 +122,12 @@
 {
     <div style="border: 1px solid #ccc; padding: 30px; margin-bottom: 20px;  border-radius: 5px; background-color: #fff;">
         <h3>@item.TITLE </h3>
+        <p><strong>Created on:</strong> @item.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
         <p><strong>Description</strong> @item.DESCRIPTION</p>
         <p><strong></strong> @item.LINK</p>
         <p><strong>Category</strong> @item.TYPE</p>
         <p> <img src="@item.FILEURL" alt="FILE" style="max-width: 500px;" /></p>
-        <p><strong>Created At:</strong> @item.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
+       
         <P>
             <a asp-page="./Edit" asp-route-id="@item.Id" id="edit">Edit</a>
             <a asp-page="./Details" asp-route-id="@item.Id" id="details">Details</a>

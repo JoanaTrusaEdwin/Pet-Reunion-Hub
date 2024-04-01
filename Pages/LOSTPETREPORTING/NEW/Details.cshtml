@@ -162,7 +162,10 @@
     <h1>@Model.CreateReport.PetName</h1>
 
     <hr />
-
+    <p>
+        <b>Created on:</b>
+        @Model.CreateReport.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")
+        </p>
     <dl>
         <dt>Pet Name:</dt>
         <dd>@Model.CreateReport.PetName</dd>
@@ -206,7 +209,7 @@
                     @foreach (var photo in Model.CreateReport.ReportPhotos)
                     {
                         <img src="@photo.PhotoUrl" alt="Additional Photo" style="max-width: 300px;" />
-                        <br />
+                       
                     }
                 </div>
             }
