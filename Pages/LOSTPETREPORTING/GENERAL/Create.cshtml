@@ -5,17 +5,81 @@
     ViewData["Title"] = "Create";
     // Layout = "~/Pages/Shared/SignUp.cshtml";
 }
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Mvc.RazorPages
 
-<h1>Create</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost Pet Reporting</title>
+    <style>
+        body {
+            /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<h4>GENERALLOCATION</h4>
+        .container {
+            max-width: 1500px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+
+
+        #submitbtn {
+            background-color: black;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold; /* Make the text bold */
+            font-size: 1.1em;
+        }
+
+        #tolist {
+            background-color: #8b572a;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<h1>Set Your Residential Area</h1>
+
+<h4>To help foster a supportive community, each user must provide their general location by providing respective residential location categorised by Country-State-City as you will be notified when there is a lost pet report whose last seen location matches yours. You can then filter the reports based on city and state. Your cooperation is highly appreciated.</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="GENERALLOCATION.LOCATIONVALUE" class="control-label"></label>
+                <label asp-for="GENERALLOCATION.LOCATIONVALUE" class="control-label">Please select your location</label>
                 <input asp-for="GENERALLOCATION.LOCATIONVALUE" class="form-control" />
                 <span asp-validation-for="GENERALLOCATION.LOCATIONVALUE" class="text-danger"></span>
             </div>
@@ -25,15 +89,15 @@
             </div> *@
             <input type="hidden" asp-for="GENERALLOCATION.UserId" />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" id="submitbtn" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
-
+@* 
 <div>
     <a asp-page="Index">Back to List</a>
-</div>
+</div> *@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
