@@ -84,10 +84,17 @@
         .photos img {
             margin-right: 5px;
         }
+
+    .highlight {
+        background-color: yellow;
+    }
+
 </style>
 
 <h1>Reports From All Over The World</h1>
-<input type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search for names..">
+<input style="border-radius:20px; height:40px; width: 500px;" type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search">
+<br/>
+<br/>
 <div class="report-container">
     @foreach (var item in Model.CreateReport.Reverse())
     {
@@ -124,7 +131,7 @@
         </div>
     }
 </div>
-<script>
+@* <script>
     function searchFunction() {
         var input = document.getElementById("searchInput");
         var filter = input.value.toUpperCase();
@@ -157,5 +164,36 @@
     }
 </script>
 
+ *@
+<script>
+    function searchFunction() {
+        var input = document.getElementById("searchInput");
+        var filter = input.value.toUpperCase();
+        var reports = document.getElementsByClassName("report");
 
+        for (var i = 0; i < reports.length; i++) {
+            var report = reports[i];
+            var searchableElements = report.getElementsByClassName("searchable");
+            var found = false;
+
+            for (var j = 0; j < searchableElements.length; j++) {
+                var nameElement = searchableElements[j];
+                var text = nameElement.textContent.toUpperCase();
+
+                if (text.indexOf(filter) > -1) {
+                    found = true;
+                    // Highlight the matching text
+                    var newText = text.replace(new RegExp('(' + filter + ')', 'ig'), '<span class="highlight">$1</span>');
+                    nameElement.innerHTML = newText;
+                }
+            }
+
+            if (found) {
+                report.style.display = "";
+            } else {
+                report.style.display = "none";
+            }
+        }
+    }
+</script>
 
