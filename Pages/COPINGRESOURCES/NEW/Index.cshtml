@@ -126,6 +126,7 @@
         <p><strong></strong> @item.LINK</p>
         <p><strong>Category</strong> @item.TYPE</p>
         <p> <img src="@item.FILEURL" alt="FILE" style="max-width: 500px;" /></p>
+        <p><strong>Created At:</strong> @item.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
         <P>
             <a asp-page="./Edit" asp-route-id="@item.Id" id="edit">Edit</a>
             <a asp-page="./Details" asp-route-id="@item.Id" id="details">Details</a>

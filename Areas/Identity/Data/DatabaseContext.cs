@@ -116,6 +116,8 @@ namespace PRHDATALIB.Models
                 entity.Property(e => e.GenLoc)   
                   .HasColumnName("GenLoc");
 
+                entity.Property(e => e.CreatedAt);
+
                 //entity.Property(e => e.UserId)
                 //    .IsRequired();
 
@@ -189,6 +191,7 @@ namespace PRHDATALIB.Models
                 entity.Property(e => e.Visibility)
                     .IsRequired()
                     .HasColumnName("Visibility");
+                entity.Property(e => e.CreatedAt);
 
                 entity.Property(e => e.UserId).IsRequired().HasMaxLength(450);
 
@@ -256,6 +259,7 @@ namespace PRHDATALIB.Models
                 entity.Property(e => e.FILEURL);
                 entity.Property(e => e.TYPE);
                 entity.Property(e => e.FORMAT);
+                entity.Property(e => e.CreatedAt);
 
 
                 entity.Property(e => e.UserId).IsRequired().HasMaxLength(450);

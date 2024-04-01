@@ -163,6 +163,7 @@ namespace Pet_Reunion_Hub.Pages.COPINGRESOURCES.NEW
                     await _context.SaveChangesAsync();
                     _logger.LogInformation("New resource created successfully.");
                     //return RedirectToPage("./Index");
+                    RESOURCE.CreatedAt = DateTime.UtcNow;
                 }
                 return RedirectToPage("./Index");
             }

@@ -110,6 +110,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
         {
             try
             {
+                
                 var user = await _userManager.GetUserAsync(User);
                 if (user != null)
                 {
@@ -162,11 +163,14 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                     //Tribute.TributePhoto = EncryptionHelper.Encrypt(Tribute.TributePhoto);
                     //Tribute.Visibility = EncryptionHelper.Encrypt(Tribute.Visibility);
 
+                    //Tribute.CreatedAt = DateTime.UtcNow;
                     _context.Tribute.Add(Tribute);
                     await _context.SaveChangesAsync();
                     _logger.LogInformation("New tribute created successfully.");
                     //return RedirectToPage("./Index");
+                    Tribute.CreatedAt = DateTime.UtcNow;
                 }
+               
                 return RedirectToPage("./Index");
             }
             catch (Exception ex)

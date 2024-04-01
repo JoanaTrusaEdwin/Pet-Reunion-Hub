@@ -289,6 +289,7 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
                         //return RedirectToPage("/Account/Login");
 
                     }
+                    CreateReport.CreatedAt = DateTime.UtcNow;
                 }
                 return RedirectToPage("./Index");
             }
