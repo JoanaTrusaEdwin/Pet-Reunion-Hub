@@ -146,6 +146,11 @@
         padding: 5px 10px;
         font-weight: bold;
     }
+
+
+    .highlight {
+        background-color: yellow;
+    }
 </style>
 
 <h1>My Reports</h1>
@@ -155,44 +160,121 @@
     <a asp-page="Create" id="createnew">Make a New Report</a>
 </p>
 <br />
-@foreach (var item in Model.CreateReport.Reverse())
-{
-    <div style="border: 1px solid #ccc; padding: 30px; margin-bottom: 20px;  border-radius: 5px; background-color: #fff;">
-        <h3>@item.PetName </h3>
-        <p><strong>Created on:</strong> @item.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
-        @* <p><strong>Pet Name:</strong> @item.PetName</p> *@
-        <p><strong>Pet Breed:</strong> @item.PetBreed</p>
-        <p><strong>Pet Gender:</strong> @item.PetGender</p>
-        <p><strong>Date of Birth:</strong> @item.DateOfBirth</p>
-        <p><strong>Estimated Age:</strong> @item.Age</p>
-        <p><strong>Pet Microchip ID:</strong> @item.PetMicrochipID</p>
-        <p><strong>Additional Description:</strong> @item.AdditionalDescription</p>
-        <p><strong>General Location:</strong> @item.GenLoc</p>
-        <p><strong>Last Seen Location:</strong> @item.LastSeenLocation</p>
-        <p><strong>Last Seen Time:</strong> @item.LastSeenTime</p>
-        <p><strong>Contact Information:</strong> @item.ContactInformation</p>
-       @*  <p><strong>Created At:</strong> @item.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p> *@
-      @*   <p><strong>Main Photo:</strong> <br/> <img src="@item.MainPhoto" alt="Pet Photo" style="max-width: 300px;" /></p> *@
 
-        @if (item.ReportPhotos != null && item.ReportPhotos.Any())
-        {
-            <p><strong>Additional Photos:</strong></p>
-            <div class="media-container">
-                @foreach (var Item in item.ReportPhotos)
+<input style="border-radius:20px; height:40px; width: 500px;" type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search">
+<br />
+<br />
+<div class="report-container">
+
+
+    @foreach (var item in Model.CreateReport.Reverse())
+    {
+        <div class="report" style="border: 1px solid #ccc; padding: 30px; margin-bottom: 20px;  border-radius: 5px; background-color: #fff;">
+
+            <h2 class="searchable">@item.PetName</h2>
+            <br />
+
+            <h5>Owner Contact Information:</h5>
+            <p class="searchable">@item.ContactInformation</p>
+            <br />
+
+            <div class="photos">
+                @foreach (var photo in item.ReportPhotos)
                 {
-                    <img src="@Item.PhotoUrl" alt="Media Image" style="max-width: 200px; margin-right: 10px;">
+                    <img src="@photo.PhotoUrl" maxwidth="500" maxheight="1000" />
                 }
             </div>
-        }
-        <br/>
-        <br/>
+            <p><strong>General Location:</strong></p>
+            <p class="searchable"> @item.GenLoc</p>
+            <br />
+
+            <p><strong>Last Seen Location:</strong></p>
+            <p class="searchable"> @item.LastSeenLocation</p>
+            <br />
+
+            <p><strong>Last Seen Time:</strong></p>
+            <p class="searchable"> @item.LastSeenTime.Value.ToShortTimeString()</p>
+            <br />
 
 
-        <p>
+            <p><strong>Estimated Age:</strong></p>
+            <p class="searchable"> @item.Age</p>
+            <br />
+
+            <p><strong>Pet Microchip ID:</strong></p>
+            <p class="searchable"> @(string.IsNullOrEmpty(item.PetMicrochipID) ? "Not specified" : item.PetMicrochipID)</p>
+            <br />
+
+            <p><strong>Type and Breed:</strong></p>
+            <p class="searchable"> @item.PetBreed</p>
+            <br />
+
+            <p><strong>Sex:</strong></p>
+            <p class="searchable">@item.PetGender</p>
+            <br />
+
+
+            <p><strong>Additional Description:</strong></p>
+            <p class="searchable"> @item.AdditionalDescription</p>
+            <br />
+
+            <p><strong>Date of Birth:</strong></p>
+            <p class="searchable"> @(item.DateOfBirth != null ? item.DateOfBirth.Value.ToShortDateString() : "Not specified")</p>
+            <br />
+
+            <p><strong>Created on:</strong></p>
+            <p class="searchable">@item.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
+            <br />
+            @*  COMMENT *@
+            <p>
+                <a asp-page="./Edit" asp-route-id="@item.Id" id="edit">Edit</a>
+                <a asp-page="./Details" asp-route-id="@item.Id" id="details">Details</a>
+                <a asp-page="./Delete" asp-route-id="@item.Id" id="delete">Delete</a>
+            </p>
+        </div>
+        @*  <p>
             <a asp-page="./Edit" asp-route-id="@item.Id" id="edit">Edit</a> 
             <a asp-page="./Details" asp-route-id="@item.Id" id="details">Details</a> 
             <a asp-page="./Delete" asp-route-id="@item.Id" id="delete">Delete</a>
-        </p>
-    </div>
-}
+        </p> *@
+    
+    }
+
+</div>
+<script>
+    function searchFunction() {
+        var input = document.getElementById("searchInput");
+        var filter = input.value.toUpperCase();
+        var reports = document.getElementsByClassName("report");
+
+        for (var i = 0; i < reports.length; i++) {
+            var report = reports[i];
+            var searchableElements = report.getElementsByClassName("searchable");
+            var found = false;
+
+            for (var j = 0; j < searchableElements.length; j++) {
+                var nameElement = searchableElements[j];
+                var text = nameElement.textContent.toUpperCase();
+
+                if (text.indexOf(filter) > -1) {
+                    found = true;
+                    // Highlight the matching text
+                    var newText = text.replace(new RegExp('(' + filter + ')', 'ig'), '<span class="highlight">$1</span>');
+                    nameElement.innerHTML = newText;
+                }
+            }
+
+            if (found) {
+                report.style.display = "";
+            } else {
+                report.style.display = "none";
+            }
+        }
+    }
+</script>
+
+
+
+
+
  
