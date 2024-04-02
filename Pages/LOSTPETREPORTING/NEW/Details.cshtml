@@ -174,17 +174,17 @@
         <dt>Pet Breed:</dt>
         <dd style="white-space: pre-wrap; overflow-wrap: break-word;">@Model.CreateReport.PetBreed</dd>
 
-        <dt>Pet Gender:</dt>
+        <dt>Sex:</dt>
         <dd style="white-space: pre-wrap; overflow-wrap: break-word;">@Model.CreateReport.PetGender</dd>
 
         <dt>Date of Birth:</dt>
-        <dd>@Model.CreateReport.DateOfBirth</dd>
+        <dd>@(Model.CreateReport.DateOfBirth != null ? Model.CreateReport.DateOfBirth.Value.ToString("dd-MMM-yyyy HH:mm") : "-")</dd>
 
         <dt>Estimated Age:</dt>
         <dd style="white-space: pre-wrap; overflow-wrap: break-word;">@Model.CreateReport.Age</dd>
 
         <dt>Pet Microchip ID:</dt>
-        <dd>@Model.CreateReport.PetMicrochipID</dd>
+        <dd>@(Model.CreateReport.PetMicrochipID != null ? Model.CreateReport.PetMicrochipID : "-")</dd>
 
         <dt>Additional Description:</dt>
         <dd style="white-space: pre-wrap; overflow-wrap: break-word;">@Model.CreateReport.AdditionalDescription</dd>
@@ -196,7 +196,7 @@
         <dd style="white-space: pre-wrap; overflow-wrap: break-word;">@Model.CreateReport.LastSeenLocation</dd>
 
         <dt>Last Seen Time:</dt>
-        <dd>@Model.CreateReport.LastSeenTime</dd>
+        <dd>@Model.CreateReport.LastSeenTime.Value.ToString("dd-MMM-yyy HH:mm")</dd>
 
        @*  <dt>Main Photo:</dt>
         <dd><img src="@Model.CreateReport.MainPhoto" alt="Pet Photo" style="max-width: 300px;" /></dd> *@
