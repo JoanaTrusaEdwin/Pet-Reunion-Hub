@@ -64,16 +64,16 @@
     {
         <div class="counselor-box">
 
-            <h3 class="searchable">@RESOURCE.TITLE </h3>
+            <h3 style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable">@RESOURCE.TITLE </h3>
 
             <p class="searchable"><strong>Created on:</strong> @RESOURCE.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss")</p>
 
             <p><strong>Description:</strong>
-            <p class="searchable">@(string.IsNullOrEmpty(RESOURCE.DESCRIPTION) ? "-" : RESOURCE.DESCRIPTION) </p>
+            <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable">@(string.IsNullOrEmpty(RESOURCE.DESCRIPTION) ? "-" : RESOURCE.DESCRIPTION) </p>
             <br />
 
             <p><strong>URL Link to Resource:</strong>
-            <p class="searchable">@(string.IsNullOrEmpty(RESOURCE.LINK) ? "-" : RESOURCE.LINK) </p>
+            <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable">@(string.IsNullOrEmpty(RESOURCE.LINK) ? "-" : RESOURCE.LINK) </p>
             <br />
 
             <p><strong>Category:</strong>
@@ -95,7 +95,7 @@
     function searchFunction() {
         var input = document.getElementById("searchInput");
         var filter = input.value.trim().toLowerCase(); // Convert filter to lowercase for case-insensitive search
-        var reports = document.getElementsByClassName("resource");
+        var reports = document.getElementsByClassName("counselor-box");
 
         for (var i = 0; i < reports.length; i++) {
             var report = reports[i];

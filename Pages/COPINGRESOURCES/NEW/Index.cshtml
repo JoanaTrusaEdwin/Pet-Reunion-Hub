@@ -74,16 +74,16 @@
 @foreach (var item in Model.RESOURCE.Reverse())
 {
     <div class="resource" style="border: 1px solid #ccc; padding: 30px; margin-bottom: 20px;  border-radius: 5px; background-color: #fff;">
-        <h3 class="searchable">@item.TITLE </h3>
+        <h3 style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable">@item.TITLE </h3>
 
         <p><strong>Created on:</strong> @item.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss")</p>
 
         <p><strong>Description:</strong>
-        <p class="searchable">@(string.IsNullOrEmpty(item.DESCRIPTION) ? "-" : item.DESCRIPTION) </p>
+        <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable">@(string.IsNullOrEmpty(item.DESCRIPTION) ? "-" : item.DESCRIPTION) </p>
         <br />
 
         <p><strong>URL Link to Resource:</strong>
-        <p class="searchable">@(string.IsNullOrEmpty(item.LINK) ? "-" : item.LINK) </p>
+        <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable">@(string.IsNullOrEmpty(item.LINK) ? "-" : item.LINK) </p>
         <br />
 
          <p><strong>Category:</strong>
