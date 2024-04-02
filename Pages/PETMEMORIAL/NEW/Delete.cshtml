@@ -140,14 +140,15 @@
 <div style="padding: 30px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 20px; background-color: #fff;">
     <h4>Confirm Deletion</h4>
     <hr />
-    <dl class="row">
-        <p><strong>Created on:</strong> @Model.Tribute.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
-        <div class="form-group">
-            <label asp-for="Tribute.TributePhoto" class="control-label"><b>Pet Photo</b></label>
-            <br />
-            <img src="@Model.Tribute.TributePhoto" class="img-thumbnail" style="max-width: 200px;" />
+    <strong>Created on:</strong> @Model.Tribute.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
+    <div class="form-group">
+        <label asp-for="Tribute.TributePhoto" class="control-label"><b>Pet Photo</b></label>
+        <br />
+        <img src="@Model.Tribute.TributePhoto" class="img-thumbnail" style="max-width: 200px;" />
 
-        </div>
+    </div>
+    <dl class="row">
+        
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Tribute.PetName)
         </dt>

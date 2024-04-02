@@ -63,7 +63,7 @@
             <br />
 
             <p><strong>Last Seen Time:</strong></p>
-            <p class="searchable"> @report.LastSeenTime.Value.ToShortTimeString()</p>
+            <p class="searchable"> @report.LastSeenTime.Value.ToString("dd-MMM-yyyy HH:mm")</p>
             <br />
 
 
@@ -72,7 +72,7 @@
             <br />
 
             <p><strong>Pet Microchip ID:</strong></p>
-            <p class="searchable"> @(string.IsNullOrEmpty(report.PetMicrochipID) ? "Not specified" : report.PetMicrochipID)</p>
+            <p class="searchable"> @(string.IsNullOrEmpty(report.PetMicrochipID) ? "-" : report.PetMicrochipID)</p>
             <br />
 
             <p><strong>Type and Breed:</strong></p>
@@ -89,11 +89,11 @@
             <br />
 
             <p><strong>Date of Birth:</strong></p>
-            <p class="searchable"> @(report.DateOfBirth != null ? report.DateOfBirth.Value.ToShortDateString() : "Not specified")</p>
+            <p class="searchable"> @(report.DateOfBirth != null ? report.DateOfBirth.Value.ToString("dd-MMM-yyyy HH:mm") : "-")</p>
             <br />
 
             <p><strong>Created on:</strong></p>
-            <p class="searchable">@report.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
+            <p class="searchable">@report.CreatedAt.ToString("dd-MMM-yyy HH:mm:ss")</p>
             <br />
             @*  COMMENT *@
           
@@ -169,11 +169,10 @@
     }
 
 </style>
-
 <script>
     function searchFunction() {
         var input = document.getElementById("searchInput");
-        var filter = input.value.toUpperCase();
+        var filter = input.value.trim().toLowerCase(); // Convert filter to lowercase for case-insensitive search
         var reports = document.getElementsByClassName("report");
 
         for (var i = 0; i < reports.length; i++) {
@@ -183,12 +182,13 @@
 
             for (var j = 0; j < searchableElements.length; j++) {
                 var nameElement = searchableElements[j];
-                var text = nameElement.textContent.toUpperCase();
+                var originalText = nameElement.textContent; // Store the original text
+                var text = originalText.toLowerCase(); // Convert text to lowercase for case-insensitive search
 
                 if (text.indexOf(filter) > -1) {
                     found = true;
                     // Highlight the matching text
-                    var newText = text.replace(new RegExp('(' + filter + ')', 'ig'), '<span class="highlight">$1</span>');
+                    var newText = highlightMatch(originalText, filter); // Pass the original text for highlighting
                     nameElement.innerHTML = newText;
                 }
             }
@@ -200,5 +200,11 @@
             }
         }
     }
-</script>
 
+    // Helper function to highlight the matched text
+    function highlightMatch(text, filter) {
+        var regex = new RegExp('(' + filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig');
+        return text.replace(regex, '<span class="highlight">$1</span>');
+    }
+
+</script>

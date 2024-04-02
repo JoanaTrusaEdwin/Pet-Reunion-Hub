@@ -93,15 +93,15 @@
 
 
             <p><strong>Date of Birth:</strong>
-            <p class="searchable">@(item.DateOfBirth != null ? item.DateOfBirth.Value.ToShortDateString() : "-")</p>
+            <p class="searchable">@(item.DateOfBirth != null ? item.DateOfBirth.Value.ToString("dd-MMM-yyyy HH:mm") : "-")</p>
             <br />
 
             <p><strong>Date of Adoption:</strong>
-            <p class="searchable">@(item.DateOfAdoption != null ? item.DateOfAdoption.Value.ToShortDateString() : "-")</p>
+            <p class="searchable">@(item.DateOfAdoption != null ? item.DateOfAdoption.Value.ToString("dd-MMM-yyyy HH:mm") : "-")</p>
             <br />
 
             <p><strong>Date of Departure:</strong>
-            <p class="searchable">@(item.DateOfDeparture != null ? item.DateOfDeparture.Value.ToShortDateString() : "-")</p>
+            <p class="searchable">@(item.DateOfDeparture != null ? item.DateOfDeparture.Value.ToString("dd-MMM-yyyy HH:mm") : "-")</p>
             <br />
 
             <p><strong>Cause of Death:</strong>
@@ -112,7 +112,7 @@
             <br />
 
             <p><strong>Created on:</strong>
-            <p class="searchable">@item.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
+            <p class="searchable">@item.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss")</p>
             <br />
       
         <p>
@@ -126,7 +126,7 @@
 <script>
     function searchFunction() {
         var input = document.getElementById("searchInput");
-        var filter = input.value.toUpperCase();
+        var filter = input.value.trim().toLowerCase(); // Convert filter to lowercase for case-insensitive search
         var reports = document.getElementsByClassName("tribute");
 
         for (var i = 0; i < reports.length; i++) {
@@ -136,12 +136,13 @@
 
             for (var j = 0; j < searchableElements.length; j++) {
                 var nameElement = searchableElements[j];
-                var text = nameElement.textContent.toUpperCase();
+                var originalText = nameElement.textContent; // Store the original text
+                var text = originalText.toLowerCase(); // Convert text to lowercase for case-insensitive search
 
                 if (text.indexOf(filter) > -1) {
                     found = true;
                     // Highlight the matching text
-                    var newText = text.replace(new RegExp('(' + filter + ')', 'ig'), '<span class="highlight">$1</span>');
+                    var newText = highlightMatch(originalText, filter); // Pass the original text for highlighting
                     nameElement.innerHTML = newText;
                 }
             }
@@ -153,4 +154,11 @@
             }
         }
     }
+
+    // Helper function to highlight the matched text
+    function highlightMatch(text, filter) {
+        var regex = new RegExp('(' + filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig');
+        return text.replace(regex, '<span class="highlight">$1</span>');
+    }
+
 </script>

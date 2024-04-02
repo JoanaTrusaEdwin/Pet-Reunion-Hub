@@ -66,7 +66,7 @@
 
             <h3 class="searchable">@RESOURCE.TITLE </h3>
 
-            <p><strong>Created on:</strong> @RESOURCE.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
+            <p class="searchable"><strong>Created on:</strong> @RESOURCE.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss")</p>
 
             <p><strong>Description:</strong>
             <p class="searchable">@(string.IsNullOrEmpty(RESOURCE.DESCRIPTION) ? "-" : RESOURCE.DESCRIPTION) </p>
@@ -94,8 +94,8 @@
 <script>
     function searchFunction() {
         var input = document.getElementById("searchInput");
-        var filter = input.value.toUpperCase();
-        var reports = document.getElementsByClassName("counselor-box");
+        var filter = input.value.trim().toLowerCase(); // Convert filter to lowercase for case-insensitive search
+        var reports = document.getElementsByClassName("resource");
 
         for (var i = 0; i < reports.length; i++) {
             var report = reports[i];
@@ -104,12 +104,13 @@
 
             for (var j = 0; j < searchableElements.length; j++) {
                 var nameElement = searchableElements[j];
-                var text = nameElement.textContent.toUpperCase();
+                var originalText = nameElement.textContent; // Store the original text
+                var text = originalText.toLowerCase(); // Convert text to lowercase for case-insensitive search
 
                 if (text.indexOf(filter) > -1) {
                     found = true;
                     // Highlight the matching text
-                    var newText = text.replace(new RegExp('(' + filter + ')', 'ig'), '<span class="highlight">$1</span>');
+                    var newText = highlightMatch(originalText, filter); // Pass the original text for highlighting
                     nameElement.innerHTML = newText;
                 }
             }
@@ -120,6 +121,12 @@
                 report.style.display = "none";
             }
         }
+    }
+
+    // Helper function to highlight the matched text
+    function highlightMatch(text, filter) {
+        var regex = new RegExp('(' + filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig');
+        return text.replace(regex, '<span class="highlight">$1</span>');
     }
 
 </script>
