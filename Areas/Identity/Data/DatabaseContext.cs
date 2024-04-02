@@ -188,9 +188,9 @@ namespace PRHDATALIB.Models
                 entity.Property(e => e.TributeText).HasMaxLength(int.MaxValue); // Max length
                 entity.Property(e => e.TributePhoto);
                 //entity.Property(e => e.IsPublic).IsRequired().HasColumnType("BIT");
-                entity.Property(e => e.Visibility)
-                    .IsRequired()
-                    .HasColumnName("Visibility");
+                //entity.Property(e => e.Visibility)
+                //    .IsRequired()
+                //    .HasColumnName("Visibility");
                 entity.Property(e => e.CreatedAt);
 
                 entity.Property(e => e.UserId).IsRequired().HasMaxLength(450);

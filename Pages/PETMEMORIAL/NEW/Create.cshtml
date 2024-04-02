@@ -99,11 +99,18 @@
 
             <div class="form-group">
                     <label asp-for="Tribute.PetType" class="control-label"><b><span class="text-danger">*</span>Pet Type</b></label>
-                    <input asp-for="Tribute.PetType" class="form-control character-count" required
-                           id="pet-type-input"
-                           maxlength="100"
-                           oninput="handleInput(event, 'pet-type-count')" />
-                    <span id="pet-type-count" class="character-count-display">0/100</span>
+                    <select asp-for="Tribute.PetType" class="form-control" required id="pet-type-input" onchange="handleInput(event)">
+                        <option value="">Select</option>
+                        <option value="Dog">Dog</option>
+                        <option value="Cat">Cat</option>
+                        <option value="Bird">Bird</option>
+                        <option value="Fish">Fish</option>
+                        <option value="Rodent">Rodent</option>
+                        <option value="Reptile">Reptile</option>
+                        <option value="Hamster">Hamster</option>
+                        <option value="Other Small Mammal">Other Small Mammal</option>
+                    </select>
+                   
                 <span asp-validation-for="Tribute.PetType" class="text-danger"></span>
             </div>
                 <br />
@@ -127,6 +134,7 @@
                 <div class="form-group">
                     <label asp-for="Tribute.PetSex" class="control-label"><b>Sex</b></label>
                     <select asp-for="Tribute.PetSex" class="form-control">
+                        <option value="">Select</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                     </select>
