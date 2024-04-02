@@ -79,32 +79,32 @@
            @*  <input type="hidden" asp-for="CreateReport.Id" /> *@
            <p>
             <b>Created on:</b>
-            @Model.CreateReport.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")
+                @Model.CreateReport.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss")
                </p>
             <br />
             <div class="form-group">
                 <label asp-for="CreateReport.PetName" class="control-label"><b>Pet Name</b></label>
-                <input asp-for="CreateReport.PetName" class="form-control character-count" required
-                       id="pet-name-input"
-                       maxlength="255"
-                       oninput="handleInput(event, 'pet-name-count')" />
-                <span id="pet-name-count" class="character-count-display">0/255</span>
+                <textarea asp-for="CreateReport.PetName" class="form-control autosize character-count"
+                          id="pet-name-input"
+                          maxlength="150"
+                          oninput="handleInput(event, 'pet-name-count')"></textarea>
+                <span id="pet-name-count" class="character-count-display">0/150</span>
                 <span asp-validation-for="CreateReport.PetName" class="text-danger"></span>
             </div>
             <br />
 
 
+
             <div class="form-group">
-                <label asp-for="CreateReport.PetBreed" class="control-label"><b>Pet Type and Breed  (e.g.: Dog, Husky)</b></label>
-                <input asp-for="CreateReport.PetBreed" class="form-control character-count" required
-                       maxlength="255"
-                       id="pet-breed-input"
-                       oninput="handleInput(event, 'pet-breed-count')" />
-                <span id="pet-breed-count" class="character-count-display">0/255</span>
+                <label asp-for="CreateReport.PetBreed" class="control-label"><b>Pet Type and Breed(e.g.: Dog, Husky)</b></label>
+                <textarea asp-for="CreateReport.PetBreed" class="form-control autosize character-count" required
+                          maxlength="150"
+                          id="pet-breed-input"
+                          oninput="handleInput(event, 'pet-breed-count')"></textarea>
+                <span id="pet-breed-count" class="character-count-display">0/150</span>
                 <span asp-validation-for="CreateReport.PetBreed" class="text-danger"></span>
             </div>
             <br />
-
             <div>
                 <label asp-for="CreateReport.PetGender" class="control-label"><b>Sex</b></label>
                 <select asp-for="CreateReport.PetGender" class="form-control" required>
@@ -146,10 +146,11 @@
 
             <div class="form-group">
                 <label asp-for="CreateReport.AdditionalDescription" class="control-label"><b>Any necessary descriptions about the pet (physical appearance, behavior, unique traits)</b></label>
-                <input asp-for="CreateReport.AdditionalDescription" class="form-control character-count"
-                       maxlength="500"
-                       id="pet-desc-input"
-                       oninput="handleInput(event, 'pet-desc-count')" />
+                <textarea asp-for="CreateReport.AdditionalDescription" class="form-control autosize character-count"
+                          id="pet-desc-input"
+                          rows="5"
+                          maxlength="500"
+                          oninput="handleInput(event, 'pet-desc-count')"></textarea>
                 <span id="pet-desc-count" class="character-count-display">0/500</span>
                 <span asp-validation-for="CreateReport.AdditionalDescription" class="text-danger"></span>
             </div>
@@ -163,13 +164,15 @@
                 </div>
                 <br />
 
+
             <div class="form-group">
-                <label asp-for="CreateReport.LastSeenLocation" class="control-label"><b>Describe where you last saw your pet.</b></label>
-                <input asp-for="CreateReport.LastSeenLocation" class="form-control character-count" required
-                       maxlength="500"
-                       id="pet-location-input"
-                       oninput="handleInput(event, 'pet-location-count')" />
-                <span id="pet-location-count" class="character-count-display">0/500</span>
+                <label asp-for="CreateReport.LastSeenLocation" class="control-label"><b>Describe where you last saw your pet. It can be a specific address, description of the location, etc.</b></label>
+                <textarea asp-for="CreateReport.LastSeenLocation" class="form-control autosize character-count"
+                          id="pet-location-input"
+                          rows="5"
+                          maxlength="1000"
+                          oninput="handleInput(event, 'pet-location-count')"></textarea>
+                <span id="pet-location-count" class="character-count-display">0/1000</span>
                 <span asp-validation-for="CreateReport.LastSeenLocation" class="text-danger"></span>
             </div>
             <br />
@@ -214,14 +217,16 @@
 
             <div class="form-group">
                 <label asp-for="CreateReport.ContactInformation" class="control-label"><b>Your contact information (You may choose to share your phone number, email, or any preferred platforms)</b></label>
-                <input asp-for="CreateReport.ContactInformation" class="form-control character-count" required
-                       maxlength="500"
-                       id="pet-ctc-input"
-                       oninput="handleInput(event, 'pet-ctc-count')" />
-                <span id="pet-ctc-count" class="character-count-display">0/500</span>
+                <textarea asp-for="CreateReport.ContactInformation" class="form-control autosize character-count"
+                          id="pet-ctc-input"
+                          rows="5"
+                          maxlength="1000"
+                          oninput="handleInput(event, 'pet-ctc-count')"></textarea>
+                <span id="pet-ctc-count" class="character-count-display">0/1000</span>
                 <span asp-validation-for="CreateReport.ContactInformation" class="text-danger"></span>
             </div>
             <br />
+
 
             <div class="form-group">
                 <input type="submit" id="submitbtn" value="Save Changes" class="btn btn-primary" />

@@ -36,50 +36,36 @@
     }
 </style>
 
-<h1>@Model.RESOURCE.TITLE</h1>
+
 
 <div style="padding: 30px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 20px; background-color: #fff;">
-    <h4>RESOURCE</h4>
+    <h4
+        style="white-space: pre-wrap; overflow-wrap: break-word;">@Model.RESOURCE.TITLE</h4>
     <hr />
     <dl class="row">
-        <p><strong>Created on:</strong> @Model.RESOURCE.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
+        <p><strong>Created on:</strong> @Model.RESOURCE.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss")</p>
         <div class="form-group">
-            <label asp-for="RESOURCE.FILEURL" class="control-label"><b>File Preview</b></label>
+            @* <label asp-for="RESOURCE.FILEURL" class="control-label"><b>File Preview</b></label>
             <br />
-            <img src="@Model.RESOURCE.FILEURL" class="img-thumbnail" style="max-width: 200px;" />
+            <img src="@Model.RESOURCE.FILEURL" class="img-thumbnail" style="max-width: 200px;" /> *@
 
         </div>
+        <dt>Title:</dt>
+        <dd style="white-space: pre-wrap; overflow-wrap: break-word;">@Model.RESOURCE.TITLE)</dd>
 
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.RESOURCE.TITLE)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.RESOURCE.TITLE)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.RESOURCE.DESCRIPTION)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.RESOURCE.DESCRIPTION)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.RESOURCE.LINK)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.RESOURCE.LINK)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.RESOURCE.FILEURL)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.RESOURCE.FILEURL)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.RESOURCE.TYPE)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.RESOURCE.TYPE)
-        </dd>
+        <dt>Description:</dt>
+        <dd style="white-space: pre-wrap; overflow-wrap: break-word;">@Model.RESOURCE.DESCRIPTION)</dd>
+
+        <dt>URL Link to Resource:</dt>
+        <dd style="white-space: pre-wrap; overflow-wrap: break-word;">@(Model.RESOURCE.LINK != null ? @Model.RESOURCE.LINK:"-")</dd>
+        
+        <dt>Attached File:</dt>
+        <p> <img src="@Model.RESOURCE.FILEURL" alt="FILE" style="max-width: 500px;" /></p>
+        
+        <p><strong>Category:</strong>
+        <p > @Model.RESOURCE.TYPE</p>
+        <br />
+       
      @*    <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.RESOURCE.User)
         </dt>
