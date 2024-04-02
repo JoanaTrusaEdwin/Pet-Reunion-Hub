@@ -83,7 +83,7 @@
                </p>
             <br />
             <div class="form-group">
-                <label asp-for="CreateReport.PetName" class="control-label"><b>Pet Name</b></label>
+                <label asp-for="CreateReport.PetName" class="control-label"><b><span class="text-danger">*</span>Pet Name</b></label>
                 <textarea asp-for="CreateReport.PetName" class="form-control autosize character-count"
                           id="pet-name-input"
                           maxlength="150"
@@ -96,7 +96,7 @@
 
 
             <div class="form-group">
-                <label asp-for="CreateReport.PetBreed" class="control-label"><b>Pet Type and Breed(e.g.: Dog, Husky)</b></label>
+                <label asp-for="CreateReport.PetBreed" class="control-label"><b><span class="text-danger">*</span>Pet Type and Breed(e.g.: Dog, Husky)</b></label>
                 <textarea asp-for="CreateReport.PetBreed" class="form-control autosize character-count" required
                           maxlength="150"
                           id="pet-breed-input"
@@ -106,7 +106,7 @@
             </div>
             <br />
             <div>
-                <label asp-for="CreateReport.PetGender" class="control-label"><b>Sex</b></label>
+                <label asp-for="CreateReport.PetGender" class="control-label"><b><span class="text-danger">*</span>Sex</b></label>
                 <select asp-for="CreateReport.PetGender" class="form-control" required>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
@@ -116,14 +116,14 @@
             <br/>
 
             <div class="form-group">
-                <label asp-for="CreateReport.DateOfBirth" class="control-label"><b>Date of Birth (leave empty if unsure)</b></label>
+                <label asp-for="CreateReport.DateOfBirth" class="control-label"><b>Date of Birth</b></label>
                 <input asp-for="CreateReport.DateOfBirth" class="form-control" />
                 <span asp-validation-for="CreateReport.DateOfBirth" class="text-danger"></span>
             </div>
             <br/>
 
             <div class="form-group">
-                <label asp-for="CreateReport.Age" class="control-label"><b>Your pet's estimated age (Specify. e.g: 1 year/1 year 3 months/3 weeks)</b></label>
+                <label asp-for="CreateReport.Age" class="control-label"><b><span class="text-danger">*</span>Your pet's estimated age (Specify. e.g: 1 year/1 year 3 months/3 weeks)</b></label>
                 <input asp-for="CreateReport.Age" class="form-control character-count" required
                        maxlength="50"
                        id="pet-age-input"
@@ -134,7 +134,7 @@
             <br />
 
             <div class="form-group">
-                <label asp-for="CreateReport.PetMicrochipID" class="control-label"><b>Microchip ID (if any)</b></label>
+                <label asp-for="CreateReport.PetMicrochipID" class="control-label"><b>Microchip ID</b></label>
                 <input asp-for="CreateReport.PetMicrochipID" class="form-control character-count"
                        maxlength="50"
                        id="pet-id-input"
@@ -157,7 +157,7 @@
             <br />
 
                  <div class="form-group">
-                    <label asp-for="CreateReport.GenLoc" class="control-label"><b>To notify nearby users, please provide the general location of where you found your lost pet with capital letters and folloing the format COUNTRY-STATE-CITY</b></label>
+                <label asp-for="CreateReport.GenLoc" class="control-label"><b><span class="text-danger">*</span>To notify nearby users, please provide the general location of where you found your lost pet with capital letters and folloing the format COUNTRY-STATE-CITY</b></label>
                     <input asp-for="CreateReport.GenLoc" class="form-control" required
                            maxlength="100" />
                     <span asp-validation-for="CreateReport.GenLoc" class="text-danger"></span>
@@ -179,7 +179,7 @@
 
 
             <div class="form-group">
-                <label asp-for="CreateReport.LastSeenTime" class="control-label"><b>When was the last time your pet was seen?</b></label>
+                <label asp-for="CreateReport.LastSeenTime" class="control-label"><b><span class="text-danger">*</span>When was the last time your pet was seen?</b></label>
                 <input asp-for="CreateReport.LastSeenTime" class="form-control" required/>
                 <span asp-validation-for="CreateReport.LastSeenTime" class="text-danger"></span>
             </div>
@@ -216,7 +216,7 @@
             <br />
 
             <div class="form-group">
-                <label asp-for="CreateReport.ContactInformation" class="control-label"><b>Your contact information (You may choose to share your phone number, email, or any preferred platforms)</b></label>
+                <label asp-for="CreateReport.ContactInformation" class="control-label"><b><span class="text-danger">*</span>Your contact information (You may choose to share your phone number, email, or any preferred platforms)</b></label>
                 <textarea asp-for="CreateReport.ContactInformation" class="form-control autosize character-count"
                           id="pet-ctc-input"
                           rows="5"
