@@ -140,7 +140,7 @@
 <div style="padding: 30px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 20px; background-color: #fff;">
     <h4>Confirm Deletion</h4>
     <hr />
-    <strong>Created on:</strong> @Model.Tribute.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
+    <strong>Created on:</strong> @Model.Tribute.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss")</p>
     <div class="form-group">
         <label asp-for="Tribute.TributePhoto" class="control-label"><b>Pet Photo</b></label>
         <br />
@@ -148,80 +148,31 @@
 
     </div>
     <dl class="row">
-        
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Tribute.PetName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Tribute.PetName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Tribute.PetType)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Tribute.PetType)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Tribute.PetBreed)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Tribute.PetBreed)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Tribute.PetSex)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Tribute.PetSex)
-        </dd>
+        <dt>Pet Name:</dt>
+        <dd style="white-space: pre-wrap; overflow-wrap: break-word;">@Model.Tribute.PetName</dd>
 
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Tribute.DateOfBirth)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Tribute.DateOfBirth)
-        </dd>
+        <dt>Pet Type:</dt>
+        <dd style="white-space: pre-wrap; overflow-wrap: break-word;">@Model.Tribute.PetType</dd>
 
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Tribute.DateOfAdoption)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Tribute.DateOfAdoption)
-        </dd>
+        <dt>Breed:</dt>
+        <dd style="white-space: pre-wrap; overflow-wrap: break-word;">@Model.Tribute.PetBreed</dd>
 
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Tribute.DateOfDeparture)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Tribute.DateOfDeparture)
-        </dd>
+        <dt>Sex:</dt>
+        <dd style="white-space: pre-wrap; overflow-wrap: break-word;">@Model.Tribute.PetSex</dd>
 
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Tribute.TributeText)
-        </dt>
-        <dd class="col-sm-10" style="white-space: pre-wrap;">
-            @Html.DisplayFor(model => model.Tribute.TributeText)
-        </dd>
+        <dt>Date of Birth:</dt>
+        <dd>@(Model.Tribute.DateOfBirth != null ? Model.Tribute.DateOfBirth.Value.ToString("dd-MMM-yyyy HH:mm") : "-")</dd>
 
-       @*  <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Tribute.IsPublic)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Tribute.IsPublic)
-        </dd>
- *@
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Tribute.Visibility)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Tribute.Visibility)
-        </dd>
-        
-        @* <div class="form-group">
-            <label asp-for="CreateReport.MainPhoto" class="control-label"><b>Pet Photo</b></label>
-            <br />
-            <img src="@Model.CreateReport.MainPhoto" class="img-thumbnail" style="max-width: 200px;" />
+        <dt>Date of Adoption:</dt>
+        <dd>@(Model.Tribute.DateOfAdoption != null ? Model.Tribute.DateOfAdoption.Value.ToString("dd-MMM-yyyy HH:mm") : "-")</dd>
 
-        </div> *@
+        <dt>Date of Departure:</dt>
+        <dd>@(Model.Tribute.DateOfDeparture != null ? Model.Tribute.DateOfDeparture.Value.ToString("dd-MMM-yyyy HH:mm") : "-")</dd>
+
+
+        <dt>Tribute Text:</dt>
+        <dd style="white-space: pre-wrap; overflow-wrap: break-word;">@Model.Tribute.TributeText</dd>
+
     </dl>
 
     <form method="post">

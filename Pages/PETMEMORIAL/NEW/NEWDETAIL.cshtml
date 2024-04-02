@@ -39,49 +39,42 @@
     <h1>@Model.Tribute.PetName</h1>
 
     <hr />
-    <p><strong>Created on:</strong> @Model.Tribute.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
+    <p><strong>Created on:</strong> @Model.Tribute.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss")</p>
     <dl>
-        @*  <dt>Pet Name:</dt>
-        <dd>@Model.Tribute.PetName</dd>
-        *@
-        <dt></dt>
-        <dd><img src="@Model.Tribute.TributePhoto" alt="Pet Photo" style="max-width: 300px;" /></dd>
+        <div class="form-group">
+            <label asp-for="Tribute.TributePhoto" class="control-label"><b>Pet Photo</b></label>
+            <br />
+            <img src="@Model.Tribute.TributePhoto" class="img-thumbnail" style="max-width: 200px;" />
 
-        @* <dt>Photo:</dt>
-        <dd>@Model.Tribute.TributePhoto</dd> *@
+        </div>
+        <dl class="row">
+            <dt>Pet Name:</dt>
+            <dd style="white-space: pre-wrap; overflow-wrap: break-word;">@Model.Tribute.PetName</dd>
 
-        <dt>Pet Type:</dt>
-        <dd>@Model.Tribute.PetType</dd>
+            <dt>Pet Type:</dt>
+            <dd style="white-space: pre-wrap; overflow-wrap: break-word;">@Model.Tribute.PetType</dd>
 
-        <dt>Breed:</dt>
-        <dd>@Model.Tribute.PetBreed</dd>
+            <dt>Breed:</dt>
+            <dd style="white-space: pre-wrap; overflow-wrap: break-word;">@Model.Tribute.PetBreed</dd>
 
-        <dt>Sex:</dt>
-        <dd>@Model.Tribute.PetSex</dd>
+            <dt>Sex:</dt>
+            <dd style="white-space: pre-wrap; overflow-wrap: break-word;">@Model.Tribute.PetSex</dd>
 
-        <dt>Date of Birth:</dt>
-        <dd>@Model.Tribute.DateOfBirth</dd>
+            <dt>Date of Birth:</dt>
+            <dd>@(Model.Tribute.DateOfBirth != null ? Model.Tribute.DateOfBirth.Value.ToString("dd-MMM-yyyy HH:mm") : "-")</dd>
 
-        <dt>Date of Adoption:</dt>
-        <dd>@Model.Tribute.DateOfAdoption </dd>
+            <dt>Date of Adoption:</dt>
+            <dd>@(Model.Tribute.DateOfAdoption != null ? Model.Tribute.DateOfAdoption.Value.ToString("dd-MMM-yyyy HH:mm") : "-")</dd>
 
-        <dt>Date of Departure:</dt>
-        <dd>@Model.Tribute.DateOfDeparture</dd>
-
-        <dt>Tribute Text:</dt>
-        <dd style="white-space: pre-wrap;">@Model.Tribute.TributeText  </dd>
-
-        @* <dt>Public:</dt>
-        <dd>@Model.Tribute.IsPublic </dd>
-        *@
-        <dt>Visibility:</dt>
-        <dd>@Model.Tribute.Visibility </dd>
-
-        @*  <dt>Main Photo:</dt>
-        <dd><img src="@Model.Tribute.TributePhoto" alt="Pet Photo" style="max-width: 300px;" /></dd> *@
+            <dt>Date of Departure:</dt>
+            <dd>@(Model.Tribute.DateOfDeparture != null ? Model.Tribute.DateOfDeparture.Value.ToString("dd-MMM-yyyy HH:mm") : "-")</dd>
 
 
-    </dl>
+            <dt>Tribute Text:</dt>
+            <dd style="white-space: pre-wrap; overflow-wrap: break-word;">@Model.Tribute.TributeText</dd>
+
+        </dl>
+
 
     <div>
         <a asp-page="./Edit" asp-route-id="@Model.Tribute?.Id" class="btn" id="edit">Edit</a>
