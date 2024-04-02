@@ -73,7 +73,7 @@
 <div class="tribute-container">
 @foreach (var item in Model.Tribute.Reverse())
 {
-    <div class="tribute" style="border: 1px solid #ccc; padding: 30px; margin-bottom: 20px;  border-radius: 5px; background-color: #fff;">
+    <div class="tribute" style="border: 1px solid #ccc; padding: 30px; margin-bottom: 20px;  border-radius: 5px; background-color: #fff; ">
             <h3 class="searchable">@item.PetName </h3>
 
       
@@ -108,7 +108,7 @@
             <p class="searchable">@(string.IsNullOrEmpty(item.Cause) ? "-" : item.Cause) </p>
 
             <p><strong>Tribute Text:</strong>
-            <p style="white-space: pre-wrap;" class="searchable">@(string.IsNullOrEmpty(item.TributeText) ? "-" : item.TributeText) </p>
+            <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable">@(string.IsNullOrEmpty(item.TributeText) ? "-" : item.TributeText) </p>
             <br />
 
             <p><strong>Created on:</strong>
