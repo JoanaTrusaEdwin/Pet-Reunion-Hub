@@ -35,19 +35,19 @@
 <br />
 
 <div class="report-container">
-  
+
 
     @foreach (var report in Model.CreateReport.Reverse())
     {
         <div class="report">
 
-            <h2 class="searchable">@report.PetName</h2>
-            <br/>
+            <h2 style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable">@report.PetName</h2>
+            <br />
 
             <h5>Owner Contact Information:</h5>
-            <p class="searchable">@report.ContactInformation</p>
-            <br/>
-          
+            <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable">@report.ContactInformation</p>
+            <br />
+
             <div class="photos">
                 @foreach (var photo in report.ReportPhotos)
                 {
@@ -55,11 +55,11 @@
                 }
             </div>
             <p><strong>General Location:</strong></p>
-            <p class="searchable"> @report.GenLoc</p>
+            <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable"> @report.GenLoc</p>
             <br />
 
             <p><strong>Last Seen Location:</strong></p>
-            <p class="searchable"> @report.LastSeenLocation</p>
+            <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable"> @report.LastSeenLocation</p>
             <br />
 
             <p><strong>Last Seen Time:</strong></p>
@@ -68,15 +68,15 @@
 
 
             <p><strong>Estimated Age:</strong></p>
-            <p class="searchable"> @report.Age</p>
+            <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable"> @report.Age</p>
             <br />
 
             <p><strong>Pet Microchip ID:</strong></p>
-            <p class="searchable"> @(string.IsNullOrEmpty(report.PetMicrochipID) ? "-" : report.PetMicrochipID)</p>
+            <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable"> @(string.IsNullOrEmpty(report.PetMicrochipID) ? "-" : report.PetMicrochipID)</p>
             <br />
 
             <p><strong>Type and Breed:</strong></p>
-            <p class="searchable"> @report.PetBreed</p>
+            <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable"> @report.PetBreed</p>
             <br />
 
             <p><strong>Sex:</strong></p>
@@ -85,7 +85,7 @@
 
 
             <p><strong>Additional Description:</strong></p>
-            <p class="searchable"> @report.AdditionalDescription</p>
+            <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable"> @report.AdditionalDescription</p>
             <br />
 
             <p><strong>Date of Birth:</strong></p>
@@ -93,10 +93,10 @@
             <br />
 
             <p><strong>Created on:</strong></p>
-            <p class="searchable">@report.CreatedAt.ToString("dd-MMM-yyy HH:mm:ss")</p>
+            <p class="searchable">@report.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
             <br />
             @*  COMMENT *@
-          
+
         </div>
     }
 
