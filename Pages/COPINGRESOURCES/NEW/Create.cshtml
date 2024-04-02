@@ -81,7 +81,7 @@
         <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="RESOURCE.TITLE" class="control-label"><b>Title</b></label>
+                <label asp-for="RESOURCE.TITLE" class="control-label"><b><span class="text-danger">*</span>Title</b></label>
                 <input asp-for="RESOURCE.TITLE" class="form-control character-count" required
                        id="pet-title-input"
                        maxlength="255"
@@ -98,7 +98,7 @@
             </div> *@
 
             <div class="form-group">
-                <label asp-for="RESOURCE.DESCRIPTION" class="control-label"><b>Description</b></label>
+                <label asp-for="RESOURCE.DESCRIPTION" class="control-label"><b><span class="text-danger">*</span>Description</b></label>
                 <textarea asp-for="RESOURCE.DESCRIPTION" class="form-control autosize  character-count" required
                           id="pet-content-input"
                           rows="5"

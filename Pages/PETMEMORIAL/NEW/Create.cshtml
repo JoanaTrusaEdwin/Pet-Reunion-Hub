@@ -87,7 +87,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                <label asp-for="Tribute.PetName" class="control-label"><b>Name</b></label>
+                    <label asp-for="Tribute.PetName" class="control-label"><b><span class="text-danger">*</span>Name</b></label>
                     <input asp-for="Tribute.PetName" class="form-control character-count" required
                            id="pet-name-input"
                            maxlength="255"
@@ -98,7 +98,7 @@
             <br/>
 
             <div class="form-group">
-                <label asp-for="Tribute.PetType" class="control-label"><b>Pet Type</b></label>
+                    <label asp-for="Tribute.PetType" class="control-label"><b><span class="text-danger">*</span>Pet Type</b></label>
                     <input asp-for="Tribute.PetType" class="form-control character-count" required
                            id="pet-type-input"
                            maxlength="100"
@@ -195,29 +195,8 @@
                     <img id="mainPhotoPreview" src="#" alt="Main Photo Preview" style="display: none; max-width: 200px;">
                 </div>
 
-@* 
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Tribute.IsPublic" /> @Html.DisplayNameFor(model => model.Tribute.IsPublic)
-                </label>
-            </div>
-                <br /> *@
 
-                <div class="form-group">
-                    <label asp-for="Tribute.Visibility" class="control-label"><b>Visibility</b></label>
-                    <select asp-for="Tribute.Visibility" class="form-control">
-                        <option value="Private">Private</option>
-                        <option value="Public">Public</option>
-                    </select>
-                    <span asp-validation-for="Tribute.Visibility" class="text-danger"></span>
-                </div>
-                <br/>
-
-         @*    <div class="form-group">
-                <label asp-for="Tribute.UserId" class="control-label"></label>
-                <select asp-for="Tribute.UserId" class ="form-control" asp-items="ViewBag.UserId"></select>
-            </div> *@
-
+          
             <input type="hidden" asp-for="Tribute.UserId" />
             <div class="form-group">
                     <input type="submit" id="submitbtn" value="Create" class="btn btn-primary" />
