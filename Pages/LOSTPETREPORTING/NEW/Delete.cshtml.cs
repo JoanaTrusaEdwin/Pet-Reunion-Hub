@@ -90,6 +90,7 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
 
         [BindProperty]
         public CreateReport CreateReport { get; set; }
+        public List<IFormFile> Photos { get; set; } = new List<IFormFile>();
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -98,7 +99,7 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
                 return NotFound();
             }
 
-            CreateReport = await _context.CreateReport.FirstOrDefaultAsync(m => m.Id == id);
+            CreateReport = await _context.CreateReport.Include(cr => cr.ReportPhotos).FirstOrDefaultAsync(m => m.Id == id);
 
             if (CreateReport == null)
             {
