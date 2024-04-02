@@ -171,7 +171,7 @@
 
 
         <dt>Tribute Text:</dt>
-        <dd style="white-space: pre-wrap; overflow-wrap: break-word;">@Model.Tribute.TributeText</dd>
+        <dd style="white-space: pre-wrap; overflow-wrap: break-word;">@(Model.Tribute.TributeText != null ? Model.Tribute.TributeText : "-")
 
     </dl>
 
