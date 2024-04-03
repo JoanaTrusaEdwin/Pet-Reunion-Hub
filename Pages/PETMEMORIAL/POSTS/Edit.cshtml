@@ -100,6 +100,7 @@
                     foreach (var Media in Model.Post.Media)
                     {
                         <img src="@Media.MediaUrl" alt="Additional Media" class="img-fluid" />
+                        <button type="button" class="btn btn-danger remove-btn" data-media-id="@Media.Id">Remove</button>
                         <br/>
                     }
                 }
@@ -134,10 +135,35 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script
+        src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
        <script>
-        document.querySelectorAll('textarea.autosize').forEach(function (element) {
-            autoExpandTextarea(element);
+        $(document).ready(function () {
+            $(".remove-btn").click(function () {
+                var button = $(this); // Store reference to the button element
+                var mediaId = button.data("media-id");
+                $.ajax({
+                    url: "https://localhost:7145/PETMEMORIAL/POSTS/Edit?handler=RemoveMedia"
+                    , // Adjust the URL to match your endpoint
+                    method: "POST",
+                    contentType: "application/json", // Specify content type
+                    data: JSON.stringify({ MediaId: mediaId }),// Serialize mediaId as a simple integer
+                    success: function (response) {
+                        // Handle success
+                        button.closest('div').remove();
+                        console.log("Image removed");
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error
+                        console.log("Error removing image " + error);
+                    }
+                });
+            });
         });
+
+        // document.querySelectorAll('textarea.autosize').forEach(function (element) {
+        //     autoExpandTextarea(element);
+        // });
 
         //TO CONTROL NUMBER OF CHARACTERS
         function updateCharacterCount(inputId, countId, limit) {

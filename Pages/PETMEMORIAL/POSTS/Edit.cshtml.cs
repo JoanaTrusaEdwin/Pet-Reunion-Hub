@@ -17,7 +17,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
 {
-    [Authorize]
+    //[Authorize]
     public class EditModel : PageModel
     {
         private readonly DatabaseContext _context;
@@ -130,6 +130,30 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
                 throw;
             }
         }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> OnPostRemoveMediaAsync([FromBody] int MediaId)
+        {
+            try
+            {
+                var mediaToRemove = await _context.Media.FindAsync(MediaId);
+                if (mediaToRemove != null)
+                {
+                    _context.Media.Remove(mediaToRemove);
+                    await _context.SaveChangesAsync();
+                    _logger.LogInformation("Media file removed successfully.");
+                    return new JsonResult(new { success = true });
+                }
+                return new JsonResult(new { success = false, error = "Media file not found." });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error removing media file:");
+                return new JsonResult(new { success = false, error = ex.Message });
+            }
+        }
+
 
         private async Task UpdateOrCreateMedia(Post existingPost,  List<IFormFile> mediaFiles)
         {
