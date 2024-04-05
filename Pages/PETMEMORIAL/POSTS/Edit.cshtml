@@ -174,6 +174,8 @@
             $(".remove-btn").click(function () {
                 var button = $(this);
                 var mediaId = button.data("media-id");
+                console.log("Media ID:", mediaId);
+
                 $.ajax({
                     url: "https://localhost:7145/PETMEMORIAL/POSTS/Edit?handler=RemoveMedia",
                     method: "POST",

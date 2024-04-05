@@ -133,10 +133,14 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
 
         //[HttpPost]
         //[ValidateAntiForgeryToken]
+
+
         public async Task<IActionResult> OnPostRemoveMediaAsync([FromBody] int MediaId)
         {
+            
             try
             {
+                _logger.LogInformation("Received media ID: {MediaId}", MediaId);
                 var mediaToRemove = await _context.Media.FindAsync(MediaId);
                 if (mediaToRemove != null)
                 {
@@ -145,7 +149,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
                     _logger.LogInformation("Media file removed successfully.");
                     return new JsonResult(new { success = true });
                 }
-                return new JsonResult(new { success = false, error = "Media file not found." });
+                return new JsonResult(new { success = false, error = "Could not remove media." });
             }
             catch (Exception ex)
             {
