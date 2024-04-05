@@ -179,11 +179,11 @@
                 $.ajax({
                     url: "https://localhost:7145/PETMEMORIAL/POSTS/Edit?handler=RemoveMedia",
                     method: "POST",
-                    contentType: "application/json",
+                   
                     headers: {
                         "RequestVerificationToken": token
                     },
-                    data: JSON.stringify({ MediaId: mediaId }),
+                    data: { MediaId: mediaId },
                     success: function (response) {
                         // Handle success
                         if (response.success) {

@@ -135,7 +135,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
         //[ValidateAntiForgeryToken]
 
 
-        public async Task<IActionResult> OnPostRemoveMediaAsync([FromBody] int MediaId)
+        public async Task<IActionResult> OnPostRemoveMediaAsync(int MediaId)
         {
             
             try
