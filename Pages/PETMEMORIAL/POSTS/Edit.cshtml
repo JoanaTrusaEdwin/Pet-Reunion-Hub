@@ -172,24 +172,29 @@
 
         $(document).ready(function () {
             $(".remove-btn").click(function () {
-                var button = $(this); // Store reference to the button element
+                var button = $(this);
                 var mediaId = button.data("media-id");
                 $.ajax({
                     url: "https://localhost:7145/PETMEMORIAL/POSTS/Edit?handler=RemoveMedia",
                     method: "POST",
-                    contentType: "application/json", // Specify content type
+                    contentType: "application/json",
                     headers: {
-                        "RequestVerificationToken": token // Include antiforgery token in headers
+                        "RequestVerificationToken": token
                     },
-                    data: JSON.stringify({ MediaId: mediaId }), // Serialize mediaId as a simple integer
+                    data: JSON.stringify({ MediaId: mediaId }),
                     success: function (response) {
                         // Handle success
-                        button.closest('div').remove();
-                        console.log("Image removed");
+                        if (response.success) {
+                            button.prev('img').remove(); // Remove the previous sibling image
+                            button.remove(); // Remove the remove button itself
+                            console.log("Image removed");
+                        } else {
+                            console.log("Error: " + response.error);
+                        }
                     },
                     error: function (xhr, status, error) {
                         // Handle error
-                        console.log("Error removing image " + error);
+                        console.log("Error removing image: " + error);
                     }
                 });
             });
