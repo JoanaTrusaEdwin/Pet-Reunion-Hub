@@ -189,7 +189,11 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
             var blobServiceClient = new BlobServiceClient(azureBlobStorageConnectionString);
             var containerClient = blobServiceClient.GetBlobContainerClient(containerName);
 
-            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(mediaFile.FileName);
+            //var fileName = Guid.NewGuid().ToString() + Path.GetExtension(mediaFile.FileName);
+
+            string uniqueIdentifier = Guid.NewGuid().ToString();
+            string fileName = $"{Path.GetFileName(mediaFile.FileName)}_{uniqueIdentifier}";
+
             var blobClient = containerClient.GetBlobClient(fileName);
 
             using (var stream = mediaFile.OpenReadStream())
