@@ -192,15 +192,19 @@
             var photosGroup = document.querySelector('.form-group.photos-group');
             photosGroup.appendChild(input);
 
-            var removeButton = document.createElement('button');
-            removeButton.type = 'button';
-            removeButton.className = 'btn btn-danger';
-            removeButton.textContent = 'Remove';
-            removeButton.onclick = function () {
-                photosGroup.removeChild(input);
-                photosGroup.removeChild(removeButton);
-            };
-            photosGroup.appendChild(removeButton);
+            var previewContainer = document.createElement('div');
+            previewContainer.className = 'additional-photos-preview';
+            photosGroup.appendChild(previewContainer);
+
+            // var removeButton = document.createElement('button');
+            // removeButton.type = 'button';
+            // removeButton.className = 'btn btn-danger';
+            // removeButton.textContent = 'Remove';
+            // removeButton.onclick = function () {
+            //     photosGroup.removeChild(input);
+            //     photosGroup.removeChild(removeButton);
+            // };
+            // photosGroup.appendChild(removeButton);
         }
 
         //TO PREVIEW EACH PHOTO
