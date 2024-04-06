@@ -7,6 +7,7 @@
 }
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Mvc.RazorPages
+<script src="https://vjs.zencdn.net/7.10.4/video.js"></script>
 
 <style>
 
@@ -56,6 +57,11 @@
     .highlight {
         background-color: yellow;
     }
+
+    .media-container video,
+    .media-container audio {
+        vertical-align: middle;
+    }
 </style>
 <h1>Your Moments and Stories</h1>
 <br/>
@@ -91,7 +97,20 @@
                 <div class="media-container">
                     @foreach (var mediaItem in item.Media)
                     {
+                       
+                        @if (mediaItem.MediaType == "Image")
+                        {
                         <img src="@mediaItem.MediaUrl" alt="Media Image" style="max-width: 200px; margin-right: 10px;">
+                        }
+                        else if (mediaItem.MediaType == "Video")
+                        {
+                        <video src="@mediaItem.MediaUrl" controls style="max-width: 200px; margin-right: 10px;"></video>
+
+                        }
+                        else if (mediaItem.MediaType == "Audio")
+                        {
+                        <audio src="@mediaItem.MediaUrl" controls style="max-width: 200px; margin-right: 10px;"></audio>
+                        }
                     }
                 </div>
             }

@@ -107,7 +107,7 @@
             <br /> *@
             <div class="form-group photos-group">
                 <label asp-for="MediaFiles" class="control-label"><b>Upload photos, videos, audios that perfectly capture your beloved pet's memories'</b></label>
-                <input type="file" name="MediaFiles" class="form-control" onchange="previewAdditionalPhotos(event)" />
+                <input type="file" name="MediaFiles" class="form-control" onchange="validateAndPreviewPhotos(event)" />
                 <span asp-validation-for="MediaFiles" class="text-danger"></span>
                 <div class="additional-photos-preview"></div>
                 <div class="form-group">
@@ -190,6 +190,18 @@
             return isValid;
         }
 
+        function validateAndPreviewPhotos(event) {
+            var files = event.target.files;
+            for (var i = 0; i < files.length; i++) {
+                if (files[i].size > 2.1 * 1024 * 1024) { // 2.1 MB limit
+                    alert('File size exceeds the limit of 2.1 MB');
+                    event.target.value = '';
+                    return;
+                }
+            }
+            previewAdditionalPhotos(event);
+        }
+
         //TO ADD PHOTOS
         function addMorePhotos() {
             var input = document.createElement('input');
@@ -253,7 +265,7 @@
                             video.src = event.target.result;
                             video.className = 'preview-video';
                             video.controls = true;
-                            video.style.maxWidth = '200px';
+                            video.style.maxWidth = '500px';
 
                             var previewVideo = document.createElement('video');
                             previewVideo.src = event.target.result;
