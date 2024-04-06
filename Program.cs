@@ -55,6 +55,28 @@ builder.Logging.AddConsole(options =>
 
 var app = builder.Build();
 
+
+// Countdown Timer for Session Expiry Warning
+app.Use(async (context, next) =>
+{
+    var cookieExpireTime = TimeSpan.FromMinutes(30); // Cookie expiry time
+    var warningTime = TimeSpan.FromMinutes(3); // Warning time before expiry
+
+    var timeUntilExpiration = context.Request.Cookies[".AspNetCore.Identity.Application"] != null
+        ? cookieExpireTime - (DateTimeOffset.UtcNow - DateTimeOffset.Parse(context.Request.Cookies[".AspNetCore.Identity.Application"]))
+        : TimeSpan.Zero;
+
+    if (timeUntilExpiration <= warningTime && timeUntilExpiration > TimeSpan.Zero)
+    {
+        // Display a warning message to the user
+        // This could be a pop-up notification or a countdown timer in the UI
+        Console.WriteLine("Your session will expire in three minutes. Please save your work or extend your session.");
+    }
+
+    await next();
+});
+
+
 //Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
