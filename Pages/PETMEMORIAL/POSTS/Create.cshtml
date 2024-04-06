@@ -178,55 +178,6 @@
             return isValid;
         }
 
-        // //FOR ADDITIONAL PHOTOS
-        // function addMorePhotos() {
-        //     var input = document.createElement('input');
-        //     input.type = 'file';
-        //     input.multiple = true;
-        //     input.className = 'form-control';
-        //     input.name = 'MediaFiles';
-        //     input.onchange = function (event) {
-        //         previewAdditionalPhotos(event);
-        //     };
-
-        //     var photosGroup = document.querySelector('.form-group.photos-group');
-        //     photosGroup.appendChild(input);
-
-        //     var removeButton = document.createElement('button');
-        //     removeButton.type = 'button';
-        //     removeButton.className = 'btn btn-danger';
-        //     removeButton.textContent = 'Remove';
-        //     removeButton.onclick = function () {
-        //         photosGroup.removeChild(input);
-        //         photosGroup.removeChild(removeButton);
-        //     };
-        //     photosGroup.appendChild(removeButton);
-        // }
-
-        // //PREVIEWS THE ADDITIONAL PHOTOS
-        // function previewAdditionalPhotos(event) {
-        //     var input = event.target;
-        //     var reader;
-
-        //     // Clear existing previews for this input
-        //     var previewContainer = input.nextElementSibling;
-        //     previewContainer.innerHTML = '';
-
-        //     // Loop through each selected file
-        //     for (var i = 0; i < input.files.length; i++) {
-        //         reader = new FileReader();
-        //         reader.onload = function () {
-        //             var img = document.createElement('img');
-        //             img.src = reader.result;
-        //             img.className = 'img-thumbnail';
-        //             img.style.maxWidth = '200px';
-
-        //             previewContainer.appendChild(img);
-        //         };
-
-        //         reader.readAsDataURL(input.files[i]);
-        //     }
-        // }
         //TO ADD PHOTOS
         function addMorePhotos() {
             var input = document.createElement('input');
@@ -280,39 +231,6 @@
                 reader.readAsDataURL(input.files[i]);
             }
         }
-
-                      // function previewAdditionalPhotos(event) {
-                //     var previewContainer = document.querySelector('.additional-photos-preview');
-
-                //     var files = event.target.files;
-                //     for (var i = 0; i < files.length; i++) {
-                //         var file = files[i];
-                //         if (file.type.match('image.*')) {
-                //             var reader = new FileReader();
-                //             reader.onload = function (e) {
-                //                 var image = document.createElement('img');
-                //                 image.className = 'preview-image';
-                //                 image.src = e.target.result;
-
-                //                 var removeButton = document.createElement('button');
-                //                 removeButton.innerHTML = 'Remove';
-                //                 removeButton.className = 'btn btn-danger remove-button';
-                //                 removeButton.addEventListener('click', function () {
-                //                     var previewDiv = this.parentNode;
-                //                     var fileInput = document.querySelector('input[type="file"]');
-                //                     fileInput.value = null; // Reset input value to clear the file selection
-                //                     previewContainer.removeChild(previewDiv); // Remove the preview container
-                //                 });
-
-                //                 var previewDiv = document.createElement('div');
-                //                 previewDiv.appendChild(image);
-                //                 previewDiv.appendChild(removeButton);
-                //                 previewContainer.appendChild(previewDiv);
-                //             }
-                //             reader.readAsDataURL(file);
-                //         }
-                //     }
-                // }
 
     </script>
 }
