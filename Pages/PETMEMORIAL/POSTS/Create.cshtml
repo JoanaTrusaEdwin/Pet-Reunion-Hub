@@ -229,6 +229,15 @@
                         previewImg.style.backgroundColor = 'transparent';
 
                         previewContainer.appendChild(previewImg);
+
+                        var removeBtn = document.createElement('button');
+                        removeBtn.className = 'remove-btn btn btn-danger';
+                        removeBtn.textContent = 'Remove';
+                        removeBtn.addEventListener('click', function () {
+                            input.value = '';
+                            previewContainer.innerHTML = '';
+                        });
+                        previewContainer.appendChild(removeBtn);
                     };
                 })(input.files[i]);
 
