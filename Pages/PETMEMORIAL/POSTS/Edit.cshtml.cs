@@ -161,9 +161,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
 
         private async Task UpdateOrCreateMedia(Post existingPost,  List<IFormFile> mediaFiles)
         {
-            // Clear existing media if any
-            existingPost.Media.Clear();
-
+            
             // Add new media
             if (mediaFiles != null && mediaFiles.Count > 0)
             {

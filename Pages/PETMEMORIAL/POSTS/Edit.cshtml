@@ -289,34 +289,94 @@
             previewContainer.innerHTML = '';
 
             for (var i = 0; i < input.files.length; i++) {
+                var file = input.files[i];
                 var reader = new FileReader();
-                reader.onload = (function (file) {
-                    return function (event) {
-                        var img = document.createElement('img');
-                        img.src = event.target.result;
-                        img.className = 'preview-image';
-                        img.style.maxWidth = '100px';
 
-                        var previewImg = document.createElement('img');
-                        previewImg.src = event.target.result;
-                        previewImg.className = 'preview-image';
-                        previewImg.style.maxWidth = '200px';
-                        previewImg.style.backgroundColor = 'transparent';
+                if (file.type.startsWith("image/")) {
+                    reader.onload = (function (file) {
+                        return function (event) {
+                            var img = document.createElement('img');
+                            img.src = event.target.result;
+                            img.className = 'preview-image';
+                            img.style.maxWidth = '100px';
 
-                        previewContainer.appendChild(previewImg);
+                            var previewImg = document.createElement('img');
+                            previewImg.src = event.target.result;
+                            previewImg.className = 'preview-image';
+                            previewImg.style.maxWidth = '200px';
+                            previewImg.style.backgroundColor = 'transparent';
 
-                        var removeBtn = document.createElement('button');
-                        removeBtn.className = 'remove-btn btn btn-danger';
-                        removeBtn.textContent = 'Remove';
-                        removeBtn.addEventListener('click', function () {
-                            input.value = '';
-                            previewContainer.innerHTML = '';
-                        });
-                        previewContainer.appendChild(removeBtn);
-                    };
-                })(input.files[i]);
+                            previewContainer.appendChild(previewImg);
 
-                reader.readAsDataURL(input.files[i]);
+                            var removeBtn = document.createElement('button');
+                            removeBtn.className = 'remove-btn btn btn-danger';
+                            removeBtn.textContent = 'Remove';
+                            removeBtn.addEventListener('click', function () {
+                                input.value = '';
+                                previewContainer.innerHTML = '';
+                            });
+                            previewContainer.appendChild(removeBtn);
+                        };
+                    })(file);
+                } else if (file.type.startsWith("video/")) {
+                    reader.onload = (function (file) {
+                        return function (event) {
+                            var video = document.createElement('video');
+                            video.src = event.target.result;
+                            video.className = 'preview-video';
+                            video.controls = true;
+                            video.style.maxWidth = '500px';
+
+                            var previewVideo = document.createElement('video');
+                            previewVideo.src = event.target.result;
+                            previewVideo.className = 'preview-video';
+                            previewVideo.controls = true;
+                            previewVideo.style.maxWidth = '300px';
+                            previewVideo.style.backgroundColor = 'transparent';
+
+                            previewContainer.appendChild(previewVideo);
+
+                            var removeBtn = document.createElement('button');
+                            removeBtn.className = 'remove-btn btn btn-danger';
+                            removeBtn.textContent = 'Remove';
+                            removeBtn.addEventListener('click', function () {
+                                input.value = '';
+                                previewContainer.innerHTML = '';
+                            });
+                            previewContainer.appendChild(removeBtn);
+                        };
+                    })(file);
+                } else if (file.type.startsWith("audio/")) {
+                    reader.onload = (function (file) {
+                        return function (event) {
+                            var audio = document.createElement('audio');
+                            audio.src = event.target.result;
+                            audio.className = 'preview-audio';
+                            audio.controls = true;
+                            audio.style.maxWidth = '300px';
+
+                            var previewAudio = document.createElement('audio');
+                            previewAudio.src = event.target.result;
+                            previewAudio.className = 'preview-audio';
+                            previewAudio.controls = true;
+                            previewAudio.style.maxWidth = '300px';
+                            previewAudio.style.backgroundColor = 'transparent';
+
+                            previewContainer.appendChild(previewAudio);
+
+                            var removeBtn = document.createElement('button');
+                            removeBtn.className = 'remove-btn btn btn-danger';
+                            removeBtn.textContent = 'Remove';
+                            removeBtn.addEventListener('click', function () {
+                                input.value = '';
+                                previewContainer.innerHTML = '';
+                            });
+                            previewContainer.appendChild(removeBtn);
+                        };
+                    })(file);
+                }
+
+                reader.readAsDataURL(file);
             }
         }
     </script>
