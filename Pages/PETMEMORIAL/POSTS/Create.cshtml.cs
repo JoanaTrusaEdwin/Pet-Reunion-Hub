@@ -147,7 +147,9 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
                             string connectionString = _configuration["AzureBlobStorageConnectionString"];
                             var blobServiceClient = new BlobServiceClient(azureBlobStorageConnectionString);
                             var containerClient = blobServiceClient.GetBlobContainerClient("posts");
-                            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                            //var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                            string uniqueIdentifier = Guid.NewGuid().ToString();
+                            string fileName = $"{Path.GetFileName(file.FileName)}_{uniqueIdentifier}";
                             var blobClient = containerClient.GetBlobClient(fileName);
 
                             using (var stream = file.OpenReadStream())
