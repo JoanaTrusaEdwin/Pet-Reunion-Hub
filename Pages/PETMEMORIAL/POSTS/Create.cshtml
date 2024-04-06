@@ -94,7 +94,7 @@
 
             <div class="form-group photos-group">
                 <label asp-for="MediaFiles" class="control-label"><b>Upload photos, videos, audios that perfectly capture your beloved pet's memories'</b></label>
-                <input type="file" name="MediaFiles" multiple class="form-control" onchange="previewAdditionalPhotos(event)" />
+                <input type="file" name="MediaFiles" class="form-control" onchange="previewAdditionalPhotos(event)" />
                 <span asp-validation-for="MediaFiles" class="text-danger"></span>
                 <div class="additional-photos-preview"></div>
                 <button type="button" class="btn btn-primary" onclick="addMorePhotos()">+</button>

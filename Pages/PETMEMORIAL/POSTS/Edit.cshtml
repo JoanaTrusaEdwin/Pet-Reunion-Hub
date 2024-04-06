@@ -108,10 +108,10 @@
             </div>
               <div class="form-group photos-group">
                 <label asp-for="MediaFiles" class="control-label"><b>Upload photos, videos, audios that perfectly capture your beloved pet's memories'</b></label>
-                <input type="file" name="MediaFiles" multiple class="form-control" onchange="previewAdditionalPhotos(event)" />
+                <input type="file" name="MediaFiles" class="form-control" onchange="previewAdditionalPhotos(event)" />
                 <span asp-validation-for="MediaFiles" class="text-danger"></span>
                 <div class="additional-photos-preview"></div>
-               @*  <button type="button" class="btn btn-primary" onclick="addMorePhotos()">+</button> *@
+                <button type="button" class="btn btn-primary" onclick="addMorePhotos()">+</button>
                 <br/>
             </div>
 
@@ -260,31 +260,25 @@
             return isValid;
         }
 
-        //TO ADD PHOTOS
-        // function addMorePhotos() {
-        //     var input = document.createElement('input');
-        //     input.type = 'file';
-        //     input.multiple = true;
-        //     input.className = 'form-control';
-        //     input.name = 'MediaFiles';
-        //     input.onchange = function (event) {
-        //         previewAdditionalPhotos(event);
-        //     };
+        function addMorePhotos() {
+            var input = document.createElement('input');
+            input.type = 'file';
+            input.multiple = true;
+            input.className = 'form-control';
+            input.name = 'MediaFiles';
+            input.onchange = function (event) {
+                previewAdditionalPhotos(event);
+            };
 
-        //     var photosGroup = document.querySelector('.form-group.photos-group');
-        //     photosGroup.appendChild(input);
+            var photosGroup = document.querySelector('.form-group.photos-group');
+            photosGroup.appendChild(input);
 
-        //     var removeButton = document.createElement('button');
-        //     removeButton.type = 'button';
-        //     removeButton.className = 'btn btn-danger';
-        //     removeButton.textContent = 'Remove';
-        //     removeButton.onclick = function () {
-        //         photosGroup.removeChild(input);
-        //         photosGroup.removeChild(removeButton);
-        //     };
-        //     photosGroup.appendChild(removeButton);
-        // }
+            var previewContainer = document.createElement('div');
+            previewContainer.className = 'additional-photos-preview';
+            photosGroup.appendChild(previewContainer);
 
+            
+        }
         //TO PREVIEW EACH PHOTO
         function previewAdditionalPhotos(event) {
             var input = event.target;
@@ -307,6 +301,15 @@
                         previewImg.style.backgroundColor = 'transparent';
 
                         previewContainer.appendChild(previewImg);
+
+                        var removeBtn = document.createElement('button');
+                        removeBtn.className = 'remove-btn btn btn-danger';
+                        removeBtn.textContent = 'Remove';
+                        removeBtn.addEventListener('click', function () {
+                            input.value = '';
+                            previewContainer.innerHTML = '';
+                        });
+                        previewContainer.appendChild(removeBtn);
                     };
                 })(input.files[i]);
 
