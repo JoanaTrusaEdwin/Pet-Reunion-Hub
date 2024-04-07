@@ -85,6 +85,7 @@
             <div class="form-group">
                 <label asp-for="CreateReport.PetName" class="control-label"><b><span class="text-danger">*</span>Pet Name</b></label>
                 <textarea asp-for="CreateReport.PetName" class="form-control autosize character-count"
+                          required
                           id="pet-name-input"
                           maxlength="150"
                           oninput="handleInput(event, 'pet-name-count')"></textarea>
@@ -267,8 +268,9 @@
 
 
             <div class="form-group">
-                <label asp-for="CreateReport.LastSeenLocation" class="control-label"><b>Describe where you last saw your pet. It can be a specific address, description of the location, etc.</b></label>
+                <label asp-for="CreateReport.LastSeenLocation" class="control-label"><b><span class="text-danger">*</span>Describe where you last saw your pet. It can be a specific address, description of the location, etc.</b></label>
                 <textarea asp-for="CreateReport.LastSeenLocation" class="form-control autosize character-count"
+                          required
                           id="pet-location-input"
                           rows="5"
                           maxlength="1000"
@@ -305,7 +307,7 @@
 
             @* ADDITIONAL PHOTOS *@
             <div class="form-group photos-group">
-                <label asp-for="Photos" class="control-label"><b>Upload one or more photos of your pet</b></label>
+                <label asp-for="Photos" class="control-label"><b><span class="text-danger">*</span>Upload one or more photos of your pet</b></label>
                 <input type="file" name="Photos" class="form-control" accept="image/*" onchange="validateAndPreviewPhotos(event)" />
                 <span asp-validation-for="Photos" class="text-danger"></span>
                 <div class="additional-photos-preview"></div>
@@ -316,14 +318,15 @@
             </div>
             <button type="button" class="btn btn-primary" onclick="addMorePhotos()">+</button>
 
-            <div class="form-group">
+            @* <div class="form-group">
                 <img src="#" alt="Main Photo Preview" style="display: none; max-width: 200px;">
-            </div>
+            </div> *@
             <br />
 
             <div class="form-group">
                 <label asp-for="CreateReport.ContactInformation" class="control-label"><b><span class="text-danger">*</span>Your contact information (You may choose to share your phone number, email, or any preferred platforms)</b></label>
                 <textarea asp-for="CreateReport.ContactInformation" class="form-control autosize character-count"
+                          required
                           id="pet-ctc-input"
                           rows="5"
                           maxlength="1000"
@@ -462,9 +465,10 @@
         function addMorePhotos() {
             var input = document.createElement('input');
             input.type = 'file';
-            input.multiple = true;
+           
             input.className = 'form-control';
             input.name = 'Photos';
+            input.accept = 'image/*';
             input.onchange = function (event) {
                 previewAdditionalPhotos(event);
             };

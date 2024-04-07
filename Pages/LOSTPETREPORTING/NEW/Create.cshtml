@@ -109,7 +109,7 @@
                 <label asp-for="CreateReport.PetName" class="control-label"><b><span class="text-danger">*</span>Pet Name</b></label>
                 <textarea asp-for="CreateReport.PetName" class="form-control autosize character-count"
                           id="pet-name-input"
-                          
+                          required
                           maxlength="150"
                           oninput="handleInput(event, 'pet-name-count')"></textarea>
                 <span id="pet-name-count" class="character-count-display">0/150</span>
@@ -315,8 +315,9 @@
                 <br /> *@
 
             <div class="form-group">
-                <label asp-for="CreateReport.LastSeenLocation" class="control-label"><b>Describe where you last saw your pet. It can be a specific address, description of the location, etc.</b></label>
+                <label asp-for="CreateReport.LastSeenLocation" class="control-label"><b><span class="text-danger">*</span>Describe where you last saw your pet. It can be a specific address, description of the location, etc.</b></label>
                 <textarea asp-for="CreateReport.LastSeenLocation" class="form-control autosize character-count"
+                          required 
                           id="pet-location-input"
                           rows="5"
                           maxlength="1000"
@@ -339,16 +340,15 @@
           @* ADDITIONAL PHOTOS *@
             <div class="form-group photos-group">
                 <label asp-for="Photos" class="control-label"><b><span class="text-danger">*</span>Upload one or more photos of your pet</b></label>
-                    <input type="file" name="Photos" multiple class="form-control" accept="image/*" required onchange="previewAdditionalPhotos(event)" />
+                <input type="file" required name="Photos" class="form-control" accept="image/*" onchange="validateAndPreviewPhotos(event)" />
                 <span asp-validation-for="Photos" class="text-danger"></span>
                 <div class="additional-photos-preview"></div>
-                <button type="button" class="btn btn-primary" onclick="addMorePhotos()">+</button>
-            </div>
 
-            <div class="form-group">
-                <img  src="#" alt="Main Photo Preview" style="display: none; max-width: 200px;">
-            </div>    
-                <br />
+                <div class="form-group">
+                    <img src="#" alt="Main Photo Preview" style="display: none; max-width: 200px;">
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="addMorePhotos()">+</button>
                 
             @* <div class="form-group">
                     <label asp-for="CreateReport.ContactInformation" class="control-label"><b>Your contact information (You may choose to share your phone number, email, or any preferred platforms)</b></label>
@@ -364,6 +364,7 @@
             <div class="form-group">
                 <label asp-for="CreateReport.ContactInformation" class="control-label"><b><span class="text-danger">*</span>Your contact information (You may choose to share your phone number, email, or any preferred platforms)</b></label>
                 <textarea asp-for="CreateReport.ContactInformation" class="form-control autosize character-count"
+                            required
                           id="pet-ctc-input"
                           rows="5"
                           maxlength="1000"
@@ -393,9 +394,7 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
-        document.querySelectorAll('textarea.autosize').forEach(function (element) {
-            autoExpandTextarea(element);
-        });
+     
         //TO CONTROL NUMBER OF CHARACTERS
         function updateCharacterCount(inputId, countId, limit) {
             var input = document.getElementById(inputId);
@@ -449,32 +448,38 @@
         }
 
 
-
+        function validateAndPreviewPhotos(event) {
+            var files = event.target.files;
+            for (var i = 0; i < files.length; i++) {
+                if (files[i].size > 2.1 * 1024 * 1024) { // 2.1 MB limit
+                    alert('File size exceeds the limit of 2.1 MB');
+                    event.target.value = '';
+                    return;
+                }
+            }
+            previewAdditionalPhotos(event);
+        }
         //TO ADD PHOTOS
         function addMorePhotos() {
             var input = document.createElement('input');
             input.type = 'file';
-            input.multiple = true;
+            
             input.className = 'form-control';
             input.name = 'Photos';
+            input.accept = 'image/*';
             input.onchange = function (event) {
-                previewAdditionalPhotos(event);
+                validateAndPreviewPhotos(event);
             };
 
             var photosGroup = document.querySelector('.form-group.photos-group');
             photosGroup.appendChild(input);
 
-            var removeButton = document.createElement('button');
-            removeButton.type = 'button';
-            removeButton.className = 'btn btn-danger';
-            removeButton.textContent = 'Remove';
-            removeButton.onclick = function () {
-                photosGroup.removeChild(input);
-                photosGroup.removeChild(removeButton);
-            };
-           photosGroup.appendChild(removeButton);
+            var previewContainer = document.createElement('div');
+            previewContainer.className = 'additional-photos-preview';
+            photosGroup.appendChild(previewContainer);
         }
 
+        //TO PREVIEW EACH PHOTO
         //TO PREVIEW EACH PHOTO
         function previewAdditionalPhotos(event) {
             var input = event.target;
@@ -482,27 +487,95 @@
             previewContainer.innerHTML = '';
 
             for (var i = 0; i < input.files.length; i++) {
+                var file = input.files[i];
                 var reader = new FileReader();
-                reader.onload = (function (file) {
-                    return function (event) {
-                        var img = document.createElement('img');
-                        img.src = event.target.result;
-                        img.className = 'preview-image';
-                        img.style.maxWidth = '100px';
 
-                        var previewImg = document.createElement('img');
-                        previewImg.src = event.target.result;
-                        previewImg.className = 'preview-image';
-                        previewImg.style.maxWidth = '200px';
-                        previewImg.style.backgroundColor = 'transparent';
+                if (file.type.startsWith("image/")) {
+                    reader.onload = (function (file) {
+                        return function (event) {
+                            var img = document.createElement('img');
+                            img.src = event.target.result;
+                            img.className = 'preview-image';
+                            img.style.maxWidth = '100px';
 
-                        previewContainer.appendChild(previewImg);
-                    };
-                })(input.files[i]);
+                            var previewImg = document.createElement('img');
+                            previewImg.src = event.target.result;
+                            previewImg.className = 'preview-image';
+                            previewImg.style.maxWidth = '200px';
+                            previewImg.style.backgroundColor = 'transparent';
 
-                reader.readAsDataURL(input.files[i]);
+                            previewContainer.appendChild(previewImg);
+
+                            var removeBtn = document.createElement('button');
+                            removeBtn.className = 'remove-btn btn btn-danger';
+                            removeBtn.textContent = 'Remove';
+                            removeBtn.addEventListener('click', function () {
+                                input.value = '';
+                                previewContainer.innerHTML = '';
+                            });
+                            previewContainer.appendChild(removeBtn);
+                        };
+                    })(file);
+                } else if (file.type.startsWith("video/")) {
+                    reader.onload = (function (file) {
+                        return function (event) {
+                            var video = document.createElement('video');
+                            video.src = event.target.result;
+                            video.className = 'preview-video';
+                            video.controls = true;
+                            video.style.maxWidth = '500px';
+
+                            var previewVideo = document.createElement('video');
+                            previewVideo.src = event.target.result;
+                            previewVideo.className = 'preview-video';
+                            previewVideo.controls = true;
+                            previewVideo.style.maxWidth = '300px';
+                            previewVideo.style.backgroundColor = 'transparent';
+
+                            previewContainer.appendChild(previewVideo);
+
+                            var removeBtn = document.createElement('button');
+                            removeBtn.className = 'remove-btn btn btn-danger';
+                            removeBtn.textContent = 'Remove';
+                            removeBtn.addEventListener('click', function () {
+                                input.value = '';
+                                previewContainer.innerHTML = '';
+                            });
+                            previewContainer.appendChild(removeBtn);
+                        };
+                    })(file);
+                } else if (file.type.startsWith("audio/")) {
+                    reader.onload = (function (file) {
+                        return function (event) {
+                            var audio = document.createElement('audio');
+                            audio.src = event.target.result;
+                            audio.className = 'preview-audio';
+                            audio.controls = true;
+                            audio.style.maxWidth = '300px';
+
+                            var previewAudio = document.createElement('audio');
+                            previewAudio.src = event.target.result;
+                            previewAudio.className = 'preview-audio';
+                            previewAudio.controls = true;
+                            previewAudio.style.maxWidth = '300px';
+                            previewAudio.style.backgroundColor = 'transparent';
+
+                            previewContainer.appendChild(previewAudio);
+
+                            var removeBtn = document.createElement('button');
+                            removeBtn.className = 'remove-btn btn btn-danger';
+                            removeBtn.textContent = 'Remove';
+                            removeBtn.addEventListener('click', function () {
+                                input.value = '';
+                                previewContainer.innerHTML = '';
+                            });
+                            previewContainer.appendChild(removeBtn);
+                        };
+                    })(file);
+                }
+
+                reader.readAsDataURL(file);
             }
         }
- 
     </script>
 }
