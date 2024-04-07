@@ -62,8 +62,22 @@
 @{
     ViewData["Title"] = "All Reports";
 }
+<br/>
+<div class="button-container">
+    
+    <a href="/LOSTPETREPORTING/NEW/CountryReports" class="box" id="country">
+        <b>Lost Pets in Your Country</b>
+    </a>
 
 
+    <a href="/LOSTPETREPORTING/NEW/StateReports" class="box" id="state">
+        <b>Lost Pets in Your State</b>
+    </a>
+
+    <a href="/LOSTPETREPORTING/NEW/CityReports" class="box" id="city">
+        <b>Lost Pets in Your City</b>
+    </a>
+</div>
 <h1>Reports From All Over The World</h1>
 <input style="border-radius:20px; height:40px; width: 500px;" type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search">
 <br/>
@@ -143,6 +157,58 @@
 
 
 <style>
+    .button-container {
+        display: flex;
+        justify-content: space-between; /* Adjust as needed */
+    }
+    #global {
+        background-color: black;
+        color: #fff;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        font-weight: bold; /* Make the text bold */
+        font-size: 1.1em;
+    }
+
+    #country {
+        background-color: black;
+        color: #fff;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        font-weight: bold; /* Make the text bold */
+        font-size: 1.1em;
+    }
+
+    #state {
+        background-color: #8b572a;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        font-weight: bold; /* Make the text bold */
+        font-size: 1.1em;
+    }
+
+    #city {
+        background-color: white;
+        color: black;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        font-weight: bold; /* Make the text bold */
+        font-size: 1.1em;
+    }
+
     .report-container {
         display: flex;
         flex-direction: column;
