@@ -315,25 +315,6 @@
             return isValid;
         }
 
-        function addMorePhotos() {
-            var input = document.createElement('input');
-            input.type = 'file';
-            input.multiple = true;
-            input.className = 'form-control';
-            input.name = 'MediaFiles';
-            input.onchange = function (event) {
-                previewAdditionalPhotos(event);
-            };
-
-            var photosGroup = document.querySelector('.form-group.photos-group');
-            photosGroup.appendChild(input);
-
-            var previewContainer = document.createElement('div');
-            previewContainer.className = 'additional-photos-preview';
-            photosGroup.appendChild(previewContainer);
-
-            
-        }
         function validateAndPreviewPhotos(event) {
             var files = event.target.files;
             for (var i = 0; i < files.length; i++) {
@@ -345,6 +326,27 @@
             }
             previewAdditionalPhotos(event);
         }
+
+        function addMorePhotos() {
+            var input = document.createElement('input');
+            input.type = 'file';
+            input.multiple = true;
+            input.className = 'form-control';
+            input.name = 'MediaFiles';
+            input.onchange = function (event) {
+                validateAndPreviewPhotos(event);
+            };
+
+            var photosGroup = document.querySelector('.form-group.photos-group');
+            photosGroup.appendChild(input);
+
+            var previewContainer = document.createElement('div');
+            previewContainer.className = 'additional-photos-preview';
+            photosGroup.appendChild(previewContainer);
+
+            
+        }
+        
 
         //TO PREVIEW EACH PHOTO
         function previewAdditionalPhotos(event) {
