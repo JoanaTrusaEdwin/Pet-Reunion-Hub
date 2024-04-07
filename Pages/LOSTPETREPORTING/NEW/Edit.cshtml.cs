@@ -252,7 +252,28 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
 
         
         }
+        public async Task<IActionResult> OnPostRemoveMediaAsync(int PhotosId)
+        {
 
+            try
+            {
+                _logger.LogInformation("Received photo ID: {PhotoId}", PhotosId);
+                var mediaToRemove = await _context.ReportPhoto.FindAsync(PhotosId);
+                if (mediaToRemove != null)
+                {
+                    _context.ReportPhoto.Remove(mediaToRemove);
+                    await _context.SaveChangesAsync();
+                    _logger.LogInformation("Media file removed successfully.");
+                    return new JsonResult(new { success = true });
+                }
+                return new JsonResult(new { success = false, error = "Could not remove media." });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error removing media file:");
+                return new JsonResult(new { success = false, error = ex.Message });
+            }
+        }
 
         private async Task UpdateOrCreateReportPhotos(CreateReport existingReport, List<IFormFile> photos)
         {
