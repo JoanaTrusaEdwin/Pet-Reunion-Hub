@@ -91,24 +91,73 @@
                 <span asp-validation-for="Post.Content" class="text-danger"></span>
             </div>
             <br />
-           
-                 <div class="form-group">
-                <label asp-for="MediaFiles" class="control-label">Your Media Files</label>
-                <br />
-                @if (Model.Post.Media != null)
+           <div>
+                @if (Model.Post.Media != null && Model.Post.Media.Any())
                 {
-                    foreach (var Media in Model.Post.Media)
-                    {
-                        <img src="@Media.MediaUrl" alt="Additional Media" class="img-fluid" />
-                        <button type="button" class="btn btn-danger remove-btn" data-media-id="@Media.Id">Remove</button>
-                        <br/>
-                    }
-                }
+                    <p><strong>Media:</strong></p>
+                    <div class="media-container">
+                        @foreach (var Media in Model.Post.Media)
+                        {
+                           
+                            var lastSlashIndex = Media.MediaUrl.LastIndexOf('/');
+                            var fileName = Media.MediaUrl.Substring(lastSlashIndex + 1);
+                            var lastUnderscoreIndex = fileName.LastIndexOf('_');
 
-            </div>
+                            if (lastUnderscoreIndex != -1)
+                            {
+                                var fileNameWithoutUniqueIdentifier = fileName.Substring(0, lastUnderscoreIndex);
+                                <span style="display: block; font-size: small;">@fileNameWithoutUniqueIdentifier</span>
+                            }
+                            else
+                            {
+                                <span style="display: block; font-size: small;">@fileName</span>
+                            }
+
+
+
+                            @if (Media.MediaType == "Image")
+                            {
+                                <img src="@Media.MediaUrl" alt="Media Image" style="max-width: 200px; margin-right: 10px;">
+                                <button type="button" class="btn btn-danger remove-btn" data-media-id="@Media.Id">Remove</button>
+
+
+                            }
+                            else if (Media.MediaType == "Video")
+                            {
+                                <video src="@Media.MediaUrl" controls style="max-width: 200px; margin-right: 10px;"></video>
+                                <button type="button" class="btn btn-danger remove-btn" data-media-id="@Media.Id">Remove</button>
+
+
+                            }
+                            else if (Media.MediaType == "Audio")
+                            {
+                                <audio src="@Media.MediaUrl" controls style="max-width: 200px; margin-right: 10px;"></audio>
+                                <button type="button" class="btn btn-danger remove-btn" data-media-id="@Media.Id">Remove</button>
+
+                            }
+                        }
+                    </div>
+                }
+           </div>
+            @*  <div class="form-group">
+                    <label asp-for="MediaFiles" class="control-label">Your Media Files</label>
+                    <br />
+
+
+                    @if (Model.Post.Media != null)
+                    {
+                        foreach (var Media in Model.Post.Media)
+                        {
+                            <img src="@Media.MediaUrl" alt="Additional Media" class="img-fluid" />
+                            <button type="button" class="btn btn-danger remove-btn" data-media-id="@Media.Id">Remove</button>
+                            <br/>
+                        }
+                    }
+            </div> *@
+
               <div class="form-group photos-group">
                 <label asp-for="MediaFiles" class="control-label"><b>Upload photos, videos, audios that perfectly capture your beloved pet's memories'</b></label>
-                <input type="file" name="MediaFiles" class="form-control" onchange="previewAdditionalPhotos(event)" />
+                <input type="file" name="MediaFiles" class="form-control" onchange="validateAndPreviewPhotos(event)" />
                 <span asp-validation-for="MediaFiles" class="text-danger"></span>
                 <div class="additional-photos-preview"></div>
                 <div class="form-group">
@@ -179,7 +228,7 @@
                 var mediaId = button.data("media-id");
                 console.log("Media ID:", mediaId);
 
-                if (confirm("Are you sure you want to delete this image? This action cannot be undone.")) {
+                if (confirm("Are you sure you want to delete this file? This action is instantly applied and cannot be undone.")) {
                     $.ajax({
                         url: "https://localhost:7145/PETMEMORIAL/POSTS/Edit?handler=RemoveMedia",
                         method: "POST",
@@ -282,6 +331,18 @@
 
             
         }
+        function validateAndPreviewPhotos(event) {
+            var files = event.target.files;
+            for (var i = 0; i < files.length; i++) {
+                if (files[i].size > 2.1 * 1024 * 1024) { // 2.1 MB limit
+                    alert('File size exceeds the limit of 2.1 MB');
+                    event.target.value = '';
+                    return;
+                }
+            }
+            previewAdditionalPhotos(event);
+        }
+
         //TO PREVIEW EACH PHOTO
         function previewAdditionalPhotos(event) {
             var input = event.target;
