@@ -240,7 +240,10 @@
                         success: function (response) {
                             // Handle success
                             if (response.success) {
+
                                 button.prev('img').remove(); // Remove the previous sibling image
+                                button.prev('video').remove();
+                                button.prev('audio').remove();
                                 button.remove(); // Remove the remove button itself
                                 console.log("Image removed");
                             } else {
