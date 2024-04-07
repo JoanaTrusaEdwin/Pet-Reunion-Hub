@@ -6,7 +6,16 @@
 }
 
 <h1>Posts in @Model.ContainerId</h1>
-
+<style>
+    #edit {
+        border-radius: 5px;
+        background-color: black;
+        color: white;
+        text-decoration: none;
+        padding: 5px 10px;
+        font-weight: bold;
+    }
+</style>
 @* <div class="row">
     @foreach (var post in Model.Posts)
     {
@@ -70,11 +79,8 @@
                <p>No posts</p>
             }
         </div>
-        <div class="col-md-12">
-           
-            <p>
-                <a asp-page="/POSTS/Edit" asp-route-id="@post.Id" id="delete">Edit</a>
-            </p>
+        <div class="card-footer text-muted">
+            <a asp-page="/POSTS/Edit" asp-route-id="@post.Id" class="btn btn-primary" id="edit">Edit</a>
         </div>
   
        
