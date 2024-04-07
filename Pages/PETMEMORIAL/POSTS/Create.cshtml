@@ -117,11 +117,11 @@
                 <br />
             </div>
             <button type="button" class="btn btn-primary" onclick="addMorePhotos()">+</button>
-            <div class="form-group">
+            @* <div class="form-group">
                 <label asp-for="Post.TributeId" class="control-label"><b>Select a tribute</b></label>
                 <select asp-for="Post.TributeId" asp-items="Model.Tribute" class="form-control"></select>
                 <span asp-validation-for="Post.TributeId" class="text-danger"></span>
-            </div>
+            </div> *@
             <input type="hidden" asp-for="Post.UserId" />
             <div class="form-group">
                 <input id="submitbtn" type="submit" value="Create" class="btn btn-primary" />
