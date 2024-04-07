@@ -44,6 +44,7 @@ using Microsoft.EntityFrameworkCore;
 using PRHDATALIB.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Pet_Reunion_Hub.Helper;
 
 
 namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
@@ -82,6 +83,22 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
                    .Include(p => p.Media)
                    .ToListAsync();
 
+            foreach (var post in Post)
+            {
+                // Check if the user ID associated with the tribute matches the currently authenticated user
+                if (post.UserId == currentUser.Id)
+                {
+                    // Decrypt the tribute properties
+                    post.Title = EncryptionHelper.Decrypt(post.Title);
+                    post.Content = EncryptionHelper.Decrypt(post.Content);
+
+                }
+                else
+                {
+                    // If the user ID associated with the tribute doesn't match the currently authenticated user, skip decryption
+                    // Alternatively, you can choose to handle this case differently based on your application's requirements
+                }
+            }
 
             return Page();
         }

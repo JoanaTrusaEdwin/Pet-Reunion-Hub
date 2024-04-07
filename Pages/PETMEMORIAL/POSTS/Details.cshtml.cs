@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Pet_Reunion_Hub.Helper;
 using PRHDATALIB.Models;
 
 namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
@@ -48,7 +49,11 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
             {
                 return NotFound();
             }
-
+            else
+            {
+                Post.Title = EncryptionHelper.Decrypt(Post.Title);
+                Post.Content = EncryptionHelper.Decrypt(Post.Content);
+            }
             return Page();
         }
     }
