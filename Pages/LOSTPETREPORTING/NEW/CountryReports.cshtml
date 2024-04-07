@@ -61,7 +61,11 @@
             <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable"> @(string.IsNullOrEmpty(report.PetMicrochipID) ? "-" : report.PetMicrochipID)</p>
             <br />
 
-            <p><strong>Type and Breed:</strong></p>
+            <p><strong>Type:</strong></p>
+            <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable"> @report.PetType</p>
+            <br />
+
+            <p><strong>Breed:</strong></p>
             <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable"> @report.PetBreed</p>
             <br />
 

@@ -117,10 +117,26 @@
             </div>
             <br />
 
-            
+            <div class="form-group">
+                <label asp-for="CreateReport.PetType" class="control-label"><b><span class="text-danger">*</span>Pet Type</b></label>
+                <select asp-for="CreateReport.PetType" class="form-control" required id="pet-type-input" onchange="handleInput(event)">
+                    <option value="">Select</option>
+                    <option value="Dog">Dog</option>
+                    <option value="Cat">Cat</option>
+                    <option value="Bird">Bird</option>
+                    <option value="Fish">Fish</option>
+                    <option value="Rodent">Rodent</option>
+                    <option value="Reptile">Reptile</option>
+                    <option value="Hamster">Hamster</option>
+                    <option value="Other Small Mammal">Other Small Mammal</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <span asp-validation-for="CreateReport.PetType" class="text-danger"></span>
+            </div>
 
             <div class="form-group">
-                <label asp-for="CreateReport.PetBreed" class="control-label"><b><span class="text-danger">*</span>Pet Type and Breed(e.g.: Dog, Husky)</b></label>
+                <label asp-for="CreateReport.PetBreed" class="control-label"><b><span class="text-danger">*</span>Breed(e.g.: Husky/Beagle Husky Mixed/etc)</b></label>
                 <textarea asp-for="CreateReport.PetBreed" class="form-control autosize character-count" required
                            maxlength="150"
                          
