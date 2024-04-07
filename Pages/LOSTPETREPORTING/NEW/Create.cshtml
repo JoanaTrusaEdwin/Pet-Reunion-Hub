@@ -201,7 +201,7 @@
                 <br /> *@
 
             <div class="form-group">
-                <label asp-for="CreateReport.AdditionalDescription" class="control-label"><b>Any necessary descriptions about the pet (physical appearance, behavior, unique traits)</b></label>
+                <label asp-for="CreateReport.AdditionalDescription" class="control-label"><b>Any necessary description or infomration about the pet about the pet that the community needs to know (physical appearance, behavior, unique traits, etc)</b></label>
                 <textarea asp-for="CreateReport.AdditionalDescription" class="form-control autosize character-count"
                           id="pet-desc-input"
                           rows="5"
@@ -213,9 +213,92 @@
             <br />
 
                 <div class="form-group">
-                <label asp-for="CreateReport.GenLoc" class="control-label"><b><span class="text-danger">*</span>To notify nearby users, please provide the general location of where you found your lost pet with capital letters and folloing the format COUNTRY-STATE-CITY</b></label>
-                    <input asp-for="CreateReport.GenLoc" class="form-control" required
-                           maxlength="100" />
+                <label asp-for="CreateReport.GenLoc" class="control-label"><b><span class="text-danger">*</span>To notify users in your area, please provide the general location of where your pet's last seen location</b></label>
+                <select asp-for="CreateReport.GenLoc" required class="form-control">
+                    <option value="">Select a location</option>
+                    <option value="Malaysia-Johor-Johor Bahru">Malaysia - Johor - Johor Bahru</option>
+                    <option value="Malaysia-Johor-Batu Pahat">Malaysia - Johor - Batu Pahat</option>
+                    <option value="Malaysia-Johor-Muar">Malaysia - Johor - Muar</option>
+                    <option value="Malaysia-Johor-Kluang">Malaysia - Johor - Kluang</option>
+                    <option value="Malaysia-Johor-Kota Tinggi">Malaysia - Johor - Kota Tinggi</option>
+                    <option value="Malaysia-Johor-Pontian">Malaysia - Johor - Pontian</option>
+                    <option value="Malaysia-Johor-Segamat">Malaysia - Johor - Segamat</option>
+                    <option value="Malaysia-Johor-Kulai">Malaysia - Johor - Kulai</option>
+                    <option value="Malaysia-Johor-Mersing">Malaysia - Johor - Mersing</option>
+                    <option value="Malaysia-Kedah-Alor Setar">Malaysia - Kedah - Alor Setar</option>
+                    <option value="Malaysia-Kedah-Sungai Petani">Malaysia - Kedah - Sungai Petani</option>
+                    <option value="Malaysia-Kedah-Kulim">Malaysia - Kedah - Kulim</option>
+                    <option value="Malaysia-Kedah-Langkawi">Malaysia - Kedah - Langkawi</option>
+                    <option value="Malaysia-Kedah-Kota Setar">Malaysia - Kedah - Kota Setar</option>
+                    <option value="Malaysia-Kedah-Baling">Malaysia - Kedah - Baling</option>
+                    <option value="Malaysia-Kedah-Pokok Sena">Malaysia - Kedah - Pokok Sena</option>
+                    <option value="Malaysia-Kelantan-Kota Bharu">Malaysia - Kelantan - Kota Bharu</option>
+                    <option value="Malaysia-Kelantan-Pasir Mas">Malaysia - Kelantan - Pasir Mas</option>
+                    <option value="Malaysia-Kelantan-Tanah Merah">Malaysia - Kelantan - Tanah Merah</option>
+                    <option value="Malaysia-Kelantan-Machang">Malaysia - Kelantan - Machang</option>
+                    <option value="Malaysia-Kelantan-Pasir Puteh">Malaysia - Kelantan - Pasir Puteh</option>
+                    <option value="Malaysia-Kelantan-Tumpat">Malaysia - Kelantan - Tumpat</option>
+                    <option value="Malaysia-Kelantan-Bachok">Malaysia - Kelantan - Bachok</option>
+                    <option value="Malaysia-Kelantan-Kuala Krai">Malaysia - Kelantan - Kuala Krai</option>
+                    <option value="Malaysia-Kelantan-Gua Musang">Malaysia - Kelantan - Gua Musang</option>
+                    <option value="Malaysia-Melaka-Melaka City">Malaysia - Melaka - Melaka City</option>
+                    <option value="Malaysia-Melaka-Alor Gajah">Malaysia - Melaka - Alor Gajah</option>
+                    <option value="Malaysia-Melaka-Jasin">Malaysia - Melaka - Jasin</option>
+                    <option value="Malaysia-Negeri Sembilan-Seremban">Malaysia - Negeri Sembilan - Seremban</option>
+                    <option value="Malaysia-Negeri Sembilan-Port Dickson">Malaysia - Negeri Sembilan - Port Dickson</option>
+                    <option value="Malaysia-Negeri Sembilan-Nilai">Malaysia - Negeri Sembilan - Nilai</option>
+                    <option value="Malaysia-Negeri Sembilan-Rembau">Malaysia - Negeri Sembilan - Rembau</option>
+                    <option value="Malaysia-Negeri Sembilan-Tampin">Malaysia - Negeri Sembilan - Tampin</option>
+                    <option value="Malaysia-Pahang-Kuantan">Malaysia - Pahang - Kuantan</option>
+                    <option value="Malaysia-Pahang-Temerloh">Malaysia - Pahang - Temerloh</option>
+                    <option value="Malaysia-Pahang-Mentakab">Malaysia - Pahang - Mentakab</option>
+                    <option value="Malaysia-Pahang-Bentong">Malaysia - Pahang - Bentong</option>
+                    <option value="Malaysia-Pahang-Raub">Malaysia - Pahang - Raub</option>
+                    <option value="Malaysia-Pahang-Jerantut">Malaysia - Pahang - Jerantut</option>
+                    <option value="Malaysia-Pahang-Maran">Malaysia - Pahang - Maran</option>
+                    <option value="Malaysia-Pahang-Bera">Malaysia - Pahang - Bera</option>
+                    <option value="Malaysia-Pahang-Rompin">Malaysia - Pahang - Rompin</option>
+                    <option value="Malaysia-Pahang-Lipis">Malaysia - Pahang - Lipis</option>
+                    <option value="Malaysia-Penang-George Town">Malaysia - Penang - George Town</option>
+                    <option value="Malaysia-Perak-Ipoh">Malaysia - Perak - Ipoh</option>
+                    <option value="Malaysia-Perak-Taiping">Malaysia - Perak - Taiping</option>
+                    <option value="Malaysia-Perak-Sitiawan">Malaysia - Perak - Sitiawan</option>
+                    <option value="Malaysia-Perak-Lumut">Malaysia - Perak - Lumut</option>
+                    <option value="Malaysia-Perak-Teluk Intan">Malaysia - Perak - Teluk Intan</option>
+                    <option value="Malaysia-Perak-Tanjung Malim">Malaysia - Perak - Tanjung Malim</option>
+                    <option value="Malaysia-Perak-Tapah">Malaysia - Perak - Tapah</option>
+                    <option value="Malaysia-Perlis-Kangar">Malaysia - Perlis - Kangar</option>
+                    <option value="Malaysia-Sabah-Kota Kinabalu">Malaysia - Sabah - Kota Kinabalu</option>
+                    <option value="Malaysia-Sabah-Sandakan">Malaysia - Sabah - Sandakan</option>
+                    <option value="Malaysia-Sabah-Tawau">Malaysia - Sabah - Tawau</option>
+                    <option value="Malaysia-Sabah-Lahad Datu">Malaysia - Sabah - Lahad Datu</option>
+                    <option value="Malaysia-Sabah-Keningau">Malaysia - Sabah - Keningau</option>
+                    <option value="Malaysia-Sabah-Putatan">Malaysia - Sabah - Putatan</option>
+                    <option value="Malaysia-Sabah-Kota Belud">Malaysia - Sabah - Kota Belud</option>
+                    <option value="Malaysia-Sabah-Penampang">Malaysia - Sabah - Penampang</option>
+                    <option value="Malaysia-Sabah-Papar">Malaysia - Sabah - Papar</option>
+                    <option value="Malaysia-Sabah-Kota Marudu">Malaysia - Sabah - Kota Marudu</option>
+                    <option value="Malaysia-Sarawak-Kuching">Malaysia - Sarawak - Kuching</option>
+                    <option value="Malaysia-Sarawak-Miri">Malaysia - Sarawak - Miri</option>
+                    <option value="Malaysia-Sarawak-Sibu">Malaysia - Sarawak - Sibu</option>
+                    <option value="Malaysia-Sarawak-Bintulu">Malaysia - Sarawak - Bintulu</option>
+                    <option value="Malaysia-Sarawak-Limbang">Malaysia - Sarawak - Limbang</option>
+                    <option value="Malaysia-Sarawak-Kapit">Malaysia - Sarawak - Kapit</option>
+                    <option value="Malaysia-Sarawak-Sarikei">Malaysia - Sarawak - Sarikei</option>
+                    <option value="Malaysia-Sarawak-Sri Aman">Malaysia - Sarawak - Sri Aman</option>
+                    <option value="Malaysia-Selangor-Shah Alam">Malaysia - Selangor - Shah Alam</option>
+                    <option value="Malaysia-Selangor-Petaling Jaya">Malaysia - Selangor - Petaling Jaya</option>
+                    <option value="Malaysia-Selangor-Subang Jaya">Malaysia - Selangor - Subang Jaya</option>
+                    <option value="Malaysia-Selangor-Klang">Malaysia - Selangor - Klang</option>
+                    <option value="Malaysia-Selangor-Kajang">Malaysia - Selangor - Kajang</option>
+                    <option value="Malaysia-Selangor-Selayang">Malaysia - Selangor - Selayang</option>
+                    <option value="Malaysia-Selangor-Ampang Jaya">Malaysia - Selangor - Ampang Jaya</option>
+                    <option value="Malaysia-Selangor-Cheras">Malaysia - Selangor - Cheras</option>
+                    <option value="Malaysia-Terengganu-Kuala Terengganu">Malaysia - Terengganu - Kuala Terengganu</option>
+                    <option value="Malaysia-Terengganu-Kemaman">Malaysia - Terengganu - Kemaman</option>
+                    <option value="Malaysia-Terengganu-Dungun">Malaysia - Terengganu - Dungun</option>
+                    <option value="Malaysia-Terengganu-Marang">Malaysia - Terengganu - Marang</option>
+                </select>
                     <span asp-validation-for="CreateReport.GenLoc" class="text-danger"></span>
                 </div>
                 <br />
