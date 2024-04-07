@@ -2,17 +2,19 @@
 @model Pet_Reunion_Hub.Pages.LOGOUTPAGEModel
 @{
 }
-@if (Model.IsUserAuthenticated)
-{
-    <h1>Hello, @User.Identity.Name</h1>
-    <p>Are you sure you want to logout?</p>
-    <a id="manage" class="headerLinks" asp-area="Identity" asp-page="~/User/Profile" title="Manage"></a>
-    <form id="logoutForm" class="headerLinks" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
-        <button id="logout" type="submit" class="headerLinks" style="border: 1px solid white; border-radius: 5px; color: black;">Logout</button>
-    </form>
-}
-else
-{
-    <a href="~/Register">Register</a>
-    <a href="~/Login">Log In</a>
-}
+<div style="text-align:center;">
+    @if (Model.IsUserAuthenticated)
+    {
+        <h1>Hello, @User.Identity.Name</h1>
+        <p>Are you sure you want to logout?</p>
+        <a id="manage" class="headerLinks" asp-area="Identity" asp-page="~/User/Profile" title="Manage"></a>
+        <form id="logoutForm" class="headerLinks" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
+            <button id="logout" type="submit" class="headerLinks" style=" background-color: black; border-radius: 10px; color: white;"><b>Logout</b></button>
+        </form>
+    }
+    else
+    {
+        <a href="~/Register">Register</a>
+        <a href="~/Login">Log In</a>
+    }
+</div>
