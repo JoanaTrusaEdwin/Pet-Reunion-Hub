@@ -105,7 +105,17 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
                Value = c.Id.ToString(),
                Text = c.Name
            });
+
+            Tribute = _context.Tribute
+           .Select(c => new SelectListItem
+           {
+               Value = c.Id.ToString(),
+               Text = EncryptionHelper.Decrypt(c.PetName)
+
+
+           });
             return Page();
+
         }
 
         [BindProperty]
@@ -115,6 +125,8 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
         public IFormFileCollection MediaFiles { get; set; }
 
         public IEnumerable<SelectListItem> Containers { get; set; }
+
+        public IEnumerable<SelectListItem> Tribute { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
