@@ -214,7 +214,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                         existingTribute.DateOfDeparture = Tribute.DateOfDeparture;
                         existingTribute.Cause = Tribute.Cause;
                         existingTribute.TributeText = Tribute.TributeText;
-                        //existingTribute.Visibility = Tribute.Visibility;
+                        existingTribute.Visibility = Tribute.Visibility;
                         //existingTribute.TributePhoto = Tribute.TributePhoto;
                         //existingTribute.Visibility = Tribute.Visibility;
 

@@ -111,6 +111,9 @@
             <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable">@(string.IsNullOrEmpty(item.TributeText) ? "-" : item.TributeText) </p>
             <br />
 
+            <dt>Privacy Settings:</dt>
+            <dd style="white-space: pre-wrap; overflow-wrap: break-word;">@item.Visibility</dd>
+
             <p><strong>Created on:</strong>
             <p class="searchable">@item.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss")</p>
             <br />
