@@ -46,8 +46,11 @@
     @Model.Post.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss")
     <br/>
     <dl class="row">
-        
-        
+
+        <p><strong>Title:</strong>
+        <p class="searchable">@(string.IsNullOrEmpty(Model.Post.Title) ? "-" : Model.Post.Title) </p>
+        <br />
+
         <dt>Description:</dt>
         <dd style="white-space: pre-wrap; overflow-wrap: break-word;">@(Model.Post.Content != null ? Model.Post.Content : "-")</dd>
    

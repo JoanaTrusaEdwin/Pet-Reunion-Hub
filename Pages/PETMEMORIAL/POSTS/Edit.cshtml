@@ -89,6 +89,20 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Post.Id" />
             <p><b>Created on:</b> @Model.Post.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
+
+            <div class="form-group">
+                <label asp-for="Post.Title" class="control-label"><b><span class="text-danger">*</span>Title</b></label>
+                <textarea asp-for="Post.Title" class="form-control autosize  character-count"
+                          required
+                          id="pet-title-input"
+                          rows="2"
+                          maxlength="255"
+                          oninput="handleInput(event, 'pet-title-count')"></textarea>
+                <span id="pet-title-count" class="character-count-display">0/255</span>
+                <span asp-validation-for="Post.Title" class="text-danger"></span>
+            </div>
+            <br />
+
             <div class="form-group">
                 <label asp-for="Post.Content" class="control-label"><b>Description</b></label>
                 <textarea asp-for="Post.Content" class="form-control autosize  character-count"

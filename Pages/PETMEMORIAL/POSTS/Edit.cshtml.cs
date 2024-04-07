@@ -101,7 +101,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
                         {
                             return NotFound();
                         }
-
+                        existingPost.Title = Post.Title;
                         existingPost.Content = Post.Content;
                         existingPost.TributeId = Post.TributeId;
                         existingPost.IsPublic = Post.IsPublic;
