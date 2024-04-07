@@ -77,6 +77,9 @@ namespace PRHDATALIB.Models
                     .IsRequired()
                     .HasColumnName("PetName");
 
+                entity.Property(e => e.PetType)
+                  .HasColumnName("PetType");
+
                 entity.Property(e => e.PetBreed)
                     .HasColumnName("PetBreed");
 
@@ -188,9 +191,8 @@ namespace PRHDATALIB.Models
                 entity.Property(e => e.TributeText).HasMaxLength(int.MaxValue); // Max length
                 entity.Property(e => e.TributePhoto);
                 //entity.Property(e => e.IsPublic).IsRequired().HasColumnType("BIT");
-                //entity.Property(e => e.Visibility)
-                //    .IsRequired()
-                //    .HasColumnName("Visibility");
+                entity.Property(e => e.Visibility);
+                
                 entity.Property(e => e.CreatedAt);
 
                 entity.Property(e => e.UserId).IsRequired().HasMaxLength(450);
@@ -212,7 +214,7 @@ namespace PRHDATALIB.Models
                         .HasColumnName("Id"); entity.Property(e => e.Id)
                         .ValueGeneratedOnAdd()
                         .HasColumnName("Id");
-              
+                //entity.Property(e => e.Tribute);
                 entity.Property(e => e.Content);
                 entity.Property(e => e.IsPublic);
                 entity.Property(e => e.CreatedAt);
@@ -225,13 +227,13 @@ namespace PRHDATALIB.Models
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK_Post_CONTAINER");
 
-                entity.Property(e => e.TributeId).HasColumnName("TributeId");
+                //entity.Property(e => e.TributeId).HasColumnName("TributeId");
 
-                entity.HasOne(p => p.Tribute)
-                    .WithMany()
-                    .HasForeignKey(p => p.TributeId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("FK_Post_Tribute");
+                //entity.HasOne(p => p.Tribute)
+                //    .WithMany()
+                //    .HasForeignKey(p => p.TributeId)
+                //    .OnDelete(DeleteBehavior.Restrict)
+                //    .HasConstraintName("FK_Post_Tribute");
 
                 entity.Property(e => e.UserId).IsRequired().HasMaxLength(450);
 
