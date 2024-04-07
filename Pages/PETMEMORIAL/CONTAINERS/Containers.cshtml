@@ -1,0 +1,36 @@
+﻿
+@page
+@model Pet_Reunion_Hub.Pages.PETMEMORIAL.CONTAINERS.ContainersModel
+@{
+    ViewData["Title"] = "Containers";
+}
+
+<h1>My Containers</h1>
+
+<div class="row">
+    @if (Model.Containers != null && Model.Containers.Any())
+    {
+        @foreach (var container in Model.Containers)
+        {
+            <div class="col-md-4">
+                <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">@container.Name</h5>
+                                <p class="card-text">@container.Description</p>
+                                <a asp-page="./ContainerPosts" asp-route-id="@container.Id" class="btn btn-primary">View Posts</a>
+                            </div>
+                        </div>
+                    </div>
+        }
+    }
+    else
+    {
+        <p>You have not created any container</p>
+    }
+
+    <div class="row">
+        <div class="col-md-12">
+            <a asp-page="./CreateContainer" class="btn btn-primary">Create New Container</a>
+        </div>
+    </div>
+</div>

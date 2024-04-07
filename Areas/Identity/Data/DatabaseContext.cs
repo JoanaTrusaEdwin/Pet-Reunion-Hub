@@ -298,7 +298,7 @@ namespace PRHDATALIB.Models
 
             modelBuilder.Entity<CONTAINER>(entity =>
             {
-                entity.ToTable("POSTCONTAINER");
+                entity.ToTable("CONTAINER");
                 entity.Property(e => e.Id)
                         .ValueGeneratedOnAdd()
                         .HasColumnName("Id"); entity.Property(e => e.Id)

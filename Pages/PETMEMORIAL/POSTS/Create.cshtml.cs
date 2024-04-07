@@ -98,6 +98,13 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
         public IActionResult OnGet()
         {
             Post = new Post { UserId = _userManager.GetUserId(User) };
+
+            Containers = _context.CONTAINER
+           .Select(c => new SelectListItem
+           {
+               Value = c.Id.ToString(),
+               Text = c.Name
+           });
             return Page();
         }
 
@@ -106,6 +113,8 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
 
         [BindProperty]
         public IFormFileCollection MediaFiles { get; set; }
+
+        public IEnumerable<SelectListItem> Containers { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
