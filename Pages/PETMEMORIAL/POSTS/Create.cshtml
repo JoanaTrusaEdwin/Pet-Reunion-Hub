@@ -210,7 +210,7 @@
             input.className = 'form-control';
             input.name = 'MediaFiles';
             input.onchange = function (event) {
-                previewAdditionalPhotos(event);
+                validateAndPreviewPhotos(event);
             };
 
             var photosGroup = document.querySelector('.form-group.photos-group');
