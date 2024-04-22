@@ -15,7 +15,7 @@
 @foreach (var tribute in Model.PublicTributes)
 {
     <div style="background-color: #fff; border-radius: 20px; padding: 20px; margin-bottom: 20px;">
-        
+        <h1>@tribute.User.UserName</h1>
         <h2>@tribute.PetName</h2>
         @if (!string.IsNullOrEmpty(tribute.TributePhoto))
         {

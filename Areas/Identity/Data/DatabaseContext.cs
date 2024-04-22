@@ -48,7 +48,7 @@ namespace PRHDATALIB.Models
         //public DbSet<Post> Post { get; set; }
         //public DbSet<Media> Media { get; set; }
 
-        //public DbSet<TributeNotification> TributeNotification { get; set; }
+        public DbSet<TributeNotification> TributeNotification { get; set; }
 
         public DbSet<Newtest> NEWTEST { get; set; }
 
@@ -373,15 +373,20 @@ namespace PRHDATALIB.Models
             //});
             modelBuilder.Entity<Comment>(entity =>
             {
-                entity.HasKey(c => c.Id);
+                entity.ToTable("Comment");
+                entity.Property(e => e.Id)
+                .ValueGeneratedOnAdd()
+                .HasColumnName("Id");entity.Property(e => e.Id);
 
-                entity.Property(c => c.Content).HasMaxLength(500);
+                entity.Property(e => e.Content).HasMaxLength(500);
 
-                entity.Property(c => c.TributeId)
+                entity.Property(e => e.CreatedAt);
+
+                entity.Property(e => e.TributeId)
                     .IsRequired();
 
-                entity.HasOne(c => c.Tribute)
-                    .WithMany(t => t.Comments)
+                entity.HasOne(e => e.Tribute)
+                    .WithMany(e => e.Comments)
                     .HasForeignKey(c => c.TributeId)
                     .OnDelete(DeleteBehavior.Cascade);
 
@@ -392,38 +397,43 @@ namespace PRHDATALIB.Models
             .HasConstraintName("FK_Comment_AspNetUsers");
             });
 
-            //modelBuilder.Entity<TributeNotification>(entity =>
-            //{
-            //    entity.ToTable("TributeNotification");
+            modelBuilder.Entity<TributeNotification>(entity =>
+            {
+                entity.ToTable("TributeNotification");
 
-            //    entity.HasKey(c => c.Id);
+               
+                entity.Property(e => e.Id)
+              .ValueGeneratedOnAdd()
+              .HasColumnName("Id"); entity.Property(e => e.Id);
 
-            //    entity.Property(c => c.UserId).IsRequired();
+                entity.Property(e => e.UserId).IsRequired();
 
-            //    entity.Property(c => c.TributeId).IsRequired();
+                entity.Property(e => e.TributeId).IsRequired();
 
-            //    entity.Property(c => c.CommentId).IsRequired();
+                entity.Property(e => e.CommentId).IsRequired();
 
-            //    entity.Property(c => c.IsRead).IsRequired();
+                entity.Property(e => e.IsRead).IsRequired();
 
-            //    entity.HasOne(cr => cr.User)
-            //        .WithMany()
-            //        .HasForeignKey(cr => cr.UserId)
-            //        .OnDelete(DeleteBehavior.Restrict)
-            //        .HasConstraintName("FK_TributeNotification_AspNetUsers");
+                entity.Property(e => e.CreatedAt);
 
-            //    entity.HasOne(cr => cr.Tribute)
-            //        .WithMany()
-            //        .HasForeignKey(cr => cr.TributeId)
-            //        .OnDelete(DeleteBehavior.Restrict)
-            //        .HasConstraintName("FK_TributeNotification_Tribute");
+                entity.HasOne(cr => cr.User)
+                    .WithMany()
+                    .HasForeignKey(cr => cr.UserId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("FK_TributeNotification_AspNetUsers");
 
-            //    entity.HasOne(cr => cr.Comment)
-            //        .WithMany()
-            //        .HasForeignKey(cr => cr.CommentId)
-            //        .OnDelete(DeleteBehavior.Restrict)
-            //        .HasConstraintName("FK_TributeNotification_Comment");
-            //});
+                entity.HasOne(cr => cr.Tribute)
+                    .WithMany()
+                    .HasForeignKey(cr => cr.TributeId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("FK_TributeNotification_Tribute");
+
+                entity.HasOne(cr => cr.Comment)
+                    .WithMany()
+                    .HasForeignKey(cr => cr.CommentId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("FK_TributeNotification_Comment");
+            });
 
             //modelBuilder.Entity<Heart>(entity =>
             //{

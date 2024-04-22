@@ -1,0 +1,22 @@
+﻿
+@page
+@model Pet_Reunion_Hub.Pages.NotificationsModel
+
+<h1>Notifications</h1>
+
+@if (Model.Notifications.Any())
+{
+    <ul>
+        @foreach (var notification in Model.Notifications)
+        {
+            <li>
+                <!-- Display notification content -->
+                <p>New comment on Tribute ID: @notification.TributeId</p>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No new notifications.</p>
+}

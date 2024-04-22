@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Pet_Reunion_Hub.Services;
 
 
 
@@ -22,9 +23,11 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<DatabaseContext>();
 
+builder.Services.AddScoped<INotificationService, NotificationService>();
+
 //builder.Services.ConfigureApplicationCookie(options =>
 //{
-    
+
 //    options.ExpireTimeSpan = TimeSpan.FromMinutes(30); // Cookie expires when browser session ends
 //    options.SlidingExpiration = false;
 //});
