@@ -42,6 +42,8 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
 
             Tribute = await _context.Tribute
                    .Where(n => n.UserId == currentUser.Id)
+                     .Include(t => t.Comments)
+                     .ThenInclude(c => c.User)
                    .ToListAsync();
 
             //foreach (var tribute in Tribute)

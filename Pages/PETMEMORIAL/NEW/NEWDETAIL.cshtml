@@ -36,7 +36,7 @@
 </style>
 
 <div style="padding: 30px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 20px; background-color: #fff;">
-   @*  <h1>@Model.Tribute.PetName</h1> *@
+    <h1>@Model.Tribute.PetName</h1>
 
     <hr />
     <p><strong>Created on:</strong> @Model.Tribute.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss")</p>
@@ -83,5 +83,29 @@
         <a asp-page="./Edit" asp-route-id="@Model.Tribute?.Id" class="btn" id="edit">Edit</a>
         <a asp-page="./Index" class="btn" id="back">Back to List</a>
     </div>
+       
+</div>
+<div style="background-color: lightgray; border-radius: 20px; padding: 20px; margin-bottom: 10px; white-space: pre-wrap; overflow-wrap: break-word; ">
+    <!-- Comments Section -->
+    <h3>Comments</h3>
+    @if (Model.Tribute.Comments.Any())
+    {
+
+        @foreach (var comment in Model.Tribute.Comments)
+        {
+            <div style="background-color: #fff; border-radius: 5px; padding: 10px; margin-bottom: 10px;">
+                <strong>@comment.User.UserName:</strong> <!-- Display username -->
+                <br />
+                @comment.Content
+            </div>
+        }
+
+    }
+    else
+    {
+        <p>No comments yet.</p>
+    }
+
+    <hr />
 </div>
 

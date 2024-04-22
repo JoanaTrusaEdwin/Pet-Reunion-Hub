@@ -24,6 +24,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
 
         public Tribute Tribute { get; set; } = default!;
 
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null || _context.Tribute == null)
@@ -31,7 +32,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                 return NotFound();
             }
 
-            var tribute = await _context.Tribute.FirstOrDefaultAsync(m => m.Id == id);
+            var tribute = await _context.Tribute.Include(t => t.Comments).ThenInclude(c => c.User).FirstOrDefaultAsync(m => m.Id == id);
             if (tribute == null)
             {
                 return NotFound();
