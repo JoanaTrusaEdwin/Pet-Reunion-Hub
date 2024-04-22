@@ -1,0 +1,28 @@
+﻿@* @* @page
+@model Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW.TributeNotificationsModel
+@{
+} *@
+
+
+@* @page
+@model Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW.TributeNotificationsModel
+
+@{
+    ViewData["Title"] = "Notifications";
+}
+
+<h1>Notifications</h1>
+
+<ul>
+    @foreach (var notification in Model.Notifications)
+    {
+        <li>
+            @if (notification.CommentId != null)
+            {
+                <a href="/PETMEMORIAL/NEW/NEWDETAIL?id=@notification.TributeId">New Comment on Tribute</a>
+            }
+            <!-- Add additional conditions for other types of notifications if needed -->
+        </li>
+    }
+</ul>
+ *@ 

@@ -48,6 +48,8 @@ namespace PRHDATALIB.Models
         //public DbSet<Post> Post { get; set; }
         //public DbSet<Media> Media { get; set; }
 
+        //public DbSet<TributeNotification> TributeNotification { get; set; }
+
         public DbSet<Newtest> NEWTEST { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -389,6 +391,39 @@ namespace PRHDATALIB.Models
             .OnDelete(DeleteBehavior.Restrict)
             .HasConstraintName("FK_Comment_AspNetUsers");
             });
+
+            //modelBuilder.Entity<TributeNotification>(entity =>
+            //{
+            //    entity.ToTable("TributeNotification");
+
+            //    entity.HasKey(c => c.Id);
+
+            //    entity.Property(c => c.UserId).IsRequired();
+
+            //    entity.Property(c => c.TributeId).IsRequired();
+
+            //    entity.Property(c => c.CommentId).IsRequired();
+
+            //    entity.Property(c => c.IsRead).IsRequired();
+
+            //    entity.HasOne(cr => cr.User)
+            //        .WithMany()
+            //        .HasForeignKey(cr => cr.UserId)
+            //        .OnDelete(DeleteBehavior.Restrict)
+            //        .HasConstraintName("FK_TributeNotification_AspNetUsers");
+
+            //    entity.HasOne(cr => cr.Tribute)
+            //        .WithMany()
+            //        .HasForeignKey(cr => cr.TributeId)
+            //        .OnDelete(DeleteBehavior.Restrict)
+            //        .HasConstraintName("FK_TributeNotification_Tribute");
+
+            //    entity.HasOne(cr => cr.Comment)
+            //        .WithMany()
+            //        .HasForeignKey(cr => cr.CommentId)
+            //        .OnDelete(DeleteBehavior.Restrict)
+            //        .HasConstraintName("FK_TributeNotification_Comment");
+            //});
 
             //modelBuilder.Entity<Heart>(entity =>
             //{
