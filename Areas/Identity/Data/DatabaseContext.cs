@@ -419,20 +419,20 @@ namespace PRHDATALIB.Models
                 entity.HasOne(cr => cr.User)
                     .WithMany()
                     .HasForeignKey(cr => cr.UserId)
-                    .OnDelete(DeleteBehavior.Restrict)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_TributeNotification_AspNetUsers");
 
                 entity.HasOne(cr => cr.Tribute)
                     .WithMany()
                     .HasForeignKey(cr => cr.TributeId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("FK_TributeNotification_Tribute");
+                    .OnDelete(DeleteBehavior.Cascade);
+
 
                 entity.HasOne(cr => cr.Comment)
                     .WithMany()
                     .HasForeignKey(cr => cr.CommentId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("FK_TributeNotification_Comment");
+                    .OnDelete(DeleteBehavior.Cascade);
+                    
             });
 
             //modelBuilder.Entity<Heart>(entity =>

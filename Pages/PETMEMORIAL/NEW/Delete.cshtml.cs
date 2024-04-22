@@ -106,6 +106,12 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                         _context.Remove(comment);
                     }
 
+                    var notifications = await _context.TributeNotification.Where(n => n.TributeId == Tribute.Id).ToListAsync();
+                    foreach (var notification in notifications)
+                    {
+                        _context.Remove(notification);
+                    }
+
                     _context.Tribute.Remove(Tribute);
                     await _context.SaveChangesAsync();
 
