@@ -1,0 +1,43 @@
+﻿@* @page
+@model Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW.CommunityMemorialsModel
+@{
+}
+ *@
+
+@page
+@model Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW.CommunityMemorialsModel
+@{
+    ViewData["Title"] = "Community Memorials";
+}
+
+<h1>Community Memorials</h1>
+
+@foreach (var tribute in Model.PublicTributes)
+{
+    <div style="background-color: #fff; border-radius: 20px; padding: 20px; margin-bottom: 20px;">
+        
+        <h2>@tribute.PetName</h2>
+        @if (!string.IsNullOrEmpty(tribute.TributePhoto))
+        {
+            <img src="@tribute.TributePhoto" alt="Tribute Photo" style="max-width: 500px;" />
+        }
+        <p><b>Type: </b> @tribute.PetType</p>
+        <p> <b>Breed: </b> @tribute.PetBreed </p>
+        <p><b>Sex:</b> @tribute.PetSex</p>
+        <p><b>Date of Birth:</b> @tribute.DateOfBirth</p>
+        <p><b>Date of Adoption:</b> @tribute.DateOfAdoption</p>
+        <p><b>Date of Departure:</b> @tribute.DateOfDeparture</p>
+        <p><b>Cause of Death:</b> @tribute.Cause</p>
+        <p>@tribute.TributeText</p>
+
+      
+   
+
+    <form method="post">
+        @* <input type="hidden" name="tributeId" value="@tribute.Id" />
+        <input type="hidden" name="Visibility" value="@tribute.Visibility" /> *@
+    </form>
+    <hr />
+    </div>
+}
+
