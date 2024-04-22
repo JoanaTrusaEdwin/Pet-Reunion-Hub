@@ -30,14 +30,42 @@
         <p><b>Cause of Death:</b> @tribute.Cause</p>
         <p>@tribute.TributeText</p>
 
-      
-   
+        <div style="background-color: lightgray; border-radius: 20px; padding: 20px; margin-bottom: 20px;">
+            <!-- Comments Section -->
+            <h3>Comments</h3>
+            @if (tribute.Comments.Any())
+            {
+                
+                    @foreach (var comment in tribute.Comments)
+                    {
+                    <div style="background-color: #fff; border-radius: 5px; padding: 10px; margin-bottom: 10px;">
+                        <strong>@comment.User.UserName:</strong> <!-- Display username -->
+                        <br />
+                        @comment.Content
+                    </div>
+                    }
+                
+            }
+            else
+            {
+                <p>No comments yet.</p>
+            }
 
-    <form method="post">
-        @* <input type="hidden" name="tributeId" value="@tribute.Id" />
-        <input type="hidden" name="Visibility" value="@tribute.Visibility" /> *@
-    </form>
+            <!-- Form to Add New Comment -->
+            <form method="post">
+                <input type="hidden" name="tributeId" value="@tribute.Id" />
+                <div class="form-group">
+                    <label for="commentContent">Add a comment:</label>
+                    <textarea class="form-control" id="commentContent" name="commentContent" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+
+            <hr />
+        </div>
     <hr />
     </div>
+ 
 }
 

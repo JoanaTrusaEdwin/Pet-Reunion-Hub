@@ -36,18 +36,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
             {
                 return NotFound();
             }
-            else
-            {
-                Tribute = tribute;
-                tribute.PetName = EncryptionHelper.Decrypt(tribute.PetName);
-                tribute.PetType = EncryptionHelper.Decrypt(tribute.PetType);
-                tribute.PetBreed = EncryptionHelper.Decrypt(tribute.PetBreed);
-                tribute.PetSex = EncryptionHelper.Decrypt(tribute.PetSex);
-                tribute.Cause = EncryptionHelper.Decrypt(tribute.Cause);
-                tribute.TributeText = EncryptionHelper.Decrypt(tribute.TributeText);
-                //tribute.TributePhoto = EncryptionHelper.Decrypt(tribute.TributePhoto);
-                //tribute.Visibility = EncryptionHelper.Decrypt(tribute.Visibility);
-            }
+            Tribute = tribute;
             return Page();
         }
     }

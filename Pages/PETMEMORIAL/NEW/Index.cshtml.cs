@@ -44,30 +44,30 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                    .Where(n => n.UserId == currentUser.Id)
                    .ToListAsync();
 
-            foreach (var tribute in Tribute)
-            {
-                // Check if the user ID associated with the tribute matches the currently authenticated user
-                if (tribute.UserId == currentUser.Id)
-                {
-                    // Decrypt the tribute properties
-                    tribute.PetName = EncryptionHelper.Decrypt(tribute.PetName);
-                    tribute.PetType = EncryptionHelper.Decrypt(tribute.PetType);
-                    tribute.PetBreed = EncryptionHelper.Decrypt(tribute.PetBreed);
-                    tribute.PetSex = EncryptionHelper.Decrypt(tribute.PetSex);
-                    tribute.Cause = EncryptionHelper.Decrypt(tribute.Cause);
-                    tribute.TributeText = EncryptionHelper.Decrypt(tribute.TributeText);
-                    //tribute.TributePhoto = EncryptionHelper.Decrypt(tribute.TributePhoto);
-                    //tribute.Visibility = EncryptionHelper.Decrypt(tribute.Visibility);
-                    //tribute. = EncryptionHelper.Decrypt(tribute.);
-                    //tribute. = EncryptionHelper.Decrypt(tribute.);
-                    // Decrypt other properties as needed
-                }
-                else
-                {
-                    // If the user ID associated with the tribute doesn't match the currently authenticated user, skip decryption
-                    // Alternatively, you can choose to handle this case differently based on your application's requirements
-                }
-            }
+            //foreach (var tribute in Tribute)
+            //{
+            //    // Check if the user ID associated with the tribute matches the currently authenticated user
+            //    if (tribute.UserId == currentUser.Id)
+            //    {
+            //        // Decrypt the tribute properties
+            //        tribute.PetName = EncryptionHelper.Decrypt(tribute.PetName);
+            //        tribute.PetType = EncryptionHelper.Decrypt(tribute.PetType);
+            //        tribute.PetBreed = EncryptionHelper.Decrypt(tribute.PetBreed);
+            //        tribute.PetSex = EncryptionHelper.Decrypt(tribute.PetSex);
+            //        tribute.Cause = EncryptionHelper.Decrypt(tribute.Cause);
+            //        tribute.TributeText = EncryptionHelper.Decrypt(tribute.TributeText);
+            //        //tribute.TributePhoto = EncryptionHelper.Decrypt(tribute.TributePhoto);
+            //        //tribute.Visibility = EncryptionHelper.Decrypt(tribute.Visibility);
+            //        //tribute. = EncryptionHelper.Decrypt(tribute.);
+            //        //tribute. = EncryptionHelper.Decrypt(tribute.);
+            //        // Decrypt other properties as needed
+            //    }
+            //    else
+            //    {
+            //        // If the user ID associated with the tribute doesn't match the currently authenticated user, skip decryption
+            //        // Alternatively, you can choose to handle this case differently based on your application's requirements
+            //    }
+            //}
 
 
             return Page();

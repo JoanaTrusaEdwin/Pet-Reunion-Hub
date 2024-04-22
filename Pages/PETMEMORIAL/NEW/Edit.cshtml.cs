@@ -135,14 +135,14 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
             {
                 return NotFound();
             }
-            Tribute.PetName = EncryptionHelper.Decrypt(Tribute.PetName);
-            Tribute.PetType = EncryptionHelper.Decrypt(Tribute.PetType);
-            Tribute.PetBreed = EncryptionHelper.Decrypt(Tribute.PetBreed);
-            Tribute.PetSex = EncryptionHelper.Decrypt(Tribute.PetSex);
-            Tribute.Cause = EncryptionHelper.Decrypt(Tribute.Cause);
-            Tribute.TributeText = EncryptionHelper.Decrypt(Tribute.TributeText);
-            //Tribute.TributePhoto = EncryptionHelper.Decrypt(Tribute.TributePhoto);
-            //Tribute.Visibility = EncryptionHelper.Decrypt(Tribute.Visibility);
+            //Tribute.PetName = EncryptionHelper.Decrypt(Tribute.PetName);
+            //Tribute.PetType = EncryptionHelper.Decrypt(Tribute.PetType);
+            //Tribute.PetBreed = EncryptionHelper.Decrypt(Tribute.PetBreed);
+            //Tribute.PetSex = EncryptionHelper.Decrypt(Tribute.PetSex);
+            //Tribute.Cause = EncryptionHelper.Decrypt(Tribute.Cause);
+            //Tribute.TributeText = EncryptionHelper.Decrypt(Tribute.TributeText);
+            ////Tribute.TributePhoto = EncryptionHelper.Decrypt(Tribute.TributePhoto);
+            ////Tribute.Visibility = EncryptionHelper.Decrypt(Tribute.Visibility);
             return Page();
         }
 
@@ -224,13 +224,13 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                             existingTribute.TributePhoto = fileUrl;
                         }
 
-                        existingTribute.PetName = EncryptionHelper.Encrypt(existingTribute.PetName);
-                        existingTribute.PetType = EncryptionHelper.Encrypt(existingTribute.PetType);
-                        existingTribute.PetBreed = EncryptionHelper.Encrypt(existingTribute.PetBreed);
-                        existingTribute.PetSex = EncryptionHelper.Encrypt(existingTribute.PetSex);
-                        existingTribute.Cause = EncryptionHelper.Encrypt(existingTribute.Cause);
-                        existingTribute.TributeText = EncryptionHelper.Encrypt(existingTribute.TributeText);
-                        //existingTribute.Visibility = EncryptionHelper.Encrypt(existingTribute.Visibility);
+                        //existingTribute.PetName = EncryptionHelper.Encrypt(existingTribute.PetName);
+                        //existingTribute.PetType = EncryptionHelper.Encrypt(existingTribute.PetType);
+                        //existingTribute.PetBreed = EncryptionHelper.Encrypt(existingTribute.PetBreed);
+                        //existingTribute.PetSex = EncryptionHelper.Encrypt(existingTribute.PetSex);
+                        //existingTribute.Cause = EncryptionHelper.Encrypt(existingTribute.Cause);
+                        //existingTribute.TributeText = EncryptionHelper.Encrypt(existingTribute.TributeText);
+                        ////existingTribute.Visibility = EncryptionHelper.Encrypt(existingTribute.Visibility);
 
                         _context.Entry(existingTribute).State = EntityState.Modified;
 

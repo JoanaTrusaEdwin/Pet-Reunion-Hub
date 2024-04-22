@@ -43,7 +43,7 @@ namespace PRHDATALIB.Models
         public DbSet<CONTAINER> CONTAINER { get; set; }
 
         //public DbSet<TESTBIT> TESTBIT { get; set; }
-        //public DbSet<Comment> Comment { get; set; }
+        public DbSet<Comment> Comment { get; set; }
         //public DbSet<Heart> Heart { get; set; }
         //public DbSet<Post> Post { get; set; }
         //public DbSet<Media> Media { get; set; }
@@ -176,9 +176,7 @@ namespace PRHDATALIB.Models
                 entity.ToTable("Tribute");
                 entity.Property(e => e.Id)
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("Id"); entity.Property(e => e.Id)
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("Id");
+                        .HasColumnName("Id"); 
                 /*entity.HasKey(e => e.Id);*/ // Primary key
                 entity.Property(e => e.PetName);
                 entity.Property(e => e.PetType);
@@ -329,7 +327,7 @@ namespace PRHDATALIB.Models
             //            .HasColumnName("Id"); entity.Property(e => e.Id)
             //            .ValueGeneratedOnAdd()
             //            .HasColumnName("Id");
-                
+
             //    entity.Property(e => e.Cute);
             //    entity.Property(e => e.UserId).IsRequired().HasMaxLength(450);
 
@@ -371,6 +369,26 @@ namespace PRHDATALIB.Models
             //   .HasConstraintName("FK_Comment_AspNetUsers");
 
             //});
+            modelBuilder.Entity<Comment>(entity =>
+            {
+                entity.HasKey(c => c.Id);
+
+                entity.Property(c => c.Content).HasMaxLength(500);
+
+                entity.Property(c => c.TributeId)
+                    .IsRequired();
+
+                entity.HasOne(c => c.Tribute)
+                    .WithMany(t => t.Comments)
+                    .HasForeignKey(c => c.TributeId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(cr => cr.User)
+            .WithMany()
+            .HasForeignKey(cr => cr.UserId)
+            .OnDelete(DeleteBehavior.Restrict)
+            .HasConstraintName("FK_Comment_AspNetUsers");
+            });
 
             //modelBuilder.Entity<Heart>(entity =>
             //{

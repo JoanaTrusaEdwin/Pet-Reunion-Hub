@@ -1,19 +1,4 @@
-//using Microsoft.AspNetCore.Authorization;
-//using Microsoft.AspNetCore.Identity;
-//using Microsoft.AspNetCore.Mvc;
-//using Microsoft.AspNetCore.Mvc.RazorPages;
-//using Pet_Reunion_Hub.Helper;
-//using PRHDATALIB.Models;
 
-//namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
-//{
-//    public class CommunityMemorialsModel : PageModel
-//    {
-//        public void OnGet()
-//        {
-//        }
-//    }
-//}
 
 
 using System.Collections.Generic;
@@ -24,7 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Pet_Reunion_Hub.Helper;
+//using Pet_Reunion_Hub.Helper;
 using PRHDATALIB.Models;
 
 namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
@@ -51,18 +36,20 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
             // Query for public tributes
             PublicTributes = _context.Tribute
                 .Where(t => t.Visibility == "Public")
+                .Include(t => t.Comments)
+                .ThenInclude(c => c.User)
                 .OrderByDescending(t => t.Id)
                 .ToList();
 
-            foreach (var tribute in PublicTributes)
-            {
-                tribute.PetName = EncryptionHelper.Decrypt(tribute.PetName);
-                tribute.PetType = EncryptionHelper.Decrypt(tribute.PetType);
-                tribute.PetBreed = EncryptionHelper.Decrypt(tribute.PetBreed);
-                tribute.PetSex = EncryptionHelper.Decrypt(tribute.PetSex);
-                tribute.Cause = EncryptionHelper.Decrypt(tribute.Cause);
-                tribute.TributeText = EncryptionHelper.Decrypt(tribute.TributeText);
-            }
+            //foreach (var tribute in PublicTributes)
+            //{
+            //    tribute.PetName = EncryptionHelper.Decrypt(tribute.PetName);
+            //    tribute.PetType = EncryptionHelper.Decrypt(tribute.PetType);
+            //    tribute.PetBreed = EncryptionHelper.Decrypt(tribute.PetBreed);
+            //    tribute.PetSex = EncryptionHelper.Decrypt(tribute.PetSex);
+            //    tribute.Cause = EncryptionHelper.Decrypt(tribute.Cause);
+            //    tribute.TributeText = EncryptionHelper.Decrypt(tribute.TributeText);
+            //}
 
 
 
@@ -71,5 +58,33 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
 
             return Page();
         }
+
+        public IActionResult OnPost(int tributeId, string commentContent)
+        {
+            var userId = _userManager.GetUserId(User);
+
+            // Find the tribute to which the comment belongs
+            var tribute = _context.Tribute.FirstOrDefault(t => t.Id == tributeId);
+
+            if (tribute != null)
+            {
+                // Create a new comment
+                var newComment = new Comment
+                {
+                    Content = commentContent,
+                    UserId = userId,
+                    TributeId = tributeId
+                };
+
+                // Add the comment to the database
+                _context.Comment.Add(newComment);
+                _context.SaveChanges();
+            }
+
+            // Redirect back to the page
+            return RedirectToPage();
+        }
+
     }
 }
+
