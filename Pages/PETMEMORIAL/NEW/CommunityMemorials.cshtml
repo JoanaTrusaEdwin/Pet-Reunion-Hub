@@ -10,13 +10,14 @@
     ViewData["Title"] = "Community Memorials";
 }
 
-<h1>Community Memorials</h1>
+<h1>Monuments Among The Community</h1>
 
 @foreach (var tribute in Model.PublicTributes)
 {
     <div style="background-color: #fff; border-radius: 20px; padding: 20px; margin-bottom: 20px;">
-        <h1>@tribute.User.UserName</h1>
+    
         <h2>@tribute.PetName</h2>
+        <p><b>By: @tribute.User.UserName  </b> </p>
         @if (!string.IsNullOrEmpty(tribute.TributePhoto))
         {
             <img src="@tribute.TributePhoto" alt="Tribute Photo" style="max-width: 500px;" />
