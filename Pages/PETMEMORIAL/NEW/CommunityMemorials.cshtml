@@ -10,27 +10,48 @@
     ViewData["Title"] = "Community Memorials";
 }
 @using System.Security.Claims
-
+<style>
+    .highlight {
+        background-color: yellow;
+    }
+</style>
 <h1>Monuments Among The Community</h1>
-
+<input style="border-radius:20px; height:40px; width: 500px;" type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search">
 @foreach (var tribute in Model.PublicTributes)
 {
-    <div style="background-color: #fff; border-radius: 20px; padding: 20px; margin-bottom: 20px;">
-    
-        <h2>@tribute.PetName</h2>
-        <p><b>By: @tribute.User.UserName  </b> </p>
+    <div class="tribute" style="background-color: #fff; border-radius: 20px; padding: 20px; margin-bottom: 20px;">
+
+        <h2 class="searchable">@tribute.PetName</h2>
+        <p><strong>By:</strong></p>
+        <p class="searchable">@tribute.User.UserName  </p>
         @if (!string.IsNullOrEmpty(tribute.TributePhoto))
         {
             <img src="@tribute.TributePhoto" alt="Tribute Photo" style="max-width: 500px;" />
         }
-        <p><b>Type: </b> @tribute.PetType</p>
-        <p> <b>Breed: </b> @tribute.PetBreed </p>
-        <p><b>Sex:</b> @tribute.PetSex</p>
-        <p><b>Date of Birth:</b> @tribute.DateOfBirth</p>
-        <p><b>Date of Adoption:</b> @tribute.DateOfAdoption</p>
-        <p><b>Date of Departure:</b> @tribute.DateOfDeparture</p>
-        <p><b>Cause of Death:</b> @tribute.Cause</p>
-        <p>@tribute.TributeText</p>
+
+        <p><strong>Type:</strong></p>
+        <p class="searchable">@tribute.PetType</p>
+
+        <p><strong>Breed:</strong></p>
+        <p class="searchable"> @tribute.PetBreed </p>
+
+        <p><strong>Sex:</strong></p>
+        <p class="searchable">@tribute.PetSex</p>
+
+        <p><strong>Date of Birth:</strong></p>
+        <p class="searchable"> @tribute.DateOfBirth</p>
+
+        <p><strong>Date of Adoption:</strong></p>
+        <p class="searchable"> @tribute.DateOfAdoption</p>
+
+        <p><strong>Date of Departure:</strong></p>
+        <p class="searchable"> @tribute.DateOfDeparture</p>
+
+        <p><strong>Cause of Death:</strong></p>
+        <p class="searchable">@tribute.Cause</p>
+
+        <p><strong>Owner's Tribute Text:</strong></p>
+        <p class="searchable">@tribute.TributeText</p>
 
         <div style="background-color: lightgray; border-radius: 20px; padding: 20px; margin-bottom: 20px;">
             <!-- Comments Section -->
@@ -41,9 +62,9 @@
                     @foreach (var comment in tribute.Comments)
                     {
                     <div class="comment-container" style="background-color: #fff; border-radius: 5px; padding: 10px; margin-bottom: 10px;">
-                        <strong>@comment.User.UserName:</strong> <!-- Display username -->
+                        <strong class="searchable">@comment.User.UserName:</strong> <!-- Display username -->
                         <br />
-                        @comment.Content
+                        <p class="searchable">@comment.Content</p>
                         <br/>
                         @if (User.Identity.IsAuthenticated && comment.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier))
                         {
@@ -126,5 +147,43 @@
                 }
             });
         });
+
+        function searchFunction() {
+            var input = document.getElementById("searchInput");
+            var filter = input.value.trim().toLowerCase(); // Convert filter to lowercase for case-insensitive search
+            var reports = document.getElementsByClassName("tribute");
+
+            for (var i = 0; i < reports.length; i++) {
+                var report = reports[i];
+                var searchableElements = report.getElementsByClassName("searchable");
+                var found = false;
+
+                for (var j = 0; j < searchableElements.length; j++) {
+                    var nameElement = searchableElements[j];
+                    var originalText = nameElement.textContent; // Store the original text
+                    var text = originalText.toLowerCase(); // Convert text to lowercase for case-insensitive search
+
+                    if (text.indexOf(filter) > -1) {
+                        found = true;
+                        // Highlight the matching text
+                        var newText = highlightMatch(originalText, filter); // Pass the original text for highlighting
+                        nameElement.innerHTML = newText;
+                    }
+                }
+
+                if (found) {
+                    report.style.display = "";
+                } else {
+                    report.style.display = "none";
+                }
+            }
+        }
+
+        // Helper function to highlight the matched text
+        function highlightMatch(text, filter) {
+            var regex = new RegExp('(' + filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig');
+            return text.replace(regex, '<span class="highlight">$1</span>');
+        }
+
     </script>
 }

@@ -98,6 +98,9 @@
             overflow-x: auto; /* Enable horizontal scrolling */
             white-space: nowrap; /* Prevent report cards from wrapping */
             max-width: 100%;
+            background-color: gray;
+            padding:10px;
+            border-radius:10px;
         }
       .report-card{
             display: inline-block; /* Display report cards inline */
@@ -130,19 +133,23 @@
         .scroll-button {
             margin-top: 10px;
             text-align: center;
-            position: absolute; /* Set position absolute */
-            top: 17.5%; /* Adjust top position */
-            right: 10%; /* Adjust right position */
+            position: fixed; /* Set position absolute */
+            top: 55%; /* Adjust top position */
+            right: 5%; /* Adjust right position */
             z-index: 1;
         }
 
         .prev-button {
             margin-top: 10px;
             text-align: center;
-            position: absolute; /* Set position absolute */
-            top: 17.5%; /* Adjust top position */
-            right: 25%; /* Adjust right position */
+            position: fixed; /* Set position absolute */
+            top: 60%; /* Adjust top position */
+            right: 5%; /* Adjust right position */
             z-index: 1;
+        }
+
+        .highlight {
+            background-color: yellow;
         }
     </style>
 </head>
@@ -167,7 +174,11 @@
         </div>
     </div>
     <div class="report-container">
-        <h3>Lost Pets Reported In Your City!</h3>
+        <h3 style="color:white;">Lost Pets Reported In Your City!</h3>
+        <p style="color:white;">These are pets reported to be missing, last seen in your city. Your city is set to Malaysia-Sarawak-Sibu by default. Change your residential area to filter reports near you. </p>
+        <input style="border-radius:20px; height:40px; width: 500px;" type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search">
+        <br />
+        <br />
         @foreach (var report in Model.CreateReport.Reverse())
         {
             <div class="report-card">
@@ -208,6 +219,31 @@
                     <p><strong>Created on:</strong></p>
                     <p class="searchable">@report.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss")</p>
                     <br />
+
+                    <br/>
+                    <h4>Additional Details</h4>
+                  <br/>
+
+
+                    <p><strong>Estimated Age:</strong></p>
+                    <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable"> @report.Age</p>
+                    <br />
+
+                    <p><strong>Pet Microchip ID:</strong></p>
+                    <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable"> @(string.IsNullOrEmpty(report.PetMicrochipID) ? "-" : report.PetMicrochipID)</p>
+                    <br />
+
+                    <p><strong>Type:</strong></p>
+                    <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable"> @report.PetType</p>
+                    <br />
+
+                    <p><strong>Breed:</strong></p>
+                    <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable"> @report.PetBreed</p>
+                    <br />
+
+                    <p><strong>Date of Birth:</strong></p>
+                    <p class="searchable"> @(report.DateOfBirth != null ? report.DateOfBirth.Value.ToString("dd-MMM-yyyy HH:mm") : "-")</p>
+                    <br />
                 </div>
 
             </div>
@@ -223,12 +259,49 @@
     <script>
         function scrollToNext() {
             const reportContainer = document.querySelector('.report-container');
-            reportContainer.scrollBy(200, 0); // Adjust scroll distance as needed
+            reportContainer.scrollBy(800, 0); // Adjust scroll distance as needed
         }
 
         function scrollToPrevious() {
             const reportContainer = document.querySelector('.report-container');
-            reportContainer.scrollBy(-200, 0); // Adjust scroll distance as needed
+            reportContainer.scrollBy(-800, 0); // Adjust scroll distance as needed
+        }
+
+        function searchFunction() {
+            var input = document.getElementById("searchInput");
+            var filter = input.value.trim().toLowerCase(); // Convert filter to lowercase for case-insensitive search
+            var reports = document.getElementsByClassName("report-card");
+
+            for (var i = 0; i < reports.length; i++) {
+                var report = reports[i];
+                var searchableElements = report.getElementsByClassName("searchable");
+                var found = false;
+
+                for (var j = 0; j < searchableElements.length; j++) {
+                    var nameElement = searchableElements[j];
+                    var originalText = nameElement.textContent; // Store the original text
+                    var text = originalText.toLowerCase(); // Convert text to lowercase for case-insensitive search
+
+                    if (text.indexOf(filter) > -1) {
+                        found = true;
+                        // Highlight the matching text
+                        var newText = highlightMatch(originalText, filter); // Pass the original text for highlighting
+                        nameElement.innerHTML = newText;
+                    }
+                }
+
+                if (found) {
+                    report.style.display = "";
+                } else {
+                    report.style.display = "none";
+                }
+            }
+        }
+
+        // Helper function to highlight the matched text
+        function highlightMatch(text, filter) {
+            var regex = new RegExp('(' + filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig');
+            return text.replace(regex, '<span class="highlight">$1</span>');
         }
     </script>
 </body>
