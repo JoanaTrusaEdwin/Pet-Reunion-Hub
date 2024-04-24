@@ -21,9 +21,11 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
         private readonly DatabaseContext _context;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly INotificationService _notificationService;
+        private readonly ILogger<CommunityMemorialsModel> _logger;
 
-        public CommunityMemorialsModel(DatabaseContext context, UserManager<IdentityUser> userManager, INotificationService notificationService)
+        public CommunityMemorialsModel(ILogger<CommunityMemorialsModel> logger,DatabaseContext context, UserManager<IdentityUser> userManager, INotificationService notificationService)
         {
+            _logger = logger;
             _context = context;
             _userManager = userManager;
             _notificationService = notificationService;
@@ -96,6 +98,65 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
 
             // Redirect back to the page
             return RedirectToPage();
+        }
+
+        //public async Task<IActionResult> OnPostRemoveCommentAsync(int CommentId)
+        //{
+
+        //    try
+        //    {
+        //        _logger.LogInformation("Received media ID: {MediaId}", CommentId);
+        //        var commentToRemove = await _context.Comment.FindAsync(CommentId);
+        //        if (commentToRemove != null)
+        //        {
+        //            _context.Comment.Remove(commentToRemove);
+        //            await _context.SaveChangesAsync();
+        //            _logger.LogInformation("Comment removed successfully.");
+        //            return new JsonResult(new { success = true });
+
+
+        //        }
+        //        return new JsonResult(new { success = false, error = "Could not remove comment." });
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "Error removing comment:");
+        //        return new JsonResult(new { success = false, error = ex.Message });
+        //    }
+        //}
+        public async Task<IActionResult> OnPostRemoveCommentAsync(int CommentId)
+        {
+            try
+            {
+                _logger.LogInformation("Received media ID: {MediaId}", CommentId);
+
+                // Find the comment to remove
+                var commentToRemove = await _context.Comment.FindAsync(CommentId);
+                if (commentToRemove == null)
+                {
+                    return new JsonResult(new { success = false, error = "Comment not found." });
+                }
+
+                // Remove related TributeNotification entries
+                var notificationsToRemove = _context.TributeNotification
+                    .Where(n => n.CommentId == CommentId)
+                    .ToList();
+                _context.TributeNotification.RemoveRange(notificationsToRemove);
+
+                // Remove the comment
+                _context.Comment.Remove(commentToRemove);
+
+                // Save changes to the database
+                await _context.SaveChangesAsync();
+
+                _logger.LogInformation("Comment removed successfully.");
+                return new JsonResult(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error removing comment:");
+                return new JsonResult(new { success = false, error = ex.Message });
+            }
         }
 
     }
