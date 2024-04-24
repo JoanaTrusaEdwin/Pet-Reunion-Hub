@@ -40,6 +40,23 @@
             
         }
 
+        .lost-pets{
+            
+        }
+
+        .report-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .report {
+            background-color: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 1000px;
+        }
         .row {
             display: flex;
             justify-content: space-around;
@@ -91,6 +108,45 @@
                 color: #ccc;
             }
 
+        .report-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius:10px;
+            height: 25%;
+           
+        }
+
+        .report-card {
+            display: flex;
+            align-items: flex-start; /* Align items at the start of the cross axis */
+            margin-bottom: 20px; /* Adjust margin between report cards */
+            height: 25%;
+            background-color:white;
+            border-radius:10px;
+        }
+
+        .photos {
+            flex: 1; /* Take up remaining space */
+            margin-right: 20px; /* Adjust margin between photos and details */
+        }
+
+        .details {
+            flex: 2; /* Take up twice as much space as photos */
+        }
+        .reports {
+            display: flex;
+            flex-wrap: wrap; /* Allow reports to wrap to the next line */
+            justify-content: center; /* Align reports in the center horizontally */
+        }
+
+        .report {
+            width: 300px; /* Adjust the width of each report container as needed */
+            margin: 10px; /* Adjust the margin between reports */
+            border: 1px solid #ccc; /* Add border for each report container */
+            padding: 20px; /* Add padding to each report container */
+        }
+
         
     </style>
 </head>
@@ -114,5 +170,51 @@
             </a>
         </div>
     </div>
+    <div class="report-container">
+        <h3>Lost Pets Reported In Your City!</h3>
+        @foreach (var report in Model.CreateReport.Reverse())
+        {
+            <div class="report-card">
+
+                <div class="photos">
+                    @foreach (var photo in report.ReportPhotos)
+                    {
+                        <img src="@photo.PhotoUrl" style="max-width: 100%; max-height: 300px;" />
+                    }
+                </div>
+
+                <div class="details">
+                    <h2 style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable">@report.PetName</h2>
+                    <br />
+
+                    <h5>Owner Contact Information:</h5>
+                    <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable">@report.ContactInformation</p>
+                    <br />
+
+                    <p><strong>Last Seen Location:</strong></p>
+                    <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable"> @report.LastSeenLocation</p>
+                    <br />
+
+                    <p><strong>Last Seen Time:</strong></p>
+                    <p class="searchable"> @report.LastSeenTime.Value.ToString("dd-MMM-yyyy HH:mm")</p>
+                    <br />
+
+                    <p><strong>Sex:</strong></p>
+                    <p class="searchable">@report.PetGender</p>
+                    <br />
+
+                    <p><strong>Additional Description:</strong></p>
+                    <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable"> @report.AdditionalDescription</p>
+                    <br />
+
+                    <p><strong>Created on:</strong></p>
+                    <p class="searchable">@report.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss")</p>
+                    <br />
+                </div>
+
+            </div>
+        }
+    </div>
+
 </body>
 </html>
