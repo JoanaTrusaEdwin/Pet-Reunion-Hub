@@ -156,8 +156,8 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
                         return Page();
                     }
 
-                    Post.Title = EncryptionHelper.Encrypt(Post.Title);
-                    Post.Content = EncryptionHelper.Encrypt(Post.Content);
+                    //Post.Title = EncryptionHelper.Encrypt(Post.Title);
+                    //Post.Content = EncryptionHelper.Encrypt(Post.Content);
 
                     _context.Post.Add(Post);
                     await _context.SaveChangesAsync();

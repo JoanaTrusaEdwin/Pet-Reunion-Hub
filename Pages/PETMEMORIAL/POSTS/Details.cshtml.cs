@@ -49,11 +49,11 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
             {
                 return NotFound();
             }
-            else
-            {
-                Post.Title = EncryptionHelper.Decrypt(Post.Title);
-                Post.Content = EncryptionHelper.Decrypt(Post.Content);
-            }
+            //else
+            //{
+            //    Post.Title = EncryptionHelper.Decrypt(Post.Title);
+            //    Post.Content = EncryptionHelper.Decrypt(Post.Content);
+            //}
             return Page();
         }
     }

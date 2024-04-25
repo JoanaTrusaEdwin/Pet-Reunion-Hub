@@ -49,8 +49,8 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
             else 
             {
                 Post = post;
-                post.Title = EncryptionHelper.Decrypt(post.Title);
-                post.Content = EncryptionHelper.Decrypt(post.Content);
+                //post.Title = EncryptionHelper.Decrypt(post.Title);
+                //post.Content = EncryptionHelper.Decrypt(post.Content);
             }
             return Page();
         }

@@ -32,6 +32,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
         }
 
         public List<Tribute> PublicTributes { get; set; }
+        public List<Post> PublicPosts { get; set; }
 
 
         public IActionResult OnGet()
@@ -53,6 +54,11 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                     .OrderByDescending(t => t.Id)
                     .ToList();
 
+            PublicPosts = _context.Post
+               .Where(p => p.IsPublic == "Public") // Filter by IsPublic column
+               .Include(t => t.Media)
+               .OrderByDescending(p => p.CreatedAt)
+               .ToList();
 
             //foreach (var tribute in PublicTributes)
             //{
@@ -68,6 +74,8 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
 
 
             Console.WriteLine($"Number of public tributes: {PublicTributes.Count}");
+            Console.WriteLine($"Number of public posts: {PublicPosts.Count}");
+
 
             return Page();
         }

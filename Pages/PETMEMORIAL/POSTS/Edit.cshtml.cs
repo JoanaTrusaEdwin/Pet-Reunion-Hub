@@ -60,8 +60,8 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
             {
                 return NotFound();
             }
-            Post.Title = EncryptionHelper.Decrypt(Post.Title);
-            Post.Content = EncryptionHelper.Decrypt(Post.Content);
+            //Post.Title = EncryptionHelper.Decrypt(Post.Title);
+            //Post.Content = EncryptionHelper.Decrypt(Post.Content);
             return Page();
         }
 
@@ -111,8 +111,8 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
 
                         await UpdateOrCreateMedia(existingPost, MediaFiles);
 
-                        existingPost.Title = EncryptionHelper.Encrypt(existingPost.Title);
-                        existingPost.Content = EncryptionHelper.Encrypt(existingPost.Content);
+                        //existingPost.Title = EncryptionHelper.Encrypt(existingPost.Title);
+                        //existingPost.Content = EncryptionHelper.Encrypt(existingPost.Content);
                         _context.Entry(existingPost).State = EntityState.Modified;
 
 
