@@ -85,7 +85,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
             var userId = _userManager.GetUserId(User);
 
             // Find the tribute to which the comment belongs
-            var tribute = _context.Tribute.FirstOrDefault(t => t.Id == tributeId);
+            var tribute = _context.Tribute.Include(t => t.User).FirstOrDefault(t => t.Id == tributeId);
 
             if (tribute != null)
             {
@@ -101,7 +101,22 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                 _context.Comment.Add(newComment);
                 _context.SaveChanges();
 
-                _notificationService.AddNotificationAsync(userId, tributeId, newComment.Id).Wait();
+                if (tribute.User.Id != userId)
+                {
+                    var commenter = _context.Users.FirstOrDefault(u => u.Id == newComment.UserId);
+                    // Add a notification for the tribute owner
+                    var notification = new NEWNOTIFICATION
+                    {
+                        UserId = tribute.UserId,
+                        Content = $"You have a new comment on your tribute '{tribute.PetName}' by {commenter.UserName}",
+                        IsRead = false,
+                        CreatedAt = DateTime.Now
+                    };
+
+                    _context.NEWNOTIFICATION.Add(notification);
+                    _context.SaveChanges();
+                }
+                //_notificationService.AddNotificationAsync(userId, tributeId, newComment.Id).Wait();
             }
 
             // Redirect back to the page

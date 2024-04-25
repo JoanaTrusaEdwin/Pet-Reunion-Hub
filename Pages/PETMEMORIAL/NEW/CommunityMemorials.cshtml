@@ -233,7 +233,7 @@
                 <img src="@tribute.TributePhoto" alt="Tribute Photo" style="max-width: 500px;" />
             }
 
-            <p><strong>Type:</strong> <span class="searchable">@tribute.PetType</span></p>
+         @*    <p><strong>Type:</strong> <span class="searchable">@tribute.PetType</span></p>
             
 
             <p><strong>Breed:</strong> <span class="searchable">@tribute.PetBreed</span></p>
@@ -255,7 +255,25 @@
            
 
             <p><strong>Owner's Tribute Text:</strong></p>
-            <p style="text-align:justify;" class="searchable">@tribute.TributeText</p>
+            <p style="text-align:justify;" class="searchable">@tribute.TributeText</p> *@
+
+            <p><strong>Type:</strong> <span class="searchable">@tribute?.PetType ?? "-"</span></p>
+
+            <p><strong>Breed:</strong> <span class="searchable">@tribute?.PetBreed ?? "-"</span></p>
+
+            <p><strong>Sex:</strong> <span class="searchable">@tribute?.PetSex ?? "-"</span></p>
+
+            <p><strong>Date of Birth:</strong> <span class="searchable">@tribute?.DateOfBirth?.ToString("yyyy-MMM-dd HH:mm") ?? "-"</span></p>
+
+            <p><strong>Date of Adoption:</strong> <span class="searchable">@tribute?.DateOfAdoption?.ToString("yyyy-MMM-dd HH:mm") ?? "-"</span></p>
+
+            <p><strong>Date of Departure:</strong> <span class="searchable">@tribute?.DateOfDeparture?.ToString("yyyy-MMM-dd HH:mm") ?? "-"</span></p>
+
+            <p><strong>Cause of Death:</strong> <span class="searchable">@tribute?.Cause ?? "-"</span></p>
+
+            <p><strong>Owner's Tribute Text:</strong></p>
+            <p style="text-align:justify;" class="searchable">@tribute?.TributeText ?? "-"</p>
+
 
             <div style="background-color: lightgray; color:black; border-radius: 20px; padding: 20px; margin-bottom: 20px; text-align:justify;">
                 <!-- Comments Section -->

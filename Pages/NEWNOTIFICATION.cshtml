@@ -1,0 +1,17 @@
+﻿@page
+@model Pet_Reunion_Hub.Pages.NEWNOTIFICATIONModel
+@{
+}
+<h1>Notifications</h1>
+
+
+@foreach (var notification in Model.Notifications.OrderByDescending(n => n.CreatedAt))
+    {
+        <div style="background-color: white; color: black; border-radius:10px;">
+        <p>@notification.Content</p>
+
+        <p>@notification.CreatedAt.ToString("dd-MMM-yyyy HH:mm")</p>
+        </div>
+       
+    }
+

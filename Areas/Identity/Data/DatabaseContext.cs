@@ -50,6 +50,8 @@ namespace PRHDATALIB.Models
 
         public DbSet<TributeNotification> TributeNotification { get; set; }
 
+        public DbSet<NEWNOTIFICATION> NEWNOTIFICATION { get; set; }
+
         public DbSet<Newtest> NEWTEST { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -434,6 +436,32 @@ namespace PRHDATALIB.Models
                     .OnDelete(DeleteBehavior.Cascade);
                     
             });
+
+            modelBuilder.Entity<NEWNOTIFICATION>(entity =>
+            {
+                entity.ToTable("NEWNOTIFICATION");
+
+
+                entity.Property(e => e.Id)
+              .ValueGeneratedOnAdd()
+              .HasColumnName("Id"); entity.Property(e => e.Id);
+
+                entity.Property(e => e.UserId).IsRequired();
+
+                entity.Property(e => e.IsRead).IsRequired();
+
+                entity.Property(e => e.Content);
+
+                entity.Property(e => e.CreatedAt);
+
+                entity.HasOne(cr => cr.User)
+                    .WithMany()
+                    .HasForeignKey(cr => cr.UserId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_NEWNOTIFICATION_AspNetUsers");
+
+            });
+
 
             //modelBuilder.Entity<Heart>(entity =>
             //{
