@@ -4,14 +4,19 @@
 }
 <h1>Notifications</h1>
 
-
-@foreach (var notification in Model.Notifications.OrderByDescending(n => n.CreatedAt))
+@if (Model.Notifications.Any())
+{
+    @foreach (var notification in Model.Notifications.OrderByDescending(n => n.CreatedAt))
     {
-        <div style="background-color: white; color: black; border-radius:10px;">
-        <p>@notification.Content</p>
+        <div style="background-color: white; color: black; border-radius:10px; padding: 10px; margin-bottom:10px;">
+            <p><b>@notification.Content</b></p>
 
-        <p>@notification.CreatedAt.ToString("dd-MMM-yyyy HH:mm")</p>
+            <p>@notification.CreatedAt.ToString("dd-MMM-yyyy HH:mm")</p>
         </div>
-       
     }
 
+}
+else
+{
+    <p>No Notifications</p>
+}
