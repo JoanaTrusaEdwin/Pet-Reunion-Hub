@@ -94,7 +94,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                         var notification = new NEWNOTIFICATION
                         {
                             UserId = mentionedUser.Id,
-                            Content = $"You were mentioned in a comment",
+                            Content = $"{_userManager.GetUserName(User)} mentioned you in a comment on {tribute.User.UserName}'s tribute '{tribute.PetName}'",
                             IsRead = false,
                             CreatedAt = DateTime.Now
                         };
