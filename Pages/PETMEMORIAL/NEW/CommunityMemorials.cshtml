@@ -352,6 +352,52 @@
           
 
             <p><strong>Created on:</strong> @post.CreatedAt.ToString("dd-MMM-yyyy HH:mm HH:mm:ss")</p>
+
+            <div style="color:black; border-radius: 20px; padding: 20px; margin-bottom: 20px; text-align:justify;">
+                <!-- Comments Section -->
+                <h3 style="color:black;">Comments</h3>
+                        @if (post.PostComments.Any())
+                        {
+
+                            @foreach (var comment in post.PostComments)
+                            {
+                        <div class="comment-container" style="background-color: lightgray; color:black;border-radius: 5px; padding: 10px; margin-bottom: 10px; overflow-wrap: break-word;">
+                            <strong class="searchable">@comment.User.UserName:</strong> <!-- Display username -->
+                            <br />
+                            <p class="searchable">@comment.Content</p>
+                            <br />
+                                    @if (User.Identity.IsAuthenticated && comment.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier))
+                                    {
+
+                                <button type="button" class="btn btn-danger postremove-btn" data-postcomment-id="@comment.Id">Delete</button>
+                                    }
+                        </div>
+                            }
+
+                        }
+                        else
+                        {
+                    <p style="color:black;">No comments yet.</p>
+                        }
+
+                <!-- Form to Add New Comment -->
+                <form method="post" asp-page-handler="PostComment">
+                    <input type="hidden" name="postId" value="@post.Id" />
+                    <div class="form-group">
+                        <label for="postCommentContent" style="color:black;">Add a comment:</label>
+                        <textarea class="form-control" id="postCommentContent" name="postCommentContent" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="background-color:black; border-radius:5px; color:white; border:none;"><b>Post</b></button>
+                </form>
+
+
+                <hr />
+            </div>
+            <hr />
+            <form asp-antiforgery="true">
+                <input type="hidden" name="__RequestVerificationToken" value="@ViewData["RequestVerificationToken"]" />
+                <!-- Your other form elements -->
+            </form>
         </div>
 
        
@@ -405,7 +451,45 @@
                 }
             });
         });
+        var token = $('input[name="__RequestVerificationToken"]').val();
 
+        $(document).ready(function () {
+            $(".postremove-btn").click(function () {
+                var button = $(this);
+                var postcommentId = button.data("postcomment-id");
+                console.log("Post Comment ID:", postcommentId);
+
+                if (confirm("Are you sure you want to delete this comment? This action is instantly applied and cannot be undone.")) {
+                    $.ajax({
+                        url: "https://localhost:7145/PETMEMORIAL/NEW/CommunityMemorials?handler=RemovePostComment",
+                        method: "POST",
+
+                        headers: {
+                            "RequestVerificationToken": token
+                        },
+                        data: { postCommentId: postcommentId },
+                        success: function (response) {
+                            // Handle success
+                            if (response.success) {
+
+                                button.prev('img').remove(); // Remove the previous sibling image
+                                button.prev('video').remove();
+                                button.prev('audio').remove();
+                                button.closest('.comment-container').remove();
+                                button.remove(); // Remove the remove button itself
+                                console.log("Comment removed");
+                            } else {
+                                console.log("Error: " + response.error);
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            // Handle error
+                            console.log("Error removing comment: " + error);
+                        }
+                    });
+                }
+            });
+        });
         function searchFunction() {
             var input = document.getElementById("searchInput");
             var filter = input.value.trim().toLowerCase(); // Convert filter to lowercase for case-insensitive search

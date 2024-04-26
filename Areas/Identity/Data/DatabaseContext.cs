@@ -44,6 +44,8 @@ namespace PRHDATALIB.Models
 
         //public DbSet<TESTBIT> TESTBIT { get; set; }
         public DbSet<Comment> Comment { get; set; }
+
+        public DbSet<POSTCOMMENT> POSTCOMMENT { get; set; }
         //public DbSet<Heart> Heart { get; set; }
         //public DbSet<Post> Post { get; set; }
         //public DbSet<Media> Media { get; set; }
@@ -397,6 +399,32 @@ namespace PRHDATALIB.Models
             .HasForeignKey(cr => cr.UserId)
             .OnDelete(DeleteBehavior.Restrict)
             .HasConstraintName("FK_Comment_AspNetUsers");
+            });
+
+            modelBuilder.Entity<POSTCOMMENT>(entity =>
+            {
+                entity.ToTable("POSTCOMMENT");
+                entity.Property(e => e.Id)
+                .ValueGeneratedOnAdd()
+                .HasColumnName("Id"); entity.Property(e => e.Id);
+
+                entity.Property(e => e.Content).HasMaxLength(500);
+
+                entity.Property(e => e.CreatedAt);
+
+                entity.Property(e => e.PostId)
+                   .IsRequired();
+
+                entity.HasOne(e => e.Post)
+
+                    .WithMany(e => e.PostComments)
+                    .HasForeignKey(c => c.PostId)
+                    .OnDelete(DeleteBehavior.Cascade);
+                entity.HasOne(cr => cr.User)
+            .WithMany()
+            .HasForeignKey(cr => cr.UserId)
+            .OnDelete(DeleteBehavior.Restrict)
+            .HasConstraintName("FK_POSTCOMMENT_AspNetUsers");
             });
 
             modelBuilder.Entity<TributeNotification>(entity =>

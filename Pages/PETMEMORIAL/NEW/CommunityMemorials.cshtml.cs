@@ -57,20 +57,13 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
             PublicPosts = _context.Post
                .Where(p => p.IsPublic == "Public") // Filter by IsPublic column
                .Include(t => t.Media)
+               .Include(c => c.User)
+               .Include(t => t.PostComments)
+               .ThenInclude(c => c.User)
                .OrderByDescending(p => p.CreatedAt)
                .ToList();
 
-            //foreach (var tribute in PublicTributes)
-            //{
-            //    tribute.PetName = EncryptionHelper.Decrypt(tribute.PetName);
-            //    tribute.PetType = EncryptionHelper.Decrypt(tribute.PetType);
-            //    tribute.PetBreed = EncryptionHelper.Decrypt(tribute.PetBreed);
-            //    tribute.PetSex = EncryptionHelper.Decrypt(tribute.PetSex);
-            //    tribute.Cause = EncryptionHelper.Decrypt(tribute.Cause);
-            //    tribute.TributeText = EncryptionHelper.Decrypt(tribute.TributeText);
-            //}
-
-
+          
 
 
             Console.WriteLine($"Number of public tributes: {PublicTributes.Count}");
@@ -181,6 +174,78 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                 return new JsonResult(new { success = false, error = ex.Message });
             }
         }
+
+        public IActionResult OnPostPostComment(int postId, string postCommentContent)
+        {
+            var userId = _userManager.GetUserId(User);
+
+            // Find the post to which the comment belongs
+            var post = _context.Post.Include(p => p.User).FirstOrDefault(p => p.Id == postId);
+
+            if (post != null)
+            {
+                // Create a new post comment
+                var newPostComment = new POSTCOMMENT
+                {
+                    Content = postCommentContent,
+                    UserId = userId,
+                    PostId = postId
+                };
+
+                // Add the post comment to the database
+                _context.POSTCOMMENT.Add(newPostComment);
+                _context.SaveChanges();
+
+                if (post.User.Id != userId)
+                {
+                    var commenter = _context.Users.FirstOrDefault(u => u.Id == newPostComment.UserId);
+                    // Add a notification for the post owner
+                    var notification = new NEWNOTIFICATION
+                    {
+                        UserId = post.UserId,
+                        Content = $"You have a new comment on your post '{post.Title}' by {commenter.UserName}",
+                        IsRead = false,
+                        CreatedAt = DateTime.Now
+                    };
+
+                    _context.NEWNOTIFICATION.Add(notification);
+                    _context.SaveChanges();
+                }
+            }
+
+            // Redirect back to the page
+            return RedirectToPage();
+        }
+
+        public async Task<IActionResult> OnPostRemovePostCommentAsync(int postCommentId)
+        {
+            try
+            {
+                _logger.LogInformation("Received post comment ID: {PostCommentId}", postCommentId);
+
+                // Find the post comment to remove
+                var postCommentToRemove = await _context.POSTCOMMENT.FindAsync(postCommentId);
+                if (postCommentToRemove == null)
+                {
+                    return new JsonResult(new { success = false, error = "Post comment not found." });
+                }
+
+                // Remove the post comment
+                _context.POSTCOMMENT.Remove(postCommentToRemove);
+
+                // Save changes to the database
+                await _context.SaveChangesAsync();
+
+                _logger.LogInformation("Post comment removed successfully.");
+                return new JsonResult(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error removing post comment:");
+                return new JsonResult(new { success = false, error = ex.Message });
+            }
+        }
+
 
     }
 }
