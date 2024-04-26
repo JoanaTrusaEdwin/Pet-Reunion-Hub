@@ -194,10 +194,12 @@
 <style>
     .highlight {
         background-color: yellow;
+        color: black;
     }
 </style>
-<h1>Monuments Among The Community</h1>
+<h1>Memorials Among The Community</h1>
 <input style="border-radius:20px; height:40px; width: 500px;" type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search">
+<br/>
 <br/>
 @{
     // Merge public tributes and public posts
@@ -233,57 +235,33 @@
                 <img src="@tribute.TributePhoto" alt="Tribute Photo" style="max-width: 500px;" />
             }
 
-         @*    <p><strong>Type:</strong> <span class="searchable">@tribute.PetType</span></p>
-            
+            <p><strong>Type:</strong> <span class="searchable">@tribute?.PetType</span></p>
 
-            <p><strong>Breed:</strong> <span class="searchable">@tribute.PetBreed</span></p>
-            
+            <p style="white-space: pre-wrap; overflow-wrap: break-word;"><strong>Breed:</strong> <span class="searchable">@(string.IsNullOrEmpty(tribute?.PetBreed) ? "-" : tribute.PetBreed)</span></p>
 
-            <p><strong>Sex:</strong> <span class="searchable">@tribute.PetSex</span></p>
-     
+            <p><strong>Sex:</strong> <span class="searchable">@(string.IsNullOrEmpty(tribute?.PetSex) ? "-" : tribute.PetSex)</span></p>
 
-            <p><strong>Date of Birth:</strong> <span class="searchable">@tribute.DateOfBirth</span></p>
-          
+            <p><strong>Date of Birth:</strong> <span class="searchable">@(tribute?.DateOfBirth != null ? tribute.DateOfBirth.Value.ToString("dd-MMM-yyyy HH:mm") : "-")</span></p>
 
-            <p><strong>Date of Adoption:</strong> <span class="searchable">@tribute.DateOfAdoption</span></p>
-           
+            <p><strong>Date of Adoption:</strong> <span class="searchable">@(tribute?.DateOfAdoption != null ? tribute.DateOfAdoption.Value.ToString("dd-MMM-yyyy HH:mm") : "-")</span></p>
 
-            <p><strong>Date of Departure:</strong> <span class="searchable">@tribute.DateOfDeparture</span></p>
-           
+            <p><strong>Date of Departure:</strong> <span class="searchable">@(tribute?.DateOfDeparture != null ? tribute.DateOfDeparture.Value.ToString("dd-MMM-yyyy HH:mm") : "-")</span></p>
 
-            <p><strong>Cause of Death:</strong> <span class="searchable">@tribute.Cause</span></p>
-           
+            <p style="white-space: pre-wrap; overflow-wrap: break-word;"><strong>Cause of Death:</strong> <span class="searchable">@(string.IsNullOrEmpty(tribute?.Cause) ? "-" : tribute.Cause)</span></p>
 
             <p><strong>Owner's Tribute Text:</strong></p>
-            <p style="text-align:justify;" class="searchable">@tribute.TributeText</p> *@
-
-            <p><strong>Type:</strong> <span class="searchable">@tribute?.PetType ?? "-"</span></p>
-
-            <p><strong>Breed:</strong> <span class="searchable">@tribute?.PetBreed ?? "-"</span></p>
-
-            <p><strong>Sex:</strong> <span class="searchable">@tribute?.PetSex ?? "-"</span></p>
-
-            <p><strong>Date of Birth:</strong> <span class="searchable">@tribute?.DateOfBirth?.ToString("yyyy-MMM-dd HH:mm") ?? "-"</span></p>
-
-            <p><strong>Date of Adoption:</strong> <span class="searchable">@tribute?.DateOfAdoption?.ToString("yyyy-MMM-dd HH:mm") ?? "-"</span></p>
-
-            <p><strong>Date of Departure:</strong> <span class="searchable">@tribute?.DateOfDeparture?.ToString("yyyy-MMM-dd HH:mm") ?? "-"</span></p>
-
-            <p><strong>Cause of Death:</strong> <span class="searchable">@tribute?.Cause ?? "-"</span></p>
-
-            <p><strong>Owner's Tribute Text:</strong></p>
-            <p style="text-align:justify;" class="searchable">@tribute?.TributeText ?? "-"</p>
+            <p style="font-style:italic; white-space: pre-wrap; overflow-wrap: break-word;" class="searchable">@(string.IsNullOrEmpty(tribute?.TributeText) ? "-" : tribute.TributeText)</p>
 
 
-            <div style="background-color: lightgray; color:black; border-radius: 20px; padding: 20px; margin-bottom: 20px; text-align:justify;">
+            <div style="color:black; border-radius: 20px; padding: 20px; margin-bottom: 20px; text-align:justify;">
                 <!-- Comments Section -->
-                <h3>Comments</h3>
+                <h3 style="color:white;">Comments</h3>
                 @if (tribute.Comments.Any())
                 {
 
                     @foreach (var comment in tribute.Comments)
                     {
-                        <div class="comment-container" style="background-color: #fff; border-radius: 5px; padding: 10px; margin-bottom: 10px;">
+                        <div class="comment-container" style="background-color: #593214; color:white;border-radius: 5px; padding: 10px; margin-bottom: 10px; overflow-wrap: break-word;">
                             <strong class="searchable">@comment.User.UserName:</strong> <!-- Display username -->
                             <br />
                             <p class="searchable">@comment.Content</p>
@@ -299,17 +277,17 @@
                 }
                 else
                 {
-                    <p>No comments yet.</p>
+                    <p style="color:white;">No comments yet.</p>
                 }
 
                 <!-- Form to Add New Comment -->
                 <form method="post">
                     <input type="hidden" name="tributeId" value="@tribute.Id" />
                     <div class="form-group">
-                        <label for="commentContent">Add a comment:</label>
+                        <label for="commentContent" style="color:white;">Add a comment:</label>
                         <textarea class="form-control" id="commentContent" name="commentContent" rows="3"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Post</button>
+                    <button type="submit" class="btn btn-primary" style="background-color:black; border-radius:5px; color:white; border:none;"><b>Post</b></button>
                 </form>
 
 
@@ -324,15 +302,15 @@
     }
     else if (item is Post post)
     {
-        <div class="post" style="background-color:white; border-radius: 20px; padding: 20px; margin-bottom: 20px;">
+        <div class="tribute" style="background-color:white; border-radius: 20px; padding: 20px; margin-bottom: 20px;">
             <h1>Story</h1>
-            <h6>By: @post.User.UserName</h6>
+            <h6 style="white-space: pre-wrap; overflow-wrap: break-word;">By: @post.User.UserName</h6>
             <p><strong>Title:</strong>
-            <p class="searchable">@(string.IsNullOrEmpty(post.Title) ? "-" : post.Title)</p>
+            <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable">@(string.IsNullOrEmpty(post.Title) ? "-" : post.Title)</p>
             <br />
 
             <p><strong>Caption:</strong>
-            <p class="searchable">@(string.IsNullOrEmpty(post.Content) ? "-" : post.Content)</p>
+            <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable">@(string.IsNullOrEmpty(post.Content) ? "-" : post.Content)</p>
             <br />
 
                     @if (post.Media != null && post.Media.Any())

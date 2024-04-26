@@ -98,19 +98,20 @@
             overflow-x: auto; /* Enable horizontal scrolling */
             white-space: nowrap; /* Prevent report cards from wrapping */
             max-width: 100%;
-            background-color: gray;
+            background-color: white;
             padding:10px;
             border-radius:10px;
         }
       .report-card{
             display: inline-block; /* Display report cards inline */
-            background-color: white;
+            background-color: black;
             border-radius: 10px;
             padding: 20px;
             margin-right: 20px; /* Add margin between report cards */
             vertical-align: top;
             width: 300px; /* Set a fixed width for the report cards */
             word-wrap: break-word;
+            color:white;
         }
 
         .photos {
@@ -174,8 +175,8 @@
         </div>
     </div>
     <div class="report-container">
-        <h3 style="color:white;">Lost Pets Reported In Your City!</h3>
-        <p style="color:white;">These are pets reported to be missing, last seen in your city. Your city is set to Malaysia-Sarawak-Sibu by default. Change your residential area to filter reports near you. </p>
+        <h3 style="color:red;">Lost Pets Reported In Your City!</h3>
+        <p style="color:black;">These are pets reported to be missing, last seen in your city. Your city is set to Malaysia-Sarawak-Sibu by default. Change your residential area to filter reports near you. </p>
         <input style="border-radius:20px; height:40px; width: 500px;" type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search">
         <br />
         <br />

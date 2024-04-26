@@ -123,7 +123,7 @@
             <a asp-page="./NEWDETAIL" asp-route-id="@item.Id" id="details">Details</a> 
             <a asp-page="./Delete" asp-route-id="@item.Id" id="delete">Delete</a>
         </p>
-           <div style="background-color: lightgray; border-radius: 20px; padding: 20px; margin-bottom: 20px;">
+           <div style="padding: 20px; margin-bottom: 20px;">
             <!-- Comments Section -->
             <h3>Comments</h3>
             @if (item.Comments.Any())
@@ -131,7 +131,7 @@
 
                 @foreach (var comment in item.Comments)
                 {
-                    <div style="background-color: #fff; border-radius: 5px; padding: 10px; margin-bottom: 10px;">
+                        <div style="background-color: #593214; color:white;border-radius: 5px; padding: 10px; margin-bottom: 10px; overflow-wrap: break-word;">
                         <strong>@comment.User.UserName:</strong> <!-- Display username -->
                         <br />
                         @comment.Content

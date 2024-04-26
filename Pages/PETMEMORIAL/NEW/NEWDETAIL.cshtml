@@ -85,7 +85,7 @@
     </div>
        
 </div>
-<div style="background-color: lightgray; border-radius: 20px; padding: 20px; margin-bottom: 10px; white-space: pre-wrap; overflow-wrap: break-word; ">
+<div >
     <!-- Comments Section -->
     <h3>Comments</h3>
     @if (Model.Tribute.Comments.Any())
@@ -93,7 +93,7 @@
 
         @foreach (var comment in Model.Tribute.Comments)
         {
-            <div style="background-color: #fff; border-radius: 5px; padding: 10px; margin-bottom: 10px;">
+            <div style="background-color: #593214; color:white;border-radius: 5px; padding: 10px; margin-bottom: 10px; overflow-wrap: break-word;">
                 <strong>@comment.User.UserName:</strong> <!-- Display username -->
                 <br />
                 @comment.Content
