@@ -64,6 +64,16 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
 
             if (tribute != null)
             {
+                var newComment = new Comment
+                {
+                    Content = commentContent,
+                    UserId = userId,
+                    TributeId = tributeId
+                };
+
+                // Add the comment to the database
+                _context.Comment.Add(newComment);
+                _context.SaveChanges();
                 var mentionedUserEmail = ExtractMentionedUserEmail(commentContent);
                 if (!string.IsNullOrEmpty(mentionedUserEmail))
                 {
@@ -75,7 +85,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                         var notification = new NEWNOTIFICATION
                         {
                             UserId = mentionedUser.Id,
-                            Content = $"{_userManager.GetUserName(User)} mentioned you in a comment on {tribute.User.UserName}'s tribute '{tribute.PetName}'",
+                            Content = $"(Monument Comment ID:{newComment.Id}) {_userManager.GetUserName(User)} mentioned you in a comment on {tribute.User.UserName}'s monument with Pet Name '{tribute.PetName}' with Monument ID '{tribute.Id}'",
                             IsRead = false,
                             CreatedAt = DateTime.Now
                         };
@@ -85,16 +95,16 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                     }
                 }
                 // Create a new comment
-                var newComment = new Comment
-                {
-                    Content = commentContent,
-                    UserId = userId,
-                    TributeId = tributeId
-                };
+                //var newComment = new Comment
+                //{
+                //    Content = commentContent,
+                //    UserId = userId,
+                //    TributeId = tributeId
+                //};
 
-                // Add the comment to the database
-                _context.Comment.Add(newComment);
-                _context.SaveChanges();
+                //// Add the comment to the database
+                //_context.Comment.Add(newComment);
+                //_context.SaveChanges();
 
                 if (tribute.User.Id != userId)
                 {
@@ -103,7 +113,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                     var notification = new NEWNOTIFICATION
                     {
                         UserId = tribute.UserId,
-                        Content = $"You have a new comment on your tribute '{tribute.PetName}' by {commenter.UserName}",
+                        Content = $"(Monument Comment ID:{newComment.Id}) You have a new comment on your monument titled '{tribute.PetName}' with Monument ID '{tribute.Id}' by {commenter.UserName}.",
                         IsRead = false,
                         CreatedAt = DateTime.Now
                     };

@@ -80,6 +80,16 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
 
             if (post != null)
             {
+                var newComment = new POSTCOMMENT
+                {
+                    Content = commentContent,
+                    UserId = userId,
+                    PostId = postId
+                };
+
+                // Add the comment to the database
+                _context.POSTCOMMENT.Add(newComment);
+                _context.SaveChanges();
                 var mentionedUserEmail = ExtractMentionedUserEmail(commentContent);
                 if (!string.IsNullOrEmpty(mentionedUserEmail))
                 {
@@ -91,7 +101,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
                         var notification = new NEWNOTIFICATION
                         {
                             UserId = mentionedUser.Id,
-                            Content = $"{_userManager.GetUserName(User)} mentioned you in a comment on {post.User.UserName}'s post '{post.Title}'",
+                            Content = $"(Post Comment ID: {newComment.Id}) {_userManager.GetUserName(User)} mentioned you in a comment on {post.User.UserName}'s post '{post.Title}' with Post ID '{post.Id}'",
                             IsRead = false,
                             CreatedAt = DateTime.Now
                         };
@@ -101,16 +111,16 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
                     }
                 }
                 // Create a new comment
-                var newComment = new POSTCOMMENT
-                {
-                    Content = commentContent,
-                    UserId = userId,
-                    PostId = postId
-                };
+                //var newComment = new POSTCOMMENT
+                //{
+                //    Content = commentContent,
+                //    UserId = userId,
+                //    PostId = postId
+                //};
 
-                // Add the comment to the database
-                _context.POSTCOMMENT.Add(newComment);
-                _context.SaveChanges();
+                //// Add the comment to the database
+                //_context.POSTCOMMENT.Add(newComment);
+                //_context.SaveChanges();
 
                 if (post.User.Id != userId)
                 {
@@ -119,7 +129,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
                     var notification = new NEWNOTIFICATION
                     {
                         UserId = post.UserId,
-                        Content = $"You have a new comment on your post '{post.Title}' by {commenter.UserName}",
+                        Content = $"(Post Comment ID: {newComment.Id}) You have a new comment on your post '{post.Title}' with Post ID '{Post.Id}' by {commenter.UserName}",
                         IsRead = false,
                         CreatedAt = DateTime.Now
                     };
