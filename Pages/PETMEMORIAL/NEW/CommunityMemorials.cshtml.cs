@@ -94,7 +94,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                         var notification = new NEWNOTIFICATION
                         {
                             UserId = mentionedUser.Id,
-                            Content = $"{_userManager.GetUserName(User)} mentioned you in a comment on {tribute.User.UserName}'s monument with Pet Name'{tribute.PetName} (Monument ID: {tribute.Id})'",
+                            Content = $"{_userManager.GetUserName(User)} mentioned you in a comment on {tribute.User.UserName}'s monument with Pet Name '{tribute.PetName}' (Monument ID: {tribute.Id})",
                             IsRead = false,
                             CreatedAt = DateTime.Now
                         };
