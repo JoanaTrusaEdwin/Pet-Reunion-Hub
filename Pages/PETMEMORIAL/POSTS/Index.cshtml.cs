@@ -81,6 +81,8 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
            Post = await _context.Post
                    .Where(n => n.UserId == currentUser.Id)
                    .Include(p => p.Media)
+                   .Include(t => t.PostComments)
+                     .ThenInclude(c => c.User)
                    .ToListAsync();
 
             //foreach (var post in Post)
