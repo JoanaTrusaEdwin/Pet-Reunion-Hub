@@ -249,7 +249,10 @@ namespace PRHDATALIB.Models
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("FK_Tribute_AspNetUsers");
 
-              
+                entity.HasMany(p => p.PostComments)
+            .WithOne()
+            .HasForeignKey(pc => pc.PostId)
+            .OnDelete(DeleteBehavior.Cascade);
 
             });
 

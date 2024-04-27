@@ -1,4 +1,4 @@
-﻿@page
+﻿@* @page
 @model Pet_Reunion_Hub.Pages.NEWNOTIFICATIONModel
 @{
 }
@@ -20,3 +20,51 @@ else
 {
     <p>No Notifications</p>
 }
+ *@
+
+@page
+@model Pet_Reunion_Hub.Pages.NEWNOTIFICATIONModel
+@{
+}
+<h1>Notifications</h1>
+@if (Model.Notifications.Any())
+{
+    @foreach (var notification in Model.Notifications.OrderByDescending(n => n.CreatedAt))
+    {
+        <div id="notification-@notification.Id" style="background-color: white; color: black; border-radius:10px; padding: 10px; margin-bottom:10px;">
+            <p id="notification-content-@notification.Id" style="font-weight: bold;">@notification.Content</p>
+            <a id="community-memorials-button-@notification.Id" style="text-decoration:none; color:white; background-color:black; padding:5px; border-radius:4px;" href="/PETMEMORIAL/NEW/CommunityMemorials" onclick="markAsRead('@notification.Id')">View in Community Memorials</a>
+            <p>@notification.CreatedAt.ToString("dd-MMM-yyyy HH:mm")</p>
+        </div>
+    }
+}
+else
+{
+    <p>No Notifications</p>
+}
+
+<script>
+    // Check if the notification has been marked as read previously
+    function checkReadStatus(notificationId) {
+        var isRead = localStorage.getItem('communityMemorialsClicked_' + notificationId);
+        if (isRead === 'true') {
+            var contentElement = document.getElementById('notification-content-' + notificationId);
+            contentElement.style.fontWeight = 'normal';
+        }
+    }
+
+    // Mark the notification as read and store the status
+    function markAsRead(notificationId) {
+        var contentElement = document.getElementById('notification-content-' + notificationId);
+        contentElement.style.fontWeight = 'normal'; // Remove bold styling
+        localStorage.setItem('communityMemorialsClicked_' + notificationId, 'true'); // Store the state
+    }
+
+    // Check the read status for each notification when the page loads
+    document.addEventListener('DOMContentLoaded', function () {
+    @foreach (var notification in Model.Notifications)
+    {
+        <text>checkReadStatus('@notification.Id'); </text>
+    }
+        });
+</script>

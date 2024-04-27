@@ -102,7 +102,11 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
                     {
                         _context.Remove(media);
                     }
-
+                    var comments = await _context.POSTCOMMENT.Where(rp => rp.PostId == Post.Id).ToListAsync();
+                    foreach (var comment in comments)
+                    {
+                        _context.Remove(comment);
+                    }
                     _context.Post.Remove(Post);
                     await _context.SaveChangesAsync();
 
