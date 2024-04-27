@@ -207,11 +207,13 @@ namespace PRHDATALIB.Models
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("FK_Tribute_AspNetUsers");
 
+              
 
             });
 
             modelBuilder.Entity<Post>(entity =>
             {
+
                 entity.ToTable("Post");
                 entity.Property(e => e.Id)
                         .ValueGeneratedOnAdd()
@@ -247,6 +249,7 @@ namespace PRHDATALIB.Models
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("FK_Tribute_AspNetUsers");
 
+              
 
             });
 
@@ -481,6 +484,8 @@ namespace PRHDATALIB.Models
                 entity.Property(e => e.Content);
 
                 entity.Property(e => e.CreatedAt);
+
+              
 
                 entity.HasOne(cr => cr.User)
                     .WithMany()
