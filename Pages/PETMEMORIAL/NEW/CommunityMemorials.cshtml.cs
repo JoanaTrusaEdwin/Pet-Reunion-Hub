@@ -182,10 +182,10 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                 }
 
                 // Remove related TributeNotification entries
-                var notificationsToRemove = _context.TributeNotification
-                    .Where(n => n.CommentId == CommentId)
-                    .ToList();
-                _context.TributeNotification.RemoveRange(notificationsToRemove);
+                //var notificationsToRemove = _context.TributeNotification
+                //    .Where(n => n.CommentId == CommentId)
+                //    .ToList();
+                //_context.TributeNotification.RemoveRange(notificationsToRemove);
 
                 // Remove the comment
                 _context.Comment.Remove(commentToRemove);
@@ -212,6 +212,26 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
 
             if (post != null)
             {
+                var mentionedUserEmail = ExtractMentionedUserEmail(postCommentContent);
+                if (!string.IsNullOrEmpty(mentionedUserEmail))
+                {
+                    // Find the mentioned user's IdentityUser object
+                    var mentionedUser = _context.Users.FirstOrDefault(u => u.Email == mentionedUserEmail);
+                    if (mentionedUser != null)
+                    {
+                        // Add a notification for the mentioned user
+                        var notification = new NEWNOTIFICATION
+                        {
+                            UserId = mentionedUser.Id,
+                            Content = $"{_userManager.GetUserName(User)} mentioned you in a comment on {post.User.UserName}'s tribute '{post.Title}'",
+                            IsRead = false,
+                            CreatedAt = DateTime.Now
+                        };
+
+                        _context.NEWNOTIFICATION.Add(notification);
+                        _context.SaveChanges();
+                    }
+                }
                 // Create a new post comment
                 var newPostComment = new POSTCOMMENT
                 {

@@ -13,6 +13,7 @@ using Pet_Reunion_Hub.Services;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 
 
 namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
@@ -63,6 +64,26 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
 
             if (tribute != null)
             {
+                var mentionedUserEmail = ExtractMentionedUserEmail(commentContent);
+                if (!string.IsNullOrEmpty(mentionedUserEmail))
+                {
+                    // Find the mentioned user's IdentityUser object
+                    var mentionedUser = _context.Users.FirstOrDefault(u => u.Email == mentionedUserEmail);
+                    if (mentionedUser != null)
+                    {
+                        // Add a notification for the mentioned user
+                        var notification = new NEWNOTIFICATION
+                        {
+                            UserId = mentionedUser.Id,
+                            Content = $"{_userManager.GetUserName(User)} mentioned you in a comment on {tribute.User.UserName}'s tribute '{tribute.PetName}'",
+                            IsRead = false,
+                            CreatedAt = DateTime.Now
+                        };
+
+                        _context.NEWNOTIFICATION.Add(notification);
+                        _context.SaveChanges();
+                    }
+                }
                 // Create a new comment
                 var newComment = new Comment
                 {
@@ -95,7 +116,14 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
             // Redirect back to the page
             return RedirectToPage(new { id = tributeId });
         }
-
+        private string ExtractMentionedUserEmail(string commentContent)
+        {
+            // Implement the logic to extract the mentioned user's email from the comment content
+            // For example, you can use a regular expression to find the mentioned user's email
+            // In this example, I'm assuming the mentioned user's email is in the format "user@example.com"
+            var mentionedUserEmail = Regex.Match(commentContent, @"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}").Value;
+            return mentionedUserEmail;
+        }
         public async Task<IActionResult> OnPostRemoveCommentAsync(int commentId)
         {
             try
