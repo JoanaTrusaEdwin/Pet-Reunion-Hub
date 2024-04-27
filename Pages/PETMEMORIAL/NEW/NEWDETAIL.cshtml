@@ -97,9 +97,13 @@
         @foreach (var comment in Model.Tribute.Comments)
         {
             <div class="comment-container" style="background-color: #593214; color:white;border-radius: 5px; padding: 10px; margin-bottom: 10px; overflow-wrap: break-word;">
+                <p>Comment ID: @comment.Id</p>
+                <br/>
                 <strong>@comment.User.UserName:</strong> <!-- Display username -->
                 <br />
                 @comment.Content
+                <br/>
+                <p class="searchable">@comment.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss") </p>
                 @if (User.Identity.IsAuthenticated && comment.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier))
                 {
 

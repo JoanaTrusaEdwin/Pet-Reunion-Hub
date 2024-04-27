@@ -88,6 +88,7 @@
         <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Post.Id" />
+            <p>Post ID: @Model.Post.Id</p>
             <p><b>Created on:</b> @Model.Post.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
 
             <div class="form-group">

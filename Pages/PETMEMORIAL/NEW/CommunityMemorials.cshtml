@@ -67,7 +67,9 @@
 
             <p><strong>Owner's Tribute Text:</strong></p>
             <p style="font-style:italic; white-space: pre-wrap; overflow-wrap: break-word;" class="searchable">@(string.IsNullOrEmpty(tribute?.TributeText) ? "-" : tribute.TributeText)</p>
+            <p><strong>Created on:</strong>
 
+            <p class="searchable">@tribute.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss")</p>
 
             <div style="color:black; border-radius: 20px; padding: 20px; margin-bottom: 20px; text-align:justify;">
                 <!-- Comments Section -->
@@ -78,10 +80,16 @@
                     @foreach (var comment in tribute.Comments)
                     {
                         <div class="comment-container" style="background-color: #593214; color:white;border-radius: 5px; padding: 10px; margin-bottom: 10px; overflow-wrap: break-word;">
+                            <p class="searchable">Monument Comment ID: @comment.Id</p>
+                            <br />
                             <strong class="searchable">@comment.User.UserName:</strong> <!-- Display username -->
                             <br />
+                           
                             <p class="searchable">@comment.Content</p>
                             <br />
+                           
+                            <p class="searchable">@comment.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss") </p>
+                            <br/>
                             @if (User.Identity.IsAuthenticated && comment.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier))
                             {
 
@@ -168,7 +176,7 @@
 
           
 
-            <p><strong>Created on:</strong> @post.CreatedAt.ToString("dd-MMM-yyyy HH:mm HH:mm:ss")</p>
+            <p><strong>Created on:</strong> @post.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss")</p>
 
             <div style="color:black; border-radius: 20px; padding: 20px; margin-bottom: 20px; text-align:justify;">
                 <!-- Comments Section -->
@@ -179,10 +187,16 @@
                             @foreach (var comment in post.PostComments)
                             {
                         <div class="comment-container" style="background-color: lightgray; color:black;border-radius: 5px; padding: 10px; margin-bottom: 10px; overflow-wrap: break-word;">
+                            <p class="searchable">Post Comment ID: @comment.Id</p>
+                            <br />
                             <strong class="searchable">@comment.User.UserName:</strong> <!-- Display username -->
                             <br />
+                           
                             <p class="searchable">@comment.Content</p>
                             <br />
+                           
+                            <p class="searchable">@comment.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss") </p>
+                            <br/>
                                     @if (User.Identity.IsAuthenticated && comment.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier))
                                     {
 

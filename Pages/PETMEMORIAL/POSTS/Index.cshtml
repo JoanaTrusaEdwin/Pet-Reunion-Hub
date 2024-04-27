@@ -83,7 +83,7 @@
         <div class="post" style="border: 1px solid #ccc; padding: 30px; margin-bottom: 20px;  border-radius: 5px; background-color: #fff;">
             
             @* <p><strong>Pet Name:</strong> @item.PetName</p> *@
-
+        <p class="searchable">Post ID: @item.Id</p>
         <p><strong>Title:</strong>
         <p class="searchable">@(string.IsNullOrEmpty(item.Title) ? "-" : item.Title) </p>
         <br />
@@ -141,7 +141,7 @@
         <dt>Privacy Settings:</dt>
         <dd style="white-space: pre-wrap; overflow-wrap: break-word;">@item.IsPublic</dd>
 
-        <p><strong>Created on:</strong> @item.CreatedAt.ToString("dd-MMM-yyyy HH:mm HH:mm:ss")</p>
+        <p><strong>Created on:</strong> @item.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss")</p>
 
             <p>
              @*    <a asp-page="./Edit" asp-route-id="@item.Id" id="edit">Edit</a>  *@
@@ -157,9 +157,13 @@
                         @foreach (var comment in item.PostComments)
                         {
                     <div style="background-color: #593214; color:white;border-radius: 5px; padding: 10px; margin-bottom: 10px; overflow-wrap: break-word;">
+                        <p class="searchable">Comment ID: @comment.Id</p>
+                        <br />
                         <strong>@comment.User.UserName:</strong> <!-- Display username -->
                         <br />
-                                @comment.Content
+                        <p class="searchable">@comment.Content</p>
+                        <br />
+                        <p class="searchable">@comment.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss") </p>
                     </div>
                         }
 

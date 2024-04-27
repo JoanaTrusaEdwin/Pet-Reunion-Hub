@@ -133,9 +133,13 @@
                 @foreach (var comment in item.Comments)
                 {
                         <div style="background-color: #593214; color:white;border-radius: 5px; padding: 10px; margin-bottom: 10px; overflow-wrap: break-word;">
+                        <p class="searchable">Comment ID: @comment.Id</p>
+                        <br/>
                         <strong>@comment.User.UserName:</strong> <!-- Display username -->
                         <br />
-                        @comment.Content
+                         <p class="searchable">@comment.Content</p>
+                        <br/>
+                         <p class="searchable">@comment.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss") </p>
                     </div>
                 }
 
