@@ -74,6 +74,7 @@
 @foreach (var item in Model.Tribute.Reverse())
 {
     <div class="tribute" style="border: 1px solid #ccc; padding: 30px; margin-bottom: 20px;  border-radius: 5px; background-color: #fff; ">
+            <p class="searchable">Monument ID: @item.Id</p>
             <h3 class="searchable">@item.PetName </h3>
 
       

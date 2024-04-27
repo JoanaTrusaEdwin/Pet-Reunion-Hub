@@ -94,7 +94,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                         var notification = new NEWNOTIFICATION
                         {
                             UserId = mentionedUser.Id,
-                            Content = $"{_userManager.GetUserName(User)} mentioned you in a comment on {tribute.User.UserName}'s tribute '{tribute.PetName}'",
+                            Content = $"{_userManager.GetUserName(User)} mentioned you in a comment on {tribute.User.UserName}'s monument with Pet Name'{tribute.PetName} (Monument ID: {tribute.Id})'",
                             IsRead = false,
                             CreatedAt = DateTime.Now
                         };
@@ -122,7 +122,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                     var notification = new NEWNOTIFICATION
                     {
                         UserId = tribute.UserId,
-                        Content = $"You have a new comment on your tribute '{tribute.PetName}' by {commenter.UserName}",
+                        Content = $"You have a new comment on your monument titled '{tribute.PetName}' (Monument ID: {tribute.Id}) by {commenter.UserName}",
                         IsRead = false,
                         CreatedAt = DateTime.Now
                     };
@@ -223,7 +223,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                         var notification = new NEWNOTIFICATION
                         {
                             UserId = mentionedUser.Id,
-                            Content = $"{_userManager.GetUserName(User)} mentioned you in a comment on {post.User.UserName}'s tribute '{post.Title}'",
+                            Content = $"{_userManager.GetUserName(User)} mentioned you in a comment on {post.User.UserName}'s post titled '{post.Title}' (Post ID: {post.Id})",
                             IsRead = false,
                             CreatedAt = DateTime.Now
                         };
@@ -251,7 +251,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                     var notification = new NEWNOTIFICATION
                     {
                         UserId = post.UserId,
-                        Content = $"You have a new comment on your post '{post.Title}' by {commenter.UserName}",
+                        Content = $"You have a new comment on your post titled '{post.Title}' (Post ID: {post.Id}) by {commenter.UserName}",
                         IsRead = false,
                         CreatedAt = DateTime.Now
                     };

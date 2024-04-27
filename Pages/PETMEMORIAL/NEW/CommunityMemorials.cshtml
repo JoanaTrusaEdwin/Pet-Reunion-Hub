@@ -42,6 +42,7 @@
         <div class="tribute" style="background-color: #8b572a; color: white; border-radius: 20px; padding: 20px; margin-bottom: 20px; text-align:center;">
 
             <h1 style="text-align:justify;">Monument</h1>
+            <p style="text-align:justify;"class="searchable">Monument ID: @tribute.Id</p>
             <h2 class="searchable">@tribute.PetName</h2>
             <p><strong>By:</strong></p>
             <p class="searchable">@tribute.User.UserName  </p>
@@ -119,6 +120,7 @@
     {
         <div class="tribute" style="background-color:white; border-radius: 20px; padding: 20px; margin-bottom: 20px;">
             <h1>Story</h1>
+            <p class="searchable">Post ID: @post.Id</p>
             <h6 style="white-space: pre-wrap; overflow-wrap: break-word;">By: @post.User.UserName</h6>
             <p><strong>Title:</strong>
             <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable">@(string.IsNullOrEmpty(post.Title) ? "-" : post.Title)</p>
