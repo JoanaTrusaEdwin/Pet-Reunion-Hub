@@ -77,10 +77,17 @@
             <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable">@(string.IsNullOrEmpty(RESOURCE.DESCRIPTION) ? "-" : RESOURCE.DESCRIPTION) </p>
             <br />
 
-            <p><strong>URL Link to Resource:</strong>
-            <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable">@(string.IsNullOrEmpty(RESOURCE.LINK) ? "-" : RESOURCE.LINK) </p>
-            <br />
+            <p>
+                <strong>URL Link to Resource:</strong>
 
+                    @if (!string.IsNullOrEmpty(RESOURCE.LINK))
+                    {
+                    <a style="color:white;" href="@RESOURCE.LINK" target="_blank" class="searchable">@RESOURCE.LINK</a>
+                    }
+                    else
+                    {
+                <p style="white-space: pre-wrap; overflow-wrap: break-word;">-</p>
+                    }
             <p><strong>Category:</strong>
             <p class="searchable"> @RESOURCE.TYPE</p>
             <br />
@@ -88,6 +95,10 @@
                         @if (!string.IsNullOrEmpty(RESOURCE.FILEURL))
                         {
                 <p> <img src="@RESOURCE.FILEURL" alt="FILE" style="max-width: 500px;" /></p>
+                        }
+                        else
+                        {
+                <p>No file attached</p>
                         }
             <hr />
         </div>
