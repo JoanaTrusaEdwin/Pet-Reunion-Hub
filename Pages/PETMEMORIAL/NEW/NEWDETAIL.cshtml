@@ -123,9 +123,11 @@
         <div class="form-group">
             <label for="commentContent" style="color:black;"><b>Add a comment:</b></label>
             <p style="color:black;">To reply to a comment or mention a user, simply type "@@[username of that commenter]" anywhere in the comment. For example, if you want to reply to a comment from a user named "example@gmail.com" or you would like to mention the user, you would type "@@example@gmail.com".</p>
-            <textarea class="form-control" id="commentContent" name="commentContent" rows="3"></textarea>
-        </div>
+            
+            <textarea maxlength="1000" class="form-control autosize  character-count" id="commentContent" name="commentContent" rows="3" oninput="handleInput(event, 'comment-content-count')"></textarea>
+            <span style="color:black;" id="comment-content-count" class="character-count-display">0/1000</span> <br/>
         <button type="submit" class="btn btn-primary" style="background-color:black; border-radius:5px; color:white; border:none;"><b>Post</b></button>
+        </div>
     </form>
 
 
@@ -146,6 +148,28 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         // Your existing JavaScript code here
+        function updateCharacterCount(inputId, countId, limit) {
+            var input = document.getElementById(inputId);
+            var count = document.getElementById(countId);
+            console.log("Input value:", input.value);
+            console.log("Input length:", input.value.length);
+            count.textContent = input.value.length + "/" + limit;
+        }
+
+        // Call this function when the input changes
+        function handleInput(event, countId) {
+            var inputId = event.target.id;
+            var limit = event.target.getAttribute('maxlength') || 0;
+            updateCharacterCount(inputId, countId, limit);
+        }
+
+        var characterCountInputs = document.querySelectorAll('.character-count');
+        characterCountInputs.forEach(function (input) {
+            input.addEventListener('input', function (event) {
+                var countId = input.getAttribute('data-count-id');
+                handleInput(event, countId);
+            });
+        });
 
         var token = $('input[name="__RequestVerificationToken"]').val();
 
