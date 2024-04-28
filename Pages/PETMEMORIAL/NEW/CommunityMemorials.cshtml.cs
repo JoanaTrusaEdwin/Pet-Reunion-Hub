@@ -104,7 +104,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                         var notification = new NEWNOTIFICATION
                         {
                             UserId = mentionedUser.Id,
-                            Content = $"(Search 'Monument Comment ID: {newComment.Id}') {_userManager.GetUserName(User)} mentioned you in a comment on {tribute.User.UserName}'s monument with Pet Name '{tribute.PetName}' with Monument ID '{tribute.Id}'",
+                            Content = $"(Monument Comment ID: {newComment.Id}) {_userManager.GetUserName(User)} mentioned you in a comment on {tribute.User.UserName}'s monument with Pet Name '{tribute.PetName}' with Monument ID '{tribute.Id}'",
                             IsRead = false,
                             CreatedAt = DateTime.Now
                         };
@@ -132,7 +132,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                     var notification = new NEWNOTIFICATION
                     {
                         UserId = tribute.UserId,
-                        Content = $"(Search 'Monument Comment ID: {newComment.Id}') You have a new comment on your monument titled '{tribute.PetName}' with Monument ID '{tribute.Id}' by {commenter.UserName}.",
+                        Content = $"(Monument Comment ID: {newComment.Id}) You have a new comment on your monument titled '{tribute.PetName}' with Monument ID '{tribute.Id}' by {commenter.UserName}.",
                         IsRead = false,
                         CreatedAt = DateTime.Now
                     };
@@ -243,7 +243,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                         var notification = new NEWNOTIFICATION
                         {
                             UserId = mentionedUser.Id,
-                            Content = $"(Search 'Post Comment ID: {newPostComment.Id}') {_userManager.GetUserName(User)} mentioned you in a comment on {post.User.UserName}'s post titled '{post.Title}' with Post ID '{post.Id}'",
+                            Content = $"(Post Comment ID: {newPostComment.Id}) {_userManager.GetUserName(User)} mentioned you in a comment on {post.User.UserName}'s post titled '{post.Title}' with Post ID '{post.Id}'",
                             IsRead = false,
                             CreatedAt = DateTime.Now
                         };
@@ -271,7 +271,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                     var notification = new NEWNOTIFICATION
                     {
                         UserId = post.UserId,
-                        Content = $"(Search 'Post Comment ID: {newPostComment.Id}') You have a new comment on your post titled '{post.Title}' with Post ID '{post.Id}' by {commenter.UserName}",
+                        Content = $"(Post Comment ID: {newPostComment.Id}) You have a new comment on your post titled '{post.Title}' with Post ID '{post.Id}' by {commenter.UserName}",
                         IsRead = false,
                         CreatedAt = DateTime.Now
                     };

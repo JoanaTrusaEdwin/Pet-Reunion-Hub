@@ -121,7 +121,8 @@
     <form method="post">
         <input type="hidden" name="tributeId" value="@Model.Tribute.Id" />
         <div class="form-group">
-            <label for="commentContent" style="color:white;">Add a comment:</label>
+            <label for="commentContent" style="color:black;"><b>Add a comment:</b></label>
+            <p style="color:black;">To reply to a comment or mention a user, simply type "@@[username of that commenter]" anywhere in the comment. For example, if you want to reply to a comment from a user named "example@gmail.com" or you would like to mention the user, you would type "@@example@gmail.com".</p>
             <textarea class="form-control" id="commentContent" name="commentContent" rows="3"></textarea>
         </div>
         <button type="submit" class="btn btn-primary" style="background-color:black; border-radius:5px; color:white; border:none;"><b>Post</b></button>
