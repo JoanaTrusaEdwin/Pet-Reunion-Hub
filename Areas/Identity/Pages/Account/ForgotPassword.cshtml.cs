@@ -88,7 +88,7 @@ namespace Pet_Reunion_Hub.Areas.Identity.Pages.Account
                 message.To.Add(new MailboxAddress(user.UserName, user.Email));
                 message.Subject = "Reset Password";
 
-                var builder = new BodyBuilder { TextBody = $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>." };
+                var builder = new BodyBuilder { TextBody = $"Please reset your password by clicking here {HtmlEncoder.Default.Encode(callbackUrl)}" };
                 message.Body = builder.ToMessageBody();
 
                 using (var client = new SmtpClient())
