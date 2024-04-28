@@ -91,6 +91,10 @@
             <p> <img src="@RESOURCE.FILEURL" alt="FILE" style="max-width: 500px;" /></p>
             }
             <hr />
+            <form method="post">
+                <input type="hidden" name="resourceId" value="@RESOURCE.Id" />
+                <button type="submit" class="btn btn-primary" style="background-color:black; border-radius:5px; color:white; border:none;"><b>Save to Favorites</b></button>
+            </form>
         </div>
         <br />
     }

@@ -40,6 +40,31 @@ namespace Pet_Reunion_Hub.Pages.COPINGRESOURCES
 
             return Page();
         }
+
+        public IActionResult OnPost(int resourceId)
+        {
+            var userId = _userManager.GetUserId(User);
+
+            // Find the tribute to which the comment belongs
+            var resource = _context.RESOURCE.Include(t => t.User).FirstOrDefault(t => t.Id == resourceId);
+
+            if (resource != null)
+            {
+                var RESOURCEFAVE = new RESOURCEFAVE
+                {
+                    UserId = userId,
+                    RESOURCEId = resourceId
+                };
+
+                // Add the comment to the database
+                _context.RESOURCEFAVE.Add(RESOURCEFAVE);
+                _context.SaveChanges();
+  
+            }
+
+            // Redirect back to the page
+            return RedirectToPage(new { id = resourceId });
+        }
     }
 }
 

@@ -46,6 +46,8 @@ namespace PRHDATALIB.Models
         public DbSet<Comment> Comment { get; set; }
 
         public DbSet<POSTCOMMENT> POSTCOMMENT { get; set; }
+
+        public DbSet<RESOURCEFAVE> RESOURCEFAVE { get; set; }
         //public DbSet<Heart> Heart { get; set; }
         //public DbSet<Post> Post { get; set; }
         //public DbSet<Media> Media { get; set; }
@@ -426,11 +428,39 @@ namespace PRHDATALIB.Models
                     .WithMany(e => e.PostComments)
                     .HasForeignKey(c => c.PostId)
                     .OnDelete(DeleteBehavior.Cascade);
+
                 entity.HasOne(cr => cr.User)
             .WithMany()
             .HasForeignKey(cr => cr.UserId)
             .OnDelete(DeleteBehavior.Restrict)
             .HasConstraintName("FK_POSTCOMMENT_AspNetUsers");
+            });
+
+            modelBuilder.Entity<RESOURCEFAVE>(entity =>
+            {
+                entity.ToTable("RESOURCEFAVE");
+                entity.Property(e => e.Id)
+                .ValueGeneratedOnAdd()
+                .HasColumnName("Id"); entity.Property(e => e.Id);
+
+                entity.Property(e => e.UserId).IsRequired();
+
+                entity.Property(e => e.CreatedAt);
+
+                entity.Property(e => e.RESOURCEId)
+                   .IsRequired();
+
+                entity.HasOne(e => e.RESOURCE)
+
+                    .WithMany(e => e.RESOURCEFAVE)
+                    .HasForeignKey(c => c.RESOURCEId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(cr => cr.User)
+                .WithMany()
+                .HasForeignKey(cr => cr.UserId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("FK_RESOURCEFAVE_AspNetUsers");
             });
 
             modelBuilder.Entity<TributeNotification>(entity =>
