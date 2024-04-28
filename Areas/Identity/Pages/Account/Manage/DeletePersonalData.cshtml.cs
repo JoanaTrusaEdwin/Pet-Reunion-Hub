@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Pet_Reunion_Hub.Areas.Identity.Pages.Account.Manage
@@ -17,15 +18,18 @@ namespace Pet_Reunion_Hub.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<DeletePersonalDataModel> _logger;
+        private readonly PRHDATALIB.Models.DatabaseContext _dbContext; // Up
 
         public DeletePersonalDataModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
-            ILogger<DeletePersonalDataModel> logger)
+            ILogger<DeletePersonalDataModel> logger,
+           PRHDATALIB.Models.DatabaseContext dbContext)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _dbContext = dbContext;
         }
 
         /// <summary>
@@ -86,10 +90,49 @@ namespace Pet_Reunion_Hub.Areas.Identity.Pages.Account.Manage
                 }
             }
 
+            //var result = await _userManager.DeleteAsync(user);
+            //var userId = await _userManager.GetUserIdAsync(user);
+
+            // Delete related records
+            var createReports = await _dbContext.CreateReport.Where(r => r.UserId == user.Id).ToListAsync();
+            _dbContext.CreateReport.RemoveRange(createReports);
+
+            var tributes = await _dbContext.Tribute.Where(t => t.UserId == user.Id).ToListAsync();
+            _dbContext.Tribute.RemoveRange(tributes);
+
+            var posts = await _dbContext.Post.Where(p => p.UserId == user.Id).ToListAsync();
+            _dbContext.Post.RemoveRange(posts);
+
+            var comments = await _dbContext.Comment.Where(rp => rp.TributeId != null && rp.Tribute.UserId == user.Id).ToListAsync();
+            _dbContext.Comment.RemoveRange(comments);
+
+            var postComments = await _dbContext.POSTCOMMENT.Where(rp => rp.PostId != null && rp.Post.UserId == user.Id).ToListAsync();
+            _dbContext.POSTCOMMENT.RemoveRange(postComments);
+
+            var generalLocations = await _dbContext.GENERALLOCATION.Where(gl => gl.UserId == user.Id).ToListAsync();
+            _dbContext.GENERALLOCATION.RemoveRange(generalLocations);
+
+            var newNotifications = await _dbContext.NEWNOTIFICATION.Where(nn => nn.UserId == user.Id).ToListAsync();
+            _dbContext.NEWNOTIFICATION.RemoveRange(newNotifications);
+
+            var resources = await _dbContext.RESOURCE.Where(r => r.UserId == user.Id).ToListAsync();
+            _dbContext.RESOURCE.RemoveRange(resources);
+
+            //var reportPhotos = await _dbContext.ReportPhoto.Where(rp => rp.ReportId.HasValue && rp.CreateReport.UserId == user.Id).ToListAsync();
+            //_dbContext.ReportPhoto.RemoveRange(reportPhotos);
+
+            var reportPhotos = await _dbContext.ReportPhoto.Where(rp => rp.ReportId != null && rp.CreateReport.UserId == user.Id).ToListAsync();
+            _dbContext.ReportPhoto.RemoveRange(reportPhotos);
+
+            var media = await _dbContext.Media.Where(m => m.Post.UserId == user.Id).ToListAsync();
+            _dbContext.Media.RemoveRange(media);
+
+            await _dbContext.SaveChangesAsync();
+
             var result = await _userManager.DeleteAsync(user);
             var userId = await _userManager.GetUserIdAsync(user);
 
-
+            //await _dbContext.SaveChangesAsync();
             if (!result.Succeeded)
             {
                 throw new InvalidOperationException($"Unexpected error occurred deleting user.");
