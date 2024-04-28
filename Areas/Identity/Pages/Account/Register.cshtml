@@ -5,7 +5,22 @@
 }
 
 <h1>@ViewData["Title"]</h1>
-
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-image: url('/images/indeximage.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        margin-right: 0;
+        margin-left: 0;
+        padding-right: 0;
+        background-attachment: fixed;
+        position: relative;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
 <div class="row">
     <div class="col-md-4">
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
@@ -32,18 +47,12 @@
     </div>
     <div class="col-md-6 col-md-offset-2">
         <section>
-            <h3>Use another service to register.</h3>
+          
             <hr />
             @{
                 if ((Model.ExternalLogins?.Count ?? 0) == 0)
                 {
-                    <div>
-                        // <p>
-                        //     There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                        //     about setting up this ASP.NET application to support logging in via external services</a>.
-                        // </p>
-                        <a href="/LOSTPETREPORTING/GENERAL/Create">Proceed to Pet Reunion Hub</a>
-                    </div>
+                   
                 }
                 else
                 {
