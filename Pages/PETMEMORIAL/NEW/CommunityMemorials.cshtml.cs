@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 //using Pet_Reunion_Hub.Helper;
 using PRHDATALIB.Models;
-using Pet_Reunion_Hub.Services;
+
 using System.Text.RegularExpressions;
 
 namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
@@ -21,15 +21,15 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
     {
         private readonly DatabaseContext _context;
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly INotificationService _notificationService;
+        
         private readonly ILogger<CommunityMemorialsModel> _logger;
 
-        public CommunityMemorialsModel(ILogger<CommunityMemorialsModel> logger,DatabaseContext context, UserManager<IdentityUser> userManager, INotificationService notificationService)
+        public CommunityMemorialsModel(ILogger<CommunityMemorialsModel> logger,DatabaseContext context, UserManager<IdentityUser> userManager)
         {
             _logger = logger;
             _context = context;
             _userManager = userManager;
-            _notificationService = notificationService;
+           
         }
 
         public List<Tribute> PublicTributes { get; set; }

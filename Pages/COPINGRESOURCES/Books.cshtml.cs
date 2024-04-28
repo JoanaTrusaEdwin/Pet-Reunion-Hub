@@ -50,15 +50,15 @@ namespace Pet_Reunion_Hub.Pages.COPINGRESOURCES
 
             if (resource != null)
             {
-                var RESOURCEFAVE = new RESOURCEFAVE
-                {
-                    UserId = userId,
-                    RESOURCEId = resourceId
-                };
+                //var RESOURCEFAVE = new RESOURCEFAVE
+                //{
+                //    UserId = userId,
+                //    RESOURCEId = resourceId
+                //};
 
-                // Add the comment to the database
-                _context.RESOURCEFAVE.Add(RESOURCEFAVE);
-                _context.SaveChanges();
+                //// Add the comment to the database
+                //_context.RESOURCEFAVE.Add(RESOURCEFAVE);
+                //_context.SaveChanges();
   
             }
 

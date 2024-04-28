@@ -40,23 +40,23 @@ namespace PRHDATALIB.Models
 
         public DbSet<RESOURCE> RESOURCE { get; set; }
 
-        public DbSet<CONTAINER> CONTAINER { get; set; }
+       
 
         //public DbSet<TESTBIT> TESTBIT { get; set; }
         public DbSet<Comment> Comment { get; set; }
 
         public DbSet<POSTCOMMENT> POSTCOMMENT { get; set; }
 
-        public DbSet<RESOURCEFAVE> RESOURCEFAVE { get; set; }
+        
         //public DbSet<Heart> Heart { get; set; }
         //public DbSet<Post> Post { get; set; }
         //public DbSet<Media> Media { get; set; }
 
-        public DbSet<TributeNotification> TributeNotification { get; set; }
+      
 
         public DbSet<NEWNOTIFICATION> NEWNOTIFICATION { get; set; }
 
-        public DbSet<Newtest> NEWTEST { get; set; }
+       
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -227,29 +227,22 @@ namespace PRHDATALIB.Models
                 entity.Property(e => e.IsPublic);
                 entity.Property(e => e.CreatedAt);
 
-                entity.Property(e => e.ContainerId).HasColumnName("ContainerId"); 
+                //entity.Property(e => e.ContainerId).HasColumnName("ContainerId"); 
 
-                entity.HasOne(p => p.CONTAINER)
-                    .WithMany()
-                    .HasForeignKey(p => p.ContainerId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("FK_Post_CONTAINER");
-
-                //entity.Property(e => e.TributeId).HasColumnName("TributeId");
-
-                //entity.HasOne(p => p.Tribute)
+                //entity.HasOne(p => p.CONTAINER)
                 //    .WithMany()
-                //    .HasForeignKey(p => p.TributeId)
+                //    .HasForeignKey(p => p.ContainerId)
                 //    .OnDelete(DeleteBehavior.Restrict)
-                //    .HasConstraintName("FK_Post_Tribute");
+                //    .HasConstraintName("FK_Post_CONTAINER");
+
 
                 entity.Property(e => e.UserId).IsRequired().HasMaxLength(450);
 
                 entity.HasOne(cr => cr.User)
                 .WithMany()
                 .HasForeignKey(cr => cr.UserId)
-                .OnDelete(DeleteBehavior.Restrict)
-                .HasConstraintName("FK_Tribute_AspNetUsers");
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_Post_AspNetUsers");
 
                 entity.HasMany(p => p.PostComments)
             .WithOne()
@@ -282,7 +275,7 @@ namespace PRHDATALIB.Models
                 .WithMany()
                 .HasForeignKey(cr => cr.UserId)
                 .OnDelete(DeleteBehavior.Restrict)
-                .HasConstraintName("FK_Tribute_AspNetUsers");
+                .HasConstraintName("FK_RESOURCE_AspNetUsers");
 
 
             });
@@ -310,28 +303,28 @@ namespace PRHDATALIB.Models
                       .HasConstraintName("FK_Media_Post");
             });
 
-            modelBuilder.Entity<CONTAINER>(entity =>
-            {
-                entity.ToTable("CONTAINER");
-                entity.Property(e => e.Id)
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("Id"); entity.Property(e => e.Id)
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("Id");
+            //modelBuilder.Entity<CONTAINER>(entity =>
+            //{
+            //    entity.ToTable("CONTAINER");
+            //    entity.Property(e => e.Id)
+            //            .ValueGeneratedOnAdd()
+            //            .HasColumnName("Id"); entity.Property(e => e.Id)
+            //            .ValueGeneratedOnAdd()
+            //            .HasColumnName("Id");
 
-                entity.Property(e => e.Name);
-                entity.Property(e => e.Description);
+            //    entity.Property(e => e.Name);
+            //    entity.Property(e => e.Description);
 
-                entity.Property(e => e.UserId).IsRequired().HasMaxLength(450);
+            //    entity.Property(e => e.UserId).IsRequired().HasMaxLength(450);
 
-                entity.HasOne(cr => cr.User)
-                .WithMany()
-                .HasForeignKey(cr => cr.UserId)
-                .OnDelete(DeleteBehavior.Restrict)
-                .HasConstraintName("FK_CONTAINER_AspNetUsers");
+            //    entity.HasOne(cr => cr.User)
+            //    .WithMany()
+            //    .HasForeignKey(cr => cr.UserId)
+            //    .OnDelete(DeleteBehavior.Restrict)
+            //    .HasConstraintName("FK_CONTAINER_AspNetUsers");
 
 
-            });
+            //});
 
             //modelBuilder.Entity<TESTBIT>(entity =>
             //{
@@ -436,70 +429,70 @@ namespace PRHDATALIB.Models
             .HasConstraintName("FK_POSTCOMMENT_AspNetUsers");
             });
 
-            modelBuilder.Entity<RESOURCEFAVE>(entity =>
-            {
-                entity.ToTable("RESOURCEFAVE");
-                entity.Property(e => e.Id)
-                .ValueGeneratedOnAdd()
-                .HasColumnName("Id"); entity.Property(e => e.Id);
+            //modelBuilder.Entity<RESOURCEFAVE>(entity =>
+            //{
+            //    entity.ToTable("RESOURCEFAVE");
+            //    entity.Property(e => e.Id)
+            //    .ValueGeneratedOnAdd()
+            //    .HasColumnName("Id"); entity.Property(e => e.Id);
 
-                entity.Property(e => e.UserId).IsRequired();
+            //    entity.Property(e => e.UserId).IsRequired();
 
-                entity.Property(e => e.CreatedAt);
+            //    entity.Property(e => e.CreatedAt);
 
-                entity.Property(e => e.RESOURCEId)
-                   .IsRequired();
+            //    entity.Property(e => e.RESOURCEId)
+            //       .IsRequired();
 
-                entity.HasOne(e => e.RESOURCE)
+            //    entity.HasOne(e => e.RESOURCE)
 
-                    .WithMany(e => e.RESOURCEFAVE)
-                    .HasForeignKey(c => c.RESOURCEId)
-                    .OnDelete(DeleteBehavior.Cascade);
+            //        .WithMany(e => e.RESOURCEFAVE)
+            //        .HasForeignKey(c => c.RESOURCEId)
+            //        .OnDelete(DeleteBehavior.Cascade);
 
-                entity.HasOne(cr => cr.User)
-                .WithMany()
-                .HasForeignKey(cr => cr.UserId)
-                .OnDelete(DeleteBehavior.Restrict)
-                .HasConstraintName("FK_RESOURCEFAVE_AspNetUsers");
-            });
+            //    entity.HasOne(cr => cr.User)
+            //    .WithMany()
+            //    .HasForeignKey(cr => cr.UserId)
+            //    .OnDelete(DeleteBehavior.Restrict)
+            //    .HasConstraintName("FK_RESOURCEFAVE_AspNetUsers");
+            //});
 
-            modelBuilder.Entity<TributeNotification>(entity =>
-            {
-                entity.ToTable("TributeNotification");
+            //modelBuilder.Entity<TributeNotification>(entity =>
+            //{
+            //    entity.ToTable("TributeNotification");
 
                
-                entity.Property(e => e.Id)
-              .ValueGeneratedOnAdd()
-              .HasColumnName("Id"); entity.Property(e => e.Id);
+            //    entity.Property(e => e.Id)
+            //  .ValueGeneratedOnAdd()
+            //  .HasColumnName("Id"); entity.Property(e => e.Id);
 
-                entity.Property(e => e.UserId).IsRequired();
+            //    entity.Property(e => e.UserId).IsRequired();
 
-                entity.Property(e => e.TributeId).IsRequired();
+            //    entity.Property(e => e.TributeId).IsRequired();
 
-                entity.Property(e => e.CommentId).IsRequired();
+            //    entity.Property(e => e.CommentId).IsRequired();
 
-                entity.Property(e => e.IsRead).IsRequired();
+            //    entity.Property(e => e.IsRead).IsRequired();
 
-                entity.Property(e => e.CreatedAt);
+            //    entity.Property(e => e.CreatedAt);
 
-                entity.HasOne(cr => cr.User)
-                    .WithMany()
-                    .HasForeignKey(cr => cr.UserId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_TributeNotification_AspNetUsers");
+            //    entity.HasOne(cr => cr.User)
+            //        .WithMany()
+            //        .HasForeignKey(cr => cr.UserId)
+            //        .OnDelete(DeleteBehavior.Cascade)
+            //        .HasConstraintName("FK_TributeNotification_AspNetUsers");
 
-                entity.HasOne(cr => cr.Tribute)
-                    .WithMany()
-                    .HasForeignKey(cr => cr.TributeId)
-                    .OnDelete(DeleteBehavior.Cascade);
+            //    entity.HasOne(cr => cr.Tribute)
+            //        .WithMany()
+            //        .HasForeignKey(cr => cr.TributeId)
+            //        .OnDelete(DeleteBehavior.Cascade);
 
 
-                entity.HasOne(cr => cr.Comment)
-                    .WithMany()
-                    .HasForeignKey(cr => cr.CommentId)
-                    .OnDelete(DeleteBehavior.Cascade);
+            //    entity.HasOne(cr => cr.Comment)
+            //        .WithMany()
+            //        .HasForeignKey(cr => cr.CommentId)
+            //        .OnDelete(DeleteBehavior.Cascade);
                     
-            });
+            //});
 
             modelBuilder.Entity<NEWNOTIFICATION>(entity =>
             {
@@ -576,21 +569,21 @@ namespace PRHDATALIB.Models
             //});
 
 
-            modelBuilder.Entity<Newtest>(entity =>
-            {
-                entity.Property(e => e.NewTest)
-                    .IsRequired()
-                    .HasMaxLength(255);
+            //modelBuilder.Entity<Newtest>(entity =>
+            //{
+            //    entity.Property(e => e.NewTest)
+            //        .IsRequired()
+            //        .HasMaxLength(255);
 
-                // Define the foreign key relationship with the User entity
-                entity.HasOne(d => d.User)
-                    .WithMany()
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.Restrict) // Choose the appropriate delete behavior
-                    .HasConstraintName("FK_NEWTEST_AspNetUsers"); // Set the constraint name
+            //    // Define the foreign key relationship with the User entity
+            //    entity.HasOne(d => d.User)
+            //        .WithMany()
+            //        .HasForeignKey(d => d.UserId)
+            //        .OnDelete(DeleteBehavior.Restrict) // Choose the appropriate delete behavior
+            //        .HasConstraintName("FK_NEWTEST_AspNetUsers"); // Set the constraint name
 
-                // Define any additional configurations for the NEWTEST entity here
-            });
+            //    // Define any additional configurations for the NEWTEST entity here
+            //});
             //modelBuilder.Entity<IdentityUser>(entity =>
             //{
             //    entity.ToTable("AspNetUsers");
@@ -669,7 +662,7 @@ namespace PRHDATALIB.Models
             //modelBuilder.Entity<IdentityUserToken<string>>().ToTable("AspNetUserTokens");
         }
 
-        public DbSet<PRHDATALIB.Models.TESTBIT>? TESTBIT_1 { get; set; }
+        //public DbSet<PRHDATALIB.Models.TESTBIT>? TESTBIT_1 { get; set; }
 
         //partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }

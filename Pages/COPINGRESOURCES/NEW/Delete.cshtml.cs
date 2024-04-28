@@ -53,6 +53,11 @@ namespace Pet_Reunion_Hub.Pages.COPINGRESOURCES.NEW
 
             if (resource != null)
             {
+                //var fav = await _context.RESOURCEFAVE.Where(rp => rp.RESOURCEId == resource.Id).ToListAsync();
+                //foreach (var saved in fav)
+                //{
+                //    _context.Remove(saved);
+                //}
                 RESOURCE = resource;
                 _context.RESOURCE.Remove(RESOURCE);
                 await _context.SaveChangesAsync();

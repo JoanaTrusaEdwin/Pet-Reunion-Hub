@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW;
-using Pet_Reunion_Hub.Services;
+
 using PRHDATALIB.Models;
 
 namespace Pet_Reunion_Hub.Pages
@@ -13,15 +13,15 @@ namespace Pet_Reunion_Hub.Pages
         public List<NEWNOTIFICATION> Notifications { get; set; }
         private readonly DatabaseContext _context;
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly INotificationService _notificationService;
+        
         private readonly ILogger<CommunityMemorialsModel> _logger;
 
-        public NEWNOTIFICATIONModel(ILogger<CommunityMemorialsModel> logger, DatabaseContext context, UserManager<IdentityUser> userManager, INotificationService notificationService)
+        public NEWNOTIFICATIONModel(ILogger<CommunityMemorialsModel> logger, DatabaseContext context, UserManager<IdentityUser> userManager)
         {
             _logger = logger;
             _context = context;
             _userManager = userManager;
-            _notificationService = notificationService;
+            
         }
       
         public async Task<IActionResult> OnGetAsync()

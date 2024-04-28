@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Org.BouncyCastle.Asn1.Cms;
 using Pet_Reunion_Hub.Helper;
 using Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW;
-using Pet_Reunion_Hub.Services;
+
 using PRHDATALIB.Models;
 using System.Security.Claims;
 using System.Text.RegularExpressions;
@@ -22,15 +22,15 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
     {
         private readonly PRHDATALIB.Models.DatabaseContext _context;
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly INotificationService _notificationService;
+    
         private readonly ILogger<CommunityMemorialsModel> _logger;
 
-        public DetailsModel(ILogger<CommunityMemorialsModel> logger, DatabaseContext context, UserManager<IdentityUser> userManager, INotificationService notificationService)
+        public DetailsModel(ILogger<CommunityMemorialsModel> logger, DatabaseContext context, UserManager<IdentityUser> userManager)
         {
             _logger = logger;
             _context = context;
             _userManager = userManager;
-            _notificationService = notificationService;
+            
         }
 
       public Post Post { get; set; } = default!;

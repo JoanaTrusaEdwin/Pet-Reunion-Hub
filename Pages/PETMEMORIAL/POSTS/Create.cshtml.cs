@@ -99,12 +99,12 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
         {
             Post = new Post { UserId = _userManager.GetUserId(User) };
 
-            Containers = _context.CONTAINER
-           .Select(c => new SelectListItem
-           {
-               Value = c.Id.ToString(),
-               Text = c.Name
-           });
+           // Containers = _context.CONTAINER
+           //.Select(c => new SelectListItem
+           //{
+           //    Value = c.Id.ToString(),
+           //    Text = c.Name
+           //});
 
             Tribute = _context.Tribute
            .Select(c => new SelectListItem

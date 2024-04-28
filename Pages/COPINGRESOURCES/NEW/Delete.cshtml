@@ -52,16 +52,25 @@
 
         </div>
         <dt>Title:</dt>
-        <dd style="white-space: pre-wrap; overflow-wrap: break-word;">@Model.RESOURCE.TITLE)</dd>
+        <dd style="white-space: pre-wrap; overflow-wrap: break-word;">@Model.RESOURCE.TITLE</dd>
 
         <dt>Description:</dt>
-        <dd style="white-space: pre-wrap; overflow-wrap: break-word;">@Model.RESOURCE.DESCRIPTION)</dd>
+        <dd style="white-space: pre-wrap; overflow-wrap: break-word;">@Model.RESOURCE.DESCRIPTION</dd>
 
         <dt>URL Link to Resource:</dt>
-        <dd style="white-space: pre-wrap; overflow-wrap: break-word;">@(Model.RESOURCE.LINK != null ? @Model.RESOURCE.LINK : "-")</dd>
+        <dd>
+            @if (!string.IsNullOrEmpty(Model.RESOURCE.LINK))
+            {
+                <a  href="@Model.RESOURCE.LINK" target="_blank" class="searchable">@Model.RESOURCE.LINK</a>
+            }
+            else
+            {
+                <p style="white-space: pre-wrap; overflow-wrap: break-word;">-</p>
+            }
+        </dd>
 
         <dt>Attached File:</dt>
-        <p> <img src="@Model.RESOURCE.FILEURL" alt="FILE" style="max-width: 500px;" /></p>
+        <p> <img src="@Model.RESOURCE.FILEURL" style="max-width: 500px;" /></p>
 
         <p><strong>Category:</strong>
         <p> @Model.RESOURCE.TYPE</p>

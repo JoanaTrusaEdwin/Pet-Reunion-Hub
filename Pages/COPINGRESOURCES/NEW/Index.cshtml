@@ -83,14 +83,22 @@
         <br />
 
         <p><strong>URL Link to Resource:</strong>
-        <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable">@(string.IsNullOrEmpty(item.LINK) ? "-" : item.LINK) </p>
-        <br />
+     
+                    @if (!string.IsNullOrEmpty(item.LINK))
+                    {
+                <a href="@item.LINK" target="_blank" class="searchable">@item.LINK</a>
+                    }
+                    else
+                    {
+                <p style="white-space: pre-wrap; overflow-wrap: break-word;">-</p>
+                    }
+            <br />
 
          <p><strong>Category:</strong>
         <p class="searchable"> @item.TYPE</p>
         <br/>
 
-        <p> <img src="@item.FILEURL" alt="FILE" style="max-width: 500px;" /></p>
+        <p> <img src="@item.FILEURL" style="max-width: 500px;" /></p>
        
         <P>
             <a asp-page="./Edit" asp-route-id="@item.Id" id="edit">Edit</a>

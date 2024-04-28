@@ -9,7 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Pet_Reunion_Hub.Services;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -24,15 +24,15 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
     {
         private readonly PRHDATALIB.Models.DatabaseContext _context;
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly INotificationService _notificationService;
+        
         private readonly ILogger<CommunityMemorialsModel> _logger;
 
-        public NEWDETAILModel(ILogger<CommunityMemorialsModel> logger, DatabaseContext context, UserManager<IdentityUser> userManager, INotificationService notificationService)
+        public NEWDETAILModel(ILogger<CommunityMemorialsModel> logger, DatabaseContext context, UserManager<IdentityUser> userManager)
         {
             _logger = logger;
             _context = context;
             _userManager = userManager;
-            _notificationService = notificationService;
+          
         }
 
         public Tribute Tribute { get; set; } = default!;

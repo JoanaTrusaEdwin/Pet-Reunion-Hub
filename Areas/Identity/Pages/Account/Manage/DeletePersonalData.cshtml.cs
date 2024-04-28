@@ -88,6 +88,8 @@ namespace Pet_Reunion_Hub.Areas.Identity.Pages.Account.Manage
 
             var result = await _userManager.DeleteAsync(user);
             var userId = await _userManager.GetUserIdAsync(user);
+
+
             if (!result.Succeeded)
             {
                 throw new InvalidOperationException($"Unexpected error occurred deleting user.");
