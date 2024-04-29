@@ -171,13 +171,14 @@
 
     .highlight {
         background-color: yellow;
+        color:black;
     }
 </style>
 <script>
     function searchFunction() {
         var input = document.getElementById("searchInput");
         var filter = input.value.trim().toLowerCase(); // Convert filter to lowercase for case-insensitive search
-        var reports = document.getElementsByClassName("tribute");
+        var reports = document.getElementsByClassName("report");
 
         for (var i = 0; i < reports.length; i++) {
             var report = reports[i];
