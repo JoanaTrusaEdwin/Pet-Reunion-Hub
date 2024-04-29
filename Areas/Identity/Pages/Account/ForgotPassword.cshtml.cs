@@ -4,7 +4,8 @@
 
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.Configuration;
+using System.Net.Mail;
+using System.Net;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
@@ -14,22 +15,18 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using MimeKit;
-using MailKit.Security;
-using MailKit.Net.Smtp;
+
 namespace Pet_Reunion_Hub.Areas.Identity.Pages.Account
 {
     public class ForgotPasswordModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IEmailSender _emailSender;
-        private readonly IConfiguration _configuration;
 
-        public ForgotPasswordModel(UserManager<IdentityUser> userManager, IEmailSender emailSender, IConfiguration configuration)
+        public ForgotPasswordModel(UserManager<IdentityUser> userManager, IEmailSender emailSender)
         {
             _userManager = userManager;
             _emailSender = emailSender;
-            _configuration = configuration;
         }
 
         /// <summary>
@@ -64,7 +61,7 @@ namespace Pet_Reunion_Hub.Areas.Identity.Pages.Account
                     // Don't reveal that the user does not exist or is not confirmed
                     return RedirectToPage("./ForgotPasswordConfirmation");
                 }
-                Console.WriteLine($"Original Email: {Input.Email}");
+
                 // For more information on how to enable account confirmation and password reset please
                 // visit https://go.microsoft.com/fwlink/?LinkID=532713
                 var code = await _userManager.GeneratePasswordResetTokenAsync(user);
@@ -75,33 +72,42 @@ namespace Pet_Reunion_Hub.Areas.Identity.Pages.Account
                     values: new { area = "Identity", code },
                     protocol: Request.Scheme);
 
-                var emailSettings = _configuration.GetSection("EmailSettings");
-                var mailServer = emailSettings["MailServer"];
-                var mailPort = int.Parse(emailSettings["MailPort"]);
-                var senderName = emailSettings["SenderName"];
-                var sender = emailSettings["Sender"];
-                var password = emailSettings["Password"];
-
-                var message = new MimeMessage();
-                message.From.Add(new MailboxAddress(senderName, sender));
-                message.To.Add(new MailboxAddress(user.UserName, user.Email));
-                message.Subject = "Reset Password";
-
-                var builder = new BodyBuilder { TextBody = $"Please reset your password by clicking here {HtmlEncoder.Default.Encode(callbackUrl)}" };
-                message.Body = builder.ToMessageBody();
-
-                using (var client = new SmtpClient())
-                {
-                    client.Connect(mailServer, mailPort, MailKit.Security.SecureSocketOptions.Auto);
-                    client.Authenticate(sender, password);
-                    client.Send(message);
-                    client.Disconnect(true);
-                }
+                await SendEmailAsync(
+                    Input.Email,
+                    "Reset Password",
+                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }
 
             return Page();
+        }
+        private async Task<bool> SendEmailAsync(string email, string subject, string confirmLink)
+        {
+            try
+            {
+                MailMessage message = new MailMessage();
+                SmtpClient smtpClient = new SmtpClient();
+                message.From = new MailAddress("noreply@petreunionhub.fyp", "Pet Reunion Hub");
+                message.To.Add(email);
+                message.Subject = subject;
+                message.IsBodyHtml = true;
+                message.Body = confirmLink;
+
+                smtpClient.Port = 587;
+                smtpClient.Host = "smtp.gmail.com";
+
+                smtpClient.EnableSsl = true;
+                smtpClient.UseDefaultCredentials = false;
+                smtpClient.Credentials = new NetworkCredential("petreunionhubofficial@gmail.com", "izeb tvln roqy yzpj");
+                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtpClient.Send(message);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
     }
 }

@@ -161,7 +161,7 @@ namespace Pet_Reunion_Hub.Areas.Identity.Pages.Account
             {
                 MailMessage message = new MailMessage();
                 SmtpClient smtpClient = new SmtpClient();
-                message.From = new MailAddress("noreply@petreunionhub.fyp");
+                message.From = new MailAddress("noreply@petreunionhub.fyp", "Pet Reunion Hub");
                 message.To.Add(email);
                 message.Subject = subject;
                 message.IsBodyHtml = true;
