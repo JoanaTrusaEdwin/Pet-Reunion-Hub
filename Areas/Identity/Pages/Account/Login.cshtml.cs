@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 
 namespace Pet_Reunion_Hub.Areas.Identity.Pages.Account
 {
@@ -21,11 +22,15 @@ namespace Pet_Reunion_Hub.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly PRHDATALIB.Models.DatabaseContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, ILogger<LoginModel> logger, PRHDATALIB.Models.DatabaseContext context)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _context = context;
+            _userManager = userManager;
         }
 
         /// <summary>
@@ -115,8 +120,20 @@ namespace Pet_Reunion_Hub.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return RedirectToPage("/HomePage");
-                    //return LocalRedirect(returnUrl);
+
+                    // Check if the user has a record in the GENERALLOCATION table
+                    var user = await _userManager.FindByEmailAsync(Input.Email);
+                    var hasLocationValue = await _context.GENERALLOCATION.AnyAsync(g => g.UserId == user.Id);
+
+                    if (hasLocationValue)
+                    {
+                        return RedirectToPage("/HomePage");
+                    }
+                    else
+                    {
+                        // Redirect to the page where the user can set their location
+                        return RedirectToPage("/LOSTPETREPORTING/GENERAL/Create");
+                    }
                 }
                 if (result.RequiresTwoFactor)
                 {

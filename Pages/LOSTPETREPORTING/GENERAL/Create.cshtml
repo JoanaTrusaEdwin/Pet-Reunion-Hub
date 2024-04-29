@@ -72,8 +72,9 @@
 </head>
 <h1>Set Your Residential Area</h1>
 
-<h4>To help foster a supportive community, each user must provide their general location by providing respective residential location categorised by Country-State-City as you will be notified when there is a lost pet report whose last seen location matches yours. You can then filter the reports based on city and state. Your cooperation is highly appreciated.</h4>
+<h6>To enhance community support, we kindly request all users to select their city from the dropdown menu. This enables us to notify you when there is a lost pet report matching your area. You'll also have the ability to filter reports based on city and state. <br />Your cooperation is greatly appreciated.</h6>
 <hr />
+
 <div class="row">
     <div class="col-md-4">
         <form method="post">
@@ -90,7 +91,7 @@
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="GENERALLOCATION.LOCATIONVALUE" class="control-label">Please select your location</label>
+                <label asp-for="GENERALLOCATION.LOCATIONVALUE" class="control-label"><b>Please select your location</b></label>
                 <select asp-for="GENERALLOCATION.LOCATIONVALUE" required class="form-control">
                     <option value="">Select a location</option>
                     <option value="Malaysia-Johor-Johor Bahru">Malaysia - Johor - Johor Bahru</option>
