@@ -6,3 +6,8 @@
 
 <h1>@ViewData["Title"]</h1>
 <partial name="_StatusMessage" model="Model.StatusMessage" />
+
+@if (Model.StatusMessage == "Thank you for confirming your email.")
+{
+    <a style="background-color:#8b572a; border-radius:10px; padding:10px; text-decoration:none; color:white;" href="/Identity/Account/Login"><b>Proceed to Pet Reunion Hub</b></a>
+}
