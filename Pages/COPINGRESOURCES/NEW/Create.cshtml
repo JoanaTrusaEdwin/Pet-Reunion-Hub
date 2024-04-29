@@ -126,7 +126,7 @@
             </div> *@
             <div class="form-group">
                 <label asp-for="RESOURCE.FILEURL" class="control-label"><b>You may upload an image for visual appeal</b></label>
-                <input type="file" accept="image/*" name=" UploadedFile" asp-for="RESOURCE.FILEURL" class="form-control-file" onchange="previewMainPhoto(event)" />
+                <input type="file" accept="image/*" name="UploadedFile" asp-for="RESOURCE.FILEURL" class="form-control-file" onchange="previewMainPhoto(event)" />
                 <span asp-validation-for="RESOURCE.FILEURL" class="text-danger"></span>
             </div>
             <br />
