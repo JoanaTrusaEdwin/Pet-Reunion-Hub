@@ -16,7 +16,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using MimeKit;
 using MailKit.Security;
-using MimeKit;
 using MailKit.Net.Smtp;
 namespace Pet_Reunion_Hub.Areas.Identity.Pages.Account
 {
