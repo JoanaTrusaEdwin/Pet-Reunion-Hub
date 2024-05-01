@@ -106,8 +106,22 @@ namespace Pet_Reunion_Hub.Areas.Identity.Pages.Account.Manage
             var comments = await _dbContext.Comment.Where(rp => rp.TributeId != null && rp.Tribute.UserId == user.Id).ToListAsync();
             _dbContext.Comment.RemoveRange(comments);
 
+            var userCommentsOnOtherTributes = await _dbContext.Comment
+    .Include(c => c.Tribute)
+    .Where(c => c.UserId == user.Id && c.Tribute.UserId != user.Id)
+    .ToListAsync();
+            _dbContext.Comment.RemoveRange(userCommentsOnOtherTributes);
+
             var postComments = await _dbContext.POSTCOMMENT.Where(rp => rp.PostId != null && rp.Post.UserId == user.Id).ToListAsync();
             _dbContext.POSTCOMMENT.RemoveRange(postComments);
+
+
+            var userCommentsOnOtherPosts = await _dbContext.POSTCOMMENT
+    .Include(c => c.Post)
+    .Where(c => c.UserId == user.Id && c.Post.UserId != user.Id)
+    .ToListAsync();
+            _dbContext.POSTCOMMENT.RemoveRange(userCommentsOnOtherPosts);
+
 
             var generalLocations = await _dbContext.GENERALLOCATION.Where(gl => gl.UserId == user.Id).ToListAsync();
             _dbContext.GENERALLOCATION.RemoveRange(generalLocations);

@@ -4,7 +4,7 @@
 }
 <ul class="nav nav-pills flex-column">
     @* <li style="background-color: black !important; " class="nav-item"><a style="color:white; background-color: black !important;" class=" nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Profile</a></li> *@
-    <li class="nav-item"><a style="color:white; background-color: black;" class="nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email"><b>Change Email</b></a></li>
+@*     <li class="nav-item"><a style="color:white; background-color: black;" class="nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email"><b>Change Email</b></a></li> *@
     <li style="background-color: #8b572a;" class="nav-item"><a style="color:white; background-color:#8b572a;" class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword"><b>Change Password</b></a></li>
     @if (hasExternalLogins)
     {
