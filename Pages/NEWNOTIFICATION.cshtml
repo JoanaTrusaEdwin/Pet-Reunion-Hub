@@ -33,7 +33,7 @@ else
     @foreach (var notification in Model.Notifications.OrderByDescending(n => n.CreatedAt))
     {
         <div id="notification-@notification.Id" style="background-color: white; color: black; border-radius:10px; padding: 10px; margin-bottom:10px;">
-            <p id="notification-content-@notification.Id" style="font-weight: bold;">@notification.Content</p>
+            <p id="notification-content-@notification.Id" style="font-weight: @(notification.IsRead ? "normal" : "bold");">@notification.Content</p>
             @{
                 // Extract the string inside the first pair of brackets
                 var startIndex = notification.Content.IndexOf('(') + 1;
@@ -44,15 +44,12 @@ else
                     searchString = notification.Content.Substring(startIndex, endIndex - startIndex);
                 }
             }
-            <a onclick="markAsRead('@notification.Id')" id="community-memorials-button-@notification.Id" style="text-decoration:none; color:white; background-color:black; padding:5px; border-radius:4px;"
-               href="/PETMEMORIAL/NEW/CommunityMemorials?searchString=@Html.Raw(System.Web.HttpUtility.UrlEncode(searchString))">View in Community Memorials</a>
+            <a id="community-memorials-button-@notification.Id" style="text-decoration:none; color:white;  background-color:black; padding:5px; border-radius:4px;"
+               href="/PETMEMORIAL/NEW/CommunityMemorials?searchString=@Html.Raw(System.Web.HttpUtility.UrlEncode(searchString))" onclick="markAsRead('@notification.Id')">View in Community Memorials</a>
             <p>@notification.CreatedAt.ToString("dd-MMM-yyyy HH:mm")</p>
-           @*  <a href="@Url.Action("MarkAsRead", "Notification", new { id = notification.Id })">Mark as Read</a> *@
-           @*  <a href="#" onclick="markAsRead('@notification.Id')">Mark as Read</a> *@
-
         </div>
-
     }
+
 }
 else
 {
@@ -61,13 +58,13 @@ else
 
 <script>
     // Check if the notification has been marked as read previously
-    function checkReadStatus(notificationId) {
-        var isRead = localStorage.getItem('communityMemorialsClicked_' + notificationId);
-        if (isRead === 'true') {
-            var contentElement = document.getElementById('notification-content-' + notificationId);
-            contentElement.style.fontWeight = 'normal';
-        }
-    }
+    // function checkReadStatus(notificationId) {
+    //     var isRead = localStorage.getItem('communityMemorialsClicked_' + notificationId);
+    //     if (isRead === 'true') {
+    //         var contentElement = document.getElementById('notification-content-' + notificationId);
+    //         contentElement.style.fontWeight = 'normal';
+    //     }
+    // }
 
     // Mark the notification as read and store the status
     // function markAsRead(notificationId) {
