@@ -366,12 +366,14 @@
                     var nameElement = searchableElements[j];
                     var originalText = nameElement.textContent; // Store the original text
                     var text = originalText.toLowerCase(); // Convert text to lowercase for case-insensitive search
-
                     if (text.indexOf(filter) > -1) {
                         found = true;
                         // Highlight the matching text
                         var newText = highlightMatch(originalText, filter); // Pass the original text for highlighting
                         nameElement.innerHTML = newText;
+                    } else {
+                        // Clear previous highlights
+                        nameElement.innerHTML = originalText;
                     }
                 }
 
