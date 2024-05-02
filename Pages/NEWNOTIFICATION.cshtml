@@ -30,6 +30,9 @@ else
 
 @if (Model.Notifications.Any())
 {
+    <button style="background-color:darkgreen; color: white; padding: 10px; border-radius:5px; border:none"onclick="markAllAsRead()"><b>Mark All as Read</b></button>
+    <br/>
+    <br/>
     @foreach (var notification in Model.Notifications.OrderByDescending(n => n.CreatedAt))
     {
         <div id="notification-@notification.Id" style="background-color: white; color: black; border-radius:10px; padding: 10px; margin-bottom:10px;">
@@ -72,6 +75,15 @@ else
     //     contentElement.style.fontWeight = 'normal'; // Remove bold styling
     //     localStorage.setItem('communityMemorialsClicked_' + notificationId, 'true'); // Store the state
     // }
+    function markAllAsRead() {
+        // Loop through each notification and mark it as read
+    @foreach (var notification in Model.Notifications)
+    {
+        <text>
+                markAsRead('@notification.Id');
+        </text>
+    }
+        }
     function markAsRead(notificationId) {
         var contentElement = document.getElementById('notification-content-' + notificationId);
         contentElement.style.fontWeight = 'normal'; // Remove bold styling
