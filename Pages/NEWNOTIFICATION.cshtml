@@ -86,8 +86,8 @@ else
         }
     function markAsRead(notificationId) {
         var contentElement = document.getElementById('notification-content-' + notificationId);
-        contentElement.style.fontWeight = 'normal'; // Remove bold styling
-        localStorage.setItem('communityMemorialsClicked_' + notificationId, 'true'); // Store the state
+        // contentElement.style.fontWeight = 'normal'; // Remove bold styling
+        // localStorage.setItem('communityMemorialsClicked_' + notificationId, 'true'); // Store the state
 
         // Send AJAX request to mark the notification as read
         $.ajax({
