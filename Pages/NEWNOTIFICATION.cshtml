@@ -47,6 +47,9 @@ else
             <a onclick="markAsRead('@notification.Id')" id="community-memorials-button-@notification.Id" style="text-decoration:none; color:white; background-color:black; padding:5px; border-radius:4px;"
                href="/PETMEMORIAL/NEW/CommunityMemorials?searchString=@Html.Raw(System.Web.HttpUtility.UrlEncode(searchString))">View in Community Memorials</a>
             <p>@notification.CreatedAt.ToString("dd-MMM-yyyy HH:mm")</p>
+           @*  <a href="@Url.Action("MarkAsRead", "Notification", new { id = notification.Id })">Mark as Read</a> *@
+           @*  <a href="#" onclick="markAsRead('@notification.Id')">Mark as Read</a> *@
+
         </div>
 
     }
@@ -67,12 +70,31 @@ else
     }
 
     // Mark the notification as read and store the status
+    // function markAsRead(notificationId) {
+    //     var contentElement = document.getElementById('notification-content-' + notificationId);
+    //     contentElement.style.fontWeight = 'normal'; // Remove bold styling
+    //     localStorage.setItem('communityMemorialsClicked_' + notificationId, 'true'); // Store the state
+    // }
     function markAsRead(notificationId) {
         var contentElement = document.getElementById('notification-content-' + notificationId);
         contentElement.style.fontWeight = 'normal'; // Remove bold styling
         localStorage.setItem('communityMemorialsClicked_' + notificationId, 'true'); // Store the state
-    }
 
+        // Send AJAX request to mark the notification as read
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("MarkAsRead", "Notification")',
+            data: { id: notificationId },
+            success: function (response) {
+                // Handle success response if needed
+                console.log('Notification marked as read successfully');
+            },
+            error: function () {
+                // Handle error if needed
+                console.error('Failed to mark notification as read');
+            }
+        });
+    }
     // Check the read status for each notification when the page loads
     document.addEventListener('DOMContentLoaded', function () {
     @foreach (var notification in Model.Notifications)

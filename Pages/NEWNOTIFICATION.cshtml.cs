@@ -28,7 +28,7 @@ namespace Pet_Reunion_Hub.Pages
         {
             var userId = _userManager.GetUserId(User);
             Notifications = await _context.NEWNOTIFICATION
-                .Where(n => n.UserId == userId && !n.IsRead)
+                .Where(n => n.UserId == userId)
                 .OrderByDescending(n => n.CreatedAt)
                 .ToListAsync();
 
@@ -39,17 +39,17 @@ namespace Pet_Reunion_Hub.Pages
             return Page();
         }
 
-        public async Task<IActionResult> OnPostMarkAsReadAsync(int notificationId)
-        {
-            var notification = await _context.NEWNOTIFICATION.FindAsync(notificationId);
-            if (notification != null)
-            {
-                notification.IsRead = true;
-                await _context.SaveChangesAsync();
-                return RedirectToPage();
-            }
-            return NotFound();
-        }
+        //public async Task<IActionResult> OnPostMarkAsReadAsync(int notificationId)
+        //{
+        //    var notification = await _context.NEWNOTIFICATION.FindAsync(notificationId);
+        //    if (notification != null)
+        //    {
+        //        notification.IsRead = true;
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToPage();
+        //    }
+        //    return NotFound();
+        //}
 
 
     }
