@@ -346,6 +346,12 @@
                 }
             });
         });
+
+        window.onload = function () {
+            var searchString = '@Model.SearchString';
+            document.getElementById('searchInput').value = searchString;
+            searchFunction(); // Trigger search after populating the input
+        };
         function searchFunction() {
             var input = document.getElementById("searchInput");
             var filter = input.value.trim().toLowerCase(); // Convert filter to lowercase for case-insensitive search

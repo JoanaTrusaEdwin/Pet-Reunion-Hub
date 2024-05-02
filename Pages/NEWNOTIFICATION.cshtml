@@ -39,9 +39,21 @@ else
     {
         <div id="notification-@notification.Id" style="background-color: white; color: black; border-radius:10px; padding: 10px; margin-bottom:10px;">
             <p id="notification-content-@notification.Id" style="font-weight: bold;">@notification.Content</p>
-            <a id="community-memorials-button-@notification.Id" style="text-decoration:none; color:white; background-color:black; padding:5px; border-radius:4px;" href="/PETMEMORIAL/NEW/CommunityMemorials" onclick="markAsRead('@notification.Id')">View in Community Memorials</a>
+            @{
+                // Extract the string inside the first pair of brackets
+                var startIndex = notification.Content.IndexOf('(') + 1;
+                var endIndex = notification.Content.IndexOf(')');
+                string searchString = null; // Define searchString variable outside the conditional block
+                if (startIndex != -1 && endIndex != -1)
+                {
+                    searchString = notification.Content.Substring(startIndex, endIndex - startIndex);
+                }
+            }
+            <a id="community-memorials-button-@notification.Id" style="text-decoration:none; color:white; background-color:black; padding:5px; border-radius:4px;"
+               href="/PETMEMORIAL/NEW/CommunityMemorials?searchString=@Html.Raw(System.Web.HttpUtility.UrlEncode(searchString))">View in Community Memorials</a>
             <p>@notification.CreatedAt.ToString("dd-MMM-yyyy HH:mm")</p>
         </div>
+
     }
 }
 else

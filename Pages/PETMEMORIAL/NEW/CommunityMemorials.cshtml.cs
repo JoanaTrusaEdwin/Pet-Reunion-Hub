@@ -34,10 +34,13 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
 
         public List<Tribute> PublicTributes { get; set; }
         public List<Post> PublicPosts { get; set; }
+        public string SearchString { get; set; }
 
+      
 
-        public IActionResult OnGet()
+        public IActionResult OnGet(string searchString)
         {
+            SearchString = searchString;
             var userId = _userManager.GetUserId(User);
 
             // Query for public tributes
