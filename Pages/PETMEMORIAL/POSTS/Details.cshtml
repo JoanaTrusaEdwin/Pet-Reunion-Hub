@@ -151,7 +151,7 @@
         <input type="hidden" name="postId" value="@Model.Post.Id" />
         <div class="form-group">
             <label for="commentContent" style="color:black;"><b>Add a comment:</b></label>
-            <p style="color:black;">To reply to a comment or mention a user, simply type "@@[username of that commenter]" anywhere in the comment. For example, if you want to reply to a comment from a user named "example@gmail.com" or you would like to mention the user, you would type "@@example@gmail.com".</p>
+            <p style="color:black;">To mention a user, simply type "@@[username of that commenter]" anywhere in the comment. For example, if you want to reply to a comment from a user named "example@gmail.com" or you would like to mention the user, you would type "@@example@gmail.com".</p>
             <textarea maxlength="1000" class="form-control autosize  character-count" id="commentContent" name="commentContent" rows="3" oninput="handleInput(event, 'comment-content-count')"></textarea>
             <span style="color:black;" id="comment-content-count" class="character-count-display">0/1000</span>
         </div>
