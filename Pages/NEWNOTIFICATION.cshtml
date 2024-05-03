@@ -26,8 +26,16 @@ else
 @model Pet_Reunion_Hub.Pages.NEWNOTIFICATIONModel
 @{
 }
-<h3>Notification</h3>
-
+<h3>Notifications</h3>
+<input style="border-radius:20px; height:40px; width: 500px;" type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search">
+<br />
+<br />
+<style>
+    .highlight {
+        background-color: yellow;
+        color:black;
+    }
+</style>
 @if (Model.Notifications.Any())
 {
     <button style="background-color:darkgreen; color: white; padding: 10px; border-radius:5px; border:none"onclick="markAllAsRead()"><b>Mark All as Read</b></button>
@@ -35,8 +43,8 @@ else
     <br/>
     @foreach (var notification in Model.Notifications.OrderByDescending(n => n.CreatedAt))
     {
-        <div id="notification-@notification.Id" style="background-color: white; color: black; border-radius:10px; padding: 10px; margin-bottom:10px;">
-            <p id="notification-content-@notification.Id" style="font-weight: @(notification.IsRead ? "normal" : "bold");">@notification.Content</p>
+        <div class="noti" id="notification-@notification.Id" style="background-color: white; color: black; border-radius:10px; padding: 10px; margin-bottom:10px;">
+            <p class="searchable" id="notification-content-@notification.Id" style="font-weight: @(notification.IsRead ? "normal" : "bold");">@notification.Content</p>
             @{
                 // Extract the string inside the first pair of brackets
                 var startIndex = notification.Content.IndexOf('(') + 1;
@@ -49,7 +57,7 @@ else
             }
             <a id="community-memorials-button-@notification.Id" style="text-decoration:none; color:white;  background-color:black; padding:5px; border-radius:4px;"
                href="/PETMEMORIAL/NEW/CommunityMemorials?searchString=@Html.Raw(System.Web.HttpUtility.UrlEncode(searchString))" onclick="markAsRead('@notification.Id')">View in Community Memorials</a>
-            <p>@notification.CreatedAt.ToString("dd-MMM-yyyy HH:mm")</p>
+            <p class="searchable">@notification.CreatedAt.ToString("dd-MMM-yyyy HH:mm")</p>
         </div>
     }
 
@@ -75,6 +83,43 @@ else
     //     contentElement.style.fontWeight = 'normal'; // Remove bold styling
     //     localStorage.setItem('communityMemorialsClicked_' + notificationId, 'true'); // Store the state
     // }
+
+    function searchFunction() {
+        var input = document.getElementById("searchInput");
+        var filter = input.value.trim().toLowerCase(); // Convert filter to lowercase for case-insensitive search
+        var reports = document.getElementsByClassName("noti");
+
+        for (var i = 0; i < reports.length; i++) {
+            var report = reports[i];
+            var searchableElements = report.getElementsByClassName("searchable");
+            var found = false;
+
+            for (var j = 0; j < searchableElements.length; j++) {
+                var nameElement = searchableElements[j];
+                var originalText = nameElement.textContent; // Store the original text
+                var text = originalText.toLowerCase(); // Convert text to lowercase for case-insensitive search
+
+                if (text.indexOf(filter) > -1) {
+                    found = true;
+                    // Highlight the matching text
+                    var newText = highlightMatch(originalText, filter); // Pass the original text for highlighting
+                    nameElement.innerHTML = newText;
+                }
+            }
+
+            if (found) {
+                report.style.display = "";
+            } else {
+                report.style.display = "none";
+            }
+        }
+    }
+
+    // Helper function to highlight the matched text
+    function highlightMatch(text, filter) {
+        var regex = new RegExp('(' + filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig');
+        return text.replace(regex, '<span class="highlight">$1</span>');
+    }
     function markAllAsRead() {
         // Loop through each notification and mark it as read
     @foreach (var notification in Model.Notifications)
