@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Pet_Reunion_Hub.styles.css" asp-append-version="true" />
-
+    
     <style>
         
         body{
@@ -182,13 +182,10 @@
                 <button style="color:white" onclick="window.location.href='/LOSTPETREPORTING/NEW/CountryReports'">Lost Pets In Your Country</button>
                 
 
-                @{
-                    // Retrieve the count of unread notifications using the injected controller
-                    var unreadCount = NotificationController.GetUnreadNotificationsCount();
-                }
+              
 
                 <button style="color:black; background-color:yellow;" onclick="window.location.href='/NEWNOTIFICATION'">
-                    Notifications (@(unreadCount))
+                    Notifications  (<span id="notificationCount"></span>)
                 </button>
 
                 <button style="color:white; background-color:#333;" onclick="window.location.href='/HomePage'">Main Menu</button>
@@ -253,42 +250,19 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $.get("/Notification/GetUnreadNotificationsCountAjax", function (data) {
+                // Update the notification count
+                $('#notificationCount').text(data);
+            });
+        });
+    </script>
 </body>
 </html>
 
 
-@* <script>
-
-    document.addEventListener("DOMContentLoaded", function () {
-        const miniTab = document.createElement('div');
-        miniTab.classList.add('mini-tab');
-        document.body.appendChild(miniTab);
-
-        const title = document.createElement('p');
-        title.innerText = 'CURRENT LOST PETS ALERT!';
-        title.style.fontWeight = 'bold';
-        miniTab.appendChild(title);
-
-        const expandButton = document.createElement('button');
-        expandButton.innerHTML = 'Expand'; // Initial text
-        expandButton.style.fontSize = '14px';
-        expandButton.style.width = '150px';
-        expandButton.style.height = '30px';
-        expandButton.style.marginRight = '5px';
-        expandButton.style.backgroundColor = 'black';
-        expandButton.style.color = 'white'; // Set text color to white
-        expandButton.style.fontWeight = 'bold'; // Set font weight to bold
-        expandButton.style.borderRadius = '20px';
-        expandButton.addEventListener('click', function () {
-            document.body.classList.toggle('expanded');
-
-            // Change button text based on the expanded state
-            expandButton.innerHTML = document.body.classList.contains('expanded') ? 'Minimize' : 'Expand';
-        });
-        miniTab.appendChild(expandButton);
-
-        
-    });
-</script> *@
 
 

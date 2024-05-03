@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Pet_Reunion_Hub.Helper;
 
 namespace Pet_Reunion_Hub.Controllers
 {
@@ -16,26 +17,16 @@ namespace Pet_Reunion_Hub.Controllers
 
         public IActionResult Index()
         {
-            // Retrieve all notifications from the database
-            var notifications = _context.NEWNOTIFICATION.ToList();
-            return View(notifications);
+            var unreadNotificationsCount = NotificationHelper.GetUnreadNotificationsCount(_context, _userManager, User);
+            return View(unreadNotificationsCount);
+        }
+        [HttpGet]
+        public IActionResult GetUnreadNotificationsCountAjax()
+        {
+            var unreadNotificationsCount = NotificationHelper.GetUnreadNotificationsCount(_context, _userManager, User);
+            return Json(unreadNotificationsCount);
         }
 
-        public int GetUnreadNotificationsCount()
-        {
-            return _context.NEWNOTIFICATION.Count(n => !n.IsRead);
-        }
-        //public IActionResult MarkAsRead(int id)
-        //{
-        //    // Find the notification with the specified id
-        //    var notification = _context.NEWNOTIFICATION.Find(id);
-        //    if (notification != null)
-        //    {
-        //        // Mark the notification as read
-        //        notification.IsRead = true;
-        //        _context.SaveChanges();
-        //    }
-        //    return RedirectToAction("MarkAsRead", "Notification", new { id = notification.Id });
 
         //}
         public IActionResult MarkAsRead(int id)
