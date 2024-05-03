@@ -107,7 +107,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
                         existingPost.Content = Post.Content;
                         existingPost.TributeId = Post.TributeId;
                         existingPost.IsPublic = Post.IsPublic;
-                        existingPost.CreatedAt = Post.CreatedAt;
+                       
 
 
                         await UpdateOrCreateMedia(existingPost, MediaFiles);

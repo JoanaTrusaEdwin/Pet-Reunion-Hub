@@ -27,7 +27,7 @@
 <div class="report-container">
 
 
-    @foreach (var report in Model.CreateReport.Reverse())
+    @foreach (var report in Model.CreateReport.OrderByDescending(r => r.CreatedAt))
     {
         <div class="report">
 

@@ -187,7 +187,7 @@
         <input style="border-radius:20px; height:40px; width: 500px;" type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search">
         <br />
         <br />
-        @foreach (var report in Model.CreateReport.Reverse())
+        @foreach (var report in Model.CreateReport.OrderByDescending(r => r.CreatedAt))
         {
             <div class="report-card">
                 <h2 style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable">@report.PetName</h2>

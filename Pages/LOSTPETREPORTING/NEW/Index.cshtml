@@ -169,7 +169,7 @@
 <div class="report-container">
 
 
-    @foreach (var item in Model.CreateReport.Reverse())
+    @foreach (var item in Model.CreateReport.OrderByDescending(r => r.CreatedAt))
     {
         <div class="report" style="border: 1px solid #ccc; padding: 30px; margin-bottom: 20px;  border-radius: 5px; background-color: #fff;">
 
