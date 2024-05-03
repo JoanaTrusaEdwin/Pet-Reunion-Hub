@@ -99,7 +99,7 @@
             <div class="comment-container" style="background-color: #593214; color:white;border-radius: 5px; padding: 10px; margin-bottom: 10px; overflow-wrap: break-word;">
                 <p>Comment ID: @comment.Id</p>
                 <br/>
-                <strong>@comment.User.UserName:</strong> <!-- Display username -->
+                <strong class="searchable">@@@comment.User.UserName</strong> <!-- Display username -->
                 <br />
                 @comment.Content
                 <br/>
@@ -122,7 +122,7 @@
         <input type="hidden" name="tributeId" value="@Model.Tribute.Id" />
         <div class="form-group">
             <label for="commentContent" style="color:black;"><b>Add a comment:</b></label>
-            <p style="color:black;">To mention a user, simply type "@@[username of that commenter]" anywhere in the comment. For example, if you want to mention the user example@gmail.com, you would type "@@example@gmail.com".</p>
+            <p style="color:black;">To mention a user, simply type "@@[username of that commenter]" anywhere in the comment. Or, you can just copy the username of the comment you want to reply to.  For example, if you want to mention the user example@gmail.com, you would type "@@example@gmail.com".</p>
             
             <textarea maxlength="1000" class="form-control autosize  character-count" id="commentContent" name="commentContent" rows="3" oninput="handleInput(event, 'comment-content-count')"></textarea>
             <span style="color:black;" id="comment-content-count" class="character-count-display">0/1000</span> <br/>
