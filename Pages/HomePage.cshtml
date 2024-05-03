@@ -136,7 +136,7 @@
             text-align: center;
             position: fixed; /* Set position absolute */
             top: 55%; /* Adjust top position */
-            right: 5%; /* Adjust right position */
+            right: 10%; /* Adjust right position */
             z-index: 1;
         }
 
@@ -145,7 +145,7 @@
             text-align: center;
             position: fixed; /* Set position absolute */
             top: 60%; /* Adjust top position */
-            right: 5%; /* Adjust right position */
+            right: 10%; /* Adjust right position */
             z-index: 1;
         }
 
@@ -176,7 +176,13 @@
         </div>
     </div>
     <div class="report-container">
-        <h3 style="color:red;">Lost Pets Reported In Your City!</h3>
+        <div style="display: flex; align-items: center;">
+            <h3 style="color:red; margin-right: 10px;">Lost Pets Reported In Your City!</h3>
+            <!-- Button for linking to the CityReports page -->
+            <a href="/LOSTPETREPORTING/NEW/CityReports" style="text-decoration: none;">
+                <button style="background-color: darkred; color:white; border-radius:5px; border:none; padding:10px;"><b>View More in City Reports</b></button>
+            </a>
+        </div>
         <p style="color:black;">These are pets reported to be missing, last seen in your city. Change your residential area (you may find in the navigation bar on the top left corner) to filter reports near you. </p>
         <input style="border-radius:20px; height:40px; width: 500px;" type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search">
         <br />
@@ -252,10 +258,10 @@
         }
     </div>
     <div class="prev-button">
-        <button onclick="scrollToPrevious()">Previous</button>
+        <button style="background-color:black; position: fixed;  color:white; border-radius:5px; border:none;" onclick="scrollToPrevious()"><b>Previous</b></button>
     </div>
     <div class="scroll-button">
-        <button onclick="scrollToNext()">Next</button>
+        <button style="background-color: #8b572a; position: fixed;  color:white; border-radius:5px; border:none;" onclick="scrollToNext()"><b>Next</b></button>
     </div>
 
     <script>
