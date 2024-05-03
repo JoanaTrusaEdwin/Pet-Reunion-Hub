@@ -129,12 +129,16 @@
     else if (item is Post post)
     {
         <div class="tribute" style="background-color:white; border-radius: 20px; padding: 20px; margin-bottom: 20px;">
-            <h1>Story</h1>
+            <h5>Story</h5>
             <p class="searchable">Post ID: @post.Id</p>
+            
+            <br/>
+            <h3 style="overflow-wrap:break-word;"class="searchable">@(string.IsNullOrEmpty(post.Title) ? "-" : post.Title)</h3>
+         
             <h6 style="white-space: pre-wrap; overflow-wrap: break-word;">By: @post.User.UserName</h6>
-            <p><strong>Title:</strong>
+          @*   <p><strong>Title:</strong>
             <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable">@(string.IsNullOrEmpty(post.Title) ? "-" : post.Title)</p>
-            <br />
+            <br /> *@
 
             <p><strong>Caption:</strong>
             <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable">@(string.IsNullOrEmpty(post.Content) ? "-" : post.Content)</p>

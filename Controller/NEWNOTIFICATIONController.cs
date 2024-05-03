@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Pet_Reunion_Hub.Controllers
 {
@@ -6,9 +7,11 @@ namespace Pet_Reunion_Hub.Controllers
     {
       
         private readonly PRHDATALIB.Models.DatabaseContext _context;
-        public NotificationController(PRHDATALIB.Models.DatabaseContext context)
+        private readonly UserManager<IdentityUser> _userManager;
+        public NotificationController(PRHDATALIB.Models.DatabaseContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
