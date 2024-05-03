@@ -73,7 +73,6 @@
 
 <h4>Share a Meaningful Material to Help The Community</h4>
 <p>If you offer any sort of services or products, feel free to utilise this as an advertising platform.
-    Remember to be respectful and kind. Reported users will be banned permanently.
 </p>
 <hr />
 <div class="row">
@@ -143,8 +142,8 @@
             </div *@
 
               <div class="form-group">
-                    <label asp-for="RESOURCE.TYPE" class="control-label"><b>Category</b></label>
-                    <select asp-for="RESOURCE.TYPE" class="form-control">
+                <label asp-for="RESOURCE.TYPE" class="control-label"><b><span class="text-danger">*</span>Category</b></label>
+                <select asp-for="RESOURCE.TYPE" class="form-control" required>
                     <option value="">Select</option>
                         <option value="Book">Book</option>
                         <option value="Counselling and Therapy">Counselling and Therapy</option>

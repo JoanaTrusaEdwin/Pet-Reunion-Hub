@@ -161,8 +161,8 @@
    *@
 
             <div class="form-group">
-                <label asp-for="RESOURCE.TYPE" class="control-label"><b>Category</b></label>
-                <select asp-for="RESOURCE.TYPE" class="form-control">
+                <label asp-for="RESOURCE.TYPE" class="control-label"><b><span class="text-danger">*</span>Category</b></label>
+                <select asp-for="RESOURCE.TYPE" class="form-control" required>
                     <option value="Book">Book</option>
                     <option value="Counselling and Therapy">Counselling and Therapy</option>
                     <option value="Customisation">Customisation</option>

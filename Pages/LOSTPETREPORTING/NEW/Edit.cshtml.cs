@@ -217,8 +217,10 @@ namespace Pet_Reunion_Hub.Pages.LOSTPETREPORTING.NEW
                         existingReport.Age = CreateReport.Age;
                         existingReport.GenLoc = CreateReport.GenLoc;
                         existingReport.AdditionalDescription = CreateReport.AdditionalDescription;
+                     
+                        existingReport.CreatedAt= CreateReport.CreatedAt;
 
-
+                       
                         //if (Photo != null && Photo.Length > 0)
                         //{
                         //    string fileUrl = await UploadPhotoToBlobStorage(Photo);

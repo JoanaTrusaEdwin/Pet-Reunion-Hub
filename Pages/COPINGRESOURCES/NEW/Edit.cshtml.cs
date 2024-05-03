@@ -201,6 +201,7 @@ namespace Pet_Reunion_Hub.Pages.COPINGRESOURCES.NEW
                         //existingRESOURCE.FILEURL = RESOURCE.FILEURL;
                         existingRESOURCE.TYPE = RESOURCE.TYPE;
                         existingRESOURCE.FORMAT = RESOURCE.FORMAT;
+                        existingRESOURCE.CreatedAt = RESOURCE.CreatedAt;
 
 
                         if (UploadedFile != null && UploadedFile.Length > 0)
