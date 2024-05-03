@@ -18,6 +18,10 @@ namespace Pet_Reunion_Hub.Controllers
             return View(notifications);
         }
 
+        public int GetUnreadNotificationsCount()
+        {
+            return _context.NEWNOTIFICATION.Count(n => !n.IsRead);
+        }
         //public IActionResult MarkAsRead(int id)
         //{
         //    // Find the notification with the specified id

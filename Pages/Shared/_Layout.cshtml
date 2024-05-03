@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
-
+@inject Pet_Reunion_Hub.Controllers.NotificationController NotificationController
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -167,7 +167,7 @@
 
 
     @{
-        if (User.Identity.IsAuthenticated)
+        if (User.Identity.IsAuthenticated && !Context.Request.Path.StartsWithSegments("/LOSTPETREPORTING/GENERAL/Create"))
         {
             <div class="sidebar-toggle" onclick="toggleSidebar()">
                 <div class="bar" style="background-color: white; height: 4px;"></div>
@@ -180,7 +180,17 @@
                 <button style="color:white; background-color:darkred" onclick="window.location.href='/LOSTPETREPORTING/NEW/CityReports'">Lost Pets In Your City</button>
                 <button style="color:white; background-color:darkblue" onclick="window.location.href='/LOSTPETREPORTING/NEW/StateReports'">Lost Pets In Your State</button>
                 <button style="color:white" onclick="window.location.href='/LOSTPETREPORTING/NEW/CountryReports'">Lost Pets In Your Country</button>
-                <button style="color:black; background-color:yellow;" onclick="window.location.href='/NEWNOTIFICATION'">View Latest Comments Involving You and Your Memorials</button>
+                
+
+                @{
+                    // Retrieve the count of unread notifications using the injected controller
+                    var unreadCount = NotificationController.GetUnreadNotificationsCount();
+                }
+
+                <button style="color:black; background-color:yellow;" onclick="window.location.href='/NEWNOTIFICATION'">
+                    Notifications (@(unreadCount))
+                </button>
+
                 <button style="color:white; background-color:#333;" onclick="window.location.href='/HomePage'">Main Menu</button>
                 <button style="color:white; background-color:gray;" onclick="window.location.href='/LOSTPETREPORTING/LPRHome'">Lost Pets</button>
                 <button style="color:white; background-color:gray;" onclick="window.location.href='/PETMEMORIAL/PMHome'">Pet Memorial</button>

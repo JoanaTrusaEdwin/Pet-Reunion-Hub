@@ -14,6 +14,7 @@ using MimeKit;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.DependencyInjection;
 using Pet_Reunion_Hub.Interfaces;
+using Pet_Reunion_Hub.Controllers;
 
 
 
@@ -28,6 +29,7 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<DatabaseContext>();
 
+builder.Services.AddScoped<NotificationController>();
 
 //builder.Services.ConfigureApplicationCookie(options =>
 //{
