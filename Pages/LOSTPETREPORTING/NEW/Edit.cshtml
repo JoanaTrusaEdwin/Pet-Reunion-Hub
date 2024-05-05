@@ -450,15 +450,27 @@
             return isValid;
         }
 
+        // function validateAndPreviewPhotos(event) {
+        //     var files = event.target.files;
+        //     for (var i = 0; i < files.length; i++) {
+        //         if (files[i].size > 2.1 * 1024 * 1024) { // 2.1 MB limit
+        //             alert('File size exceeds the limit of 2.1 MB');
+        //             event.target.value = '';
+        //             return;
+        //         }
+        //     }
+        //     previewAdditionalPhotos(event);
+        // }
+
         function validateAndPreviewPhotos(event) {
             var files = event.target.files;
-            for (var i = 0; i < files.length; i++) {
-                if (files[i].size > 2.1 * 1024 * 1024) { // 2.1 MB limit
-                    alert('File size exceeds the limit of 2.1 MB');
-                    event.target.value = '';
-                    return;
-                }
-            }
+            // for (var i = 0; i < files.length; i++) {
+            //     if (files[i].size > 2.1 * 1024 * 1024) { // 2.1 MB limit
+            //         alert('File size exceeds the limit of 2.1 MB');
+            //         event.target.value = '';
+            //         return;
+            //     }
+            // }
             previewAdditionalPhotos(event);
         }
         //TO ADD PHOTOS
