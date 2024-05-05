@@ -41,8 +41,8 @@
     {
         <div class="tribute" style="background-color: #8b572a; color: white; border-radius: 20px; padding: 20px; margin-bottom: 20px; text-align:center;">
 
-            <h1 style="text-align:justify;">Monument</h1>
-            <p style="text-align:justify;"class="searchable">Monument ID: @tribute.Id</p>
+           
+            <p style="text-align:justify;"class="searchable">Pet Profile ID: @tribute.Id</p>
             <h2 class="searchable">@tribute.PetName</h2>
             <p><strong>By:</strong></p>
             <p class="searchable">@tribute.User.UserName  </p>
@@ -80,7 +80,7 @@
                     @foreach (var comment in tribute.Comments)
                     {
                         <div class="comment-container" style="background-color: #593214; color:white;border-radius: 5px; padding: 10px; margin-bottom: 10px; overflow-wrap: break-word;">
-                            <p class="searchable">Monument Comment ID: @comment.Id</p>
+                            <p class="searchable">Pet Profile Comment ID: @comment.Id</p>
                             <br />
                             <strong class="searchable">@@@comment.User.UserName</strong> <!-- Display username -->
                             <br />
@@ -113,7 +113,7 @@
                         <textarea maxlength="1000" class="form-control autosize  character-count" id="commentContent" name="commentContent" rows="3" oninput="handleInput(event, 'comment-content-count')"></textarea>
                         @* <span style="color:white;" id="comment-content-count" class="character-count-display">0/1000</span> *@
                     </div>
-                    <button type="submit" class="btn btn-primary" style="background-color:black; border-radius:5px; color:white; border:none;"><b>Post</b></button>
+                    <button type="submit" class="btn btn-primary" style="background-color:black; border-radius:5px; color:white; border:none;"><b>Post comment</b></button>
                 </form>
 
 
@@ -129,7 +129,7 @@
     else if (item is Post post)
     {
         <div class="tribute" style="background-color:white; border-radius: 20px; padding: 20px; margin-bottom: 20px;">
-            <h5>Story</h5>
+           
             <p class="searchable">Post ID: @post.Id</p>
             
             <br/>
@@ -226,7 +226,7 @@
                         <textarea maxlength="1000" class="form-control  autosize  character-count" id="postCommentContent" name="postCommentContent" rows="3" oninput="handleInput(event, 'postcomment-content-count')"></textarea>
                         @* <span id="postcomment-content-count" class="character-count-display">0/1000</span> *@
                     </div>
-                    <button type="submit" class="btn btn-primary" style="background-color:black; border-radius:5px; color:white; border:none;"><b>Post</b></button>
+                    <button type="submit" class="btn btn-primary" style="background-color:black; border-radius:5px; color:white; border:none;"><b>Post Comment</b></button>
                 </form>
 
 

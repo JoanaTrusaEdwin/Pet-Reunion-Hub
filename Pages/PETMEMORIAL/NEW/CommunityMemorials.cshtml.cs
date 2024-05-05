@@ -107,7 +107,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                         var notification = new NEWNOTIFICATION
                         {
                             UserId = mentionedUser.Id,
-                            Content = $"(Monument Comment ID: {newComment.Id}) {_userManager.GetUserName(User)} mentioned you in a comment on {tribute.User.UserName}'s monument with Pet Name '{tribute.PetName}' with Monument ID '{tribute.Id}'",
+                            Content = $"(Pet Profile Comment ID: {newComment.Id}) {_userManager.GetUserName(User)} mentioned you in a comment on {tribute.User.UserName}'s pet profile with Pet Name '{tribute.PetName}' with Pwt Profile ID '{tribute.Id}'",
                             IsRead = false,
                             CreatedAt = DateTime.Now
                         };
@@ -135,7 +135,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
                     var notification = new NEWNOTIFICATION
                     {
                         UserId = tribute.UserId,
-                        Content = $"(Monument Comment ID: {newComment.Id}) You have a new comment on your monument titled '{tribute.PetName}' with Monument ID '{tribute.Id}' by {commenter.UserName}.",
+                        Content = $"(Pet Profile Comment ID: {newComment.Id}) You have a new comment on your pet profile titled '{tribute.PetName}' with Pet Profile ID '{tribute.Id}' by {commenter.UserName}.",
                         IsRead = false,
                         CreatedAt = DateTime.Now
                     };

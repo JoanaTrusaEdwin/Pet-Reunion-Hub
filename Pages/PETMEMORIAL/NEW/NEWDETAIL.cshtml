@@ -38,7 +38,7 @@
 </style>
 
 <div style="padding: 30px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 20px; background-color: #fff;">
-    <p class="searchable">Monument ID: @Model.Tribute.Id</p>
+    <p class="searchable">Pet Profile ID: @Model.Tribute.Id</p>
     <h1>@Model.Tribute.PetName</h1>
 
     <hr />
@@ -126,7 +126,7 @@
             
             <textarea maxlength="1000" class="form-control autosize  character-count" id="commentContent" name="commentContent" rows="3" oninput="handleInput(event, 'comment-content-count')"></textarea>
             <span style="color:black;" id="comment-content-count" class="character-count-display">0/1000</span> <br/>
-        <button type="submit" class="btn btn-primary" style="background-color:black; border-radius:5px; color:white; border:none;"><b>Post</b></button>
+        <button type="submit" class="btn btn-primary" style="background-color:black; border-radius:5px; color:white; border:none;"><b>Post Comment</b></button>
         </div>
     </form>
 

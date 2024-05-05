@@ -114,7 +114,7 @@
 
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.Post?.Id" id="edit">Edit</a> 
-    <a asp-page="./Index" id="back">Back to List</a>
+    <a asp-page="./Index" id="back">Back to My Stories</a>
 </div>
 </div>
 <div>
@@ -155,7 +155,7 @@
             <textarea maxlength="1000" class="form-control autosize  character-count" id="commentContent" name="commentContent" rows="3" oninput="handleInput(event, 'comment-content-count')"></textarea>
             <span style="color:black;" id="comment-content-count" class="character-count-display">0/1000</span>
         </div>
-        <button type="submit" class="btn btn-primary" style="background-color:black; border-radius:5px; color:white; border:none;"><b>Post</b></button>
+        <button type="submit" class="btn btn-primary" style="background-color:black; border-radius:5px; color:white; border:none;"><b>Post Comment</b></button>
     </form>
 
 

@@ -59,10 +59,10 @@
         background-color: yellow;
     }
 </style>
-<h1>My Monument</h1>
+<h1>My Pet Profiles</h1>
 <br/>
 <p>
-    <a asp-page="Create" id="createnew">Create a New Monument</a>
+    <a asp-page="Create" id="createnew">Create a New Pet Profile</a>
 </p>
 <br/>
 
@@ -74,11 +74,11 @@
 @foreach (var item in Model.Tribute.Reverse())
 {
     <div class="tribute" style="border: 1px solid #ccc; padding: 30px; margin-bottom: 20px;  border-radius: 5px; background-color: #fff; ">
-            <p class="searchable">Monument ID: @item.Id</p>
+            <p class="searchable">Pet Profile ID: @item.Id</p>
             <h3 class="searchable">@item.PetName </h3>
 
       
-        <p> <img src="@item.TributePhoto" alt="Pet Photo" style="max-width: 500px;" /></p>
+        <p> <img src="@item.TributePhoto" style="max-width: 500px;" /></p>
        
         <p><strong>Pet Type:</strong> 
          <p class="searchable">@item.PetType </p>
