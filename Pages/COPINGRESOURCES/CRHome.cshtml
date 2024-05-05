@@ -91,13 +91,42 @@
             border-radius: 20px;
         }
 
+        .button-container {
+            display: flex;
+            justify-content: space-between; /* Adjust as needed */
+        }
 
+        #upload {
+            background-color: black;
+            color: #fff;
+            padding: 5px 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold; /* Make the text bold */
+            font-size: 1.1em;
+            top: 20px; /* Adjust top position */
+            left: 20px;
+            width:300px;
+            white-space: nowrap;
+            display: inline-block; /* Allow the button to expand horizontally */
+            width: auto;
+        }
        
     </style>
 </head>
 <body>
-<h1>Materials</h1>
-
+    <h4 style="color:white;">Materials According to Category</h4>
+    <p style="color:white;">Below is a list of materials categorised by their function and purpose. You can upload to share a beneficial material, and select its category later. If you offer any sort of services or products, feel free to utilise this as an advertising platform.</p>
+    <div class="button-container">
+       
+        <a href="/COPINGRESOURCES/NEW/Index" class="box" id="upload">
+            <b>Upload new or view your existing materials</b>
+        </a>
+     
+    </div>
+    
     <div class="container">
       @*   <img class="box-image" src="/images/counseling.jpg" alt="Lost Pet Image"> *@
         <a href="/COPINGRESOURCES/Counseling" class="box">
@@ -119,13 +148,13 @@
         </a>
 
         <a href="/COPINGRESOURCES/testimonies" class="box">
-            <h2>Testimonies by Other Users</h2>
+            <h2>Inspiring Experiences by Other Users</h2>
             <img class="box-image" src="/images/homespeech.jpg" alt="Lost Pet Image">
-            <p>Read stories and experiences shared by others who have faced pet loss.</p>
+            <p>Read stories and experiences shared by others who have faced pet loss that may inspire you.</p>
         </a>
 
         <a href="/COPINGRESOURCES/customization" class="box">
-            <h2>Customisation Services</h2>
+            <h2>Customisation and Art Services</h2>
             <img class="box-image" src="/images/custom.jpg" alt="Lost Pet Image">
             <p>Discover services to personalise memorials and create lasting memories.</p>
         </a>
@@ -136,72 +165,8 @@
             <p>Explore additional tools and information to cope with the loss of a beloved pet.</p>
         </a>
 
-        <a style="background-color: black;" href="/COPINGRESOURCES/NEW/Index" class="box">
-            <h2 style="color:white;">My Uploaded Materials</h2>
-            <p style="color:white;">
-                Share a valuable resource you found helpful in coping with pet loss.
-                If you offer any sort of services or products, feel free to utilise this as an advertising platform.
-                Remember to be respectful and kind. Reported users will be banned permanently.
-            </p>
-        </a>
-
-       @*  <a style="background-color: #8b572a; color: white !important;" href="/COPINGRESOURCES/NEW/Create" class="box">
-            <h2 style="color:white;">Share a Helpful Material</h2>
-            <p style="color:white;">Share a valuable resource you found helpful in coping with pet loss. 
-                If you offer any sort of services or products, feel free to utilise this as an advertising platform. 
-                Remember to be respectful and kind. Reported users will be banned permanently.</p>
-        </a> *@
+   
     </div>
-    @* <div class="container">
-        <div class="box">
-            
-            <h2>Counselling and Therapy</h2>
-            <p>Find professional help to navigate through the emotional journey of losing a pet.</p>
-            <a href="/COPINGRESOURCES/Counseling">Click Me</a>>
-        </div>
-
-        <div class="box">
-            <h2>Books About Grief</h2>
-            <p>Explore literature that offers insights and support for coping with pet loss.</p>
-            <a href="/COPINGRESOURCES/Books">Click Me</a>>
-        </div>
-
-        <div class="box">
-            <h2>YouTube Videos</h2>
-            <p>Watch videos that provide guidance and comfort during difficult times.</p>
-            <a href="/COPINGRESOURCES/YouTube">Click Me</a>>
-
-        </div>
-
-        <div class="box">
-            <h2>Testimonies by Users</h2>
-            <p>Read stories and experiences shared by others who have faced pet loss.</p>
-            <a href="/COPINGRESOURCES/testimonies">Click Me</a>>
-        </div>
-
-        <div class="box">
-            <h2>Customisation Services</h2>
-            <p>Discover services to personalise memorials and create lasting memories.</p>
-            <a href="/COPINGRESOURCES/customization">Click Me</a>>
-        </div>
-
-        <div class="box">
-            <h2>Other Resources</h2>
-            <p>Explore additional tools and information to cope with the loss of a beloved pet.</p>
-            <a href="/COPINGRESOURCES/others">Click Me</a>>
-        </div>
-
-        <div class="box">
-            <h2>Your Uploaded Resources</h2>
-            <a href="/COPINGRESOURCES/MyResources">Click Me</a>>
-        </div>
-
-        <div class="upload-box">
-     
-            <a href="/COPINGRESOURCES/UploadResource" class="button-link">Upload Your Resources</a>
-            <p>Share a valuable resource you found helpful in coping with pet loss.</p>
-            
-        </div>
-    </div> *@
+   
 </body>
 </html>
