@@ -352,11 +352,14 @@
         function validateAndPreviewPhotos(event) {
             var files = event.target.files;
             for (var i = 0; i < files.length; i++) {
-                if (files[i].size > 2.1 * 1024 * 1024) { // 2.1 MB limit
-                    alert('File size exceeds the limit of 2.1 MB');
+                var file = files[i];
+                // Check if the file type is video
+                if (file.type.startsWith("video/") && file.size > 2.1 * 1024 * 1024) { // 2.1 MB limit
+                    alert('Video file size exceeds the limit of 2.1 MB');
                     event.target.value = '';
                     return;
                 }
+                // You can add more conditions for other file types if needed
             }
             previewAdditionalPhotos(event);
         }
