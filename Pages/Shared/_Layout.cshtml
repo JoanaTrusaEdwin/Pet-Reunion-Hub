@@ -181,26 +181,55 @@
                 <div class="bar" style="background-color: white; height: 4px;"></div>
             </div>
 
-            <div class="sidebar">
-                <button style="color:white; background-color:#8b572a;" onclick="window.location.href='/LOSTPETREPORTING/GENERAL/Index'">Change Residential Area</button>
-                <button style="color:white; background-color:darkred" onclick="window.location.href='/LOSTPETREPORTING/NEW/CityReports'">Lost Pets In Your City</button>
-                <button style="color:white; background-color:darkblue" onclick="window.location.href='/LOSTPETREPORTING/NEW/StateReports'">Lost Pets In Your State</button>
-                <button style="color:white" onclick="window.location.href='/LOSTPETREPORTING/NEW/CountryReports'">Lost Pets In Your Country</button>
+            // <div class="sidebar">
+            //    <button style="color:black; background-color:white;" onclick="window.location.href='/HomePage'"><b>Home Page</b></button>
+            //     <button style="color:white; background-color:darkgreen;" onclick="window.location.href='/LOSTPETREPORTING/GENERAL/Index'"><b>Change Residential Area</b></button>
+            //     <button style="color:white; background-color:darkred;" onclick="toggleAreaReports()"><b>Lost Pets in Your Area</b></button>
+            //     <div id="areaReports" style="display: none; padding-left: 20px;">
+            //         <button style="color:white; background-color:darkred" onclick="window.location.href='/LOSTPETREPORTING/NEW/CityReports'">Lost Pets In Your City</button>
+            //         <button style="color:white; background-color:darkblue" onclick="window.location.href='/LOSTPETREPORTING/NEW/StateReports'">Lost Pets In Your State</button>
+            //         <button style="color:white; background-color:#8b572a;" onclick="window.location.href='/LOSTPETREPORTING/NEW/CountryReports'">Lost Pets In Your Country</button>
+            //     </div>
                 
 
               
 
-               @* <button style="color:black; background-color:yellow;" onclick="window.location.href='/NEWNOTIFICATION'">
-                    Notifications <b>(<span id="notificationCount"></span>) </b>
-                </button>*@
+            //    @* <button style="color:black; background-color:yellow;" onclick="window.location.href='/NEWNOTIFICATION'">
+            //         Notifications <b>(<span id="notificationCount"></span>) </b>
+            //     </button>*@
 
-                <button style="color:white; background-color:#333;" onclick="window.location.href='/HomePage'">Main Menu</button>
-                <button style="color:white; background-color:gray;" onclick="window.location.href='/LOSTPETREPORTING/LPRHome'">Lost Pet Reporting</button>
-                <button style="color:white; background-color:gray;" onclick="window.location.href='/PETMEMORIAL/PMHome'">Pet Memorial</button>
-                <button style="color:white; background-color:gray;" onclick="window.location.href='/COPINGRESOURCES/CRHome'">Support Hub</button>
-                <button style="color:white; background-color:darkgreen;" onclick="window.location.href='/Identity/Account/Manage'">Manage Account</button>
+
+            //     <button style="color:white; background-color:#4C331E;" onclick="window.location.href='/LOSTPETREPORTING/LPRHome'"><b>Lost Pet Reporting</b></button>
+            //     <button style="color:white; background-color:#4C331E;" onclick="window.location.href='/PETMEMORIAL/PMHome'"><b>Pet Memorial</b></button>
+            //     <button style="color:white; background-color:#4C331E;" onclick="window.location.href='/COPINGRESOURCES/CRHome'"><b>Support Hub</b></button>
+            //     <button style="color:white; background-color:blue;" onclick="window.location.href='/Identity/Account/Manage'"><b>Manage Account</b></button>
+            //     @*<button style="color:black; background-color:lightblue;" onclick="window.location.href='/ContactUs'">Contact Us</button>*@
+            //     <button style="color:red; background-color:white;" onclick="window.location.href='/LOGOUTPAGE'"><b>Log Out</b></button>
+            // </div>
+            <div class="sidebar" >
+                <button style="color:white;" onclick="window.location.href='/HomePage'"><b>Home Page</b></button>
+                <button style="color:white;" onclick="window.location.href='/LOSTPETREPORTING/GENERAL/Index'"><b>Change Residential Area</b></button>
+                <button style="color:white;" onclick="toggleAreaReports()"><b>► Lost Pets in Your Area</b></button>
+                <div id="areaReports" style="display: none; padding-left: 20px;">
+                    <button style="color:white; background-color:grey;" onclick="window.location.href='/LOSTPETREPORTING/NEW/CityReports'">Lost Pets In Your City</button>
+                    <button style="color:white;  background-color:grey;" onclick="window.location.href='/LOSTPETREPORTING/NEW/StateReports'">Lost Pets In Your State</button>
+                    <button style="color:white;  background-color:grey;" onclick="window.location.href='/LOSTPETREPORTING/NEW/CountryReports'">Lost Pets In Your Country</button>
+                </div>
+
+
+
+
+                @* <button style="color:black; background-color:yellow;" onclick="window.location.href='/NEWNOTIFICATION'">
+        Notifications <b>(<span id="notificationCount"></span>) </b>
+        </button>*@
+
+
+                <button style="color:white;" onclick="window.location.href='/LOSTPETREPORTING/LPRHome'"><b>Lost Pet Reporting</b></button>
+                <button style="color:white;"  onclick="window.location.href='/PETMEMORIAL/PMHome'"><b>Pet Memorial</b></button>
+                <button style="color:white;"  onclick="window.location.href='/COPINGRESOURCES/CRHome'"><b>Support Hub</b></button>
+                <button style="color:white;" onclick="window.location.href='/Identity/Account/Manage'"><b>Manage Account</b></button>
                 @*<button style="color:black; background-color:lightblue;" onclick="window.location.href='/ContactUs'">Contact Us</button>*@
-                <button style="color:black; background-color:white;" onclick="window.location.href='/LOGOUTPAGE'">Log Out</button>
+                <button style="color:red;" onclick="window.location.href='/LOGOUTPAGE'"><b>Log Out</b></button>
             </div>
         }
     }
@@ -259,6 +288,14 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
+        function toggleAreaReports() {
+            var areaReports = document.getElementById("areaReports");
+            if (areaReports.style.display === "none") {
+                areaReports.style.display = "block";
+            } else {
+                areaReports.style.display = "none";
+            }
+        }
         $(document).ready(function () {
             $.get("/Notification/GetUnreadNotificationsCountAjax", function (data) {
                 // Update the notification count
