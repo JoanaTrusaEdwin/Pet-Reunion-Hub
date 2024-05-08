@@ -298,8 +298,11 @@
                 console.log("Comment ID:", commentId);
 
                 if (confirm("Are you sure you want to delete this comment? This action is instantly applied and cannot be undone.")) {
+                    var baseUrl = window.location.origin; // Get the base URL of the current environment
+                    var removeMediaUrl = baseUrl + "/PETMEMORIAL/NEW/CommunityMemorials?handler=RemoveComment";
                     $.ajax({
-                        url: "https://localhost:7145/PETMEMORIAL/NEW/CommunityMemorials?handler=RemoveComment",
+                        // url: "https://localhost:7145/PETMEMORIAL/NEW/CommunityMemorials?handler=RemoveComment",
+                        url: removeMediaUrl,
                         method: "POST",
 
                         headers: {
@@ -337,8 +340,11 @@
                 console.log("Post Comment ID:", postcommentId);
 
                 if (confirm("Are you sure you want to delete this comment? This action is instantly applied and cannot be undone.")) {
+                    var baseUrl = window.location.origin; // Get the base URL of the current environment
+                    var removepostcommentUrl = baseUrl + "/PETMEMORIAL/NEW/CommunityMemorials?handler=RemovePostComment";
                     $.ajax({
-                        url: "https://localhost:7145/PETMEMORIAL/NEW/CommunityMemorials?handler=RemovePostComment",
+                        // url: "https://localhost:7145/PETMEMORIAL/NEW/CommunityMemorials?handler=RemovePostComment",
+                        url: removepostcommentUrl,
                         method: "POST",
 
                         headers: {

@@ -372,8 +372,11 @@
                 console.log("Media ID:", mediaId);
 
                 if (confirm("Are you sure you want to delete this file? This action is instantly applied and cannot be undone.")) {
+                    var baseUrl = window.location.origin; // Get the base URL of the current environment
+                    var removeMediaUrl = baseUrl + "/LOSTPETREPORTING/NEW/Edit?handler=RemoveMedia";
                     $.ajax({
-                        url: "https://localhost:7145/LOSTPETREPORTING/NEW/Edit?handler=RemoveMedia",
+                        // url: "https://localhost:7145/LOSTPETREPORTING/NEW/Edit?handler=RemoveMedia",
+                        url: removeMediaUrl,
                         method: "POST",
 
                         headers: {
