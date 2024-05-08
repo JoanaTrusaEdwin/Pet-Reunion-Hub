@@ -108,7 +108,7 @@
 
     #createnew {
         border-radius: 5px;
-        background-color: black;
+        background-color: #8b572a;
         color: white;
         text-decoration: none;
         padding: 10px 20px;
@@ -153,11 +153,26 @@
     .highlight {
         background-color: yellow;
     }
+
+    #home {
+        background-color: black;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        font-weight: bold; /* Make the text bold */
+        font-size: 1.1em;
+    }
 </style>
 
 <h1>My Reports</h1>
-<br/>
-
+<a href="/LOSTPETREPORTING/LPRHome" class="box" id="home">
+    Back to Lost Pet Reporting
+    <br />
+</a>
+<br />
 <p>
     <a asp-page="Create" id="createnew">Make a New Report</a>
 </p>
