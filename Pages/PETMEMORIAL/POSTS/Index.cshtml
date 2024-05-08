@@ -13,7 +13,7 @@
 
     #createnew {
         border-radius: 5px;
-        background-color: black;
+        background-color: #8b572a;
         color: white;
         text-decoration: none;
         padding: 10px 20px;
@@ -62,16 +62,37 @@
     .media-container audio {
         vertical-align: middle;
     }
-</style>
-<h1>Your Posts</h1>
 
+    #home {
+        background-color: black;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        font-weight: bold; /* Make the text bold */
+        font-size: 1.1em;
+    }
+</style>
+
+@* <a href="/PETMEMORIAL/PMHome" class="box" id="home">
+    <b>Back to Pet Memorial</b>
+</a> *@
+<h4>Your Posts</h4>
 <p>
-    Welcome to Your Posts. Or in other words, Moments and Stories. Here, you can store cherished memories of your beloved pet by creating different posts for each story. Or you can share a thought.
-    Feel free to add photos, videos, and audio recordings to preserve those special moments forever. Share your posts to the community to garner support for each other in difficult times of grief. 
+    Welcome to Your Posts. Here, you can store cherished memories of your beloved pet by creating different posts for a story or thought.
+    Feel free to add photos, videos, and audio recordings to preserve those memories.
 </p>
+<a href="/PETMEMORIAL/PMHome" class="box" id="home">
+    Back to Pet Memorial
+    <br />
+</a>
+<br />
 <p>
     <a asp-page="Create" id="createnew">Create a New Post</a>
 </p>
+<br/>
 
 <input style="border-radius:20px; height:40px; width: 500px;" type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search">
 <br />
