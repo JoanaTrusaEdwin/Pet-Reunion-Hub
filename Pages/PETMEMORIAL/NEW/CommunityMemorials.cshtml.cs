@@ -149,14 +149,29 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.NEW
             // Redirect back to the page
             return RedirectToPage();
         }
+        //private string ExtractMentionedUserEmail(string commentContent)
+        //{
+        //    // Implement the logic to extract the mentioned user's email from the comment content
+        //    // For example, you can use a regular expression to find the mentioned user's email
+        //    // In this example, I'm assuming the mentioned user's email is in the format "user@example.com"
+        //    var mentionedUserEmail = Regex.Match(commentContent, @"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}").Value;
+        //    return mentionedUserEmail;
+        //}
+
         private string ExtractMentionedUserEmail(string commentContent)
         {
+            if (string.IsNullOrWhiteSpace(commentContent))
+            {
+                return null; // Return null if comment content is empty or whitespace
+            }
+
             // Implement the logic to extract the mentioned user's email from the comment content
             // For example, you can use a regular expression to find the mentioned user's email
             // In this example, I'm assuming the mentioned user's email is in the format "user@example.com"
             var mentionedUserEmail = Regex.Match(commentContent, @"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}").Value;
             return mentionedUserEmail;
         }
+
         //public async Task<IActionResult> OnPostRemoveCommentAsync(int CommentId)
         //{
 
