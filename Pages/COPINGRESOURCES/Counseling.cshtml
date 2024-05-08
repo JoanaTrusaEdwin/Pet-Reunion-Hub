@@ -56,11 +56,27 @@
             background-color: yellow;
             color: black;
         }
+
+        #home {
+            background-color: black;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold; /* Make the text bold */
+            font-size: 1.1em;
+        }
     </style>
 </head>
 <body>
 
     <h1 style="color:white;">Counseling and Therapy</h1>
+    <a href="/COPINGRESOURCES/CRHome" class="box" id="home">
+        Back to Support Hub
+        <br />
+    </a>
     <br />
     <input style="border-radius:20px; height:40px; width: 500px;" type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search">
     <br />
