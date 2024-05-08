@@ -20,11 +20,11 @@ using Pet_Reunion_Hub.Controllers;
 
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("DatabaseContextConnection") ?? throw new InvalidOperationException("Connection string 'DatabaseContextConnection' not found.");
+var connectionString = builder.Configuration.GetConnectionString("JoanaPetReunionHubConnection") ?? throw new InvalidOperationException("Connection string 'DatabaseContextConnection' not found.");
 builder.Services.AddSingleton<IEmailSender, EmailSender>();
 
 builder.Services.AddDbContext<DatabaseContext>(options =>
-    options.UseSqlServer("Server=LAPTOP-4OJRF6T6\\SQLEXPRESS;Database=PetReunionHub;Trusted_Connection=True"));
+    options.UseSqlServer(connectionString));
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<DatabaseContext>();
