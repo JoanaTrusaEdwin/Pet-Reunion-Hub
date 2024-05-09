@@ -131,7 +131,7 @@
             <dd style="white-space: pre-wrap; overflow-wrap: break-word;">@item.Visibility</dd>
 
             <p><strong>Created on:</strong>
-            <p class="searchable">@item.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss")</p>
+            <p class="searchable">@item.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss") (UTC)</p>
             <br />
       
         <p>
@@ -154,7 +154,7 @@
                         <br />
                          <p class="searchable">@comment.Content</p>
                         <br/>
-                         <p class="searchable">@comment.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss") </p>
+                            <p class="searchable">@comment.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss") (UTC) </p>
                     </div>
                 }
 

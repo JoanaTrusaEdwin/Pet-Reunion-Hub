@@ -49,7 +49,7 @@
     <dl>
         <p>Post ID: @Model.Post.Id</p>
         <dt>Created on:</dt>
-        <dd>@Model.Post.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss")</dd>
+        <dd>@Model.Post.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss") (UTC)</dd>
 
         <p><strong>Title:</strong>
         <p class="searchable">@(string.IsNullOrEmpty(Model.Post.Title) ? "-" : Model.Post.Title) </p>
@@ -132,7 +132,7 @@
                 <br />
                 <p class="searchable">@comment.Content</p>
                 <br />
-                <p class="searchable">@comment.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss") </p>
+                <p class="searchable">@comment.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss") (UTC) </p>
                 @if (User.Identity.IsAuthenticated && comment.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier))
                 {
 

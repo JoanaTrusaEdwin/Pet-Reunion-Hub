@@ -162,7 +162,7 @@
         <dt>Privacy Settings:</dt>
         <dd style="white-space: pre-wrap; overflow-wrap: break-word;">@item.IsPublic</dd>
 
-        <p><strong>Created on:</strong> @item.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss")</p>
+        <p><strong>Created on:</strong> @item.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss") (UTC)</p>
 
             <p>
              @*    <a asp-page="./Edit" asp-route-id="@item.Id" id="edit">Edit</a>  *@
@@ -184,7 +184,7 @@
                         <br />
                         <p class="searchable">@comment.Content</p>
                         <br />
-                        <p class="searchable">@comment.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss") </p>
+                        <p class="searchable">@comment.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss") (UTC) </p>
                     </div>
                         }
 

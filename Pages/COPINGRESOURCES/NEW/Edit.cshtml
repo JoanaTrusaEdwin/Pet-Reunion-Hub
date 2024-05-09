@@ -103,7 +103,7 @@
                 <select asp-for="RESOURCE.UserId" class="form-control" asp-items="ViewBag.UserId"></select>
                 <span asp-validation-for="RESOURCE.UserId" class="text-danger"></span>
             </div> *@
-            <p><strong>Created on:</strong> @Model.RESOURCE.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
+            <p><strong>Created on:</strong> @Model.RESOURCE.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss") (UTC)</p>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="RESOURCE.TITLE" class="control-label"><b><span class="text-danger">*</span>Title</b></label>

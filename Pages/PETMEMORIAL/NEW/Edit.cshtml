@@ -86,7 +86,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Tribute.Id" />
                 <p class="searchable">Pet Profile ID: @Model.Tribute.Id</p>
-                <p><strong>Created on:</strong> @Model.Tribute.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
+                <p><strong>Created on:</strong> @Model.Tribute.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss") (UTC)</p>
 
                 <div class="form-group">
                     <label asp-for="Tribute.PetName" class="control-label"><b><span class="text-danger">*</span>Name</b></label>

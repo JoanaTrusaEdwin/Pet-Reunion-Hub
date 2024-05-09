@@ -57,7 +57,7 @@ else
             }
             <a id="community-memorials-button-@notification.Id" style="text-decoration:none; color:white;  background-color:black; padding:5px; border-radius:4px;"
                href="/PETMEMORIAL/NEW/CommunityMemorials?searchString=@Html.Raw(System.Web.HttpUtility.UrlEncode(searchString))" onclick="markAsRead('@notification.Id')">View in Community Memorials</a>
-            <p class="searchable">@notification.CreatedAt.ToString("dd-MMM-yyyy HH:mm")</p>
+            <p class="searchable">@notification.CreatedAt.ToString("dd-MMM-yyyy HH:mm") (UTC)</p>
         </div>
     }
 
