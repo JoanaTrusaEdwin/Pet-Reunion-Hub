@@ -115,6 +115,10 @@
         }
        
     </style>
+   @*  @{
+        // Set cache control header for images
+        Response.Headers.Add("Cache-Control", "public, max-age=3600"); // Cache images for 1 hour (3600 seconds)
+    } *@
 </head>
 <body>
     <h4 style="color:black;">Materials According to Category</h4>

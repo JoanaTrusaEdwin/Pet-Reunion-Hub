@@ -129,7 +129,7 @@
             <br />
 
              <div class="form-group">
-                <label asp-for="RESOURCE.LINK" class="control-label"><b>Attach a URL to the resource</b></label>
+                <label asp-for="RESOURCE.LINK" class="control-label"><b>Attach a URL to the material</b></label>
                 <input asp-for="RESOURCE.LINK" class="form-control  character-count" 
                        id="pet-link-input"
                        maxlength="2083"
@@ -137,7 +137,7 @@
                 <span id="pet-link-count" class="character-count-display">0/2083</span>
                 <span asp-validation-for="RESOURCE.LINK" class="text-danger"></span>
             </div>
-            
+            <br/>
     
              <div class="form-group">
                 <label asp-for="RESOURCE.FILEURL" class="control-label"><b>Your Image</b></label>
@@ -163,10 +163,10 @@
             <div class="form-group">
                 <label asp-for="RESOURCE.TYPE" class="control-label"><b><span class="text-danger">*</span>Category</b></label>
                 <select asp-for="RESOURCE.TYPE" class="form-control" required>
-                    <option value="Book">Book</option>
+                    <option value="Book">Book/Reading Material</option>
                     <option value="Counselling and Therapy">Counselling and Therapy</option>
-                    <option value="Customisation">Customisation</option>
-                    <option value="Personal Testimony">Personal Testimony</option>
+                    <option value="Customisation">Customisation and Art</option>
+                    <option value="Personal Testimony">Personal Experience</option>
                     <option value="Online Video">Online Video</option>
                     <option value="Other">Other</option>
                 </select>
