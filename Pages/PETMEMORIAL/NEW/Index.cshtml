@@ -38,7 +38,7 @@
 
     #details {
         border-radius: 5px;
-        background-color: #8b572a;
+        background-color: black;
         color: white;
         text-decoration: none;
         padding: 5px 10px;
@@ -88,7 +88,7 @@
 <div class="tribute-container">
 @foreach (var item in Model.Tribute.Reverse())
 {
-    <div class="tribute" style="border: 1px solid #ccc; padding: 30px; margin-bottom: 20px;  border-radius: 5px; background-color: #fff; ">
+        <div class="tribute" style="border: 1px solid #ccc; padding: 30px; margin-bottom: 20px;  border-radius: 5px; background-color: #8b572a; color:white; text-align:center; ">
             <p class="searchable">Pet Profile ID: @item.Id</p>
             <h3 class="searchable">@item.PetName </h3>
 
@@ -124,7 +124,7 @@
             <p class="searchable">@(string.IsNullOrEmpty(item.Cause) ? "-" : item.Cause) </p>
 
             <p><strong>Tribute Text:</strong>
-            <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable">@(string.IsNullOrEmpty(item.TributeText) ? "-" : item.TributeText) </p>
+            <p style="font-style:Italic; white-space: pre-wrap; overflow-wrap: break-word;" class="searchable">@(string.IsNullOrEmpty(item.TributeText) ? "-" : item.TributeText) </p>
             <br />
 
             <dt>Privacy Settings:</dt>
@@ -136,10 +136,10 @@
       
         <p>
            @*  <a asp-page="./Edit" asp-route-id="@item.Id" id="edit">Edit</a>  *@
-            <a asp-page="./NEWDETAIL" asp-route-id="@item.Id" id="details">View more or edit</a> 
-            <a asp-page="./Delete" asp-route-id="@item.Id" id="delete">Delete</a>
+            <a asp-page="./NEWDETAIL" asp-route-id="@item.Id" id="details" style="text-align:left;">View more or edit</a> 
+                <a asp-page="./Delete" asp-route-id="@item.Id" id="delete" style="text-align:left;">Delete</a>
         </p>
-           <div style="padding: 20px; margin-bottom: 20px;">
+           <div style="padding: 20px; margin-bottom: 20px; text-align:left;">
             <!-- Comments Section -->
             <h3>Comments</h3>
             @if (item.Comments.Any())
