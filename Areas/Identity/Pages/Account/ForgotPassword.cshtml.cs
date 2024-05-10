@@ -75,7 +75,7 @@ namespace Pet_Reunion_Hub.Areas.Identity.Pages.Account
                 await SendEmailAsync(
                     Input.Email,
                     "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    $"Dear user, we received a request to reset your password. If you did not make this request, please disregard this email. Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>. Thank you, Pet Reunion Hub Team");
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }
