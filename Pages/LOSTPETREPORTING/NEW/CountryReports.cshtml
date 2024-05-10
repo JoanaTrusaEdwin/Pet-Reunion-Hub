@@ -24,7 +24,7 @@
 
     @foreach (var report in Model.CreateReport.OrderByDescending(r => r.CreatedAt))
     {
-        <div class="report">
+        <div class="report" style="border: 1px solid #ccc; padding: 30px; margin-bottom: 20px;  border-radius: 5px; background-color: #fff;">
 
             <h2 style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable">@report.PetName</h2>
             <br />
@@ -36,7 +36,7 @@
             <div class="photos">
                 @foreach (var photo in report.ReportPhotos)
                 {
-                    <img src="@photo.PhotoUrl" style="max-width: 400px; height: auto;" />
+                    <img src="@photo.PhotoUrl" style="max-width: 200px; margin-right: 10px;" />
                 }
             </div>
             <p><strong>General Location:</strong></p>
@@ -158,11 +158,12 @@
         border-radius: 20px;
         padding: 20px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        width: 1000px;
+        /* width: 1000px; */
     }
 
     .photos {
         margin-top: 10px;
+       
     }
 
         .photos img {

@@ -141,14 +141,14 @@
 
                             @if (Media.MediaType == "Image")
                             {
-                                <img src="@Media.MediaUrl" alt="Media Image" style="max-width: 500px; margin-right: 10px;">
+                                <img src="@Media.MediaUrl" alt="Media Image" style="max-width: 200px; margin-right: 10px;">
                                 <button type="button" class="btn btn-danger remove-btn" data-media-id="@Media.Id">Remove</button>
 
 
                             }
                             else if (Media.MediaType == "Video")
                             {
-                                <video src="@Media.MediaUrl" controls style="max-width: 500px; margin-right: 10px;"></video>
+                                <video src="@Media.MediaUrl" controls style="max-width: 200px; margin-right: 10px;"></video>
                                 <button type="button" class="btn btn-danger remove-btn" data-media-id="@Media.Id">Remove</button>
 
 
