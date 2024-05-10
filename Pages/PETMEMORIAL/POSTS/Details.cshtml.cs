@@ -101,7 +101,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
                         var notification = new NEWNOTIFICATION
                         {
                             UserId = mentionedUser.Id,
-                            Content = $"(Post Comment ID: {newComment.Id}) {_userManager.GetUserName(User)} mentioned you in a comment on {post.User.UserName}'s post '{post.Title}' with Post ID '{post.Id}'",
+                            Content = $"(Post Comment ID: {newComment.Id}) {_userManager.GetUserName(User)} mentioned you in a comment on {post.User.UserName}'s post titled '{post.Title}'",
                             IsRead = false,
                             CreatedAt = DateTime.Now
                         };
@@ -129,7 +129,7 @@ namespace Pet_Reunion_Hub.Pages.PETMEMORIAL.POSTS
                     var notification = new NEWNOTIFICATION
                     {
                         UserId = post.UserId,
-                        Content = $"(Post Comment ID: {newComment.Id}) You have a new comment on your post '{post.Title}' with Post ID '{Post.Id}' by {commenter.UserName}",
+                        Content = $"(Post Comment ID: {newComment.Id}) You have a new comment on your post titled '{post.Title}' by {commenter.UserName}",
                         IsRead = false,
                         CreatedAt = DateTime.Now
                     };
