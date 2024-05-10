@@ -32,11 +32,22 @@
         transition: background-color 0.3s;
     }
 
+    #delete {
+        border-radius: 5px;
+        background-color: red;
+        color: white;
+        text-decoration: none;
+        padding: 5px 10px;
+        font-weight: bold;
+    }
     .btn:hover {
         background-color: #555; /* Darken the background color on hover */
     }
 </style>
-
+<br />
+<a asp-page="./Index" class="btn" id="back">Back to My Pet Profiles</a>
+<br />
+<br />
 <div style="padding: 30px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 20px; background-color: #fff;">
     <p class="searchable">Pet Profile ID: @Model.Tribute.Id</p>
     <h1>@Model.Tribute.PetName</h1>
@@ -84,9 +95,10 @@
 
     <div>
         <a asp-page="./Edit" asp-route-id="@Model.Tribute?.Id" class="btn" id="edit">Edit</a>
-            <a asp-page="./Index" class="btn" id="back">Back to My Pet Profiles</a>
+           
     </div>
-       
+        <br />
+        <a asp-page="./Delete" asp-route-id="@Model.Tribute?.Id" id="delete" class="btn">Delete</a>
 </div>
 <div >
     <!-- Comments Section -->
