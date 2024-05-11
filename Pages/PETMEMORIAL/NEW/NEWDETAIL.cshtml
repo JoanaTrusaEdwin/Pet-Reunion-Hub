@@ -134,7 +134,10 @@
         <input type="hidden" name="tributeId" value="@Model.Tribute.Id" />
         <div class="form-group">
             <label for="commentContent" style="color:black;"><b>Add a comment:</b></label>
-            <p style="color:black;">To mention a user, simply type "@@[username of that commenter]" anywhere in the comment. Or, you can just copy the username of the comment you want to reply to.  For example, if you want to mention the user example@gmail.com, you would type "@@example@gmail.com".</p>
+            <p style="color:black;"><p>To mention a user, simply type "<b>@@[username]</b>" anywhere in the comment. 
+                For example, if you want to mention the user <b>example@gmail.com</b>, you would type "<b>@@example@gmail.com</b>". 
+                Remember to include a space after mentioning the user, like this: "<b>@@example@gmail.com</b> hi". Alternatively, you can copy the username of the comment you want to reply to.</p>
+
             
             <textarea maxlength="1000" class="form-control autosize  character-count" id="commentContent" name="commentContent" rows="3" oninput="handleInput(event, 'comment-content-count')"></textarea>
             <span style="color:black;" id="comment-content-count" class="character-count-display">0/1000</span> <br/>
