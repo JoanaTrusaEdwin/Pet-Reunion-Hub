@@ -153,6 +153,7 @@
             background-color: yellow;
             color:black;
         }
+
     </style>
 </head>
 <body>
@@ -160,34 +161,53 @@
     <div class="main-container">
         <div class="row">
             <a href="/LOSTPETREPORTING/LPRHome" class="box">
+                
                 <h2>Lost Pet Reporting</h2>
-                <p>Report missing pets and aid in a quicker reunion.</p>
+               @*  <p>Report missing pets and aid in a quicker reunion.</p> *@
             </a>
 
             <a href="/PETMEMORIAL/PMHome" class="box">
-                <h2>Pet Memorial</h2>
-                <p>Celebrate the joy your pet brought into your life.</p>             
+               
+                <h2>Pet <br />Memorial</h2>
+               @*  <p>Celebrate the joy your pet brought into your life.</p>    *@          
             </a>
 
             <a href="/COPINGRESOURCES/CRHome" class="box">
-                <h2 style="color: black;">Grief Support</h2>
-                <p style="color: black;">Discover tools and materials to help navigate the emotional journey of losing a pet.</p>
+                
+                <h2 style="color: black;">Grief <br />Support</h2>
+               @*  <p style="color: black;">Discover tools and materials to help navigate the emotional journey of losing a pet.</p> *@
             </a>
         </div>
     </div>
     <div class="report-container">
-        <div style="display: flex; align-items: center;">
-            <h3 style="color:red; margin-right: 10px;">Lost Pets Reported In Your City!</h3>
+        <div style="align-items: center;">
+           
             <!-- Button for linking to the CityReports page -->
-            <a href="/LOSTPETREPORTING/NEW/CityReports" style="text-decoration: none;">
-                <button style="background-color: darkred; color:white; border-radius:5px; border:none; padding:10px; margin-right: 10px;"><b>View more in your city</b></button>
+           
+                 @if (Model.GENERALLOCATION != null)
+                {
+                    string[] locationParts = Model.GENERALLOCATION.LOCATIONVALUE.Split('-');
+                    string country = locationParts[0];
+                    string state = locationParts.Length > 1 ? locationParts[1] : "";
+                    string city = locationParts.Length > 2 ? locationParts[2] : "";
+                <h3 style="color:red; margin-right: 10px;">Lost Pets Reported in @city!</h3>
+                    <div style="display:flex;">
+                    <a href="/LOSTPETREPORTING/NEW/CityReports" style="text-decoration: none;">
+                        <button style="background-color: darkred; color:white; border-radius:5px; border:none; padding:10px; margin-right: 10px;"><b>View more in @city</b></button>
+                    </a>
+                    <a href="/LOSTPETREPORTING/NEW/StateReports" style="text-decoration: none;">
+                        <button style="background-color: darkblue; color:white; border-radius:5px; border:none; padding:10px; margin-right: 10px;"><b>View more in @state</b></button>
+                    </a>
+                    <a href="/LOSTPETREPORTING/NEW/CountryReports" style="text-decoration: none;">
+                        <button style="background-color:#8B572A; color:white; border-radius:5px; border:none; padding:10px;"><b>View more in @country</b></button>
             </a>
-            <a href="/LOSTPETREPORTING/NEW/StateReports" style="text-decoration: none;">
-                <button style="background-color: darkblue; color:white; border-radius:5px; border:none; padding:10px; margin-right: 10px;"><b>View more in your state</b></button>
-            </a>
-            <a href="/LOSTPETREPORTING/NEW/CountryReports" style="text-decoration: none;">
-                <button style="background-color:#8B572A; color:white; border-radius:5px; border:none; padding:10px;"><b>View more in your country</b></button>
-            </a>
+                </div>
+            }
+            else
+            {
+                <p>Set your residential area now to view reports in your city</p>
+            }
+
         </div>
         <p style="color:black;">These are pets reported to be missing, last seen in your city. Change your residential area (you may find in the navigation bar on the top left corner) to filter reports near you. </p>
         <input style="border-radius:20px; height:40px; width: 500px;" type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search">
@@ -233,7 +253,9 @@
                     <p><strong>Created on:</strong></p>
                     <p class="searchable">@report.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss") (UTC)</p>
                     <br />
-
+                    <p><strong>General Location:</strong></p>
+                    <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable"> @report.GenLoc</p>
+                    <br />
                     <br/>
                     <h4>Additional Details</h4>
                   <br/>

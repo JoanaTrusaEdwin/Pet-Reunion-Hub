@@ -33,24 +33,35 @@ namespace Pet_Reunion_Hub.Pages
         public IList<CreateReport>? CreateReport { get; set; }
         public GENERALLOCATION? GENERALLOCATION { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
             // Get the current user
             var currentUser = await _userManager.GetUserAsync(User);
             if (currentUser == null)
             {
                 // Handle case where user is not found
-                return;
+                return RedirectToPage("/Identity/Account/Login");
             }
 
             // Retrieve the LOCATIONVALUE of the current user
             var userLocationValue = await _context.GENERALLOCATION
                 .Where(gl => gl.UserId == currentUser.Id)
-                .Select(gl => gl.LOCATIONVALUE)
                 .FirstOrDefaultAsync();
+            if (userLocationValue == null)
+            {
+                // Redirect the user to a location setting page
+                return RedirectToPage("/LOSTPETREPORTING/GENERAL/Create");
+            }
+            // Set the GENERALLOCATION property with the retrieved value
+            GENERALLOCATION = userLocationValue;
 
             // Query reports where GenLoc matches the user's LOCATIONVALUE
-            CreateReport = await _context.CreateReport.Include(r => r.ReportPhotos).Where(r => r.GenLoc == userLocationValue).ToListAsync();
+            CreateReport = await _context.CreateReport
+                .Include(r => r.ReportPhotos)
+                .Where(r => r.GenLoc == userLocationValue.LOCATIONVALUE)
+                .ToListAsync();
+
+            return Page();
         }
 
     }
