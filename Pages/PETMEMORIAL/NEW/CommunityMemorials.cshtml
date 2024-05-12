@@ -25,6 +25,9 @@
     }
 </style>
 <h1>Discover Memorials Among The Community</h1>
+<p style="text-align:justify;">
+    Welcome to Community Memorials. Explore stories shared by others who understand.
+</p>
 <a href="/PETMEMORIAL/PMHome" class="box" id="home">
     Back to Pet Memorial
     <br />
@@ -153,14 +156,14 @@
            
             <p class="searchable">Post ID: @post.Id</p>
             
-            <br/>
+           
             <h3 style="overflow-wrap:break-word;"class="searchable">@(string.IsNullOrEmpty(post.Title) ? "-" : post.Title)</h3>
          
             <h6 style="white-space: pre-wrap; overflow-wrap: break-word;">By: @post.User.UserName</h6>
           @*   <p><strong>Title:</strong>
             <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable">@(string.IsNullOrEmpty(post.Title) ? "-" : post.Title)</p>
             <br /> *@
-
+            <br/>
             <p><strong>Caption:</strong>
             <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable">@(string.IsNullOrEmpty(post.Content) ? "-" : post.Content)</p>
             <br />

@@ -89,17 +89,17 @@
             <h3 style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable">@RESOURCE.TITLE </h3>
 
             <p class="searchable"><strong>Created on:</strong> @RESOURCE.CreatedAt.ToString("dd-MMM-yyyy HH:mm:ss") (UTC)</p>
-
+            <br />
             <p><strong>Description:</strong>
             <p style="white-space: pre-wrap; overflow-wrap: break-word;" class="searchable">@(string.IsNullOrEmpty(RESOURCE.DESCRIPTION) ? "-" : RESOURCE.DESCRIPTION) </p>
             <br />
 
-            <p>
+            <p style="overflow-wrap: break-word;">
                 <strong>URL Link to Resource:</strong>
 
                     @if (!string.IsNullOrEmpty(RESOURCE.LINK))
                     {
-                    <a style="color:white;" href="@RESOURCE.LINK" target="_blank" class="searchable">@RESOURCE.LINK</a>
+                    <a style="color:lightblue;" href="@RESOURCE.LINK" target="_blank" class="searchable">@RESOURCE.LINK</a>
                     }
                     else
                     {
