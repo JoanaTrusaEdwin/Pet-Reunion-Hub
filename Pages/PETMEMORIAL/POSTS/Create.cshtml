@@ -124,18 +124,18 @@
                 <span asp-validation-for="MediaFiles" class="text-danger"></span>
                 <div class="additional-photos-preview"></div>
                 <div class="form-group">
-                    <img src="#" alt="Main Photo Preview" style="display: none; max-width: 200px;">
+                    <img src="#" alt="Main Photo Preview" style="display: none; max-width: 200px; margin-bottom:5px;">
                 </div>
                 @* <button type="button" class="btn btn-primary" onclick="addMorePhotos()">+</button> *@
-                <br />
+                
             </div>
-            <button type="button" class="btn btn-primary" onclick="addMorePhotos()">+</button>
+            <button type="button" style="margin-top:5px;" class="btn btn-primary" onclick="addMorePhotos()">+ Add More</button>
             @* <div class="form-group">
                 <label asp-for="Post.TributeId" class="control-label"><b>Select a tribute</b></label>
                 <select asp-for="Post.TributeId" asp-items="Model.Tribute" class="form-control"></select>
                 <span asp-validation-for="Post.TributeId" class="text-danger"></span>
             </div> *@
-
+            <br/>
             <div class="form-group">
                 <label asp-for="Post.IsPublic" class="control-label"><b><span class="text-danger">*</span>Privacy Settings:</b><br />When you choose 'public,' your memorial will be shared in 'Posts and Pet Profiles by other users', allowing other users to comment, fostering a sense of support. You can change this setting at any time.</label>
                 <select asp-for="Post.IsPublic" class="form-control" required>

@@ -142,7 +142,7 @@
             <br/>
 
             <div class="form-group">
-                <label asp-for="CreateReport.Age" class="control-label"><b><span class="text-danger">*</span>Your pet's estimated age (Specify. e.g: 1 year/1 year 3 months/3 weeks)</b></label>
+                <label asp-for="CreateReport.Age" class="control-label"><b><span class="text-danger">*</span>Your pet's estimated age</b></label>
                 <input asp-for="CreateReport.Age" class="form-control character-count" required
                        maxlength="50"
                        id="pet-age-input"
@@ -164,7 +164,7 @@
             <br />
 
             <div class="form-group">
-                <label asp-for="CreateReport.AdditionalDescription" class="control-label"><b>Any necessary description or information about the pet that the community needs to know (physical appearance, behavior, unique traits, etc)</b></label>
+                <label asp-for="CreateReport.AdditionalDescription" class="control-label"><b>Additional Description</b></label>
                 <textarea asp-for="CreateReport.AdditionalDescription" class="form-control autosize character-count"
                           id="pet-desc-input"
                           rows="5"
@@ -268,7 +268,7 @@
 
 
             <div class="form-group">
-                <label asp-for="CreateReport.LastSeenLocation" class="control-label"><b><span class="text-danger">*</span>Describe where you last saw your pet. It can be a specific address, description of the location, etc.</b></label>
+                <label asp-for="CreateReport.LastSeenLocation" class="control-label"><b><span class="text-danger">*</span>Be as specific as possible. Describe where you last saw your pet. It can be a specific address, description of the location, etc.</b></label>
                 <textarea asp-for="CreateReport.LastSeenLocation" class="form-control autosize character-count"
                           required
                           id="pet-location-input"
@@ -316,7 +316,7 @@
                     <img src="#" alt="Main Photo Preview" style="display: none; max-width: 200px;">
                 </div>
             </div>
-            <button type="button" class="btn btn-primary" onclick="addMorePhotos()">+</button>
+            <button type="button" class="btn btn-primary" onclick="addMorePhotos()">+ Add More</button>
 
             @* <div class="form-group">
                 <img src="#" alt="Main Photo Preview" style="display: none; max-width: 200px;">

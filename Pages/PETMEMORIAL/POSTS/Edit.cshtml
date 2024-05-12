@@ -188,15 +188,15 @@
                     <img src="#" alt="Main Photo Preview" style="display: none; max-width: 200px;">
                 </div>
                 @* <button type="button" class="btn btn-primary" onclick="addMorePhotos()">+</button> *@
-                <br/>
+                
             </div>
-            <button type="button" class="btn btn-primary" onclick="addMorePhotos()">+</button>
+            <button type="button" style="margin-top:5px;" class="btn btn-primary" onclick="addMorePhotos()">+ Add More</button>
 
            @*  <div class="form-group">
                 <img src="#" alt="Main Photo Preview" style="display: none; max-width: 200px;">
             </div>
             <br /> *@
-
+            <br/>
             <div class="form-group">
                 <label asp-for="Post.IsPublic" class="control-label"><b>Privacy Settings:</b></label>
                 <select asp-for="Post.IsPublic" class="form-control" required>
