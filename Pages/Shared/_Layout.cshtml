@@ -159,7 +159,7 @@
             </a>
 
             
-            @if (User.Identity.IsAuthenticated)
+            @if (User.Identity.IsAuthenticated && !Context.Request.Path.StartsWithSegments("/LOSTPETREPORTING/GENERAL/Create"))
             {
                 <div style="display: flex; align-items: center;">
                     <button style="border:none; color:black; background-color:white; border-radius:10px; padding:10px 10px;" onclick="window.location.href='/NEWNOTIFICATION'">
