@@ -30,7 +30,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<DatabaseContext>();
 
 builder.Services.AddScoped<NotificationController>();
-
+//testing change
 //builder.Services.ConfigureApplicationCookie(options =>
 //{
 
